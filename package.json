@@ -1,5 +1,5 @@
 {
-  "name": "web-sdk",
+  "name": "web-sdk-pnpm",
   "private": true,
   "scripts": {
     "build": "turbo build",
@@ -12,12 +12,8 @@
     "turbo": "^2.3.3",
     "typescript": "5.5.4"
   },
+  "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=18"
-  },
-  "packageManager": "bun@1.1.42",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+  }
 }
