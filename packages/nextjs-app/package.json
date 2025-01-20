@@ -15,8 +15,10 @@
         "compile": "pnpm clean && tsup"
     },
     "dependencies": {
+        "next": "^15.1.0"
     },
     "devDependencies": {
+        "@types/next": "^9.0.0",
         "@types/node": "^22.10.5",
         "dotenv": "^16.4.7",
         "prettier": "^3.4.2",

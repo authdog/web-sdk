@@ -9,6 +9,6 @@ export default defineConfig({
   minify: true,
   clean: true,
   target: "node16", // Ensure compatibility with Node.js 16
-  external: [], // Include external dependencies by default
-  noExternal: ["ws"], // Force 'ws' to be bundled in the build
+  external: ["next/server"], // Treat `next/server` as an external dependency
+  noExternal: [], // Include everything else
 });

@@ -1,1 +1,1 @@
-console.log("Hello, World!");
+export {authenticateRequest} from "./middleware.js"
