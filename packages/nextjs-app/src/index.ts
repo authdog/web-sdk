@@ -1,1 +1,1 @@
-export {authenticateRequest} from "./middleware.js"
+export {authenticateRequest} from "./middleware";
