@@ -14,8 +14,16 @@ export async function updateSession(request: NextRequest) {
         throw new Error("Public key is not defined");
     }
 
+    if (!publicKey.startsWith("pk_")) {
+        throw new Error("Invalid public key");
+    }
+
     // Decode Base64-encoded publicKey
-    const publicKeyObj = JSON.parse(Buffer.from(publicKey, "base64").toString("utf-8"));
+    const publicKeyObj = JSON.parse(Buffer.from(publicKey
+        .replace(
+            "pk_",
+            ""
+        ), "base64").toString("utf-8"));
 
     const tokenFromUri = new URL(request.nextUrl).searchParams.get("token");
 
