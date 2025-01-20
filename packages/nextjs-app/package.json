@@ -1,0 +1,27 @@
+{
+    "name": "@authdog/nextjs-app",
+    "version": "0.0.1",
+    "source": "src/index.ts",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist/"
+    ],
+    "scripts": {
+        "format": "prettier --config .prettierrc.json --write \"**/*.{ts,md}\"",
+        "type-check": "tsc",
+        "clean": "rm -rf dist",
+        "compile": "pnpm clean && tsup"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+        "@types/node": "^22.10.5",
+        "dotenv": "^16.4.7",
+        "prettier": "^3.4.2",
+        "tsup": "^8.3.5",
+        "typescript": "^5.7.2",
+        "vitest": "^2.1.8"
+    }
+}
