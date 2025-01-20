@@ -1,40 +1,53 @@
 import { NextResponse, type NextRequest } from "next/server";
-// cookies from next
-import {cookies} from "next/headers";
-
-const nonAuthPath = ["/login", "/register", "/email-verify"];
-const protectedRoutes = ["/profile"];
 
 export async function updateSession(request: NextRequest) {
-    // Create a new response object
     const response = NextResponse.next();
-  
     const options = {
         maxAge: 60 * 60 * 24 * 7, // 1 week
         path: "/",
         httpOnly: true,
     };
 
-    const authenticatedUser = {
-        id: 1,
-        email: "toto@doe.com"
+    const publicKey = process.env.PK_AUTHDOG as string;
+
+    if (!publicKey) {
+        throw new Error("Public key is not defined");
     }
 
-    response.cookies.set({
-        name: "user_session",
-        value: JSON.stringify(authenticatedUser),
-        ...options,
-    });
+    // Decode Base64-encoded publicKey
+    const publicKeyObj = JSON.parse(Buffer.from(publicKey, "base64").toString("utf-8"));
 
     const tokenFromUri = new URL(request.nextUrl).searchParams.get("token");
 
     if (tokenFromUri) {
-        response.cookies.set({
-            name: "user_session_hash",
-            value: tokenFromUri,
-            ...options,
-        })
-    }
+        const userData = await fetch(
+            `${publicKeyObj?.identityHost}/oidc/${publicKeyObj?.environmentId}/userinfo`,
+            {
+                headers: {
+                    authorization: `Bearer ${tokenFromUri}`,
+                },
+            }
+        );
 
+        if (!userData.ok) {
+            throw new Error("Failed to fetch user info");
+        }
+
+        const authenticatedUser = await userData.json();
+
+        if (authenticatedUser?.meta && authenticatedUser?.meta?.code === 200) {
+            response.cookies.set({
+                name: `user_session_${publicKeyObj?.environmentId}`,
+                value: JSON.stringify(authenticatedUser?.user),
+                ...options,
+            });
+
+            response.cookies.set({
+                name: `user_session_hash_${publicKeyObj?.environmentId}`,
+                value: tokenFromUri,
+                ...options,
+            });
+        }
+    }
     return response;
 }
