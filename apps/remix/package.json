@@ -1,5 +1,5 @@
 {
-  "name": "remix",
+  "name": "@authdog-playground/remix",
   "private": true,
   "sideEffects": false,
   "type": "module",
