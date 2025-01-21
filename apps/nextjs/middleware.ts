@@ -1,8 +1,9 @@
 import { NextRequest } from "next/server";
-import { updateSession } from "./utils/sdk/middleware";
+import {authenticateRequest} from "@authdog/nextjs-app"
+// import { updateSession } from "./utils/sdk/middleware";
 
 export async function middleware(request: NextRequest) {
-    return updateSession(request);
+    return authenticateRequest(request);
 }
 
 export const config = {

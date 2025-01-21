@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/typescript-config/react-library.json",
+  "extends": "@authdog-web/ts-config/react-library.json",
   "compilerOptions": {
     "outDir": "dist"
   },
