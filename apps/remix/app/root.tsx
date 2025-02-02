@@ -8,6 +8,7 @@ import {
 import type { LinksFunction } from "@remix-run/node";
 
 import "./tailwind.css";
+import { useEffect } from "react";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -31,11 +32,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
-      </body>
+      <AuthdogProvider>
+        <body>
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+        </body>
+      </AuthdogProvider>
+      
     </html>
   );
 }
@@ -43,3 +47,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return <Outlet />;
 }
+
+
+export const AuthdogProvider = ({
+    children
+}: { children: React.ReactNode }) => {
+
+    useEffect(() => {
+        const token = new URLSearchParams(window.location.search).get("token");
+        if (token) {
+            // localStorage.setItem("token", token);
+            // 
+          // store token in cookies
+          document.cookie = `token_dev=${token}; path=/; max-age=3600`;
+          window.history.replaceState({}, document.title, "/");
+        }
+    }, [])
+
+    return (
+        <>
+            {children}        
+        </>
+    );
+};
