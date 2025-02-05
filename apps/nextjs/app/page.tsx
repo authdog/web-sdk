@@ -1,36 +1,12 @@
-import { cookies } from "next/headers";
+import { getSessionCookie } from "../utils/sdkUtils";
 
-export default function Home() {
-  const cookieStore = cookies();
-
+export default async function Home() {
   const publicKey = process.env.PK_AUTHDOG as string;
-
-  if (!publicKey) {
-    throw new Error("Public key is not defined");
-  }
-
-  if (!publicKey.startsWith("pk_")) {
-    throw new Error("Invalid public key");
-  }
-
-  let publicKeyObj;
-  try {
-    // Decode Base64-encoded publicKey
-    publicKeyObj = JSON.parse(
-      Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8")
-    );
-  } catch (error) {
-    throw new Error("Failed to parse public key");
-  }
-
-
-  // Get the session cookie
-  const sessionCookie = cookieStore.get(`user_session_${publicKeyObj?.environmentId}`);
+  const sessionCookie = await getSessionCookie(publicKey);
 
   return (
-
     <div className="flex h-screen items-center justify-center">
-        <code>{JSON.stringify(sessionCookie, null, 2)}</code>
+      <code>{JSON.stringify(sessionCookie, null, 2)}</code>
     </div>
   );
 }
