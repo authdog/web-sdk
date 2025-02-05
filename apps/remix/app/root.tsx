@@ -7,7 +7,6 @@ import {
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 
-import "./tailwind.css";
 import { useEffect } from "react";
 
 export const links: LinksFunction = () => [
@@ -32,13 +31,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <AuthdogProvider>
-        <body>
-          {children}
-          <ScrollRestoration />
-          <Scripts />
-        </body>
-      </AuthdogProvider>
+
+
+        <AuthdogProvider>
+          <body>
+            {children}
+            <ScrollRestoration />
+            <Scripts />
+          </body>
+        </AuthdogProvider>
+
+    
       
     </html>
   );

@@ -108,7 +108,7 @@ export default function Index() {
 
   return (
     <div className="flex h-screen items-center justify-center">
-      <p>Data loaded: {JSON.stringify(data)}</p>
+      <p>{JSON.stringify(data)}</p>
     </div>
   );
 }

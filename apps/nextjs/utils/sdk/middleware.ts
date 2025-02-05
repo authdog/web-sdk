@@ -25,7 +25,7 @@ export async function updateSession(request: NextRequest) {
             ""
         ), "base64").toString("utf-8"));
 
-    const tokenFromUri = new URL(request.nextUrl).searchParams.get("token");
+    const tokenFromUri = new URL(request.url).searchParams.get("token");
 
     if (tokenFromUri) {
         const userData = await fetch(
