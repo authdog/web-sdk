@@ -1,4 +1,4 @@
-import { getSessionCookie } from "../utils/sdkUtils";
+import { getSessionCookie } from "@authdog/nextjs-app/dist/index.server";
 
 export default async function Home() {
   const publicKey = process.env.PK_AUTHDOG as string;

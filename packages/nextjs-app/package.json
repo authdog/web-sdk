@@ -12,14 +12,16 @@
         "format": "prettier --config .prettierrc.json --write \"**/*.{ts,md}\"",
         "type-check": "tsc",
         "clean": "rm -rf dist",
-        "compile": "pnpm clean && tsup"
+        "build": "pnpm clean && tsup"
     },
     "dependencies": {
-        "next": "^15.1.0"
+        "next": "^15.1.0",
+        "react": "^19.1.0"
     },
     "devDependencies": {
         "@types/next": "^9.0.0",
         "@types/node": "^22.10.5",
+        "@types/react": "^19.1.0",
         "dotenv": "^16.4.7",
         "prettier": "^3.4.2",
         "tsup": "^8.3.5",

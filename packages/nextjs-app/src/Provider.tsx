@@ -1,9 +1,8 @@
-import {useEffect} from "react";
-
+"use client";
+import React, {useEffect} from "react";
 export const AuthdogProvider = ({
     children
 }: { children: React.ReactNode }) => {
-
     useEffect(() => {
         const token = new URLSearchParams(window.location.search).get("token");
         if (token) {
@@ -11,10 +10,5 @@ export const AuthdogProvider = ({
             window.history.replaceState({}, document.title, "/");
         }
     }, [])
-
-    return (
-        <>
-            {children}        
-        </>
-    );
+    return <>{children}</>;
 };
