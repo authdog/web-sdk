@@ -11,7 +11,8 @@
     "netlify-cli": "17.38.1-rc-ds",
     "prettier": "^3.2.5",
     "turbo": "^2.3.3",
-    "typescript": "5.5.4"
+    "typescript": "5.5.4",
+    "vercel": "^41.4.1"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {

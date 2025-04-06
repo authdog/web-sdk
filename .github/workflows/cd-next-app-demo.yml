@@ -11,11 +11,9 @@ on:
 env:
   # codebase
   STORE_PATH: ~/.pnpm-store
-  # env
   ENVFILE_CONSOLE: apps/nextjs/.env
-  # public
-  PK_AUTHDOG: pk_eyJlbnZpcm9ubWVudElkIjoiMjVmN2FmYmQtOWNmZS00MTQyLWI1OWYtOGUyNmI2N2IzZTYyIiwiaWRlbnRpdHlIb3N0IjoiaHR0cDovL2xvY2FsaG9zdDozNTAwIn0=
-  
+  SCOPE_VERCEL: david-barrats-projects-b894a911
+  PROJECT_VERCEL: nextjs-demo
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -61,17 +59,24 @@ jobs:
         run: |
           pnpm install --frozen-lockfile
 
-      - name: Prepare console environment variables
-        run: |
-          {
-            # set to vercel
-            echo "PK_AUTHDOG=${{ env.PK_AUTHDOG }}"
-          } > ${{ env.ENVFILE_CONSOLE }}
+      # - name: Prepare console environment variables
+      #   run: |
+      #     {
+      #       # set to vercel
+      #       echo "PK_AUTHDOG=${{ env.PK_AUTHDOG }}"
+      #     } > ${{ env.ENVFILE_CONSOLE }}
         
       - name: Install public SDK
         run: |
-          (cd apps/nextjs && pnpm add @authdog/nextjs-app@latest)
+          pnpm add @authdog/nextjs-app@latest --cwd apps/nextjs
 
       - name: Ship NextJS demo
         run: |
-          npx vercel deploy --cwd apps/nextjs --prod --token ${{ secrets.VERCEL_CD_TOKEN }} --confirm --scope david-barrats-projects-b894a911 --name nextjs-demo --force
+          vercel deploy \
+            --cwd apps/nextjs \
+            --token ${{ secrets.VERCEL_CD_TOKEN }} \
+            --scope ${{ env.SCOPE_VERCEL }} \
+            --name ${{ env.PROJECT_VERCEL }} \
+            --force \
+            --yes \
+            --prod
