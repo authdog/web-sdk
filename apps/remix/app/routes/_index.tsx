@@ -18,75 +18,73 @@ export const loader: LoaderFunction = async ({ request, context }) => {
   const publicKey = process.env.PK_AUTHDOG as string;
 
   if (!publicKey) {
-      throw new Error("Public key is not defined");
+    throw new Error("Public key is not defined");
   }
 
   if (!publicKey.startsWith("pk_")) {
-      throw new Error("Invalid public key");
+    throw new Error("Invalid public key");
   }
 
-    // Decode Base64-encoded publicKey
-    const publicKeyObj = JSON.parse(Buffer.from(publicKey
-      .replace(
-          "pk_",
-          ""
-      ), "base64").toString("utf-8"));
+  // Decode Base64-encoded publicKey
+  const publicKeyObj = JSON.parse(
+    Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8"),
+  );
 
   const tokenFromUri = new URL(request.url).searchParams.get("token");
 
   if (tokenFromUri) {
-      const userData = await fetch(
-          `${publicKeyObj?.identityHost}/oidc/${publicKeyObj?.environmentId}/userinfo`,
-          {
-              headers: {
-                  authorization: `Bearer ${tokenFromUri}`,
-              },
-          }
-      );
+    const userData = await fetch(
+      `${publicKeyObj?.identityHost}/oidc/${publicKeyObj?.environmentId}/userinfo`,
+      {
+        headers: {
+          authorization: `Bearer ${tokenFromUri}`,
+        },
+      },
+    );
 
-      console.log("userData", userData);
+    console.log("userData", userData);
 
+    // if (!userData.ok) {
+    //     throw new Error("Failed to fetch user info");
+    // }
 
-      // if (!userData.ok) {
-      //     throw new Error("Failed to fetch user info");
-      // }
+    const authenticatedUser = await userData.json();
 
-      const authenticatedUser = await userData.json();
+    console.log("authenticatedUser", authenticatedUser);
 
-      console.log("authenticatedUser", authenticatedUser);
+    // if (authenticatedUser?.meta && authenticatedUser?.meta?.code === 200) {
+    //     // response.cookies.set({
+    //     //     name: `user_session_${publicKeyObj?.environmentId}`,
+    //     //     value: JSON.stringify(authenticatedUser?.user),
+    //     //     ...options,
+    //     // });
 
-      // if (authenticatedUser?.meta && authenticatedUser?.meta?.code === 200) {
-      //     // response.cookies.set({
-      //     //     name: `user_session_${publicKeyObj?.environmentId}`,
-      //     //     value: JSON.stringify(authenticatedUser?.user),
-      //     //     ...options,
-      //     // });
+    //     // response.cookies.set({
+    //     //     name: `user_session_hash_${publicKeyObj?.environmentId}`,
+    //     //     value: tokenFromUri,
+    //     //     ...options,
+    //     // });
 
-      //     // response.cookies.set({
-      //     //     name: `user_session_hash_${publicKeyObj?.environmentId}`,
-      //     //     value: tokenFromUri,
-      //     //     ...options,
-      //     // });
-
-      //     context[`user_session_${publicKeyObj?.environmentId}`] = JSON.stringify(authenticatedUser?.user);
-      // }
-      return json({ authenticatedUser });
-
+    //     context[`user_session_${publicKeyObj?.environmentId}`] = JSON.stringify(authenticatedUser?.user);
+    // }
+    return json({ authenticatedUser });
   }
 
   // get token_dev from cookies
   const cookies = request.headers.get("Cookie");
-  const tokenDev = cookies?.split(";").find((cookie) => cookie.trim().startsWith("token_dev="));
+  const tokenDev = cookies
+    ?.split(";")
+    .find((cookie) => cookie.trim().startsWith("token_dev="));
 
   if (tokenDev) {
     const token = tokenDev.split("=")[1];
     const userData = await fetch(
       `${publicKeyObj?.identityHost}/oidc/${publicKeyObj?.environmentId}/userinfo`,
       {
-          headers: {
-              authorization: `Bearer ${token}`,
-          },
-      }
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      },
     );
 
     console.log("userData", userData);
@@ -97,8 +95,6 @@ export const loader: LoaderFunction = async ({ request, context }) => {
 
     return json({ authenticatedUser });
   }
-
-
 
   return null;
 };

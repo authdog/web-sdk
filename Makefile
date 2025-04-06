@@ -1,9 +1,14 @@
-# .PHONY: build-deps
-# build-deps:
-# 	pnpm turbo build \
-# 		--filter=@authdog/nextjs-app
-
-.PHONY: dev-next
-dev-next:
+.PHONY: dev_next
+dev_next:
 	pnpm turbo dev \
 	    --filter=@authdog-playground/nextjs
+
+.PHONY: ship_next_demo
+ship_next_demo:
+	pnpm turbo ship-demo \
+	    --filter=@authdog-playground/nextjs
+
+
+.PHONY: format
+format:
+	pnpm format

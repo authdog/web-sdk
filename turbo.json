@@ -12,6 +12,15 @@
       "cache": false,
       "persistent": true
     },
+    "@authdog/nextjs-app#build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**"]
+    },
+    "ship-demo": {
+      "cache": false,
+      "persistent": true
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },

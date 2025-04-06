@@ -1,0 +1,77 @@
+name: cd-next-app-demo
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - apps/nextjs/**
+  workflow_dispatch:
+
+env:
+  # codebase
+  STORE_PATH: ~/.pnpm-store
+  # env
+  ENVFILE_CONSOLE: apps/nextjs/.env
+  # public
+  PK_AUTHDOG: pk_eyJlbnZpcm9ubWVudElkIjoiMjVmN2FmYmQtOWNmZS00MTQyLWI1OWYtOGUyNmI2N2IzZTYyIiwiaWRlbnRpdHlIb3N0IjoiaHR0cDovL2xvY2FsaG9zdDozNTAwIn0=
+  
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          show-progress: false
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.0.0
+
+      - name: Use taobao registry
+        run: npm config set registry https://registry.npmmirror.com/
+
+      - name: Setup PNPM store path
+        run: pnpm config set store-dir ${{ env.STORE_PATH }}
+
+      - name: Setup Pnpm Cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-cache-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-cache-
+
+      - name: Install dependencies
+        run: |
+          pnpm install --frozen-lockfile
+
+      - name: Prepare console environment variables
+        run: |
+          {
+            echo "PK_AUTHDOG=${{ env.PK_AUTHDOG }}"
+          } > ${{ env.ENVFILE_CONSOLE }}
+
+      - name: Install netlify CLI
+        run: |
+          pnpm add netlify-cli@17.38.1-rc-ds -D -w
+
+      - name: Deploy artifacts
+        run: make ship_next_demo
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

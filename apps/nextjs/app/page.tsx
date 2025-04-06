@@ -1,6 +1,6 @@
 import { getSessionCookie } from "@authdog/nextjs-app/dist/index.server";
 
-export default async function Home() {
+const Home = async () => {
   const publicKey = process.env.PK_AUTHDOG as string;
   const sessionCookie = await getSessionCookie(publicKey);
 
@@ -9,4 +9,5 @@ export default async function Home() {
       <code>{JSON.stringify(sessionCookie, null, 2)}</code>
     </div>
   );
-}
+};
+export default Home;
