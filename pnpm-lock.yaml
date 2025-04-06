@@ -24,8 +24,8 @@ importers:
   apps/nextjs:
     dependencies:
       '@authdog/nextjs-app':
-        specifier: 0.0.4
-        version: 0.0.4(@opentelemetry/api@1.8.0)(react-dom@19.1.0(react@19.1.0))
+        specifier: workspace:*
+        version: link:../../packages/nextjs-app
       next:
         specifier: ^15.1.0
         version: 15.1.0(@opentelemetry/api@1.8.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -231,9 +231,6 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
-
-  '@authdog/nextjs-app@0.0.4':
-    resolution: {integrity: sha512-G4KKxzPtK2Y/ZRwSt915qyxrWAD4NEio5W2WDE147HgJhK4QOxq7gcIWQBtufMmw84+HQ7Ue9/uw+LjfHpXpTQ==}
 
   '@babel/code-frame@7.26.2':
     resolution: {integrity: sha512-RJlIHRueQgwWitWgF8OdFYGZX328Ax5BCemNGlqHfplnRT9ESi8JkFlvaVYbS+UubVY6dpv87Fs2u5M29iNFVQ==}
@@ -7915,19 +7912,6 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
-
-  '@authdog/nextjs-app@0.0.4(@opentelemetry/api@1.8.0)(react-dom@19.1.0(react@19.1.0))':
-    dependencies:
-      next: 15.1.0(@opentelemetry/api@1.8.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      react: 19.1.0
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@opentelemetry/api'
-      - '@playwright/test'
-      - babel-plugin-macros
-      - babel-plugin-react-compiler
-      - react-dom
-      - sass
 
   '@babel/code-frame@7.26.2':
     dependencies:
