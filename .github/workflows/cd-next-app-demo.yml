@@ -14,6 +14,7 @@ env:
   ENVFILE_CONSOLE: apps/nextjs/.env
   SCOPE_VERCEL: david-barrats-projects-b894a911
   PROJECT_VERCEL: nextjs-demo
+  SDK_VERSION: latest
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -68,7 +69,7 @@ jobs:
         
       - name: Install public SDK
         run: |
-          pnpm add @authdog/nextjs-app@latest --cwd apps/nextjs
+          (cd apps/nextjs && pnpm add @authdog/nextjs-app@${ env.SDK_VERSION })
 
       - name: Ship NextJS demo
         run: |
