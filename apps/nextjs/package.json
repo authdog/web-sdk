@@ -16,7 +16,7 @@
     "next": "^15.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "@authdog/nextjs-app": "0.0.4"
+    "@authdog/nextjs-app": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20",

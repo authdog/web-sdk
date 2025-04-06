@@ -64,14 +64,14 @@ jobs:
       - name: Prepare console environment variables
         run: |
           {
+            # set to vercel
             echo "PK_AUTHDOG=${{ env.PK_AUTHDOG }}"
           } > ${{ env.ENVFILE_CONSOLE }}
 
       - name: Install netlify CLI
         run: |
           pnpm add netlify-cli@17.38.1-rc-ds -D -w
-
-      - name: Deploy artifacts
-        run: make ship_next_demo
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        
+      - name: Install public SDK
+        run: |
+          (cd apps/nextjs && pnpm add @authdog/nextjs-app@latest)
