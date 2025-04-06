@@ -67,11 +67,12 @@ jobs:
             # set to vercel
             echo "PK_AUTHDOG=${{ env.PK_AUTHDOG }}"
           } > ${{ env.ENVFILE_CONSOLE }}
-
-      - name: Install netlify CLI
-        run: |
-          pnpm add netlify-cli@17.38.1-rc-ds -D -w
         
       - name: Install public SDK
         run: |
           (cd apps/nextjs && pnpm add @authdog/nextjs-app@latest)
+
+      - name: Ship NextJS demo
+        run: |
+          npx vercel deploy --prod --token ${{ secrets.VERCEL_CD_TOKEN }} --confirm
+          ## --env-file ${{ env.ENVFILE_CONSOLE }} --scope authdog --project authdog-nextjs-demo --force
