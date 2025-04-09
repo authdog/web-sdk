@@ -42,8 +42,8 @@ jobs:
         with:
           version: 9.0.0
 
-      - name: Use taobao registry
-        run: npm config set registry https://registry.npmmirror.com/
+      # - name: Use taobao registry
+      #   run: npm config set registry https://registry.npmmirror.com/
 
       - name: Setup PNPM store path
         run: pnpm config set store-dir ${{ env.STORE_PATH }}
