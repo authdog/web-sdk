@@ -1,7 +1,7 @@
 "use server"
 // import { useState } from "react"
 import Link from "next/link"
-import { Bell, Settings, User } from "lucide-react"
+import { Settings, User } from "lucide-react"
 import { getSessionCookie } from "@authdog/nextjs-app/dist/index.server";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"

@@ -1,5 +1,5 @@
 import {cookies} from 'next/headers'
-import { getPublicKeyPayload } from '@authdog/nextjs-app';
+import { getPublicKeyPayload } from '@authdog/nextjs-app/dist/index.server';
 import { NextRequest } from 'next/server';
 
 
