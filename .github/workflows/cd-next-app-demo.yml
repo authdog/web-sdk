@@ -14,7 +14,7 @@ env:
   ENVFILE_CONSOLE: apps/nextjs/.env
   SCOPE_VERCEL: david-barrats-projects-b894a911
   PROJECT_VERCEL: nextjs-demo
-  SDK_VERSION: 0.0.7
+  SDK_VERSION: latest
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
