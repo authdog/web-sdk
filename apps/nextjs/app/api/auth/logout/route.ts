@@ -1,9 +1,9 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
 import {cookies} from 'next/headers'
 import { getPublicKeyPayload } from '@authdog/nextjs-app';
+import { NextRequest } from 'next/server';
 
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest) {
     const cookiesStore = await cookies();
 
     const publicKey = process.env.PK_AUTHDOG as string;
