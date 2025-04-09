@@ -16,13 +16,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { LogoutDropdown } from "@/components/auth/logout-dropdown";
-import { getPublicKeyPayload } from "@authdog/nextjs-app";
+import { getServerSidePayloadPublicKey } from "@authdog/nextjs-app/dist/index.server";
 import { LogoutButton } from "@/components/auth/logout-btn";
 
 export default async function Dashboard() {
   const publicKey = process.env.PK_AUTHDOG as string;
   const sessionCookie = await getSessionCookie(publicKey);
-  const publicKeyPayload = getPublicKeyPayload(publicKey);
+  const publicKeyPayload = getServerSidePayloadPublicKey(publicKey);
 
   const user = sessionCookie?.value ? JSON.parse(sessionCookie?.value) : null;
 
