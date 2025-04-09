@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import {cookies} from 'next/headers'
-import { getPublicKeyPayload } from '@authdog/nextjs-app/src/commons';
+import { getPublicKeyPayload } from '@authdog/nextjs-app';
 
 
 export async function POST(req: NextApiRequest, res: NextApiResponse) {

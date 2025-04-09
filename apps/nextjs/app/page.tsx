@@ -16,7 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { LogoutDropdown } from "@/components/auth/logout-dropdown";
-import { getPublicKeyPayload } from "@authdog/nextjs-app/src/commons";
+import { getPublicKeyPayload } from "@authdog/nextjs-app";
 import { LogoutButton } from "@/components/auth/logout-btn";
 
 export default async function Dashboard() {
