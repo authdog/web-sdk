@@ -1,9 +1,8 @@
 "use server"
 // import { useState } from "react"
 import Link from "next/link"
-import { Bell, LogOut, Menu, Settings, User } from "lucide-react"
+import { Bell, Settings, User } from "lucide-react"
 import { getSessionCookie } from "@authdog/nextjs-app/dist/index.server";
-
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -16,12 +15,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { LogoutDropdown } from "@/components/auth/logout-dropdown";
+import { getPublicKeyPayload } from "@authdog/nextjs-app/src/commons";
+import { LogoutButton } from "@/components/auth/logout-btn";
 
 export default async function Dashboard() {
-  // const [isOpen, setIsOpen] = useState(false);
-
   const publicKey = process.env.PK_AUTHDOG as string;
   const sessionCookie = await getSessionCookie(publicKey);
+  const publicKeyPayload = getPublicKeyPayload(publicKey);
 
   const user = sessionCookie?.value ? JSON.parse(sessionCookie?.value) : null;
 
@@ -37,18 +38,18 @@ export default async function Dashboard() {
           </nav>
         </div>
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" className="relative">
+          {/* <Button variant="ghost" size="icon" className="relative">
             <Bell className="h-5 w-5" />
             <span className="absolute right-1 top-1 flex h-2 w-2 rounded-full bg-primary" />
             <span className="sr-only">Notifications</span>
-          </Button>
+          </Button> */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="rounded-full">
                 <Avatar className="h-8 w-8">
                   <AvatarImage src={user?.photos?.[0]?.value} alt="User Avatar" />
                   <AvatarFallback>
-                    {user?.displayName?.charAt(0) || "U"}
+                    {user?.displayName?.charAt(0) || "?"}
                   </AvatarFallback>
                 </Avatar>
               </Button>
@@ -66,11 +67,11 @@ export default async function Dashboard() {
                   <span>Settings</span>
                 </DropdownMenuItem>
               </DropdownMenuGroup>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <LogOut className="mr-2 h-4 w-4" />
-                <span>Logout</span>
-              </DropdownMenuItem>
+              
+              {user && <>
+                <DropdownMenuSeparator />
+                <LogoutDropdown />
+              </>}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -79,7 +80,27 @@ export default async function Dashboard() {
         <div className="mx-auto max-w-7xl">
           <div className="flex h-full items-center justify-center align-middle text-center">
             <h1 className="text-6xl font-bold text-center">Hello {user?.displayName ?? "World"}</h1>
+            
           </div>
+
+          <div className="h-full items-center justify-center align-middle text-center">
+
+          {
+              user 
+            
+              ? <LogoutButton />
+              : (
+                <>
+                  <p className="mt-4 text-lg">
+                    You are not logged in. Please login to see your profile.
+                  </p>
+                  <Link href={`${publicKeyPayload?.identityHost}/signin/${publicKeyPayload?.environmentId}`} className="mt-4 inline-block rounded-md bg-blue-500 px-4 py-2 text-white">
+                    Login
+                  </Link>
+                </>
+              )
+            }
+            </div>
         </div>
       </main>
     </div>
