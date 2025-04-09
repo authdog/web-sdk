@@ -1,5 +1,5 @@
 import {cookies} from 'next/headers'
-import { getPublicKeyPayload } from '@authdog/nextjs-app/dist/index.server';
+import { getServerSidePayloadPublicKey } from '@authdog/nextjs-app/dist/index.server';
 import { NextRequest } from 'next/server';
 
 
@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
         throw new Error("Public key is not defined");
     }
 
-    const payload = getPublicKeyPayload(publicKey);
+    const payload = await getServerSidePayloadPublicKey(publicKey);
     
     const environmentId = payload.environmentId;
     const cookieNameSession = `user_session_${environmentId}`;
