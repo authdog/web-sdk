@@ -1,8 +1,8 @@
 export interface PublicKeyPayload {
     environmentId: string;
     identityHost: string;
-}
-  
+};
+
 export const getPublicKeyPayload = (publicKey: string): PublicKeyPayload => {
     if (!publicKey) {
       throw new Error("Public key is not defined");
