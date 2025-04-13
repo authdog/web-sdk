@@ -1,0 +1,34 @@
+{
+    "name": "@authdog/node-commons",
+    "version": "0.0.8",
+    "description": "Authdog Next.js SDK",
+    "source": "src/index.ts",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist/"
+    ],
+    "scripts": {
+        "format": "prettier --config .prettierrc.json --write \"**/*.{ts,md}\"",
+        "type-check": "tsc",
+        "clean": "rm -rf dist",
+        "build": "pnpm clean && tsup",
+        "ship": "pnpm build && pnpm publish --access public --no-git-checks"
+    },
+    "dependencies": {
+        "next": "^15.1.0",
+        "react": "^19.1.0"
+    },
+    "devDependencies": {
+        "@types/next": "^9.0.0",
+        "@types/node": "^22.10.5",
+        "@types/react": "^19.1.0",
+        "dotenv": "^16.4.7",
+        "prettier": "^3.4.2",
+        "tsup": "^8.3.5",
+        "typescript": "^5.7.2",
+        "vitest": "^2.1.8"
+    }
+}

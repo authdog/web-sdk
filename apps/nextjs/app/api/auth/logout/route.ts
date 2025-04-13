@@ -1,43 +1,45 @@
-import {cookies} from 'next/headers'
-import { getServerSidePayloadPublicKey } from '@authdog/nextjs-app/dist/index.server';
-import { NextRequest } from 'next/server';
-
+import { cookies } from "next/headers";
+import { getServerSidePayloadPublicKey } from "@authdog/nextjs-app/dist/index.server";
+import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
-    const cookiesStore = await cookies();
+  const cookiesStore = await cookies();
 
-    const publicKey = process.env.PK_AUTHDOG as string;
+  const publicKey = process.env.PK_AUTHDOG as string;
 
-    console.log(publicKey)
-    if (!publicKey) {
-        throw new Error("Public key is not defined");
-    }
+  console.log(publicKey);
+  if (!publicKey) {
+    throw new Error("Public key is not defined");
+  }
 
-    const payload = await getServerSidePayloadPublicKey(publicKey);
-    
-    const environmentId = payload.environmentId;
-    const cookieNameSession = `user_session_${environmentId}`;
+  const payload = await getServerSidePayloadPublicKey(publicKey);
 
-    const cookieValueSession = cookiesStore.get(cookieNameSession);
+  const environmentId = payload.environmentId;
+  const cookieNameSession = `user_session_${environmentId}`;
 
-    if (cookieValueSession) {
-        cookiesStore.delete(cookieNameSession);
-    }
+  const cookieValueSession = cookiesStore.get(cookieNameSession);
 
-    const cookieNameHash = `user_session_hash_${environmentId}`;
-    const cookieValueHash = cookiesStore.get(cookieNameHash);
+  if (cookieValueSession) {
+    cookiesStore.delete(cookieNameSession);
+  }
 
-    if (cookieValueHash) {
-        cookiesStore.delete(cookieNameHash);
-    }
+  const cookieNameHash = `user_session_hash_${environmentId}`;
+  const cookieValueHash = cookiesStore.get(cookieNameHash);
 
-    return new Response(JSON.stringify({
-        message: 'Logout successfully',
-        success: true,
-    }), {
-        status: 200,
-        headers: {
-        'Content-Type': 'application/json',
-        },
-    });
+  if (cookieValueHash) {
+    cookiesStore.delete(cookieNameHash);
+  }
+
+  return new Response(
+    JSON.stringify({
+      message: "Logout successfully",
+      success: true,
+    }),
+    {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+  );
 }

@@ -2,11 +2,12 @@ import {
   Links,
   Meta,
   Outlet,
+  redirect,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
-
+import type { LinksFunction, LoaderFunction } from "@remix-run/node";
 import { useEffect } from "react";
 
 export const links: LinksFunction = () => [
@@ -43,25 +44,71 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function App() {
+const App = () => {
   return <Outlet />;
-}
+};
 
-export const AuthdogProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const AuthdogRemixApp = (App: () => JSX.Element, opts: any = {}) => {
+  return () => {
+    // let clerkState;
+    // const isSpaMode = inSpaMode();
+
+    // Don't use `useLoaderData` to fetch the clerk state if we're in SPA mode
+    // if (!isSpaMode) {
+    //   const loaderData = useLoaderData<{ clerkState: any }>();
+    //   clerkState = loaderData.clerkState;
+    // }
+
+    // if (isSpaMode) {
+    //   assertPublishableKeyInSpaMode(opts.publishableKey);
+    // }
+
+    return (
+      <AuthdogProvider
+      /* @ts-ignore The type of opts cannot be inferred by TS automatically because of the complex
+       * discriminated unions required for the router props and multidomain feature   */
+      // {...(opts as RemixClerkProviderProps)}
+      // clerkState={clerkState}
+      >
+        <App />
+      </AuthdogProvider>
+    );
+  };
+};
+
+export const getPublicKeyPayload = (publicKey: string): any => {
+  if (!publicKey) {
+    throw new Error("Public key is not defined");
+  }
+
+  if (!publicKey.startsWith("pk_")) {
+    throw new Error("Invalid public key");
+  }
+
+  try {
+    return JSON.parse(Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8"));
+  } catch (e) {
+    throw new Error("Failed to parse public key");
+  }
+};
+
+// export const loader: LoaderFunction = async ({ request }) => {
+
+//   return null;
+// };
+
+export function AuthdogProvider({ children }: { children: React.ReactNode }) {
+
   useEffect(() => {
-    const token = new URLSearchParams(window.location.search).get("token");
+    const url = new URL(window.location.href);
+    const token = url.searchParams.get("token");
     if (token) {
-      // localStorage.setItem("token", token);
-      //
-      // store token in cookies
-      document.cookie = `token_dev=${token}; path=/; max-age=3600`;
-      window.history.replaceState({}, document.title, "/");
+      url.searchParams.delete("token");
+      window.history.replaceState({}, document.title, url.toString());
     }
   }, []);
 
   return <>{children}</>;
-};
+}
+
+export default AuthdogRemixApp(App);

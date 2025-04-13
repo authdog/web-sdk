@@ -40,6 +40,7 @@ export const useAuthMiddleware = (publicKey: string) => {
       const authenticatedUser = await userData.json();
 
       if (authenticatedUser?.meta?.code === 200) {
+        // TODO: define object in node-commons
         response.cookies.set({
           name: `user_session_${publicKeyObj.environmentId}`,
           value: JSON.stringify(authenticatedUser.user),
