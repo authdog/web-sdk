@@ -19,8 +19,7 @@
     },
     "dependencies": {
         "next": "^15.1.0",
-        "react": "^19.1.0",
-        "@authdog/node-commons": "workspace:*"
+        "react": "^19.1.0"
     },
     "devDependencies": {
         "@types/next": "^9.0.0",
