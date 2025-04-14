@@ -1,1 +1,3 @@
-export * from "./platform-public-key";
+export {
+    PublicKeyPayload
+} from "./platform-public-key";
