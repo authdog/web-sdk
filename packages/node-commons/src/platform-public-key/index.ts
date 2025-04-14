@@ -17,5 +17,5 @@ export const getPublicKeyPayload = (publicKey: string): PublicKeyPayload => {
     } catch (e) {
       throw new Error("Failed to parse public key");
     }
-  };
+};
   
