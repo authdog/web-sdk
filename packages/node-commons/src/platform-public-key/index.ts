@@ -8,7 +8,6 @@ export const getPublicKeyPayload = (publicKey: string): PublicKeyPayload => {
   if (!publicKey) {
     throw new Error("Public key is not defined");
   }
-
   if (!publicKey.startsWith("pk_")) {
     throw new Error("Invalid public key");
   }
