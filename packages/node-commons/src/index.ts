@@ -1,3 +1,3 @@
 export {
-    PublicKeyPayload
+    getPublicKeyPayload
 } from "./platform-public-key";
