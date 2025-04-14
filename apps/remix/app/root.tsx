@@ -86,7 +86,9 @@ export const getPublicKeyPayload = (publicKey: string): any => {
   }
 
   try {
-    return JSON.parse(Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8"));
+    return JSON.parse(
+      Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8"),
+    );
   } catch (e) {
     throw new Error("Failed to parse public key");
   }
@@ -98,7 +100,6 @@ export const getPublicKeyPayload = (publicKey: string): any => {
 // };
 
 export function AuthdogProvider({ children }: { children: React.ReactNode }) {
-
   useEffect(() => {
     const url = new URL(window.location.href);
     const token = url.searchParams.get("token");
