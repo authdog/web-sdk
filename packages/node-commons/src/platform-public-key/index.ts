@@ -2,7 +2,6 @@ export interface PublicKeyPayload {
   environmentId: string;
   identityHost: string;
   version?: string;
-  region?: string;
 }
 export const getPublicKeyPayload = (publicKey: string): PublicKeyPayload => {
   if (!publicKey) {
