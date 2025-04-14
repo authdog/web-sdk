@@ -1,6 +1,12 @@
 name: adog-packages-publish
 
-on: [push]
+on:
+  push:
+    # branches:
+    #   - main
+    # paths:
+    #   - packages/**
+  workflow_dispatch:
 
 jobs:
   publish:
