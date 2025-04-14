@@ -43,12 +43,12 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
         if: github.ref != 'refs/heads/main'
 
-      - name: Publish packages
-        id: changesets-publish
-        uses: changesets/action@v1
-        with:
-          publish: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_AUTOMATION_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
-        if: github.ref == 'refs/heads/main'
+      # - name: Publish packages
+      #   id: changesets-publish
+      #   uses: changesets/action@v1
+      #   with:
+      #     publish: true
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GH_AUTOMATION_TOKEN }}
+      #     NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
+      #   if: github.ref == 'refs/heads/main'
