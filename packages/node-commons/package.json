@@ -16,10 +16,6 @@
         "build": "pnpm clean && tsup",
         "ship": "pnpm build && pnpm publish --access public --no-git-checks"
     },
-    "dependencies": {
-        "next": "^15.1.0",
-        "react": "^19.1.0"
-    },
     "devDependencies": {
         "@types/next": "^9.0.0",
         "@types/node": "^22.10.5",

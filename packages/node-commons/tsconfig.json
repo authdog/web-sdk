@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "target": "ES2020",
+      "module": "NodeNext",
+      "moduleResolution": "nodenext", // Resolve Node.js modules
+      "declaration": true,
+      "declarationDir": "dist/types",
+      "emitDeclarationOnly": true,
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "types": ["next"], // Include all Next.js types,
+      "jsx": "preserve", // Preserve JSX for Next.js
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules", "dist"]
+  }
