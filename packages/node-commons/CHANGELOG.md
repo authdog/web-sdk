@@ -1,5 +1,11 @@
 # @authdog/node-commons
 
+## 0.0.11
+
+### Patch Changes
+
+- c16bd33: remove region
+
 ## 0.0.10
 
 ### Patch Changes
