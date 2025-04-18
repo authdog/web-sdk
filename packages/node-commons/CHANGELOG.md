@@ -1,5 +1,11 @@
 # @authdog/node-commons
 
+## 0.0.16
+
+### Patch Changes
+
+- 24696d9: testing changeset
+
 ## 0.0.15
 
 ### Patch Changes
