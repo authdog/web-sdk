@@ -33,22 +33,44 @@ jobs:
 
       - run: pnpm install
 
+      # - name: Create Release Pull Request
+      #   id: changesets-version
+      #   uses: changesets/action@v1
+      #   with:
+      #     version: true
+      #   env:
+      #     GITHUB_TOKEN: ${{ env.GH_AUTOMATION_TOKEN }}
+      #     NPM_TOKEN: ${{ env.NPM_AUTOMATION_TOKEN }}
+      #   if: github.ref != 'refs/heads/main'
+
+      # - name: Publish packages
+      #   id: changesets-publish
+      #   uses: changesets/action@v1
+      #   with:
+      #     publish: true
+      #   env:
+      #     GITHUB_TOKEN: ${{ env.GH_AUTOMATION_TOKEN }}
+      #     NPM_TOKEN: ${{ env.NPM_AUTOMATION_TOKEN }}
+      #   if: github.ref == 'refs/heads/main'
+
       - name: Create Release Pull Request
         id: changesets-version
         uses: changesets/action@v1
         with:
-          version: true
+          version: |
+            pnpm generate-pr
         env:
-          GITHUB_TOKEN: ${{ env.GH_AUTOMATION_TOKEN }}
-          NPM_TOKEN: ${{ env.NPM_AUTOMATION_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_AUTOMATION_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
         if: github.ref != 'refs/heads/main'
 
       - name: Publish packages
         id: changesets-publish
         uses: changesets/action@v1
         with:
-          publish: true
+          publish: |
+            pnpm publish-packages
         env:
-          GITHUB_TOKEN: ${{ env.GH_AUTOMATION_TOKEN }}
-          NPM_TOKEN: ${{ env.NPM_AUTOMATION_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_AUTOMATION_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
         if: github.ref == 'refs/heads/main'
