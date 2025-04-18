@@ -1,5 +1,11 @@
 # @authdog/nextjs-app
 
+## 0.0.10
+
+### Patch Changes
+
+- 932b120: test change
+
 ## 0.0.9
 
 ### Patch Changes
