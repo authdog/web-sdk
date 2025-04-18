@@ -1,7 +1,7 @@
 {
-    "name": "@authdog/nextjs-app",
-    "version": "0.0.11",
-    "description": "Authdog Next.js SDK",
+    "name": "@authdog/remix-sdk",
+    "version": "0.0.1",
+    "description": "Authdog Remix SDK",
     "source": "src/index.ts",
     "main": "dist/index.js",
     "module": "dist/index.js",
@@ -15,10 +15,6 @@
         "clean": "rm -rf dist",
         "build": "pnpm clean && tsup",
         "ship": "pnpm build && pnpm publish --access public --no-git-checks"
-    },
-    "dependencies": {
-        "next": "^15.1.0",
-        "react": "^19.1.0"
     },
     "publishConfig": {
         "registry": "https://registry.npmjs.org/",

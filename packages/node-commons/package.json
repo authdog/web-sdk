@@ -17,8 +17,6 @@
         "ship": "pnpm build && pnpm publish --access public --no-git-checks"
     },
     "devDependencies": {
-        "@types/node": "^22.10.7",
-        "@types/react": "^19.1.0",
         "dotenv": "^16.4.7",
         "prettier": "^3.4.2",
         "tsup": "^8.3.5",
