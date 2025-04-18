@@ -9,7 +9,7 @@
       "strict": true,
       "esModuleInterop": true,
       "skipLibCheck": true,
-      "types": ["next"], // Include all Next.js types,
+      "types": ["@types/node"],
       "jsx": "preserve", // Preserve JSX for Next.js
     },
     "include": ["src/**/*.ts"],
