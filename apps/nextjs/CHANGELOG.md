@@ -1,5 +1,12 @@
 # @authdog-playground/nextjs
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies [932b120]
+  - @authdog/nextjs-app@0.0.10
+
 ## 0.1.1
 
 ### Patch Changes
