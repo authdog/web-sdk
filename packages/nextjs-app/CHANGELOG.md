@@ -1,5 +1,11 @@
 # @authdog/nextjs-app
 
+## 0.0.11
+
+### Patch Changes
+
+- 24696d9: testing changeset
+
 ## 0.0.10
 
 ### Patch Changes
