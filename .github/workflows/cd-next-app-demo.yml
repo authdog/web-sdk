@@ -61,8 +61,7 @@ jobs:
 
       - name: Build workspace packages
         run: |
-          pnpm build --filter "./packages/*"
-          ls -la packages/nextjs-app/dist
+          make build
 
       - name: Setup workspace for Vercel
         run: |
