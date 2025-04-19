@@ -27,7 +27,8 @@
         "access": "public"
     },
     "dependencies": {
+        "@authdog/node-commons": "workspace:*",
         "@remix-run/node": "^2.15.2",
-        "@authdog/node-commons": "workspace:*"
+        "react": "^19.1.0"
     }
 }

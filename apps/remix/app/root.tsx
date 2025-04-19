@@ -2,13 +2,13 @@ import {
   Links,
   Meta,
   Outlet,
-  redirect,
+  // redirect,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
+  // useLoaderData,
 } from "@remix-run/react";
-import type { LinksFunction, LoaderFunction } from "@remix-run/node";
-import { useEffect } from "react";
+import type { LinksFunction } from "@remix-run/node";
+import {AuthdogProvider} from "@authdog/remix-node";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -99,17 +99,4 @@ const AuthdogRemixApp = (App: () => JSX.Element, opts: any = {}) => {
 //   return null;
 // };
 
-export function AuthdogProvider({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    const token = url.searchParams.get("token");
-    if (token) {
-      url.searchParams.delete("token");
-      window.history.replaceState({}, document.title, url.toString());
-    }
-  }, []);
 
-  return <>{children}</>;
-}
-
-export default AuthdogRemixApp(App);

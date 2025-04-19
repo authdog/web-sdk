@@ -229,6 +229,9 @@ importers:
       '@remix-run/node':
         specifier: ^2.15.2
         version: 2.15.2(typescript@5.7.3)
+      react:
+        specifier: ^19.1.0
+        version: 19.1.0
 
   packages/ts-config: {}
 

@@ -1,28 +1,6 @@
 import { json } from "@remix-run/node";
 
-import { parseCookies, validateAndParsePublicKey } from "@authdog/node-commons";
-
-// Function to fetch user data from the identity host
-export const fetchUserData = async (
-  identityHost: string,
-  environmentId: string,
-  token: string,
-) => {
-  const userData = await fetch(
-    `${identityHost}/oidc/${environmentId}/userinfo`,
-    {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    },
-  );
-
-  if (!userData.ok) {
-    throw new Error("Failed to fetch user info");
-  }
-
-  return userData.json();
-};
+import { parseCookies, validateAndParsePublicKey, fetchUserData } from "@authdog/node-commons";
 
 // Function to create authentication response with cookies
 export const createAuthResponse = (
@@ -174,3 +152,5 @@ export const remixAuthLoader = async ({
     loading: true,
   });
 };
+
+export {AuthdogProvider} from "./provider.tsx"
