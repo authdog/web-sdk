@@ -21,4 +21,15 @@ export default defineConfig({
     }),
     tsconfigPaths(),
   ],
+  build: {
+    target: 'esnext',
+    rollupOptions: {
+      output: {
+        format: 'esm'
+      }
+    }
+  },
+  ssr: {
+    noExternal: ['@authdog/remix-node']
+  }
 });

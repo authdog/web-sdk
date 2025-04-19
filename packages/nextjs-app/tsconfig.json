@@ -1,16 +1,18 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "NodeNext",
-    "moduleResolution": "nodenext", // Resolve Node.js modules
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "declaration": true,
     "declarationDir": "dist/types",
     "emitDeclarationOnly": true,
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["next"], // Include all Next.js types,
-    "jsx": "preserve", // Preserve JSX for Next.js
+    "types": ["next"],
+    "jsx": "preserve",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist"]
