@@ -1,0 +1,13 @@
+{
+  "version": "v1",
+  "packages": {
+    "@authdog/react-elements": {
+      "signature": "e5768a1d06012fd020580ac9a065250c",
+      "file": true
+    },
+    "@authdog/nextjs-app": {
+      "signature": "4549f92f896a1de935ed11a902c6bf61",
+      "file": true
+    }
+  }
+}

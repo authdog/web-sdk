@@ -23,3 +23,8 @@ format:
 build:
 	pnpm turbo build \
 	    --filter=@authdog*
+
+.PHONY: yalc
+yalc:
+	pnpm yalc:all
+     

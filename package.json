@@ -8,21 +8,25 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset",
     "publish-packages": "turbo build --filter=@authdog/*  --filter=!@playground/*  && pnpm changeset publish",
-    "generate-pr": "turbo build --filter=@authdog/* --filter=!@playground/* && pnpm changeset version"
+    "generate-pr": "turbo build --filter=@authdog/* --filter=!@playground/* && pnpm changeset version",
+    "yalc:all": "for d in packages/*/; do echo $d; cd $d; pnpm yalc push --replace --sig; cd '../../'; done"
   },
   "devDependencies": {
     "@changesets/cli": "^2.28.1",
-    "turbo": "^2.3.3",
-    "vercel": "^41.4.1",
-     "typescript": "^5.7.2",
-    "vitest": "^2.1.8",
     "@types/node": "^22.10.7",
     "@types/react": "^19.1.0",
     "prettier": "^3.4.2",
-    "tsup": "^8.3.5"
+    "tsup": "^8.3.5",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2",
+    "vercel": "^41.4.1",
+    "vitest": "^2.1.8"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "yalc": "1.0.0-pre.53"
   }
 }

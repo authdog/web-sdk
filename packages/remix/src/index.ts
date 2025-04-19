@@ -1,4 +1,4 @@
-import { json, redirect } from "@remix-run/node";
+import { json } from "@remix-run/node";
 
 import { parseCookies, validateAndParsePublicKey, fetchUserData } from "@authdog/node-commons";
 
@@ -73,7 +73,7 @@ export const authenticateWithCookies = async (
 
     // Find our specific cookies
     const userSessionHashCookie = cookies.find(
-      (c) => c.name === `user_session_hash_${publicKeyObj?.environmentId}`,
+      (c: any) => c.name === `user_session_hash_${publicKeyObj?.environmentId}`,
     );
 
     if (userSessionHashCookie) {

@@ -2,14 +2,13 @@
     "name": "@authdog/remix-node",
     "version": "0.0.5",
     "description": "Authdog Remix SDK",
-    "type": "module",
     "source": "src/index.ts",
-    "main": "./dist/index.mjs",
-    "types": "./dist/index.d.mts",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "exports": {
         ".": {
-            "types": "./dist/index.d.mts",
-            "import": "./dist/index.mjs"
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js"
         }
     },
     "files": [
@@ -29,7 +28,7 @@
     "dependencies": {
         "@authdog/node-commons": "workspace:*",
         "@remix-run/node": "^2.15.2",
-        "@remix-run/react": "^2.15.2",
+        "@remix-run/react": "^2.16.5",
         "react": "^18.2.0"
     },
     "devDependencies": {

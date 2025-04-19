@@ -2,7 +2,7 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
   entry: ["src/index.ts", "src/index.server.ts"],
-  format: ["esm"],
+  format: ["cjs"],
   dts: {
     compilerOptions: {
       moduleResolution: "bundler",
