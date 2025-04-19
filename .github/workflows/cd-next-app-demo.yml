@@ -60,7 +60,9 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build workspace packages
-        run: pnpm build --filter "./packages/*"
+        run: |
+          pnpm build --filter "./packages/*"
+          ls -la packages/nextjs-app/dist
 
       - name: Setup workspace for Vercel
         run: |
@@ -68,6 +70,14 @@ jobs:
           echo "shamefully-hoist=true" > .npmrc
           echo "node-linker=hoisted" >> .npmrc
           echo "link-workspace-packages=true" >> .npmrc
+          echo "public-hoist-pattern[]=*@authdog*" >> .npmrc
+
+      - name: Link packages to Next.js app
+        run: |
+          cd apps/nextjs
+          mkdir -p node_modules/@authdog
+          ln -sf ../../../packages/nextjs-app node_modules/@authdog/nextjs-app
+          ln -sf ../../../packages/react-elements node_modules/@authdog/react-elements
 
       - name: Build Next.js app
         run: |
