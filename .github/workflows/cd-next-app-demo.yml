@@ -15,8 +15,6 @@ env:
   ENVFILE_CONSOLE: apps/nextjs/.env
   SCOPE_VERCEL: david-barrats-projects-b894a911
   PROJECT_VERCEL: nextjs-demo
-  NEXT_APP_SDK_VERSION: latest
-  REACT_ELEMENTS_SDK_VERSION: 0.0.2
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -59,12 +57,22 @@ jobs:
             ${{ runner.os }}-pnpm-cache-
 
       - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build workspace packages
+        run: pnpm build --filter "./packages/*"
+
+      - name: Setup workspace for Vercel
         run: |
-          pnpm install --frozen-lockfile
-        
-      - name: Install public SDK
+          cd apps/nextjs
+          echo "shamefully-hoist=true" > .npmrc
+          echo "node-linker=hoisted" >> .npmrc
+          echo "link-workspace-packages=true" >> .npmrc
+
+      - name: Build Next.js app
         run: |
-          (cd apps/nextjs && pnpm add @authdog/nextjs-app@${{ env.NEXT_APP_SDK_VERSION }} @authdog/react-elements@${{ env.REACT_ELEMENTS_SDK_VERSION }})
+          cd apps/nextjs
+          pnpm build
 
       - name: Ship NextJS demo
         run: |
@@ -75,4 +83,5 @@ jobs:
             --name ${{ env.PROJECT_VERCEL }} \
             --force \
             --yes \
-            --prod
+            --prod \
+            --build-env NODE_PATH=$PWD/node_modules
