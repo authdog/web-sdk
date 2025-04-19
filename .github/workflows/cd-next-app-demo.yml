@@ -64,8 +64,7 @@ jobs:
         
       - name: Install public SDK
         run: |
-          (cd apps/nextjs && pnpm add @authdog/nextjs-app@${{ env.NEXT_APP_SDK_VERSION }})
-          (cd apps/nextjs && pnpm add @authdog/react-elements@${{ env.REACT_ELEMENTS_SDK_VERSION }})
+          (cd apps/nextjs && pnpm add @authdog/nextjs-app@${{ env.NEXT_APP_SDK_VERSION }}) @authdog/react-elements@${{ env.REACT_ELEMENTS_SDK_VERSION }})
 
       - name: Ship NextJS demo
         run: |
