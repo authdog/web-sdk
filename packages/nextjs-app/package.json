@@ -10,9 +10,9 @@
             "types": "./dist/index.d.ts",
             "import": "./dist/index.js"
         },
-        "./dist/index.server": {
-            "types": "./dist/index.server.d.ts",
-            "import": "./dist/index.server.js"
+        "./dist": {
+            "types": "./index.server.d.ts",
+            "import": "./index.server.js"
         }
     },
     "files": [
@@ -26,9 +26,9 @@
         "ship": "pnpm build && pnpm publish --access public --no-git-checks"
     },
     "dependencies": {
+        "@authdog/node-commons": "workspace:*",
         "next": "^15.1.0",
-        "react": "^19.1.0",
-        "@authdog/node-commons": "workspace:*"
+        "react": "^19.1.0"
     },
     "publishConfig": {
         "registry": "https://registry.npmjs.org/",

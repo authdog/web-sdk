@@ -2,11 +2,15 @@
   "version": "v1",
   "packages": {
     "@authdog/react-elements": {
-      "signature": "e5768a1d06012fd020580ac9a065250c",
+      "signature": "33285ebf90fa0bdfcc008a6824c46244",
       "file": true
     },
     "@authdog/nextjs-app": {
-      "signature": "4549f92f896a1de935ed11a902c6bf61",
+      "signature": "9f5834e7d56dc027e59b2733047177ea",
+      "file": true
+    },
+    "@authdog/node-commons": {
+      "signature": "e83e96c4bccc52da1c8f91b12d2670b0",
       "file": true
     }
   }
