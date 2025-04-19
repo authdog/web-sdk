@@ -10,6 +10,6 @@
 
 - Demo: https://nextjs-demo-five-pied.vercel.app/
 
-### Remis
+### Remix
 
 ``
