@@ -1,4 +1,4 @@
-import { getPublicKeyPayload } from "../commons";
+import { getPublicKeyPayload } from "@authdog/node-commons";
 
 export const getTokenFromUri = (url: string): string | null => {
   return new URL(url).searchParams.get("token");

@@ -18,7 +18,8 @@
     },
     "dependencies": {
         "next": "^15.1.0",
-        "react": "^19.1.0"
+        "react": "^19.1.0",
+        "@authdog/node-commons": "workspace:*"
     },
     "publishConfig": {
         "registry": "https://registry.npmjs.org/",
