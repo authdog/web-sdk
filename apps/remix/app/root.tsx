@@ -76,23 +76,23 @@ const AuthdogRemixApp = (App: () => JSX.Element, opts: any = {}) => {
   };
 };
 
-export const getPublicKeyPayload = (publicKey: string): any => {
-  if (!publicKey) {
-    throw new Error("Public key is not defined");
-  }
+// export const getPublicKeyPayload = (publicKey: string): any => {
+//   if (!publicKey) {
+//     throw new Error("Public key is not defined");
+//   }
 
-  if (!publicKey.startsWith("pk_")) {
-    throw new Error("Invalid public key");
-  }
+//   if (!publicKey.startsWith("pk_")) {
+//     throw new Error("Invalid public key");
+//   }
 
-  try {
-    return JSON.parse(
-      Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8"),
-    );
-  } catch (e) {
-    throw new Error("Failed to parse public key");
-  }
-};
+//   try {
+//     return JSON.parse(
+//       Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8"),
+//     );
+//   } catch (e) {
+//     throw new Error("Failed to parse public key");
+//   }
+// };
 
 // export const loader: LoaderFunction = async ({ request }) => {
 
