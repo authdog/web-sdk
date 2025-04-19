@@ -15,7 +15,7 @@ env:
   ENVFILE_CONSOLE: apps/nextjs/.env
   SCOPE_VERCEL: david-barrats-projects-b894a911
   PROJECT_VERCEL: nextjs-demo
-  NEXT_APP_SDK_VERSION: 0.0.15
+  NEXT_APP_SDK_VERSION: latest
   REACT_ELEMENTS_SDK_VERSION: 0.0.2
 
 concurrency:
