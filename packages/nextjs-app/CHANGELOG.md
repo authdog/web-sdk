@@ -1,5 +1,13 @@
 # @authdog/nextjs-app
 
+## 0.0.14
+
+### Patch Changes
+
+- 6998828: cleanup build
+- Updated dependencies [6998828]
+  - @authdog/node-commons@0.0.19
+
 ## 0.0.13
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @authdog/node-commons
 
+## 0.0.19
+
+### Patch Changes
+
+- 6998828: cleanup build
+
 ## 0.0.18
 
 ### Patch Changes
