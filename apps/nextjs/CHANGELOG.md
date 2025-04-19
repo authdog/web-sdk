@@ -1,5 +1,11 @@
 # @authdog-playground/nextjs
 
+## 0.1.4
+
+### Patch Changes
+
+- 7544676: isolate packages
+
 ## 0.1.3
 
 ### Patch Changes
