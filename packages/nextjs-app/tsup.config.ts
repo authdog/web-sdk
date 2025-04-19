@@ -1,8 +1,8 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/index.ts", "src/index.server.ts"], // Entry point for your source code
-  format: ["esm"], // Output only ESM format
+  entry: ["src/index.ts", "src/index.server.ts"],
+  format: ["esm"],
   dts: {
     compilerOptions: {
       moduleResolution: "bundler",
