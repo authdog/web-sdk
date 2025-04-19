@@ -15,7 +15,8 @@ env:
   ENVFILE_CONSOLE: apps/nextjs/.env
   SCOPE_VERCEL: david-barrats-projects-b894a911
   PROJECT_VERCEL: nextjs-demo
-  SDK_VERSION: latest
+  NEXT_APP_SDK_VERSION: latest
+  REACT_ELEMENTS_SDK_VERSION: latest
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -63,8 +64,8 @@ jobs:
         
       - name: Install public SDK
         run: |
-          (cd apps/nextjs && pnpm add @authdog/nextjs-app@${{ env.SDK_VERSION }})
-          (cd apps/nextjs && pnpm add @authdog/react-elements@latest)
+          (cd apps/nextjs && pnpm add @authdog/nextjs-app@${{ env.NEXT_APP_SDK_VERSION }})
+          (cd apps/nextjs && pnpm add @authdog/react-elements@${{ env.REACT_ELEMENTS_SDK_VERSION }})
 
       - name: Ship NextJS demo
         run: |
