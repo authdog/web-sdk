@@ -6,10 +6,10 @@
 
 ### NextJS app router
 
-![npm|authdog/nextjs-app](https://img.shields.io/npm/v/@authdog/nextjs-app)
+[![npm](https://img.shields.io/npm/v/@authdog/nextjs-app?label=@authdog/nextjs-app)](https://www.npmjs.com/package/@authdog/nextjs-app)
 
 - Demo: https://nextjs-demo-five-pied.vercel.app/
 
 ### Remix
 
-``
+[![npm](https://img.shields.io/npm/v/@authdog/remix-node?label=@authdog/remix-node)](https://www.npmjs.com/package/@authdog/remix-node)
