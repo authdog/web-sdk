@@ -1,5 +1,11 @@
 # @authdog/nextjs-app
 
+## 0.0.16
+
+### Patch Changes
+
+- 48de9f7: publish server assets from next-app
+
 ## 0.0.15
 
 ### Patch Changes
