@@ -1,6 +1,6 @@
 {
     "name": "@authdog/remix-node",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Authdog Remix SDK",
     "type": "module",
     "source": "src/index.ts",
