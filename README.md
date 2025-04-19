@@ -4,7 +4,6 @@
 
 ## Releases
 
-
 ## Integration
 
 - NextJS app-router Demo: https://nextjs-demo-five-pied.vercel.app/

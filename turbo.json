@@ -7,23 +7,28 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
-    "@authdog-playground/nextjs#dev": {
-      "dependsOn": ["@authdog/nextjs-app#build"],
-      "cache": false,
-      "persistent": true
-    },
-    "@authdog/nextjs-app#build": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["dist/**"]
-    },
     "@authdog/node-commons#build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": ["dist/**"]
     },
-    "@authdog-playground/remix#build": {
-      "dependsOn": ["^build"],
+    "@authdog/nextjs-app#build": {
+      "dependsOn": ["@authdog/node-commons#build", "^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**"]
+    },
+    "@authdog/remix-node#build": {
+      "dependsOn": ["@authdog/node-commons#build", "^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**"]
+    },
+    "@playground/nextjs#dev": {
+      "dependsOn": ["@authdog/nextjs-app#build", "^build"],
+      "cache": false,
+      "persistent": true
+    },
+    "@playground/remix#build": {
+      "dependsOn": ["@authdog/remix-node#build", "^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": ["build/**"]
     },

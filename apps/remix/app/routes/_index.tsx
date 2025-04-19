@@ -5,7 +5,7 @@ import {
   // createCookie,
 } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import {remixAuthLoader} from "@authdog/remix-node";
+import { remixAuthLoader } from "@authdog/remix-node";
 
 // Metadata function
 export const meta: MetaFunction = () => {
@@ -17,7 +17,7 @@ export const meta: MetaFunction = () => {
 
 // Loader function
 export const loader: LoaderFunction = remixAuthLoader;
- 
+
 const Index = () => {
   const data = useLoaderData<typeof loader>();
 

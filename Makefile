@@ -19,29 +19,34 @@ format:
 
 .PHONY: setup clean run install
 
-VENV_NAME = venv
-PYTHON = python3
-VENV_PYTHON = $(VENV_NAME)/bin/python
-VENV_PIP = $(VENV_NAME)/bin/pip
+.PHONY: build
+build:
+	pnpm turbo build \
+	    --filter=@authdog*
 
-install: clean setup
-	@echo "Installation complete! Run 'make run' to start the application."
+# VENV_NAME = venv
+# PYTHON = python3
+# VENV_PYTHON = $(VENV_NAME)/bin/python
+# VENV_PIP = $(VENV_NAME)/bin/pip
 
-setup: $(VENV_NAME)
-	$(VENV_PIP) install --upgrade pip
-	$(VENV_PIP) install -r requirements.txt
+# install: clean setup
+# 	@echo "Installation complete! Run 'make run' to start the application."
 
-$(VENV_NAME):
-	$(PYTHON) -m venv $(VENV_NAME)
+# setup: $(VENV_NAME)
+# 	$(VENV_PIP) install --upgrade pip
+# 	$(VENV_PIP) install -r requirements.txt
 
-clean:
-	rm -rf $(VENV_NAME)
-	find . -type d -name "__pycache__" -exec rm -rf {} +
-	find . -type f -name "*.pyc" -delete
+# $(VENV_NAME):
+# 	$(PYTHON) -m venv $(VENV_NAME)
 
-run: setup
-	$(VENV_PYTHON) minimal_llm.py
+# clean:
+# 	rm -rf $(VENV_NAME)
+# 	find . -type d -name "__pycache__" -exec rm -rf {} +
+# 	find . -type f -name "*.pyc" -delete
 
-activate:
-	@echo "To activate the virtual environment, run:"
-	@echo "source $(VENV_NAME)/bin/activate"
+# run: setup
+# 	$(VENV_PYTHON) minimal_llm.py
+
+# activate:
+# 	@echo "To activate the virtual environment, run:"
+# 	@echo "source $(VENV_NAME)/bin/activate"

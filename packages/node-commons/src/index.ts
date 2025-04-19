@@ -1,3 +1,2 @@
-export {
-    getPublicKeyPayload
-} from "./platform-public-key";
+export { getPublicKeyPayload } from "./public-key";
+export { parseCookies } from "./cookies";
