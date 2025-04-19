@@ -1,6 +1,6 @@
 {
     "name": "@authdog/react-elements",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Authdog React Elements",
     "type": "module",
     "source": "src/index.ts",
