@@ -105,6 +105,9 @@ importers:
 
   apps/remix:
     dependencies:
+      '@authdog/remix-node':
+        specifier: workspace:*
+        version: link:../../packages/remix
       '@remix-run/node':
         specifier: ^2.15.2
         version: 2.15.2(typescript@5.7.3)
@@ -215,7 +218,11 @@ importers:
         specifier: ^2.1.8
         version: 2.1.8(@edge-runtime/vm@3.2.0)(@types/node@20.17.6)(lightningcss@1.29.2)
 
-  packages/remix: {}
+  packages/remix:
+    dependencies:
+      '@remix-run/node':
+        specifier: ^2.15.2
+        version: 2.15.2(typescript@5.7.3)
 
   packages/ts-config: {}
 

@@ -1,11 +1,17 @@
 {
-    "name": "@authdog/remix-sdk",
+    "name": "@authdog/remix-node",
     "version": "0.0.1",
     "description": "Authdog Remix SDK",
+    "type": "module",
     "source": "src/index.ts",
-    "main": "dist/index.js",
-    "module": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "main": "./dist/index.mjs",
+    "types": "./dist/index.d.mts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.mts",
+            "import": "./dist/index.mjs"
+        }
+    },
     "files": [
         "dist/"
     ],
@@ -19,5 +25,8 @@
     "publishConfig": {
         "registry": "https://registry.npmjs.org/",
         "access": "public"
+    },
+    "dependencies": {
+        "@remix-run/node": "^2.15.2"
     }
 }
