@@ -1,5 +1,12 @@
 # @authdog/nextjs-app
 
+## 0.0.13
+
+### Patch Changes
+
+- Updated dependencies [2a116a9]
+  - @authdog/node-commons@0.0.18
+
 ## 0.0.12
 
 ### Patch Changes

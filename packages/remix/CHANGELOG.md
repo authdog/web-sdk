@@ -1,5 +1,13 @@
 # @authdog/remix-node
 
+## 0.0.4
+
+### Patch Changes
+
+- 2a116a9: define AuthdogProvider as part of remix-node package
+- Updated dependencies [2a116a9]
+  - @authdog/node-commons@0.0.18
+
 ## 0.0.3
 
 ### Patch Changes
