@@ -1,5 +1,11 @@
 # @authdog/node-commons
 
+## 0.0.17
+
+### Patch Changes
+
+- 7544676: isolate packages
+
 ## 0.0.16
 
 ### Patch Changes
