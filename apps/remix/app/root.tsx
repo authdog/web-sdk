@@ -2,13 +2,15 @@ import {
   Links,
   Meta,
   Outlet,
-  // redirect,
+  redirect,
   Scripts,
   ScrollRestoration,
-  // useLoaderData,
+  useLoaderData,
 } from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
-import {AuthdogProvider} from "@authdog/remix-node";
+import type { LinksFunction, LoaderFunction } from "@remix-run/node";
+import { useEffect } from "react";
+import { ReloadPage } from '~/components/ReloadPage';
+import {Navbar} from "@authdog/react-elements";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -38,6 +40,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           {children}
           <ScrollRestoration />
           <Scripts />
+          <ReloadPage />
         </body>
       </AuthdogProvider>
     </html>
@@ -64,39 +67,69 @@ const AuthdogRemixApp = (App: () => JSX.Element, opts: any = {}) => {
     // }
 
     return (
-      <AuthdogProvider
-      /* @ts-ignore The type of opts cannot be inferred by TS automatically because of the complex
-       * discriminated unions required for the router props and multidomain feature   */
-      // {...(opts as RemixClerkProviderProps)}
-      // clerkState={clerkState}
-      >
+      <AuthdogProvider>
+        <Navbar />
         <App />
       </AuthdogProvider>
     );
   };
 };
 
-// export const getPublicKeyPayload = (publicKey: string): any => {
-//   if (!publicKey) {
-//     throw new Error("Public key is not defined");
-//   }
+export const getPublicKeyPayload = (publicKey: string): any => {
+  if (!publicKey) {
+    throw new Error("Public key is not defined");
+  }
 
-//   if (!publicKey.startsWith("pk_")) {
-//     throw new Error("Invalid public key");
-//   }
+  if (!publicKey.startsWith("pk_")) {
+    throw new Error("Invalid public key");
+  }
 
-//   try {
-//     return JSON.parse(
-//       Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8"),
-//     );
-//   } catch (e) {
-//     throw new Error("Failed to parse public key");
-//   }
-// };
+  try {
+    return JSON.parse(Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8"));
+  } catch (e) {
+    throw new Error("Failed to parse public key");
+  }
+};
 
 // export const loader: LoaderFunction = async ({ request }) => {
-
+//   const url = new URL(request.url);
+//   const token = url.searchParams.get("token");
+  
+//   if (token) {
+//     try {
+//       // Create a new URL without the token parameter
+//       const cleanUrl = new URL(request.url);
+//       cleanUrl.searchParams.delete("token");
+      
+//       // Set the token in a cookie
+//       const headers = new Headers();
+//       headers.append("Set-Cookie", `auth_token=${token}; Path=/; HttpOnly; SameSite=Lax`);
+      
+//       // Return the current URL with auth cookie set, letting the auth process handle the redirect
+//       return new Response(null, {
+//         status: 200,
+//         headers: {
+//           ...Object.fromEntries(headers),
+//           "Cache-Control": "no-cache, no-store, must-revalidate",
+//         },
+//       });
+      
+//     } catch (error) {
+//       console.error("Error handling auth token:", error);
+//       return null;
+//     }
+//   }
+  
 //   return null;
 // };
 
+export function AuthdogProvider({ children }: { children: React.ReactNode }) {
 
+  useEffect(() => {
+    // if uri token reload to same uri
+  }, []);
+
+  return <>{children}</>;
+}
+
+export default AuthdogRemixApp(App);

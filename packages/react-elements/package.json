@@ -1,7 +1,7 @@
 {
-    "name": "@authdog/remix-node",
-    "version": "0.0.5",
-    "description": "Authdog Remix SDK",
+    "name": "@authdog/react-elements",
+    "version": "0.0.1",
+    "description": "Authdog React Elements",
     "type": "module",
     "source": "src/index.ts",
     "main": "./dist/index.mjs",
@@ -28,8 +28,6 @@
     },
     "dependencies": {
         "@authdog/node-commons": "workspace:*",
-        "@remix-run/node": "^2.15.2",
-        "@remix-run/react": "^2.15.2",
         "react": "^18.2.0"
     },
     "devDependencies": {

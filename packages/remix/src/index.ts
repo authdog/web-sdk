@@ -1,4 +1,4 @@
-import { json } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 
 import { parseCookies, validateAndParsePublicKey, fetchUserData } from "@authdog/node-commons";
 
@@ -30,11 +30,6 @@ export const createAuthResponse = (
     "Set-Cookie",
     `user_session_hash_${environmentId}=${encodeURIComponent(userSessionHashValue)}; Path=/; HttpOnly; Secure; SameSite=Strict`,
   );
-
-  // Remove token from URL
-  const newUrl = new URL(request.url);
-  newUrl.searchParams.delete("token");
-  headers.append("Location", newUrl.toString());
 
   // Add cache control headers
   headers.append(
@@ -105,18 +100,67 @@ export const authenticateWithCookies = async (
 export const remixAuthLoader = async ({
   request,
   context,
+  params
 }: {
   request: Request;
   context: Record<string, any>;
+  params: any;
 }) => {
-  const publicKey = process.env.PK_AUTHDOG as string;
+  const publicKey = typeof process !== "undefined" ? process.env.PK_AUTHDOG as string
+    : params?.publicKey;
   const publicKeyObj = validateAndParsePublicKey(publicKey);
 
   // First check if we have a token in the URL
-  const tokenFromUri = new URL(request.url).searchParams.get("token");
+  const url = new URL(request.url);
+  const tokenFromUri = url.searchParams.get("token");
 
+  // Try to authenticate using cookies first
+  const cookieAuthResult = await authenticateWithCookies(
+    request,
+    publicKeyObj,
+  );
+  
+  if (cookieAuthResult) {
+    // If we have a token in URL, still process it but don't show loading
+    if (tokenFromUri) {
+      const authenticatedUser = await fetchUserData(
+        publicKeyObj?.identityHost,
+        publicKeyObj?.environmentId,
+        tokenFromUri,
+      );
+
+      if (authenticatedUser?.meta && authenticatedUser?.meta?.code === 200) {
+        // Store in context for later use
+        const userSessionValue = JSON.stringify(authenticatedUser?.user);
+        context[`user_session_${publicKeyObj?.environmentId}`] = userSessionValue;
+        context[`user_session_hash_${publicKeyObj?.environmentId}`] = tokenFromUri;
+
+        // Create the response with auth data
+        const authResponse = createAuthResponse(
+          authenticatedUser,
+          tokenFromUri,
+          publicKeyObj?.environmentId,
+          request,
+        );
+
+        // Return the response with cookies but don't redirect
+        // The client-side reload will handle the URL cleanup
+        return json(
+          {
+            user: authenticatedUser.user,
+            isAuthenticated: true,
+          },
+          {
+            headers: authResponse.headers,
+          }
+        );
+      }
+    }
+    return cookieAuthResult;
+  }
+
+  // If we have a token but no cookie auth, show loading while processing token
   if (tokenFromUri) {
-    // Handle token from URL
     const authenticatedUser = await fetchUserData(
       publicKeyObj?.identityHost,
       publicKeyObj?.environmentId,
@@ -127,29 +171,35 @@ export const remixAuthLoader = async ({
       // Store in context for later use
       const userSessionValue = JSON.stringify(authenticatedUser?.user);
       context[`user_session_${publicKeyObj?.environmentId}`] = userSessionValue;
-      context[`user_session_hash_${publicKeyObj?.environmentId}`] =
-        tokenFromUri;
+      context[`user_session_hash_${publicKeyObj?.environmentId}`] = tokenFromUri;
 
-      return createAuthResponse(
+      // Create the response with auth data
+      const authResponse = createAuthResponse(
         authenticatedUser,
         tokenFromUri,
         publicKeyObj?.environmentId,
         request,
       );
+
+      // Return the response with cookies but don't redirect
+      // The client-side reload will handle the URL cleanup
+      return json(
+        {
+          user: authenticatedUser.user,
+          isAuthenticated: true,
+        },
+        {
+          headers: authResponse.headers,
+        }
+      );
     }
-  } else {
-    // Try to authenticate using cookies
-    const cookieAuthResult = await authenticateWithCookies(
-      request,
-      publicKeyObj,
-    );
-    if (cookieAuthResult) {
-      return cookieAuthResult;
-    }
+    return json({ loading: true });
   }
 
+  // If we get here, we're not authenticated and not loading
   return json({
-    loading: true,
+    user: null,
+    isAuthenticated: false,
   });
 };
 

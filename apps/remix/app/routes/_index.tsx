@@ -6,6 +6,7 @@ import {
 } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { remixAuthLoader } from "@authdog/remix-node";
+import { useEffect } from "react";
 
 // Metadata function
 export const meta: MetaFunction = () => {
@@ -16,11 +17,16 @@ export const meta: MetaFunction = () => {
 };
 
 // Loader function
-export const loader: LoaderFunction = remixAuthLoader;
+export const loader: LoaderFunction = async ({ context, request }) => await remixAuthLoader({
+  request,
+  context,
+  params: {
+    publicKey: process.env.PK_AUTHDOG,
+  },
+})
 
 const Index = () => {
   const data = useLoaderData<typeof loader>();
-
   return (
     <div className="flex h-screen items-center justify-center">
       {JSON.stringify(data)}

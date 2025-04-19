@@ -9,7 +9,7 @@ export default defineConfig({
   minify: true,
   clean: true,
   target: "node16", // Ensure compatibility with Node.js 16
-  external: ["@remix-run/node", "react", "react-dom"],
+  external: ["react", "react-dom"],
   env: {
     NODE_ENV: process.env.NODE_ENV || "production",
   },
