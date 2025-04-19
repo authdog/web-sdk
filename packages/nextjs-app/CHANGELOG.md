@@ -1,5 +1,11 @@
 # @authdog/nextjs-app
 
+## 0.0.12
+
+### Patch Changes
+
+- 226db5a: cleanup docs
+
 ## 0.0.11
 
 ### Patch Changes
