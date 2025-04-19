@@ -1,5 +1,12 @@
 # @authdog/remix-node
 
+## 0.0.5
+
+### Patch Changes
+
+- Updated dependencies [6998828]
+  - @authdog/node-commons@0.0.19
+
 ## 0.0.4
 
 ### Patch Changes

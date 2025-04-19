@@ -1,6 +1,6 @@
 {
     "name": "@authdog/node-commons",
-    "version": "0.0.18",
+    "version": "0.0.19",
     "description": "Authdog Next.js SDK",
     "type": "module",
     "source": "src/index.ts",
