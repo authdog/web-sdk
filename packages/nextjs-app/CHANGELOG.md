@@ -1,5 +1,11 @@
 # @authdog/nextjs-app
 
+## 0.0.15
+
+### Patch Changes
+
+- 028bc39: don't make nextjs-app a module
+
 ## 0.0.14
 
 ### Patch Changes
