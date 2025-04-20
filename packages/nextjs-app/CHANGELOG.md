@@ -1,5 +1,11 @@
 # @authdog/nextjs-app
 
+## 0.0.10
+
+### Patch Changes
+
+- b253b69: refresh dep
+
 ## 0.0.9
 
 ### Patch Changes
