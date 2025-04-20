@@ -4,11 +4,13 @@
     "description": "Authdog Remix SDK",
     "source": "src/index.ts",
     "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
-            "import": "./dist/index.js"
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js"
         }
     },
     "files": [
@@ -32,6 +34,7 @@
         "react": "^18.2.0"
     },
     "devDependencies": {
+        "@types/node": "^22.14.1",
         "@types/react": "^18.2.0"
     }
 }

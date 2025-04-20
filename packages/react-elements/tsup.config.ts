@@ -2,13 +2,13 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
   entry: ["src/index.ts"], // Entry point for your source code
-  format: [ "cjs"],
+  format: ["cjs", "esm"],
   dts: true, // Generate TypeScript declaration files
   splitting: false,
   sourcemap: true,
   minify: true,
   clean: true,
-  target: "node16", // Ensure compatibility with Node.js 16
+  target: "es2020", // Target a more modern environment 
   external: ["react", "react-dom"],
   env: {
     NODE_ENV: process.env.NODE_ENV || "production",
@@ -18,8 +18,8 @@ export default defineConfig({
       process.env.NODE_ENV || "production",
     ),
   },
-  platform: "browser",
+  platform: "browser", // Change to browser since this is for React components
   outExtension: ({ format }) => ({
-    js: `.mjs`,
-  }),
+    js: format === 'esm' ? '.mjs' : '.js',
+  })
 });

@@ -2,13 +2,13 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
   entry: ["src/index.ts"], // Entry point for your source code
-  format: ["cjs"], // Output only ESM format
+  format: ["cjs", "esm"], // Output both CJS and ESM formats
   dts: true, // Generate TypeScript declaration files
   splitting: false,
   sourcemap: true,
   minify: true,
   clean: true,
-  target: "node16", // Ensure compatibility with Node.js 16
+  target: "es2020", // Target a more modern environment
   external: ["@remix-run/node", "react", "react-dom"],
   env: {
     NODE_ENV: process.env.NODE_ENV || "production",
@@ -19,7 +19,7 @@ export default defineConfig({
     ),
   },
   platform: "browser",
-//   outExtension: ({ format }) => ({
-//     js: `.mjs`,
-//   }),
+  outExtension: ({ format }) => ({
+    js: format === 'esm' ? '.mjs' : '.js',
+  }),
 });

@@ -10,12 +10,14 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@authdog/react-elements": "workspace:*",
+    "@authdog/remix-node": "workspace:*",
     "@remix-run/node": "^2.15.2",
     "@remix-run/react": "^2.15.2",
     "@remix-run/serve": "^2.15.2",
     "isbot": "^4.1.0",
-    "@authdog/remix-node": "workspace:*",
-    "@authdog/react-elements": "workspace:*"
+    "react": "18",
+    "react-dom": "18"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.15.2",

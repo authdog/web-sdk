@@ -2,7 +2,7 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
   entry: ["src/index.ts", "src/index.server.ts"], // Entry point for your source code
-  format: ["cjs"],
+  format: ["cjs", "esm"],
   dts: {
     compilerOptions: {
       moduleResolution: "bundler",
@@ -13,8 +13,11 @@ export default defineConfig({
   sourcemap: true,
   minify: true,
   clean: true,
-  target: "node20", // Ensure compatibility with Node.js 20
+  target: "es2020", // Target modern environments
   platform: "node",
   external: [], // Treat `next/server` as an external dependency
   noExternal: [], // Include everything else
+  outExtension: ({ format }) => ({
+    js: format === 'esm' ? '.mjs' : '.js',
+  }),
 });

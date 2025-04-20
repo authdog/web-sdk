@@ -65,7 +65,7 @@ jobs:
       
       - name: Install latest dependencies in nextjs
         run: |
-          (cd apps/nextjs; pnpm add @authdog/nextjs-app)
+          (cd apps/nextjs; pnpm add @authdog/nextjs-app@latest)
 
       # - name: Build Next.js app
       #   run: |

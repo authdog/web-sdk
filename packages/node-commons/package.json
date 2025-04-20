@@ -4,12 +4,13 @@
     "description": "Authdog Next.js SDK",
     "source": "src/index.ts",
     "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
-    "type": "commonjs",
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
-            "import": "./dist/index.js"
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js"
         }
     },
     "files": [
@@ -23,6 +24,7 @@
         "ship": "pnpm build && pnpm publish --access public --no-git-checks"
     },
     "devDependencies": {
+        "@types/node": "^22.14.1",
         "dotenv": "^16.4.7",
         "prettier": "^3.4.2",
         "tsup": "^8.3.5",
