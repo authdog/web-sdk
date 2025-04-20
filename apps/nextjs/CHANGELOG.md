@@ -1,5 +1,11 @@
 # @authdog-playground/nextjs
 
+## 0.1.8
+
+### Patch Changes
+
+- 4026805: make navbar sitename configurable
+
 ## 0.1.7
 
 ### Patch Changes
