@@ -1,5 +1,13 @@
 # @authdog/react-elements
 
+## 0.0.4
+
+### Patch Changes
+
+- 30ffbd9: cleanup, prettify
+- Updated dependencies [30ffbd9]
+  - @authdog/node-commons@0.0.21
+
 ## 0.0.3
 
 ### Patch Changes
