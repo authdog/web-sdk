@@ -65,7 +65,8 @@ jobs:
 
       - name: Install demo deps
         run: |
-          (cd apps/nextjs;npm install @authdog/nextjs-app)
+          (cd apps/nextjs;npm install @authdog/nextjs-app@latest)
+
 
       - name: Build Next.js app
         run: |
