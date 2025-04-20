@@ -25,8 +25,11 @@
     "paths": {
       "@/*": [
         "./*"
-      ]
-    }
+      ],
+      "@authdog/nextjs-app/*": ["node_modules/@authdog/nextjs-app/dist/*"],
+      "@authdog/nextjs-app/server": ["node_modules/@authdog/nextjs-app/dist/index.server"]
+    },
+    "baseUrl": "./"
   },
   "include": [
     "**/*.ts",

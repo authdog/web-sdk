@@ -2,7 +2,7 @@
 // import { useState } from "react"
 import Link from "next/link";
 import { Settings, User } from "lucide-react";
-import { getSessionCookie } from "@authdog/nextjs-app/dist/index.server";
+import { getSessionCookie, getServerSidePayloadPublicKey } from "@authdog/nextjs-app/server";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { LogoutDropdown } from "@/components/auth/logout-dropdown";
-import { getServerSidePayloadPublicKey } from "@authdog/nextjs-app/dist/index.server";
 import { LogoutButton } from "@/components/auth/logout-btn";
 
 export default async function Dashboard() {

@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { useAuthMiddleware } from "@authdog/nextjs-app/dist/index.server";
+import { useAuthMiddleware } from "@authdog/nextjs-app/server";
 
 export async function middleware(request: NextRequest): Promise<Response> {
   return useAuthMiddleware(process.env.PK_AUTHDOG)(request);

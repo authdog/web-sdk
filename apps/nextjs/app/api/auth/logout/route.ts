@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { getServerSidePayloadPublicKey } from "@authdog/nextjs-app/dist/index.server";
+import { getServerSidePayloadPublicKey } from "@authdog/nextjs-app/server";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
