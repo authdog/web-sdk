@@ -1,50 +1,5 @@
 # @authdog/nextjs-app
 
-## 0.0.16
-
-### Patch Changes
-
-- 48de9f7: publish server assets from next-app
-
-## 0.0.15
-
-### Patch Changes
-
-- 028bc39: don't make nextjs-app a module
-
-## 0.0.14
-
-### Patch Changes
-
-- 6998828: cleanup build
-- Updated dependencies [6998828]
-  - @authdog/node-commons@0.0.19
-
-## 0.0.13
-
-### Patch Changes
-
-- Updated dependencies [2a116a9]
-  - @authdog/node-commons@0.0.18
-
-## 0.0.12
-
-### Patch Changes
-
-- 226db5a: cleanup docs
-
-## 0.0.11
-
-### Patch Changes
-
-- 24696d9: testing changeset
-
-## 0.0.10
-
-### Patch Changes
-
-- 932b120: test change
-
 ## 0.0.9
 
 ### Patch Changes

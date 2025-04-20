@@ -19,7 +19,7 @@ export default defineConfig({
     ),
   },
   platform: "browser",
-  outExtension: ({ format }) => ({
-    js: `.mjs`,
-  }),
+//   outExtension: ({ format }) => ({
+//     js: `.mjs`,
+//   }),
 });

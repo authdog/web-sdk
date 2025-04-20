@@ -63,25 +63,13 @@ jobs:
         run: |
           make build
 
-      - name: Setup workspace for Vercel
+      - name: Install demo deps
         run: |
-          cd apps/nextjs
-          echo "shamefully-hoist=true" > .npmrc
-          echo "node-linker=hoisted" >> .npmrc
-          echo "link-workspace-packages=true" >> .npmrc
-          echo "public-hoist-pattern[]=*@authdog*" >> .npmrc
-
-      - name: Link packages to Next.js app
-        run: |
-          cd apps/nextjs
-          mkdir -p node_modules/@authdog
-          ln -sf ../../../packages/nextjs-app node_modules/@authdog/nextjs-app
-          ln -sf ../../../packages/react-elements node_modules/@authdog/react-elements
+          (cd apps/nextjs;npm install @authdog/nextjs-app)
 
       - name: Build Next.js app
         run: |
-          cd apps/nextjs
-          pnpm build
+          (cd apps/nextjs;npm run build)
 
       - name: Ship NextJS demo
         run: |

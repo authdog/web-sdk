@@ -1,8 +1,7 @@
 ## nextjs-app
 
-Authdog next-app library
+Authdog official nextjs app router library.
 
 ## Use session
 
 ## Middleware
-

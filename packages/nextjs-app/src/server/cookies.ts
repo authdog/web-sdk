@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import {buildSessionKey, getPublicKeyPayload} from "@authdog/node-commons";
+import { getPublicKeyPayload } from "../commons";
 
 export const getSessionCookie = async (publicKey: string) => {
   if (!publicKey) {
@@ -7,5 +7,5 @@ export const getSessionCookie = async (publicKey: string) => {
   }
   const publicKeyObj = getPublicKeyPayload(publicKey);
   const cookieStore = await cookies();
-  return cookieStore.get(buildSessionKey(publicKeyObj?.environmentId));
+  return cookieStore.get(`user_session_${publicKeyObj?.environmentId}`);
 };

@@ -1,20 +1,11 @@
 {
     "name": "@authdog/nextjs-app",
-    "version": "0.0.16",
+    "version": "0.0.9",
     "description": "Authdog Next.js SDK",
     "source": "src/index.ts",
-    "main": "./dist/index.js",
-    "types": "./dist/index.d.ts",
-    "exports": {
-        ".": {
-            "types": "./dist/index.d.ts",
-            "import": "./dist/index.js"
-        },
-        "./dist": {
-            "types": "./index.server.d.ts",
-            "import": "./index.server.js"
-        }
-    },
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
     "files": [
         "dist/"
     ],
@@ -26,12 +17,17 @@
         "ship": "pnpm build && pnpm publish --access public --no-git-checks"
     },
     "dependencies": {
-        "@authdog/node-commons": "workspace:*",
         "next": "^15.1.0",
         "react": "^19.1.0"
     },
-    "publishConfig": {
-        "registry": "https://registry.npmjs.org/",
-        "access": "public"
+    "devDependencies": {
+        "@types/next": "^9.0.0",
+        "@types/node": "^22.10.5",
+        "@types/react": "^19.1.0",
+        "dotenv": "^16.4.7",
+        "prettier": "^3.4.2",
+        "tsup": "^8.3.5",
+        "typescript": "^5.7.2",
+        "vitest": "^2.1.8"
     }
 }
