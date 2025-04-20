@@ -67,9 +67,9 @@ jobs:
         run: |
           (cd apps/nextjs; pnpm add @authdog/nextjs-app)
 
-      - name: Build Next.js app
-        run: |
-          (cd apps/nextjs;pnpm run build)
+      # - name: Build Next.js app
+      #   run: |
+      #     (cd apps/nextjs;pnpm run build)
 
       - name: Ship NextJS demo
         run: |
