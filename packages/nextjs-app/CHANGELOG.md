@@ -1,5 +1,11 @@
 # @authdog/nextjs-app
 
+## 0.0.12
+
+### Patch Changes
+
+- 7966293: bump nextjs app
+
 ## 0.0.10
 
 ### Patch Changes
