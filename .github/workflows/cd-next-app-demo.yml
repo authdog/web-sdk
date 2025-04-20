@@ -63,14 +63,9 @@ jobs:
         run: |
           make build
 
-      - name: Install demo deps
-        run: |
-          (cd apps/nextjs;npm install @authdog/nextjs-app@latest)
-
-
       - name: Build Next.js app
         run: |
-          (cd apps/nextjs;npm run build)
+          (cd apps/nextjs;pnpm run build)
 
       - name: Ship NextJS demo
         run: |
