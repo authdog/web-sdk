@@ -1,4 +1,4 @@
-name: cd-next-app-demo
+name: cd-next-app-deploy
 
 on:
   push:

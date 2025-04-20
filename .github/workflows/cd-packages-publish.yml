@@ -1,4 +1,4 @@
-name: adog-packages-publish
+name: cd-packages-publish
 
 on:
   push:
