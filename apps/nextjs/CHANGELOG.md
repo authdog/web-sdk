@@ -1,5 +1,11 @@
 # @authdog-playground/nextjs
 
+## 0.1.7
+
+### Patch Changes
+
+- fae875f: general cleanup
+
 ## 0.1.6
 
 ### Patch Changes
