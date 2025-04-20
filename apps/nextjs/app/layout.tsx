@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { AuthdogProvider } from "@authdog/nextjs-app";
+import {Navbar} from "@authdog/react-elements";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <AuthdogProvider>
         <body className={`${geistSans.variable} ${geistMono.variable}`}>
+            <Navbar />
           {children}
         </body>
       </AuthdogProvider>
