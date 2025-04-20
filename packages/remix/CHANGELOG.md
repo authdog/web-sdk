@@ -1,5 +1,13 @@
 # @authdog/remix-node
 
+## 0.0.6
+
+### Patch Changes
+
+- fae875f: general cleanup
+- Updated dependencies [fae875f]
+  - @authdog/node-commons@0.0.20
+
 ## 0.0.5
 
 ### Patch Changes
