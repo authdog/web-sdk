@@ -1,12 +1,12 @@
 name: cd-next-app-deploy
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - apps/nextjs/**
-      - .github/workflows/cd-next-app-demo.yml
+  # push:
+    # branches:
+    #   - main
+    # paths:
+    #   - apps/nextjs/**
+    #   - .github/workflows/cd-next-app-demo.yml
   workflow_dispatch:
 
 env:
@@ -65,7 +65,7 @@ jobs:
       
       - name: Install latest dependencies in nextjs
         run: |
-          (cd apps/nextjs; pnpm add @authdog/nextjs-app@latest)
+          (cd apps/nextjs; pnpm add @authdog/nextjs-app@latest @authdog/react-elements@latest)
 
       # - name: Build Next.js app
       #   run: |

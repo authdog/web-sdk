@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <AuthdogProvider>
         <body className={`${geistSans.variable} ${geistMono.variable}`}>
-            <Navbar />
+            <Navbar siteName="ACME Corp" />
           {children}
         </body>
       </AuthdogProvider>
