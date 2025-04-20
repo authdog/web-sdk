@@ -1,5 +1,13 @@
 # @authdog-playground/nextjs
 
+## 0.1.9
+
+### Patch Changes
+
+- 30ffbd9: cleanup, prettify
+- Updated dependencies [30ffbd9]
+  - @authdog/react-elements@0.0.4
+
 ## 0.1.8
 
 ### Patch Changes

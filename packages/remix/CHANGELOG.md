@@ -1,5 +1,13 @@
 # @authdog/remix-node
 
+## 0.0.7
+
+### Patch Changes
+
+- 30ffbd9: cleanup, prettify
+- Updated dependencies [30ffbd9]
+  - @authdog/node-commons@0.0.21
+
 ## 0.0.6
 
 ### Patch Changes
