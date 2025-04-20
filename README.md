@@ -16,7 +16,7 @@ Authdog web SDK is curated set of libraries aiming to accelerate identity integr
 
 [![npm](https://img.shields.io/npm/v/@authdog/nextjs-app?label=@authdog/nextjs-app)](https://www.npmjs.com/package/@authdog/nextjs-app)
 
-- Demo: https://nextjs-demo-five-pied.vercel.app/
+- Demo: https://nextjs-demo.authdog.xyz/
 
 ### Remix
 
