@@ -1,5 +1,11 @@
 # @authdog/nextjs-app
 
+## 0.0.13
+
+### Patch Changes
+
+- 78d1145: fix export
+
 ## 0.0.12
 
 ### Patch Changes
