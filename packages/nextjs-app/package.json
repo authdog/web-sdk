@@ -7,11 +7,12 @@
     "module": "dist/index.js",
     "types": "dist/index.d.ts",
     "exports": {
-        ".": {
-            "import": "dist/index.js",
-            "require": "dist/index.js"
+        "./client": {
+            "types": "dist/index.d.ts",
+            "import": "./dist/index.js"
         },
         "./server": {
+            "types": "dist/index.server.d.ts",
             "import": "dist/index.server.js",
             "require": "dist/index.server.js"
         }
