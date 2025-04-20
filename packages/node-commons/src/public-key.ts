@@ -20,7 +20,6 @@ export const getPublicKeyPayload = (publicKey: string): PublicKeyPayload => {
   }
 };
 
-
 export const validateAndParsePublicKey = (publicKey: string) => {
   if (!publicKey) {
     throw new Error("Public key is not defined");

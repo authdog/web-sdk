@@ -8,7 +8,7 @@ export default defineConfig({
   sourcemap: true,
   minify: true,
   clean: true,
-  target: "es2020", // Target a more modern environment 
+  target: "es2020", // Target a more modern environment
   external: ["react", "react-dom"],
   env: {
     NODE_ENV: process.env.NODE_ENV || "production",
@@ -20,6 +20,6 @@ export default defineConfig({
   },
   platform: "browser", // Change to browser since this is for React components
   outExtension: ({ format }) => ({
-    js: format === 'esm' ? '.mjs' : '.js',
-  })
+    js: format === "esm" ? ".mjs" : ".js",
+  }),
 });

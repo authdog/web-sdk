@@ -2,7 +2,10 @@
 // import { useState } from "react"
 import Link from "next/link";
 import { Settings, User } from "lucide-react";
-import { getSessionCookie, getServerSidePayloadPublicKey } from "@authdog/nextjs-app/server";
+import {
+  getSessionCookie,
+  getServerSidePayloadPublicKey,
+} from "@authdog/nextjs-app/server";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";

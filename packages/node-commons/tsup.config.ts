@@ -6,8 +6,8 @@ export default defineConfig({
   dts: {
     compilerOptions: {
       moduleResolution: "bundler",
-      module: "ESNext"
-    }
+      module: "ESNext",
+    },
   },
   splitting: false,
   sourcemap: true,
@@ -18,6 +18,6 @@ export default defineConfig({
   external: [], // Treat `next/server` as an external dependency
   noExternal: [], // Include everything else
   outExtension: ({ format }) => ({
-    js: format === 'esm' ? '.mjs' : '.js',
+    js: format === "esm" ? ".mjs" : ".js",
   }),
 });

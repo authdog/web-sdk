@@ -22,14 +22,14 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   build: {
-    target: 'esnext',
+    target: "esnext",
     rollupOptions: {
       output: {
-        format: 'esm'
-      }
-    }
+        format: "esm",
+      },
+    },
   },
   ssr: {
-    noExternal: ['@authdog/remix-node']
-  }
+    noExternal: ["@authdog/remix-node"],
+  },
 });

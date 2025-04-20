@@ -9,8 +9,8 @@ import {
 } from "@remix-run/react";
 import type { LinksFunction, LoaderFunction } from "@remix-run/node";
 import { useEffect } from "react";
-import { ReloadPage } from '~/components/ReloadPage';
-import {Navbar} from "@authdog/react-elements";
+import { ReloadPage } from "~/components/ReloadPage";
+import { Navbar } from "@authdog/react-elements";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -85,7 +85,9 @@ export const getPublicKeyPayload = (publicKey: string): any => {
   }
 
   try {
-    return JSON.parse(Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8"));
+    return JSON.parse(
+      Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8"),
+    );
   } catch (e) {
     throw new Error("Failed to parse public key");
   }
@@ -94,17 +96,17 @@ export const getPublicKeyPayload = (publicKey: string): any => {
 // export const loader: LoaderFunction = async ({ request }) => {
 //   const url = new URL(request.url);
 //   const token = url.searchParams.get("token");
-  
+
 //   if (token) {
 //     try {
 //       // Create a new URL without the token parameter
 //       const cleanUrl = new URL(request.url);
 //       cleanUrl.searchParams.delete("token");
-      
+
 //       // Set the token in a cookie
 //       const headers = new Headers();
 //       headers.append("Set-Cookie", `auth_token=${token}; Path=/; HttpOnly; SameSite=Lax`);
-      
+
 //       // Return the current URL with auth cookie set, letting the auth process handle the redirect
 //       return new Response(null, {
 //         status: 200,
@@ -113,18 +115,17 @@ export const getPublicKeyPayload = (publicKey: string): any => {
 //           "Cache-Control": "no-cache, no-store, must-revalidate",
 //         },
 //       });
-      
+
 //     } catch (error) {
 //       console.error("Error handling auth token:", error);
 //       return null;
 //     }
 //   }
-  
+
 //   return null;
 // };
 
 export function AuthdogProvider({ children }: { children: React.ReactNode }) {
-
   useEffect(() => {
     // if uri token reload to same uri
   }, []);

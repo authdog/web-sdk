@@ -1,6 +1,10 @@
 import { json } from "@remix-run/node";
 
-import { parseCookies, validateAndParsePublicKey, fetchUserData } from "@authdog/node-commons";
+import {
+  parseCookies,
+  validateAndParsePublicKey,
+  fetchUserData,
+} from "@authdog/node-commons";
 
 // Function to create authentication response with cookies
 export const createAuthResponse = (
@@ -100,14 +104,16 @@ export const authenticateWithCookies = async (
 export const remixAuthLoader = async ({
   request,
   context,
-  params
+  params,
 }: {
   request: Request;
   context: Record<string, any>;
   params: any;
 }) => {
-  const publicKey = typeof process !== "undefined" ? process.env.PK_AUTHDOG as string
-    : params?.publicKey;
+  const publicKey =
+    typeof process !== "undefined"
+      ? (process.env.PK_AUTHDOG as string)
+      : params?.publicKey;
   const publicKeyObj = validateAndParsePublicKey(publicKey);
 
   // First check if we have a token in the URL
@@ -115,11 +121,8 @@ export const remixAuthLoader = async ({
   const tokenFromUri = url.searchParams.get("token");
 
   // Try to authenticate using cookies first
-  const cookieAuthResult = await authenticateWithCookies(
-    request,
-    publicKeyObj,
-  );
-  
+  const cookieAuthResult = await authenticateWithCookies(request, publicKeyObj);
+
   if (cookieAuthResult) {
     // If we have a token in URL, still process it but don't show loading
     if (tokenFromUri) {
@@ -132,8 +135,10 @@ export const remixAuthLoader = async ({
       if (authenticatedUser?.meta && authenticatedUser?.meta?.code === 200) {
         // Store in context for later use
         const userSessionValue = JSON.stringify(authenticatedUser?.user);
-        context[`user_session_${publicKeyObj?.environmentId}`] = userSessionValue;
-        context[`user_session_hash_${publicKeyObj?.environmentId}`] = tokenFromUri;
+        context[`user_session_${publicKeyObj?.environmentId}`] =
+          userSessionValue;
+        context[`user_session_hash_${publicKeyObj?.environmentId}`] =
+          tokenFromUri;
 
         // Create the response with auth data
         const authResponse = createAuthResponse(
@@ -152,7 +157,7 @@ export const remixAuthLoader = async ({
           },
           {
             headers: authResponse.headers,
-          }
+          },
         );
       }
     }
@@ -171,7 +176,8 @@ export const remixAuthLoader = async ({
       // Store in context for later use
       const userSessionValue = JSON.stringify(authenticatedUser?.user);
       context[`user_session_${publicKeyObj?.environmentId}`] = userSessionValue;
-      context[`user_session_hash_${publicKeyObj?.environmentId}`] = tokenFromUri;
+      context[`user_session_hash_${publicKeyObj?.environmentId}`] =
+        tokenFromUri;
 
       // Create the response with auth data
       const authResponse = createAuthResponse(
@@ -190,7 +196,7 @@ export const remixAuthLoader = async ({
         },
         {
           headers: authResponse.headers,
-        }
+        },
       );
     }
     return json({ loading: true });
@@ -203,4 +209,4 @@ export const remixAuthLoader = async ({
   });
 };
 
-export {AuthdogProvider} from "./provider.tsx"
+export { AuthdogProvider } from "./provider.tsx";

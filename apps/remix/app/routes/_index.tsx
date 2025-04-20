@@ -17,13 +17,14 @@ export const meta: MetaFunction = () => {
 };
 
 // Loader function
-export const loader: LoaderFunction = async ({ context, request }) => await remixAuthLoader({
-  request,
-  context,
-  params: {
-    publicKey: process.env.PK_AUTHDOG,
-  },
-})
+export const loader: LoaderFunction = async ({ context, request }) =>
+  await remixAuthLoader({
+    request,
+    context,
+    params: {
+      publicKey: process.env.PK_AUTHDOG,
+    },
+  });
 
 const Index = () => {
   const data = useLoaderData<typeof loader>();

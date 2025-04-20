@@ -20,6 +20,6 @@ export default defineConfig({
   },
   platform: "browser",
   outExtension: ({ format }) => ({
-    js: format === 'esm' ? '.mjs' : '.js',
+    js: format === "esm" ? ".mjs" : ".js",
   }),
 });

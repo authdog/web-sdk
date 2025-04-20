@@ -11,7 +11,6 @@ Authdog web SDK is curated set of libraries aiming to accelerate identity integr
 
 [![npm](https://img.shields.io/npm/v/@authdog/react-elements?label=@authdog/react-elements)](https://www.npmjs.com/package/@authdog/react-elements)
 
-
 ### NextJS app router
 
 [![npm](https://img.shields.io/npm/v/@authdog/nextjs-app?label=@authdog/nextjs-app)](https://www.npmjs.com/package/@authdog/nextjs-app)
@@ -23,7 +22,6 @@ Authdog web SDK is curated set of libraries aiming to accelerate identity integr
 [![npm](https://img.shields.io/npm/v/@authdog/remix-node?label=@authdog/remix-node)](https://www.npmjs.com/package/@authdog/remix-node)
 
 - Demo: (TBD)
-
 
 ## Misc
 
