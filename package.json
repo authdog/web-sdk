@@ -8,8 +8,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset",
     "publish-packages": "turbo build --filter=@authdog/*  --filter=!@playground/*  && pnpm changeset publish",
-    "generate-pr": "turbo build --filter=@authdog/* --filter=!@playground/* && pnpm changeset version",
-    "yalc:all": "for d in packages/*/; do echo $d; cd $d; pnpm yalc push --replace --sig; cd '../../'; done"
+    "generate-pr": "turbo build --filter=@authdog/* --filter=!@playground/* && pnpm changeset version"
   },
   "devDependencies": {
     "@changesets/cli": "^2.28.1",
