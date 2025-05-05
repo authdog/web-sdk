@@ -1,5 +1,13 @@
 # @authdog-playground/nextjs
 
+## 0.1.10
+
+### Patch Changes
+
+- 482b9a2: isolating nextjs app logout handler
+- Updated dependencies [482b9a2]
+  - @authdog/nextjs-app@0.1.0
+
 ## 0.1.9
 
 ### Patch Changes
