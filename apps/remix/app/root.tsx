@@ -7,7 +7,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-import type { LinksFunction, LoaderFunction } from "@remix-run/node";
+import type { LinksFunction, LoaderFunction, ActionFunction } from "@remix-run/node";
 import { useEffect } from "react";
 import { ReloadPage } from "~/components/ReloadPage";
 import { Navbar } from "@authdog/react-elements";
@@ -51,6 +51,36 @@ const App = () => {
   return <Outlet />;
 };
 
+export const action: ActionFunction = async ({ request }) => {
+  const publicKey = process.env.PK_AUTHDOG as string;
+  if (!publicKey) {
+    throw new Error("Public key is not defined");
+  }
+
+  const payload = JSON.parse(
+    Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8"),
+  );
+
+  const environmentId = payload.environmentId;
+  const cookieNameSession = `user_session_${environmentId}`;
+  const cookieNameHash = `user_session_hash_${environmentId}`;
+
+  // Create response with redirect
+  const response = redirect("/");
+
+  // Clear the session cookies
+  response.headers.append(
+    "Set-Cookie",
+    `${cookieNameSession}=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0`
+  );
+  response.headers.append(
+    "Set-Cookie",
+    `${cookieNameHash}=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0`
+  );
+
+  return response;
+};
+
 const AuthdogRemixApp = (App: () => JSX.Element, opts: any = {}) => {
   return () => {
     // let clerkState;
@@ -69,6 +99,11 @@ const AuthdogRemixApp = (App: () => JSX.Element, opts: any = {}) => {
     return (
       <AuthdogProvider>
         <Navbar />
+        <form method="post">
+          <button type="submit" className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+            Logout
+          </button>
+        </form>
         <App />
       </AuthdogProvider>
     );
