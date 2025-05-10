@@ -13,6 +13,12 @@ export const createAuthResponse = (
   environmentId: string,
   request: Request,
 ) => {
+  console.log("[Authdog] Creating auth response with:", {
+    hasUser: !!authenticatedUser?.user,
+    environmentId,
+    tokenLength: token?.length,
+  });
+
   // Create response with cookies
   const response = json({
     user: authenticatedUser.user,
@@ -25,6 +31,8 @@ export const createAuthResponse = (
   // Serialize the user object separately
   const userSessionValue = JSON.stringify(authenticatedUser?.user);
   const userSessionHashValue = token;
+
+  console.log("[Authdog] Setting cookies for environment:", environmentId);
 
   headers.append(
     "Set-Cookie",
@@ -64,11 +72,14 @@ export const authenticateWithCookies = async (
   publicKeyObj: any,
 ) => {
   try {
+    console.log("[Authdog] Attempting cookie authentication for environment:", publicKeyObj?.environmentId);
+    
     // Get cookies from request
     const cookieHeader = request.headers.get("Cookie");
     const cookies = parseCookies(cookieHeader);
 
     if (cookies.length === 0) {
+      console.log("[Authdog] No cookies found, returning unauthenticated");
       return json({
         user: null,
         isAuthenticated: false,
@@ -81,6 +92,7 @@ export const authenticateWithCookies = async (
     );
 
     if (userSessionHashCookie) {
+      console.log("[Authdog] Found session hash cookie, attempting to fetch user data");
       const userSessionHashValue = userSessionHashCookie.value;
       const authenticatedUser = await fetchUserData(
         publicKeyObj?.identityHost,
@@ -88,13 +100,21 @@ export const authenticateWithCookies = async (
         userSessionHashValue,
       );
 
+      console.log("[Authdog] User data fetch result:", {
+        success: !!authenticatedUser,
+        hasUser: !!authenticatedUser?.user,
+        metaCode: authenticatedUser?.meta?.code,
+      });
+
       return json({
         user: authenticatedUser.user,
         isAuthenticated: true,
       });
+    } else {
+      console.log("[Authdog] No session hash cookie found for environment:", publicKeyObj?.environmentId);
     }
   } catch (error) {
-    console.error("Error authenticating with cookies:", error);
+    console.error("[Authdog] Error authenticating with cookies:", error);
   }
 
   return null;
@@ -110,74 +130,48 @@ export const remixAuthLoader = async ({
   context: Record<string, any>;
   params: any;
 }) => {
+  console.log("[Authdog] Starting authentication loader");
+  
   const publicKey =
     typeof process !== "undefined"
       ? (process.env.PK_AUTHDOG as string)
       : params?.publicKey;
   const publicKeyObj = validateAndParsePublicKey(publicKey);
 
+  console.log("[Authdog] Public key parsed:", {
+    hasPublicKey: !!publicKey,
+    environmentId: publicKeyObj?.environmentId,
+  });
+
   // First check if we have a token in the URL
   const url = new URL(request.url);
   const tokenFromUri = url.searchParams.get("token");
 
-  // Try to authenticate using cookies first
-  const cookieAuthResult = await authenticateWithCookies(request, publicKeyObj);
+  console.log("[Authdog] URL token check:", {
+    hasToken: !!tokenFromUri,
+    tokenLength: tokenFromUri?.length,
+  });
 
-  if (cookieAuthResult) {
-    // If we have a token in URL, still process it but don't show loading
-    if (tokenFromUri) {
-      const authenticatedUser = await fetchUserData(
-        publicKeyObj?.identityHost,
-        publicKeyObj?.environmentId,
-        tokenFromUri,
-      );
-
-      if (authenticatedUser?.meta && authenticatedUser?.meta?.code === 200) {
-        // Store in context for later use
-        const userSessionValue = JSON.stringify(authenticatedUser?.user);
-        context[`user_session_${publicKeyObj?.environmentId}`] =
-          userSessionValue;
-        context[`user_session_hash_${publicKeyObj?.environmentId}`] =
-          tokenFromUri;
-
-        // Create the response with auth data
-        const authResponse = createAuthResponse(
-          authenticatedUser,
-          tokenFromUri,
-          publicKeyObj?.environmentId,
-          request,
-        );
-
-        // Return the response with cookies but don't redirect
-        // The client-side reload will handle the URL cleanup
-        return json(
-          {
-            user: authenticatedUser.user,
-            isAuthenticated: true,
-          },
-          {
-            headers: authResponse.headers,
-          },
-        );
-      }
-    }
-    return cookieAuthResult;
-  }
-
-  // If we have a token but no cookie auth, show loading while processing token
+  // If we have a token in URL, process it first
   if (tokenFromUri) {
+    console.log("[Authdog] Processing token from URL");
     const authenticatedUser = await fetchUserData(
       publicKeyObj?.identityHost,
       publicKeyObj?.environmentId,
       tokenFromUri,
     );
 
+    console.log("[Authdog] Token authentication result:", {
+      success: !!authenticatedUser,
+      hasUser: !!authenticatedUser?.user,
+      metaCode: authenticatedUser?.meta?.code,
+    });
+
     if (authenticatedUser?.meta && authenticatedUser?.meta?.code === 200) {
       // Store in context for later use
       const userSessionValue = JSON.stringify(authenticatedUser?.user);
       context[`user_session_${publicKeyObj?.environmentId}`] = userSessionValue;
-      context[`user_session_hash_${publicKeyObj?.environmentId}`] =
-        tokenFromUri;
+      context[`user_session_hash_${publicKeyObj?.environmentId}`] = tokenFromUri;
 
       // Create the response with auth data
       const authResponse = createAuthResponse(
@@ -187,8 +181,6 @@ export const remixAuthLoader = async ({
         request,
       );
 
-      // Return the response with cookies but don't redirect
-      // The client-side reload will handle the URL cleanup
       return json(
         {
           user: authenticatedUser.user,
@@ -199,10 +191,18 @@ export const remixAuthLoader = async ({
         },
       );
     }
-    return json({ loading: true });
   }
 
-  // If we get here, we're not authenticated and not loading
+  // If no token in URL or token authentication failed, try cookie authentication
+  console.log("[Authdog] Attempting cookie authentication");
+  const cookieAuthResult = await authenticateWithCookies(request, publicKeyObj);
+  if (cookieAuthResult) {
+    console.log("[Authdog] Cookie authentication successful");
+    return cookieAuthResult;
+  }
+
+  console.log("[Authdog] No authentication methods succeeded, returning unauthenticated");
+  // If we get here, we're not authenticated
   return json({
     user: null,
     isAuthenticated: false,

@@ -10,7 +10,6 @@ export const ReloadPage = () => {
         // Remove token from URL without triggering a page reload
         url.searchParams.delete("token");
         window.history.replaceState({}, document.title, url.toString());
-        window.location.reload();
         return;
       }
     }
