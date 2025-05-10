@@ -1,5 +1,11 @@
 # @authdog-playground/nextjs
 
+## 0.1.11
+
+### Patch Changes
+
+- c81dc4f: adding signin uri to loader response
+
 ## 0.1.10
 
 ### Patch Changes

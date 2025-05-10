@@ -1,5 +1,11 @@
 # @authdog/remix-node
 
+## 0.0.8
+
+### Patch Changes
+
+- c81dc4f: adding signin uri to loader response
+
 ## 0.0.7
 
 ### Patch Changes
