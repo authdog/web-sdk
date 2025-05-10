@@ -13,6 +13,8 @@ export const createAuthResponse = (
   environmentId: string,
   request: Request,
 ) => {
+
+
   console.log("[Authdog] Creating auth response with:", {
     hasUser: !!authenticatedUser?.user,
     environmentId,
@@ -55,10 +57,19 @@ export const createAuthResponse = (
   headers.append("Access-Control-Allow-Origin", "*");
   headers.append("Access-Control-Allow-Credentials", "true");
 
+  const publicKey = process.env.PK_AUTHDOG as string;
+
+  if (!publicKey) {
+    throw new Error("Public key is not defined");
+  }
+
+  const publicKeyObj = validateAndParsePublicKey(publicKey)
+
   return json(
     {
       user: authenticatedUser.user,
       isAuthenticated: true,
+      signinUri: `${publicKeyObj.identityHost}/signin/${publicKeyObj.environmentId}`
     },
     {
       headers,
@@ -185,6 +196,7 @@ export const remixAuthLoader = async ({
         {
           user: authenticatedUser.user,
           isAuthenticated: true,
+          signinUri: `${publicKeyObj.identityHost}/signin/${publicKeyObj.environmentId}`
         },
         {
           headers: authResponse.headers,
@@ -206,6 +218,7 @@ export const remixAuthLoader = async ({
   return json({
     user: null,
     isAuthenticated: false,
+    signinUri: `${publicKeyObj.identityHost}/signin/${publicKeyObj.environmentId}`
   });
 };
 

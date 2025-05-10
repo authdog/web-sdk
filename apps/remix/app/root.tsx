@@ -7,10 +7,10 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-import type { LinksFunction, LoaderFunction, ActionFunction } from "@remix-run/node";
-import { useEffect } from "react";
+import type { LinksFunction, ActionFunction, LoaderFunction } from "@remix-run/node";
 import { ReloadPage } from "~/components/ReloadPage";
 import { Navbar } from "@authdog/react-elements";
+import { remixAuthLoader } from "@authdog/remix-node";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -65,10 +65,8 @@ export const action: ActionFunction = async ({ request }) => {
   const cookieNameSession = `user_session_${environmentId}`;
   const cookieNameHash = `user_session_hash_${environmentId}`;
 
-  // Create response with redirect
   const response = redirect("/");
 
-  // Clear the session cookies
   response.headers.append(
     "Set-Cookie",
     `${cookieNameSession}=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0`
@@ -81,29 +79,55 @@ export const action: ActionFunction = async ({ request }) => {
   return response;
 };
 
+export const loader: LoaderFunction = async ({ context, request }) =>
+  await remixAuthLoader({
+    request,
+    context,
+    params: {
+      publicKey: process.env.PK_AUTHDOG,
+    },
+  });
+
 const AuthdogRemixApp = (App: () => JSX.Element, opts: any = {}) => {
   return () => {
-    // let clerkState;
-    // const isSpaMode = inSpaMode();
+    const data = useLoaderData<typeof loader>();
+    const isAuthenticated = data?.user?.id !== undefined;
+    const signinUri = data?.signinUri;
 
-    // Don't use `useLoaderData` to fetch the clerk state if we're in SPA mode
-    // if (!isSpaMode) {
-    //   const loaderData = useLoaderData<{ clerkState: any }>();
-    //   clerkState = loaderData.clerkState;
+    // const publicKey = process.env.PK_AUTHDOG as string;
+    // if (!publicKey) {
+    //   throw new Error("Public key is not defined");
     // }
 
-    // if (isSpaMode) {
-    //   assertPublishableKeyInSpaMode(opts.publishableKey);
+    // const payload = JSON.parse(
+    //   Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8"),
+    // );
+
+    // if (!payload?.identityHost || !payload?.environmentId) {
+    //   throw new Error("Invalid public key payload: missing identityHost or environmentId");
     // }
+
+    // const signinUri = `${payload.identityHost}/signin/${payload.environmentId}`;
+    // console.log(signinUri);
 
     return (
       <AuthdogProvider>
         <Navbar />
-        <form method="post">
-          <button type="submit" className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-            Logout
-          </button>
-        </form>
+        {isAuthenticated ? (
+          <form method="post">
+            <button type="submit" className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+              Logout
+            </button>
+          </form>
+        ): (
+        <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+          onClick={() => {
+            location.href = signinUri;
+          }}
+          >
+          Sign in
+        </button>
+        )}
         <App />
       </AuthdogProvider>
     );
@@ -128,43 +152,7 @@ export const getPublicKeyPayload = (publicKey: string): any => {
   }
 };
 
-// export const loader: LoaderFunction = async ({ request }) => {
-//   const url = new URL(request.url);
-//   const token = url.searchParams.get("token");
-
-//   if (token) {
-//     try {
-//       // Create a new URL without the token parameter
-//       const cleanUrl = new URL(request.url);
-//       cleanUrl.searchParams.delete("token");
-
-//       // Set the token in a cookie
-//       const headers = new Headers();
-//       headers.append("Set-Cookie", `auth_token=${token}; Path=/; HttpOnly; SameSite=Lax`);
-
-//       // Return the current URL with auth cookie set, letting the auth process handle the redirect
-//       return new Response(null, {
-//         status: 200,
-//         headers: {
-//           ...Object.fromEntries(headers),
-//           "Cache-Control": "no-cache, no-store, must-revalidate",
-//         },
-//       });
-
-//     } catch (error) {
-//       console.error("Error handling auth token:", error);
-//       return null;
-//     }
-//   }
-
-//   return null;
-// };
-
 export function AuthdogProvider({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    // if uri token reload to same uri
-  }, []);
-
   return <>{children}</>;
 }
 

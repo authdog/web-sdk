@@ -2,16 +2,14 @@ import {
   json,
   type LoaderFunction,
   type MetaFunction,
-  // createCookie,
 } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { remixAuthLoader } from "@authdog/remix-node";
-import { useEffect } from "react";
 
 // Metadata function
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "Authdog - Remix Demo" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
@@ -30,6 +28,7 @@ const Index = () => {
   const data = useLoaderData<typeof loader>();
   return (
     <div className="flex h-screen items-center justify-center">
+      
       {JSON.stringify(data)}
     </div>
   );
