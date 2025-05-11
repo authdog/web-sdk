@@ -1,12 +1,12 @@
 {
   "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "default",
-  "rsc": true,
+  "style": "new-york",
+  "rsc": false,
   "tsx": true,
   "tailwind": {
-    "config": "tailwind.config.ts",
-    "css": "src/globals.css",
-    "baseColor": "zinc",
+    "config": "",
+    "css": "src/styles/global.css",
+    "baseColor": "neutral",
     "cssVariables": true,
     "prefix": ""
   },
@@ -16,5 +16,6 @@
     "utils": "@authdog/react-elements/lib/utils",
     "lib": "@authdog/react-elements/lib",
     "hooks": "@authdog/react-elements/hooks"
-  }
+  },
+  "iconLibrary": "lucide"
 }

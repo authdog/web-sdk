@@ -11,22 +11,26 @@
     "generate-pr": "turbo build --filter=@authdog/* --filter=!@playground/* && pnpm changeset version"
   },
   "devDependencies": {
+    "@authdog/eslint-config": "workspace:*",
+    "@authdog/typescript-config": "workspace:*",
     "@changesets/cli": "^2.28.1",
     "@types/node": "^22.10.7",
     "@types/react": "^19.1.0",
     "postcss-loader": "^8.1.1",
-    "prettier": "^3.4.2",
-    "tailwind-animate": "^0.2.10",
+    "prettier": "catalog:",
     "tailwindcss-animate": "^1.0.7",
-    "tailwindcss-theme-variants": "2.0.0-beta.0",
     "tsup": "^8.3.5",
     "turbo": "^2.3.3",
     "typescript": "^5.7.3",
     "vercel": "^41.4.1",
     "vitest": "^2.1.8"
   },
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@9.12.0",
   "engines": {
-    "node": ">=18"
+    "node": ">=20.17.0"
+  },
+  "volta": {
+    "node": "20.17.0",
+    "pnpm": "9.12.0"
   }
 }
