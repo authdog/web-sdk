@@ -1,28 +1,42 @@
 {
-  "name": "@authdog-web/ui",
+  "name": "@authdog/ui",
   "version": "0.0.0",
-  "type": "module",
   "private": true,
-  "exports": {
-    "./button": "./src/button.tsx",
-    "./card": "./src/card.tsx",
-    "./code": "./src/code.tsx"
-  },
   "scripts": {
-    "lint": "eslint . --max-warnings 0",
-    "generate:component": "turbo gen react-component",
-    "check-types": "tsc --noEmit"
+    "ui": "pnpm dlx shadcn@latest",
+    "lint": "eslint ."
+  },
+  "peerDependencies": {
+    "react": "^18"
   },
   "devDependencies": {
-    "@authdog-web/ts-config": "workspace:*",
-    "@turbo/gen": "^1.12.4",
-    "@types/node": "^20.11.24",
-    "@types/react": "18.3.0",
-    "@types/react-dom": "18.3.1",
-    "typescript": "5.5.4"
+    "@authdog/eslint-config": "workspace:*",
+    "@authdog/typescript-config": "workspace:*",
+    "@types/node": "*",
+    "@types/react": "*",
+    "autoprefixer": "^10",
+    "postcss": "^8",
+    "postcss-load-config": "^6",
+    "tailwindcss": "*",
+    "typescript": "*"
   },
   "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "@radix-ui/react-slot": "^1.0.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "*",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "exports": {
+    "./global.css": "./src/global.css",
+    "./postcss.config": "./postcss.config.mjs",
+    "./tailwind.config": "./tailwind.config.ts",
+    "./lib/*": "./src/lib/*.ts",
+    "./hooks/*": [
+      "./src/hooks/*.ts",
+      "./src/hooks/*.tsx"
+    ],
+    "./components/*": "./src/components/*.tsx"
   }
 }

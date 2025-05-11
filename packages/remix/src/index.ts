@@ -94,6 +94,7 @@ export const authenticateWithCookies = async (
       return json({
         user: null,
         isAuthenticated: false,
+        signinUri: `${publicKeyObj.identityHost}/signin/${publicKeyObj.environmentId}`
       });
     }
 
@@ -120,6 +121,8 @@ export const authenticateWithCookies = async (
       return json({
         user: authenticatedUser.user,
         isAuthenticated: true,
+        signinUri: `${publicKeyObj.identityHost}/signin/${publicKeyObj.environmentId}`
+
       });
     } else {
       console.log("[Authdog] No session hash cookie found for environment:", publicKeyObj?.environmentId);
@@ -131,22 +134,31 @@ export const authenticateWithCookies = async (
   return null;
 };
 
+interface IRemixAuthLoader {
+  request: Request;
+  context: Record<string, any>;
+  params: {
+    publicKey?: string;
+  }
+}
+
 // Main loader function
 export const remixAuthLoader = async ({
   request,
   context,
   params,
-}: {
-  request: Request;
-  context: Record<string, any>;
-  params: any;
-}) => {
+}: IRemixAuthLoader) => {
   console.log("[Authdog] Starting authentication loader");
   
   const publicKey =
     typeof process !== "undefined"
       ? (process.env.PK_AUTHDOG as string)
-      : params?.publicKey;
+      : params?.publicKey as string
+
+  if (!publicKey) {
+    throw Error("[Authdog][Remix] Missing public key")
+  }
+
   const publicKeyObj = validateAndParsePublicKey(publicKey);
 
   console.log("[Authdog] Public key parsed:", {

@@ -1,8 +1,11 @@
 {
-  "extends": "@authdog-web/ts-config/react-library.json",
+  "extends": "@authdog/typescript-config/react-library.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "baseUrl": ".",
+    "paths": {
+      "@authdog/ui/*": ["./src/*"]
+    }
   },
   "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules"]
 }
