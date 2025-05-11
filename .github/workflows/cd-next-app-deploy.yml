@@ -1,21 +1,19 @@
 name: cd-next-app-deploy
 
 on:
-  # push:
-    # branches:
-    #   - main
-    # paths:
-    #   - apps/nextjs/**
-    #   - .github/workflows/cd-next-app-demo.yml
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - apps/nextjs-app/**
+      - .github/workflows/cd-next-app-deploy.yml
 
 env:
-  # codebase
   STORE_PATH: ~/.pnpm-store
   ENVFILE_CONSOLE: apps/nextjs-app/.env
   SCOPE_VERCEL: david-barrats-projects-b894a911
   PROJECT_VERCEL: nextjs-demo
-
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -30,26 +28,25 @@ jobs:
         node-version: [22.x]
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           show-progress: false
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
-      - uses: pnpm/action-setup@v4
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
         with:
           version: 9.12.0
 
-      # - name: Use taobao registry
-      #   run: npm config set registry https://registry.npmmirror.com/
-
-      - name: Setup PNPM store path
+      - name: Set PNPM store path
         run: pnpm config set store-dir ${{ env.STORE_PATH }}
 
-      - name: Setup Pnpm Cache
+      - name: Cache PNPM store
         uses: actions/cache@v4
         with:
           path: ${{ env.STORE_PATH }}
@@ -61,21 +58,17 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build workspace packages
-        run: |
-          make build
-      
-      - name: Install latest dependencies in nextjs
-        run: |
-          (cd apps/nextjs-app; pnpm add @authdog/nextjs-app@latest @authdog/react-elements@latest react@18.3.0 react-dom@18.3.0)
+        run: make build
 
-      # - name: Build Next.js app
-      #   run: |
-      #     (cd apps/nextjs;pnpm run build)
+      - name: Update Next.js app dependencies
+        run: |
+          cd apps/nextjs-app
+          pnpm add @authdog/nextjs-app@latest @authdog/react-elements@latest react@18.3.0 react-dom@18.3.0
 
-      - name: Replace catalog: tags with latest npm versions
+      - name: Replace catalog: tags with latest versions
         run: node .github/scripts/replace-catalog.js
 
-      - name: Ship NextJS demo
+      - name: Deploy to Vercel
         run: |
           npx vercel deploy \
             --cwd apps/nextjs-app \
