@@ -72,6 +72,9 @@ jobs:
       #   run: |
       #     (cd apps/nextjs;pnpm run build)
 
+      - name: Replace catalog: tags with latest npm versions
+        run: node .github/scripts/replace-catalog.js
+
       - name: Ship NextJS demo
         run: |
           npx vercel deploy \
