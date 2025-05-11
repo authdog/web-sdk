@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.2
+
+### Patch Changes
+
+- d6ac8e7: ensure all exports are available
+
 ## 0.0.1
 
 ### Patch Changes
