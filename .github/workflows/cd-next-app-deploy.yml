@@ -12,9 +12,10 @@ on:
 env:
   # codebase
   STORE_PATH: ~/.pnpm-store
-  ENVFILE_CONSOLE: apps/nextjs/.env
+  ENVFILE_CONSOLE: apps/nextjs-app/.env
   SCOPE_VERCEL: david-barrats-projects-b894a911
   PROJECT_VERCEL: nextjs-demo
+
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -65,7 +66,7 @@ jobs:
       
       - name: Install latest dependencies in nextjs
         run: |
-          (cd apps/nextjs; pnpm add @authdog/nextjs-app@latest @authdog/react-elements@latest)
+          (cd apps/nextjs-app; pnpm add @authdog/nextjs-app@latest @authdog/react-elements@latest)
 
       # - name: Build Next.js app
       #   run: |
