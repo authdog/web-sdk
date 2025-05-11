@@ -15,5 +15,5 @@ export default defineConfig({
   outExtension: ({ format }) => ({
     js: format === "esm" ? ".mjs" : ".js",
   }),
-  onSuccess: "cp src/global.module.css dist/global.css"
+  onSuccess: "cp src/global.module.css dist/global.css && cp postcss.config.mjs dist/postcss.config.mjs && cp tailwind.config.ts dist/tailwind.config.ts"
 }); 
