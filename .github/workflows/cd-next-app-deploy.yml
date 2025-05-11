@@ -74,7 +74,7 @@ jobs:
       - name: Ship NextJS demo
         run: |
           npx vercel deploy \
-            --cwd apps/nextjs \
+            --cwd apps/nextjs-app \
             --token ${{ secrets.VERCEL_CD_TOKEN }} \
             --scope ${{ env.SCOPE_VERCEL }} \
             --name ${{ env.PROJECT_VERCEL }} \
