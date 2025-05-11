@@ -65,7 +65,7 @@ jobs:
           cd apps/nextjs-app
           pnpm add @authdog/nextjs-app@latest @authdog/react-elements@latest react@18.3.0 react-dom@18.3.0
 
-      - name: Replace catalog: tags with latest versions
+      - name: "Replace catalog: tags with latest versions"
         run: node .github/scripts/replace-catalog.js
 
       - name: Deploy to Vercel
