@@ -2,9 +2,11 @@
   "name": "@authdog/react-elements",
   "version": "0.0.0",
   "private": true,
+  
   "scripts": {
     "ui": "pnpm dlx shadcn@latest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build": "pnpm tsup"
   },
   "peerDependencies": {
     "react": "catalog:react18"
@@ -29,14 +31,11 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "exports": {
-    "./global.css": "./src/global.css",
+    ".": "./dist/index.js",
+    "./global.css": "./dist/global.css",
     "./postcss.config": "./postcss.config.mjs",
     "./tailwind.config": "./tailwind.config.ts",
     "./lib/*": "./src/lib/*.ts",
-    "./hooks/*": [
-      "./src/hooks/*.ts",
-      "./src/hooks/*.tsx"
-    ],
-    "./components/*": "./src/components/*.tsx"
+    "./components/*": "./src/components/ui/*.tsx"
   }
 }
