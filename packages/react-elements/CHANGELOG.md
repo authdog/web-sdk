@@ -4,6 +4,12 @@
 
 ### Patch Changes
 
+- 57c41ef: add publish config
+
+## 0.0.8
+
+### Patch Changes
+
 - 30fdfe6: bump
 
 ## 0.0.7
