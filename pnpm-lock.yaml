@@ -57,6 +57,9 @@ importers:
       '@types/react':
         specifier: ^19.1.0
         version: 19.1.0
+      js-yaml:
+        specifier: ^4.1.0
+        version: 4.1.0
       postcss-loader:
         specifier: ^8.1.1
         version: 8.1.1(postcss@8.5.1)(typescript@5.7.3)
@@ -7610,14 +7613,6 @@ snapshots:
     optionalDependencies:
       vite: 5.4.12(@types/node@22.10.7)(lightningcss@1.29.2)
 
-  '@vitest/mocker@2.1.8(vite@5.4.12(@types/node@22.14.1)(lightningcss@1.29.2))':
-    dependencies:
-      '@vitest/spy': 2.1.8
-      estree-walker: 3.0.3
-      magic-string: 0.30.17
-    optionalDependencies:
-      vite: 5.4.12(@types/node@22.14.1)(lightningcss@1.29.2)
-
   '@vitest/pretty-format@2.1.8':
     dependencies:
       tinyrainbow: 1.2.0
@@ -11701,7 +11696,7 @@ snapshots:
   vitest@2.1.8(@edge-runtime/vm@3.2.0)(@types/node@22.14.1)(lightningcss@1.29.2):
     dependencies:
       '@vitest/expect': 2.1.8
-      '@vitest/mocker': 2.1.8(vite@5.4.12(@types/node@22.14.1)(lightningcss@1.29.2))
+      '@vitest/mocker': 2.1.8(vite@5.4.12(@types/node@22.10.7)(lightningcss@1.29.2))
       '@vitest/pretty-format': 2.1.8
       '@vitest/runner': 2.1.8
       '@vitest/snapshot': 2.1.8
