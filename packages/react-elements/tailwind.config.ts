@@ -6,9 +6,9 @@ const config = {
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
+     "./components/**/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-    "../../packages/react-elements/src/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}"
   ],
   prefix: "",
   theme: {

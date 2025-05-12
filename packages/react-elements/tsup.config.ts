@@ -1,7 +1,11 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/index.ts"], // Entry point for your source code
+  entry: [
+    "src/index.ts",
+    "src/components/ui/*.tsx",
+    "src/lib/*.ts"
+  ], // Build all entry points
   format: ["cjs", "esm"],
   dts: true,
   splitting: false,
@@ -15,5 +19,5 @@ export default defineConfig({
   outExtension: ({ format }) => ({
     js: format === "esm" ? ".mjs" : ".js",
   }),
-  onSuccess: "cp src/globals.css dist/global.css && cp postcss.config.mjs dist/postcss.config.mjs && cp tailwind.config.ts dist/tailwind.config.ts"
+  onSuccess: "cp src/global.css dist/global.css && cp postcss.config.mjs dist/postcss.config.mjs && cp tailwind.config.ts dist/tailwind.config.ts"
 }); 

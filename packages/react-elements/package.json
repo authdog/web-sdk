@@ -33,8 +33,9 @@
     "./global.css": "./dist/global.css",
     "./postcss.config": "./postcss.config.mjs",
     "./tailwind.config": "./tailwind.config.ts",
-    "./lib/*": "./src/lib/*.ts",
-    "./components/*": "./src/components/ui/*.tsx"
+    "./lib/*": "./dist/lib/*.js",
+    "./components/*": "./dist/components/ui/*.js",
+    "./tailwind.preset": "./dist/tailwind.preset.js"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
