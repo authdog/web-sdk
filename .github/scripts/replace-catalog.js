@@ -39,6 +39,8 @@ function removeWorkspaceDeps(deps) {
 
 replaceCatalogVersions(pkg.dependencies || {});
 replaceCatalogVersions(pkg.devDependencies || {});
+replaceCatalogVersions(pkg.peerDependencies || {});
+replaceCatalogVersions(pkg.optionalDependencies || {});
 removeWorkspaceDeps(pkg.devDependencies || {});
 
 fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
