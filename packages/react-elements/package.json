@@ -1,7 +1,6 @@
 {
   "name": "@authdog/react-elements",
-  "version": "0.0.8",
-  "private": false,
+  "version": "0.0.7",
   "scripts": {
     "ui": "pnpm dlx shadcn@latest",
     "lint": "eslint .",
@@ -36,5 +35,9 @@
     "./tailwind.config": "./tailwind.config.ts",
     "./lib/*": "./src/lib/*.ts",
     "./components/*": "./src/components/ui/*.tsx"
-  }
+  },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/",
+        "access": "public"
+    }
 }
