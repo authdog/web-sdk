@@ -12,7 +12,8 @@
     "@authdog/react-elements": "workspace:*",
     "next": "14.2.8",
     "react": "catalog:react18",
-    "react-dom": "catalog:react18"
+    "react-dom": "catalog:react18",
+    "react-elements:latest": "@authdog/react-elements:latest"
   },
   "devDependencies": {
     "@authdog/eslint-config": "workspace:*",
