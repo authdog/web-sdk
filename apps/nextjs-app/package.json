@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@authdog/react-elements": "latest",
+    "@authdog/react-elements": "workspace:*",
     "next": "14.2.8",
     "react": "catalog:react18",
     "react-dom": "catalog:react18"
