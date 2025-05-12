@@ -1,6 +1,6 @@
 {
   "name": "@authdog/react-elements",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "scripts": {
     "ui": "pnpm dlx shadcn@latest",
     "lint": "eslint .",
@@ -36,8 +36,8 @@
     "./lib/*": "./src/lib/*.ts",
     "./components/*": "./src/components/ui/*.tsx"
   },
-    "publishConfig": {
-        "registry": "https://registry.npmjs.org/",
-        "access": "public"
-    }
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
 }
