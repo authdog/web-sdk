@@ -52,8 +52,8 @@ function replaceCatalogVersions(deps) {
       const selector = match[1] || '';
       const version = getCatalogVersion(dep, selector);
       if (version) {
-        deps[dep] = `^${version}`;
-        console.log(`Set ${dep} to ^${version} (from catalog:${selector})`);
+        deps[dep] = /^[~^><=*]/.test(version) ? version : `^${version}`;
+        console.log(`Set ${dep} to ${deps[dep]} (from catalog:${selector})`);
       }
     }
   }
