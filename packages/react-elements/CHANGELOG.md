@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.9
+
+### Patch Changes
+
+- 352d31e: replace css filepath
+
 ## 0.0.8
 
 ### Patch Changes
