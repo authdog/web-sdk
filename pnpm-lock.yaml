@@ -88,8 +88,8 @@ importers:
   apps/nextjs-app:
     dependencies:
       '@authdog/react-elements':
-        specifier: workspace:*
-        version: link:../../packages/react-elements
+        specifier: latest
+        version: 0.0.8(@types/react@18.3.21)(react@18.3.1)(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@20.17.46)(typescript@5.8.3)))
       next:
         specifier: 14.2.8
         version: 14.2.8(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -99,9 +99,6 @@ importers:
       react-dom:
         specifier: catalog:react18
         version: 18.3.1(react@18.3.1)
-      react-elements:latest:
-        specifier: '@authdog/react-elements:latest'
-        version: link:@authdog/react-elements:latest
     devDependencies:
       '@authdog/eslint-config':
         specifier: workspace:*
@@ -367,6 +364,11 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@authdog/react-elements@0.0.8':
+    resolution: {integrity: sha512-fnSVtv7Vq09rp+/eGq5BBzY0s+uP1cw5xjrsGKVDcbgNKHqSlof4sLVBIrrkiweBpRacXOtNsyQg0JOlMsokIQ==}
+    peerDependencies:
+      react: ^18.3.1
 
   '@babel/code-frame@7.26.2':
     resolution: {integrity: sha512-RJlIHRueQgwWitWgF8OdFYGZX328Ax5BCemNGlqHfplnRT9ESi8JkFlvaVYbS+UubVY6dpv87Fs2u5M29iNFVQ==}
@@ -5832,6 +5834,19 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
+
+  '@authdog/react-elements@0.0.8(@types/react@18.3.21)(react@18.3.1)(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@20.17.46)(typescript@5.8.3)))':
+    dependencies:
+      '@radix-ui/react-slot': 1.2.2(@types/react@18.3.21)(react@18.3.1)
+      class-variance-authority: 0.7.1
+      clsx: 2.1.1
+      lucide-react: 0.451.0(react@18.3.1)
+      react: 18.3.1
+      tailwind-merge: 2.6.0
+      tailwindcss-animate: 1.0.7(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@20.17.46)(typescript@5.8.3)))
+    transitivePeerDependencies:
+      - '@types/react'
+      - tailwindcss
 
   '@babel/code-frame@7.26.2':
     dependencies:

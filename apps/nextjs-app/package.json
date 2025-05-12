@@ -9,11 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@authdog/react-elements": "workspace:*",
+    "@authdog/react-elements": "latest",
     "next": "14.2.8",
     "react": "catalog:react18",
-    "react-dom": "catalog:react18",
-    "react-elements:latest": "@authdog/react-elements:latest"
+    "react-dom": "catalog:react18"
   },
   "devDependencies": {
     "@authdog/eslint-config": "workspace:*",
