@@ -6,23 +6,37 @@ const path = require('path');
 const pkgPath = path.join(__dirname, '../../apps/nextjs-app/package.json');
 const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
 
-function getLatestVersion(pkgName) {
+function getCatalogVersion(pkgName, selector) {
   try {
-    // Query npm for the latest version
-    return execSync(`npm view ${pkgName} version`).toString().trim();
+    if (!selector) {
+      // Default: get latest version
+      return execSync(`npm view ${pkgName} version`).toString().trim();
+    } else {
+      // Try as dist-tag first
+      try {
+        return execSync(`npm view ${pkgName} dist-tags.${selector}`).toString().trim();
+      } catch (e) {
+        // Fallback: try as version
+        return execSync(`npm view ${pkgName}@${selector} version`).toString().trim();
+      }
+    }
   } catch (e) {
-    console.error(`Failed to get version for ${pkgName}`);
+    console.error(`Failed to get version for ${pkgName} (selector: ${selector})`);
     return null;
   }
 }
 
 function replaceCatalogVersions(deps) {
   for (const dep in deps) {
-    if (deps[dep] === 'catalog:') {
-      const latest = getLatestVersion(dep);
-      if (latest) {
-        deps[dep] = `^${latest}`;
-        console.log(`Set ${dep} to ^${latest}`);
+    const match = typeof deps[dep] === 'string' && deps[dep].startsWith('catalog:')
+      ? deps[dep].match(/^catalog:(.*)$/)
+      : null;
+    if (match) {
+      const selector = match[1] || '';
+      const version = getCatalogVersion(dep, selector);
+      if (version) {
+        deps[dep] = `^${version}`;
+        console.log(`Set ${dep} to ^${version} (from catalog:${selector})`);
       }
     }
   }
