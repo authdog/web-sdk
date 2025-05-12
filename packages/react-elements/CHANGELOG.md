@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.7
+
+### Patch Changes
+
+- 6c41c4d: bump version
+
 ## 0.0.2
 
 ### Patch Changes
