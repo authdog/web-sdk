@@ -1,7 +1,7 @@
 {
   "name": "@authdog/react-elements",
-  "version": "0.0.5",
-  "private": true,
+  "version": "0.0.6",
+  "private": false,
   "scripts": {
     "ui": "pnpm dlx shadcn@latest",
     "lint": "eslint .",
