@@ -1,4 +1,4 @@
-import {Button} from "@authdog/react-elements/components/ui/button"
+import {Button} from "@authdog/react-elements"
 
 export default function Home() {
   return (
