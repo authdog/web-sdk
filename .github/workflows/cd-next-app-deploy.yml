@@ -2,12 +2,12 @@ name: cd-next-app-deploy
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - apps/nextjs-app/**
-      - .github/workflows/cd-next-app-deploy.yml
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - apps/nextjs-app/**
+  #     - .github/workflows/cd-next-app-deploy.yml
 
 env:
   STORE_PATH: ~/.pnpm-store
