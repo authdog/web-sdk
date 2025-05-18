@@ -9,8 +9,8 @@ import {
 } from "@remix-run/react";
 import type { LinksFunction, ActionFunction, LoaderFunction } from "@remix-run/node";
 import { ReloadPage } from "~/components/ReloadPage";
-import { Navbar } from "@authdog/react-elements";
 import { remixAuthLoader } from "@authdog/remix-node";
+import React from "react";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -25,31 +25,31 @@ export const links: LinksFunction = () => [
   },
 ];
 
-export function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Meta />
-        <Links />
-      </head>
-
-      <AuthdogProvider>
-        <body>
-          {children}
-          <ScrollRestoration />
-          <Scripts />
-          <ReloadPage />
-        </body>
-      </AuthdogProvider>
-    </html>
-  );
+export function AuthdogProvider({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }
 
-const App = () => {
-  return <Outlet />;
-};
+// Create a client-only component for the Navbar
+const ClientNavbar = React.lazy(() => 
+  import("@authdog/react-elements").then(mod => ({ 
+    default: mod.Navbar 
+  }))
+);
+
+// Create a client-only wrapper component
+function ClientOnly({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  return <>{children}</>;
+}
 
 export const action: ActionFunction = async ({ request }) => {
   const publicKey = process.env.PK_AUTHDOG as string;
@@ -88,52 +88,6 @@ export const loader: LoaderFunction = async ({ context, request }) =>
     },
   });
 
-const AuthdogRemixApp = (App: () => JSX.Element, opts: any = {}) => {
-  return () => {
-    const data = useLoaderData<typeof loader>();
-    const isAuthenticated = data?.user?.id !== undefined;
-    const signinUri = data?.signinUri;
-
-    // const publicKey = process.env.PK_AUTHDOG as string;
-    // if (!publicKey) {
-    //   throw new Error("Public key is not defined");
-    // }
-
-    // const payload = JSON.parse(
-    //   Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8"),
-    // );
-
-    // if (!payload?.identityHost || !payload?.environmentId) {
-    //   throw new Error("Invalid public key payload: missing identityHost or environmentId");
-    // }
-
-    // const signinUri = `${payload.identityHost}/signin/${payload.environmentId}`;
-    // console.log(signinUri);
-
-    return (
-      <AuthdogProvider>
-        <Navbar />
-        {isAuthenticated ? (
-          <form method="post">
-            <button type="submit" className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-              Logout
-            </button>
-          </form>
-        ): (
-        <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-          onClick={() => {
-            location.href = signinUri;
-          }}
-          >
-          Sign in
-        </button>
-        )}
-        <App />
-      </AuthdogProvider>
-    );
-  };
-};
-
 export const getPublicKeyPayload = (publicKey: string): any => {
   if (!publicKey) {
     throw new Error("Public key is not defined");
@@ -152,8 +106,45 @@ export const getPublicKeyPayload = (publicKey: string): any => {
   }
 };
 
-export function AuthdogProvider({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
-}
+export default function App() {
+  const data = useLoaderData<typeof loader>();
+  const isAuthenticated = data?.user?.id !== undefined;
+  const signinUri = data?.signinUri;
 
-export default AuthdogRemixApp(App);
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <AuthdogProvider>
+          {/* <ClientOnly> */}
+            {/* {isAuthenticated ? (
+              <form method="post">
+                <button type="submit" className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                  Logout
+                </button>
+              </form>
+            ) : (
+              <button 
+                className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                onClick={() => {
+                  location.href = signinUri;
+                }}
+              >
+                Sign in
+              </button>
+            )} */}
+          {/* </ClientOnly> */}
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+          <ReloadPage />
+        </AuthdogProvider>
+      </body>
+    </html>
+  );
+}

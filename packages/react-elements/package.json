@@ -1,6 +1,10 @@
 {
   "name": "@authdog/react-elements",
   "version": "0.0.11",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "scripts": {
     "ui": "pnpm dlx shadcn@latest",
     "lint": "eslint .",
@@ -34,12 +38,24 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "exports": {
-    ".": "./dist/index.js",
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
     "./global.css": "./dist/global.css",
-    "./postcss.config": "./postcss.config.mjs",
-    "./tailwind.config": "./tailwind.config.ts",
-    "./lib/*": "./dist/lib/*.js",
-    "./components/*": "./dist/components/ui/*.js",
+    "./postcss.config": "./dist/postcss.config.mjs",
+    "./tailwind.config": "./dist/tailwind.config.ts",
+    "./lib/*": {
+      "types": "./dist/lib/*.d.mts",
+      "import": "./dist/lib/*.mjs",
+      "require": "./dist/lib/*.js"
+    },
+    "./components/*": {
+      "types": "./dist/components/ui/*.d.mts",
+      "import": "./dist/components/ui/*.mjs",
+      "require": "./dist/components/ui/*.js"
+    },
     "./tailwind.preset": "./dist/tailwind.preset.js",
     "./styles.css": "./dist/styles.css"
   },

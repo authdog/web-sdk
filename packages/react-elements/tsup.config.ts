@@ -6,7 +6,7 @@ export default defineConfig({
     "src/components/ui/*.tsx",
     "src/lib/*.ts"
   ], // Build all entry points
-  format: ["cjs", "esm"],
+  format: ["esm", "cjs"],
   dts: true,
   splitting: false,
   sourcemap: true,
@@ -16,8 +16,13 @@ export default defineConfig({
   external: ["react", "react-dom"],
   outDir: "dist",
   platform: "browser",
-  outExtension: ({ format }) => ({
-    js: format === "esm" ? ".mjs" : ".js",
-  }),
+  esbuildOptions(options) {
+    options.banner = {
+      js: '"use client";',
+    };
+    options.define = {
+      'process.env.NODE_ENV': '"production"',
+    };
+  },
   onSuccess: "cp src/global.css dist/global.css && cp postcss.config.mjs dist/postcss.config.mjs && cp tailwind.config.ts dist/tailwind.config.ts"
 }); 
