@@ -1,9 +1,9 @@
 "use client"
 
 import type React from "react"
-
-import { useState } from "react"
-import * as LucideIcons from "lucide-react"
+import { useState, useEffect } from "react"
+import { User, Settings, LogOut, Menu } from "lucide-react"
+import type { LucideProps } from "lucide-react"
 
 import { cn } from "../../lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar"
@@ -56,33 +56,39 @@ export function Navbar({
   onLogout = () => console.log("Logout clicked"),
 }: NavbarProps) {
   const [open, setOpen] = useState(false)
-  const UserIcon = LucideIcons.User as any
-  const SettingsIcon = LucideIcons.Settings as any
-  const LogOutIcon = LucideIcons.LogOut as any
-  const MenuIcon = LucideIcons.Menu as any
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  const iconProps: LucideProps = {
+    className: "mr-2 h-4 w-4",
+    "aria-hidden": "true"
+  }
+
+  const renderIcon = (Icon: any) => {
+    if (!isMounted) return null
+    return <Icon {...iconProps} />
+  }
 
   return (
     <header className={cn("border-b bg-background", className)}>
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <div className="flex items-center gap-4">
-          {/* <Link href="/" className="flex items-center gap-2">
-            <span className="text-xl font-bold">{logoText}</span>
-          </Link> */}
+          <span className="text-xl font-bold">{logoText}</span>
           <nav className="hidden md:flex gap-6">
             {items?.map((item, index) => (
-            //   <Link
-            //     key={index}
-            //     href={item.href}
-            //     className={cn(
-            //       "text-sm font-medium transition-colors hover:text-primary",
-            //       item.disabled && "cursor-not-allowed opacity-80",
-            //     )}
-            //   >
-            //     {item.title}
-            //   </Link>
-                <a href={item?.href}>
-                    {item.title}
-                </a>
+              <a
+                key={index}
+                href={item.href}
+                className={cn(
+                  "text-sm font-medium transition-colors hover:text-primary",
+                  item.disabled && "cursor-not-allowed opacity-80"
+                )}
+              >
+                {item.title}
+              </a>
             ))}
           </nav>
         </div>
@@ -107,17 +113,17 @@ export function Navbar({
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
                 <DropdownMenuItem>
-                  <UserIcon className="mr-2 h-4 w-4" />
+                  {renderIcon(User)}
                   <span>Profile</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <SettingsIcon className="mr-2 h-4 w-4" />
+                  {renderIcon(Settings)}
                   <span>Settings</span>
                 </DropdownMenuItem>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={onLogout}>
-                <LogOutIcon className="mr-2 h-4 w-4" />
+                {renderIcon(LogOut)}
                 <span>Log out</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -125,24 +131,23 @@ export function Navbar({
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden" aria-label="Open Menu">
-                <MenuIcon className="h-5 w-5" />
+                {renderIcon(Menu)}
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="pr-0">
               <nav className="grid gap-2 py-6">
                 {items?.map((item, index) => (
-                //   <Link
-                //     key={index}
-                //     href={item.href}
-                //     className={cn(
-                //       "flex w-full items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent",
-                //       item.disabled && "cursor-not-allowed opacity-80",
-                //     )}
-                //     onClick={() => setOpen(false)}
-                //   >
-                //     {item.title}
-                //   </Link>
-                <a href="https://www.goo.bar" />
+                  <a
+                    key={index}
+                    href={item.href}
+                    className={cn(
+                      "flex w-full items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent",
+                      item.disabled && "cursor-not-allowed opacity-80"
+                    )}
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.title}
+                  </a>
                 ))}
               </nav>
             </SheetContent>
