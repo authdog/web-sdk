@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.11
+
+### Patch Changes
+
+- 3734ad0: prototype navbar with shadcn/v0
+
 ## 0.0.10
 
 ### Patch Changes
