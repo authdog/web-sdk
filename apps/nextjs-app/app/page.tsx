@@ -8,15 +8,15 @@ export default function Home() {
       <Navbar
         logoText="Acme Inc"
         items={[
-          { title: "Home", href: "/" },
-          { title: "Features", href: "/features" },
-          { title: "Pricing", href: "/pricing" },
-          { title: "About", href: "/about" },
+          // { title: "Home", href: "/" },
+          // { title: "Features", href: "/features" },
+          // { title: "Pricing", href: "/pricing" },
+          // { title: "About", href: "/about" },
         ]}
         user={{
           name: "Sarah Johnson",
           email: "sarah@acme.com",
-          image: "/placeholder.svg?height=32&width=32",
+          image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
         }}
         onLogout={() => console.log("Logging out...")}
       >
