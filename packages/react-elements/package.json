@@ -4,7 +4,8 @@
   "scripts": {
     "ui": "pnpm dlx shadcn@latest",
     "lint": "eslint .",
-    "build": "pnpm tsup"
+    "build:styles": "postcss src/global.css -o dist/styles.css",
+    "build": "pnpm tsup && pnpm build:styles"
   },
   "peerDependencies": {
     "react": "catalog:react18"
@@ -16,6 +17,7 @@
     "@types/react": "catalog:react18",
     "autoprefixer": "^10",
     "postcss": "^8",
+    "postcss-cli": "^11.0.1",
     "postcss-load-config": "^6",
     "tailwindcss": "catalog:",
     "typescript": "catalog:"
@@ -35,7 +37,8 @@
     "./tailwind.config": "./tailwind.config.ts",
     "./lib/*": "./dist/lib/*.js",
     "./components/*": "./dist/components/ui/*.js",
-    "./tailwind.preset": "./dist/tailwind.preset.js"
+    "./tailwind.preset": "./dist/tailwind.preset.js",
+    "./styles.css": "./dist/styles.css"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
