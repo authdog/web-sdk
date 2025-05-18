@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.13
+
+### Patch Changes
+
+- eeca7af: minor changes, syntax/settings enhancements
+
 ## 0.0.12
 
 ### Patch Changes
