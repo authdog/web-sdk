@@ -1,9 +1,36 @@
-import {Button} from "@authdog/react-elements"
+"use client";
+import { Navbar, Button} from "@authdog/react-elements"
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-     <Button variant="destructive">Test</Button>
+       <div className="min-h-screen flex flex-col">
+      <Navbar
+        logoText="Acme Inc"
+        items={[
+          { title: "Home", href: "/" },
+          { title: "Features", href: "/features" },
+          { title: "Pricing", href: "/pricing" },
+          { title: "About", href: "/about" },
+        ]}
+        user={{
+          name: "Sarah Johnson",
+          email: "sarah@acme.com",
+          image: "/placeholder.svg?height=32&width=32",
+        }}
+        onLogout={() => console.log("Logging out...")}
+      >
+        <Button variant="ghost" size="sm">
+          Docs
+        </Button>
+        <Button size="sm">Get Started</Button>
+      </Navbar>
+
+      {/* <main className="flex-1 container px-4 py-12 md:px-6 md:py-24">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Welcome to Acme Inc</h1>
+          <p className="mt-4 text-lg text-muted-foreground">A customizable navbar with avatar and dropdown menu</p>
+        </div>
+      </main> */}
     </div>
   );
 }
