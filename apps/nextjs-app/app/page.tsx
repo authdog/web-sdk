@@ -1,12 +1,11 @@
 "use client";
-import { Navbar, Button} from "@authdog/react-elements"
+import { Navbar, Button, UserProfile} from "@authdog/react-elements"
 import "@authdog/react-elements/styles.css";
-import { Suspense } from "react";
+// import { Suspense } from "react";
 
 export default function Home() {
   return (
        <div className="min-h-screen flex flex-col">
-        <Suspense fallback={<div>Loading...</div>}>
           <Navbar
             logoText="Acme Inc"
             items={[
@@ -27,7 +26,8 @@ export default function Home() {
             </Button>
             <Button size="sm">Get Started</Button>
           </Navbar>
-        </Suspense>
+
+        <UserProfile />
 
       {/* <main className="flex-1 container px-4 py-12 md:px-6 md:py-24">
         <div className="text-center">

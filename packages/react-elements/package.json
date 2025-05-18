@@ -8,7 +8,9 @@
     "ui": "pnpm dlx shadcn@latest",
     "lint": "eslint .",
     "build:styles": "postcss src/global.css -o dist/styles.css",
-    "build": "pnpm tsup && pnpm build:styles"
+    "build": "pnpm tsup && pnpm build:styles",
+    "ladle": "ladle serve",
+    "ladle:build": "ladle build"
   },
   "peerDependencies": {
     "react": "catalog:react18"
@@ -16,14 +18,21 @@
   "devDependencies": {
     "@authdog/eslint-config": "workspace:*",
     "@authdog/typescript-config": "workspace:*",
+    "@ladle/react": "^2.0.0",
     "@types/node": "catalog:",
     "@types/react": "catalog:react18",
+    "@vitejs/plugin-react": "^4.4.1",
     "autoprefixer": "^10",
+    "css-loader": "^6.8.1",
     "postcss": "^8",
     "postcss-cli": "^11.0.1",
+    "postcss-import": "^16.1.0",
     "postcss-load-config": "^6",
+    "style-loader": "^3.3.3",
     "tailwindcss": "catalog:",
-    "typescript": "catalog:"
+    "ts-loader": "^9.5.1",
+    "typescript": "catalog:",
+    "webpack": "^5.89.0"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.9",
