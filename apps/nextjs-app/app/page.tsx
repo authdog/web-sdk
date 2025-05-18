@@ -1,5 +1,6 @@
 "use client";
 import { Navbar, Button} from "@authdog/react-elements"
+import "@authdog/react-elements/styles.css";
 
 export default function Home() {
   return (
