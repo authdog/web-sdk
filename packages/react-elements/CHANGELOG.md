@@ -4,6 +4,12 @@
 
 ### Patch Changes
 
+- bffdb42: cleanup
+
+## 0.0.12
+
+### Patch Changes
+
 - a897a13: add navbar to remix app
 
 ## 0.0.11
