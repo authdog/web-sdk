@@ -7,7 +7,12 @@ export default defineConfig({
     "src/lib/*.ts"
   ], // Build all entry points
   format: ["esm", "cjs"],
-  dts: true,
+  dts: {
+    resolve: true,
+    entry: {
+      index: "src/index.ts",
+    },
+  },
   splitting: false,
   sourcemap: true,
   minify: true,
@@ -23,6 +28,7 @@ export default defineConfig({
     options.define = {
       'process.env.NODE_ENV': '"production"',
     };
+    options.resolveExtensions = ['.tsx', '.ts', '.jsx', '.js', '.json'];
   },
   onSuccess: "cp src/global.css dist/global.css && cp postcss.config.mjs dist/postcss.config.mjs && cp tailwind.config.ts dist/tailwind.config.ts"
 }); 
