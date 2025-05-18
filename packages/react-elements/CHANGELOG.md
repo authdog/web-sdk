@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.10
+
+### Patch Changes
+
+- 5e3fbd8: add postcss cli to generate css bundle to be used in consumer app
+
 ## 0.0.9
 
 ### Patch Changes

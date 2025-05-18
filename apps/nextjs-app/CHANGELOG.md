@@ -1,5 +1,13 @@
 # nextjs-app
 
+## 0.1.7
+
+### Patch Changes
+
+- 5e3fbd8: add postcss cli to generate css bundle to be used in consumer app
+- Updated dependencies [5e3fbd8]
+  - @authdog/react-elements@0.0.10
+
 ## 0.1.6
 
 ### Patch Changes
