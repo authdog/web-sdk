@@ -13,7 +13,7 @@ env:
   STORE_PATH: ~/.pnpm-store
   # ENVFILE_CONSOLE: apps/nextjs-app/.env
   SCOPE_VERCEL: david-barrats-projects-b894a911
-  PROJECT_VERCEL: authdog-react-elements
+  PROJECT_VERCEL: react-elements
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
