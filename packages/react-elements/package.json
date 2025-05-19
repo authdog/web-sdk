@@ -13,7 +13,8 @@
     "ladle:build": "ladle build"
   },
   "peerDependencies": {
-    "react": "catalog:react18"
+    "react": "catalog:react18",
+    "react-dom": "catalog:react18"
   },
   "devDependencies": {
     "@authdog/eslint-config": "workspace:*",
