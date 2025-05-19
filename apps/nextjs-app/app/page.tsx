@@ -27,7 +27,13 @@ export default function Home() {
             <Button size="sm">Get Started</Button>
           </Navbar>
 
-        <UserProfile />
+        <UserProfile
+          user={{
+            name: "Jaylon Dias",
+            email: "example@clerk.dev",
+            image: "/placeholder-user.jpg"
+          }}
+        />
 
       {/* <main className="flex-1 container px-4 py-12 md:px-6 md:py-24">
         <div className="text-center">
