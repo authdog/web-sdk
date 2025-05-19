@@ -17,6 +17,5 @@ export default defineConfig({
     optimizeDeps: {
       include: ['tailwindcss', 'postcss', 'autoprefixer'],
     },
-  },
-  import: ['./src/ladle.css'],
+  }
 }); 

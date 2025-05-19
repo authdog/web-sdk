@@ -1,4 +1,0 @@
-/* Ladle-specific styles */
-.ladle-main {
-  @apply min-h-screen bg-background text-foreground;
-} 
