@@ -16,8 +16,8 @@
     "@remix-run/react": "2.15.3",
     "@remix-run/serve": "2.15.3",
     "isbot": "^4.1.0",
-    "react": "18",
-    "react-dom": "18"
+    "react": "catalog:react19",
+    "react-dom": "catalog:react19"
   },
   "devDependencies": {
     "@remix-run/dev": "2.15.3",

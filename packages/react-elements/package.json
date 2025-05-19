@@ -13,15 +13,15 @@
     "ladle:build": "ladle build"
   },
   "peerDependencies": {
-    "react": "catalog:react18",
-    "react-dom": "catalog:react18"
+    "react": "catalog:react19",
+    "react-dom": "catalog:react19"
   },
   "devDependencies": {
     "@authdog/eslint-config": "workspace:*",
     "@authdog/typescript-config": "workspace:*",
     "@ladle/react": "^2.0.0",
     "@types/node": "catalog:",
-    "@types/react": "catalog:react18",
+    "@types/react": "catalog:react19",
     "@vitejs/plugin-react": "^4.4.1",
     "autoprefixer": "^10",
     "css-loader": "^6.8.1",

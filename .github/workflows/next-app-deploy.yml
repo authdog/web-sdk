@@ -63,10 +63,10 @@ jobs:
       - name: Update Next.js app dependencies
         run: |
           cd apps/nextjs-app
-          pnpm add @authdog/nextjs-app@latest @authdog/react-elements@latest react@18.3.0 react-dom@18.3.0
+          pnpm add @authdog/nextjs-app@latest @authdog/react-elements@latest
 
       - name: "Replace catalog: tags with latest versions"
-        run: node .github/scripts/replace-catalog.js
+        run: node .github/scripts/replace-catalog.js 'apps/nextjs-app/package.json'
 
       - name: Deploy to Vercel
         run: |

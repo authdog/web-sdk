@@ -67,6 +67,9 @@ jobs:
         run: |
           (cd apps/remix; pnpm add @authdog/remix-node@latest @authdog/react-elements@latest)
 
+      - name: "Replace catalog: tags with latest versions"
+        run: node .github/scripts/replace-catalog.js 'apps/remix/package.json'
+
       - name: Ship Remix demo
         run: |
           npx vercel deploy \
