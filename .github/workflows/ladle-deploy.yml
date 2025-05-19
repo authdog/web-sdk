@@ -57,11 +57,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # - name: Build workspace packages
-      #   run: make build
-
       - name: "Replace catalog: tags with latest versions"
-        run: node .github/scripts/replace-catalog.js
+        run: node .github/scripts/replace-catalog.js '../../packages/react-elements/package.json'
 
       - name: Deploy to Vercel
         run: |

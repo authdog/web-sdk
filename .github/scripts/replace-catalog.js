@@ -4,7 +4,8 @@ const { execSync } = require('child_process');
 const path = require('path');
 const yaml = require('js-yaml');
 
-const pkgPath = path.join(__dirname, '../../apps/nextjs-app/package.json');
+const defaultPkgPath = path.join(__dirname, '../../apps/nextjs-app/package.json');
+const pkgPath = process.argv[2] || defaultPkgPath;
 const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
 const workspaceYamlPath = path.join(__dirname, '../../pnpm-workspace.yaml');
 const workspaceYaml = yaml.load(fs.readFileSync(workspaceYamlPath, 'utf8'));
