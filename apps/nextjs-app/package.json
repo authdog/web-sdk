@@ -13,7 +13,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.509.0",
-    "next": "14.2.8",
+    "next": "15.3.2",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
     "tailwind-merge": "^2.3.0"
@@ -21,7 +21,7 @@
   "devDependencies": {
     "@authdog/eslint-config": "workspace:*",
     "@authdog/typescript-config": "workspace:*",
-    "@next/eslint-plugin-next": "14.2.8",
+    "@next/eslint-plugin-next": "15.3.2",
     "@types/eslint": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:react19",
