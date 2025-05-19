@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.15
+
+### Patch Changes
+
+- 056c6b4: rollback dependencies react
+
 ## 0.0.14
 
 ### Patch Changes

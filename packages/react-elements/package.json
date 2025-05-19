@@ -1,6 +1,6 @@
 {
   "name": "@authdog/react-elements",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
@@ -13,8 +13,8 @@
     "ladle:build": "ladle build"
   },
   "peerDependencies": {
-   "react": "catalog:react18",
-   "react-dom": "catalog:react18"
+    "react": "catalog:react18",
+    "react-dom": "catalog:react18"
   },
   "devDependencies": {
     "@authdog/eslint-config": "workspace:*",
