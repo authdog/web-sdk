@@ -1,0 +1,76 @@
+name: ladle-deploy
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - apps/nextjs-app/**
+  #     - .github/workflows/cd-next-app-deploy.yml
+
+env:
+  STORE_PATH: ~/.pnpm-store
+  # ENVFILE_CONSOLE: apps/nextjs-app/.env
+  SCOPE_VERCEL: david-barrats-projects-b894a911
+  PROJECT_VERCEL: authdog-react-elements
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          show-progress: false
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - name: Set PNPM store path
+        run: pnpm config set store-dir ${{ env.STORE_PATH }}
+
+      - name: Cache PNPM store
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-cache-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-cache-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # - name: Build workspace packages
+      #   run: make build
+
+      # - name: "Replace catalog: tags with latest versions"
+      #   run: node .github/scripts/replace-catalog.js
+
+      - name: Deploy to Vercel
+        run: |
+          pnpx vercel deploy \
+            --cwd packages/react-elements \
+            --token ${{ secrets.VERCEL_CD_TOKEN }} \
+            --scope ${{ env.SCOPE_VERCEL }} \
+            --name ${{ env.PROJECT_VERCEL }} \
+            --force \
+            --yes \
+            --prod \
+            --build-env NODE_PATH=$PWD/node_modules
