@@ -6,7 +6,6 @@ const config = {
     tailwindcss: {},
     autoprefixer: {},
   },
-  from: './src/ladle.css',
 };
 
 export default config;
