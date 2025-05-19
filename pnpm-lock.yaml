@@ -62,7 +62,7 @@ importers:
         version: 4.1.0
       postcss-loader:
         specifier: ^8.1.1
-        version: 8.1.1(postcss@8.5.1)(typescript@5.7.3)(webpack@5.99.8(@swc/core@1.11.24))
+        version: 8.1.1(postcss@8.5.1)(typescript@5.7.3)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.24.2))
       prettier:
         specifier: 'catalog:'
         version: 3.4.2
@@ -306,6 +306,12 @@ importers:
       '@radix-ui/react-dropdown-menu':
         specifier: ^2.1.14
         version: 2.1.14(@types/react-dom@19.1.5(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@radix-ui/react-label':
+        specifier: ^2.1.6
+        version: 2.1.6(@types/react-dom@19.1.5(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@radix-ui/react-separator':
+        specifier: ^1.1.6
+        version: 1.1.6(@types/react-dom@19.1.5(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@radix-ui/react-slot':
         specifier: ^1.2.2
         version: 1.2.2(@types/react@19.1.0)(react@19.1.0)
@@ -354,7 +360,7 @@ importers:
         version: 10.4.20(postcss@8.5.1)
       css-loader:
         specifier: ^6.8.1
-        version: 6.11.0(webpack@5.99.8(@swc/core@1.11.24))
+        version: 6.11.0(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.24.2))
       postcss:
         specifier: ^8
         version: 8.5.1
@@ -369,19 +375,19 @@ importers:
         version: 6.0.1(jiti@2.4.2)(postcss@8.5.1)(yaml@2.7.0)
       style-loader:
         specifier: ^3.3.3
-        version: 3.3.4(webpack@5.99.8(@swc/core@1.11.24))
+        version: 3.3.4(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.24.2))
       tailwindcss:
         specifier: 'catalog:'
         version: 3.4.17(ts-node@10.9.2(@swc/core@1.11.24)(@types/node@20.17.46)(typescript@5.8.3))
       ts-loader:
         specifier: ^9.5.1
-        version: 9.5.2(typescript@5.8.3)(webpack@5.99.8(@swc/core@1.11.24))
+        version: 9.5.2(typescript@5.8.3)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.24.2))
       typescript:
         specifier: 'catalog:'
         version: 5.8.3
       webpack:
         specifier: ^5.89.0
-        version: 5.99.8(@swc/core@1.11.24)
+        version: 5.99.8(@swc/core@1.11.24)(esbuild@0.24.2)
 
   packages/remix:
     dependencies:
@@ -2114,6 +2120,19 @@ packages:
       '@types/react':
         optional: true
 
+  '@radix-ui/react-label@2.1.6':
+    resolution: {integrity: sha512-S/hv1mTlgcPX2gCTJrWuTjSXf7ER3Zf7zWGtOprxhIIY93Qin3n5VgNA0Ez9AgrK/lEtlYgzLd4f5x6AVar4Yw==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+
   '@radix-ui/react-menu@2.1.14':
     resolution: {integrity: sha512-0zSiBAIFq9GSKoSH5PdEaQeRB3RnEGxC+H2P0egtnKoKKLNBH8VBHyVO6/jskhjAezhOIplyRUj7U2lds9A+Yg==}
     peerDependencies:
@@ -2181,6 +2200,19 @@ packages:
 
   '@radix-ui/react-roving-focus@1.1.9':
     resolution: {integrity: sha512-ZzrIFnMYHHCNqSNCsuN6l7wlewBEq0O0BCSBkabJMFXVO51LRUTq71gLP1UxFvmrXElqmPjA5VX7IqC9VpazAQ==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+
+  '@radix-ui/react-separator@1.1.6':
+    resolution: {integrity: sha512-Izof3lPpbCfTM7WDta+LRkz31jem890VjEvpVRoWQNKpDUMMVffuyq854XPGP1KYGWWmjmYvHvPFeocWhFCy1w==}
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
@@ -8777,6 +8809,15 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.1.0
 
+  '@radix-ui/react-label@2.1.6(@types/react-dom@19.1.5(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@radix-ui/react-primitive': 2.1.2(@types/react-dom@19.1.5(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+    optionalDependencies:
+      '@types/react': 19.1.0
+      '@types/react-dom': 19.1.5(@types/react@19.1.0)
+
   '@radix-ui/react-menu@2.1.14(@types/react-dom@19.1.5(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@radix-ui/primitive': 1.1.2
@@ -8861,6 +8902,15 @@ snapshots:
       '@radix-ui/react-primitive': 2.1.2(@types/react-dom@19.1.5(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@radix-ui/react-use-callback-ref': 1.1.1(@types/react@19.1.0)(react@19.1.0)
       '@radix-ui/react-use-controllable-state': 1.2.2(@types/react@19.1.0)(react@19.1.0)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+    optionalDependencies:
+      '@types/react': 19.1.0
+      '@types/react-dom': 19.1.5(@types/react@19.1.0)
+
+  '@radix-ui/react-separator@1.1.6(@types/react-dom@19.1.5(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@radix-ui/react-primitive': 2.1.2(@types/react-dom@19.1.5(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
     optionalDependencies:
@@ -9753,14 +9803,6 @@ snapshots:
     optionalDependencies:
       vite: 5.4.12(@types/node@22.10.7)(lightningcss@1.29.2)(terser@5.39.2)
 
-  '@vitest/mocker@2.1.8(vite@5.4.12(@types/node@22.14.1)(lightningcss@1.29.2)(terser@5.39.2))':
-    dependencies:
-      '@vitest/spy': 2.1.8
-      estree-walker: 3.0.3
-      magic-string: 0.30.17
-    optionalDependencies:
-      vite: 5.4.12(@types/node@22.14.1)(lightningcss@1.29.2)(terser@5.39.2)
-
   '@vitest/pretty-format@2.1.8':
     dependencies:
       tinyrainbow: 1.2.0
@@ -10410,7 +10452,7 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
-  css-loader@6.11.0(webpack@5.99.8(@swc/core@1.11.24)):
+  css-loader@6.11.0(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.24.2)):
     dependencies:
       icss-utils: 5.1.0(postcss@8.5.1)
       postcss: 8.5.1
@@ -10421,7 +10463,7 @@ snapshots:
       postcss-value-parser: 4.2.0
       semver: 7.7.1
     optionalDependencies:
-      webpack: 5.99.8(@swc/core@1.11.24)
+      webpack: 5.99.8(@swc/core@1.11.24)(esbuild@0.24.2)
 
   css-what@6.1.0: {}
 
@@ -13099,14 +13141,14 @@ snapshots:
       postcss: 8.5.1
       yaml: 2.7.0
 
-  postcss-loader@8.1.1(postcss@8.5.1)(typescript@5.7.3)(webpack@5.99.8(@swc/core@1.11.24)):
+  postcss-loader@8.1.1(postcss@8.5.1)(typescript@5.7.3)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.24.2)):
     dependencies:
       cosmiconfig: 9.0.0(typescript@5.7.3)
       jiti: 1.21.7
       postcss: 8.5.1
       semver: 7.6.3
     optionalDependencies:
-      webpack: 5.99.8(@swc/core@1.11.24)
+      webpack: 5.99.8(@swc/core@1.11.24)(esbuild@0.24.2)
     transitivePeerDependencies:
       - typescript
 
@@ -13877,9 +13919,9 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  style-loader@3.3.4(webpack@5.99.8(@swc/core@1.11.24)):
+  style-loader@3.3.4(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.24.2)):
     dependencies:
-      webpack: 5.99.8(@swc/core@1.11.24)
+      webpack: 5.99.8(@swc/core@1.11.24)(esbuild@0.24.2)
 
   style-to-object@0.4.4:
     dependencies:
@@ -14012,16 +14054,17 @@ snapshots:
 
   term-size@2.2.1: {}
 
-  terser-webpack-plugin@5.3.14(@swc/core@1.11.24)(webpack@5.99.8(@swc/core@1.11.24)):
+  terser-webpack-plugin@5.3.14(@swc/core@1.11.24)(esbuild@0.24.2)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.24.2)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
       schema-utils: 4.3.2
       serialize-javascript: 6.0.2
       terser: 5.39.2
-      webpack: 5.99.8(@swc/core@1.11.24)
+      webpack: 5.99.8(@swc/core@1.11.24)(esbuild@0.24.2)
     optionalDependencies:
       '@swc/core': 1.11.24
+      esbuild: 0.24.2
 
   terser@5.39.2:
     dependencies:
@@ -14103,7 +14146,7 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  ts-loader@9.5.2(typescript@5.8.3)(webpack@5.99.8(@swc/core@1.11.24)):
+  ts-loader@9.5.2(typescript@5.8.3)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.24.2)):
     dependencies:
       chalk: 4.1.2
       enhanced-resolve: 5.18.1
@@ -14111,7 +14154,7 @@ snapshots:
       semver: 7.7.1
       source-map: 0.7.4
       typescript: 5.8.3
-      webpack: 5.99.8(@swc/core@1.11.24)
+      webpack: 5.99.8(@swc/core@1.11.24)(esbuild@0.24.2)
 
   ts-morph@12.0.0:
     dependencies:
@@ -14666,7 +14709,7 @@ snapshots:
   vitest@2.1.8(@edge-runtime/vm@3.2.0)(@types/node@22.14.1)(lightningcss@1.29.2)(terser@5.39.2):
     dependencies:
       '@vitest/expect': 2.1.8
-      '@vitest/mocker': 2.1.8(vite@5.4.12(@types/node@22.14.1)(lightningcss@1.29.2)(terser@5.39.2))
+      '@vitest/mocker': 2.1.8(vite@5.4.12(@types/node@22.10.7)(lightningcss@1.29.2)(terser@5.39.2))
       '@vitest/pretty-format': 2.1.8
       '@vitest/runner': 2.1.8
       '@vitest/snapshot': 2.1.8
@@ -14726,7 +14769,7 @@ snapshots:
 
   webpack-sources@3.2.3: {}
 
-  webpack@5.99.8(@swc/core@1.11.24):
+  webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.24.2):
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.6
@@ -14749,7 +14792,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 4.3.2
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.14(@swc/core@1.11.24)(webpack@5.99.8(@swc/core@1.11.24))
+      terser-webpack-plugin: 5.3.14(@swc/core@1.11.24)(esbuild@0.24.2)(webpack@5.99.8(@swc/core@1.11.24)(esbuild@0.24.2))
       watchpack: 2.4.2
       webpack-sources: 3.2.3
     transitivePeerDependencies:
