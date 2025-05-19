@@ -1,4 +1,4 @@
-name: cd-packages-publish
+name: packages-publish
 
 on:
   push:

@@ -2,8 +2,8 @@
 
 Authdog web SDK is curated set of libraries aiming to accelerate identity integration into supported frameworks, apps.
 
-[![cd-packages-publish](https://github.com/authdog-labs/web-sdk/actions/workflows/cd-packages-publish.yml/badge.svg)](https://github.com/authdog-labs/web-sdk/actions/workflows/cd-packages-publish.yml)
-[![cd-next-app-deploy](https://github.com/authdog-labs/web-sdk/actions/workflows/cd-next-app-deploy.yml/badge.svg)](https://github.com/authdog-labs/web-sdk/actions/workflows/cd-next-app-deploy.yml)
+[![packages-publish](https://github.com/authdog-labs/web-sdk/actions/workflows/packages-publish.yml/badge.svg)](https://github.com/authdog-labs/web-sdk/actions/workflows/packages-publish.yml)
+[![next-app-deploy](https://github.com/authdog-labs/web-sdk/actions/workflows/next-app-deploy.yml/badge.svg)](https://github.com/authdog-labs/web-sdk/actions/workflows/next-app-deploy.yml)
 
 ## Integrations
 

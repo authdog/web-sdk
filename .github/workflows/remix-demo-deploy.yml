@@ -1,4 +1,4 @@
-name: cd-remix-demo-deploy
+name: remix-demo-deploy
 
 on:
   # push:

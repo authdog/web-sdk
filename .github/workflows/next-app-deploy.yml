@@ -1,4 +1,4 @@
-name: cd-next-app-deploy
+name: next-app-deploy
 
 on:
   workflow_dispatch:
