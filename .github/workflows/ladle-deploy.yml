@@ -60,8 +60,8 @@ jobs:
       # - name: Build workspace packages
       #   run: make build
 
-      # - name: "Replace catalog: tags with latest versions"
-      #   run: node .github/scripts/replace-catalog.js
+      - name: "Replace catalog: tags with latest versions"
+        run: node .github/scripts/replace-catalog.js
 
       - name: Deploy to Vercel
         run: |
