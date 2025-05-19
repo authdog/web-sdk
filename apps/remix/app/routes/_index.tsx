@@ -8,6 +8,7 @@ import { useLoaderData } from "@remix-run/react";
 import { remixAuthLoader } from "@authdog/remix-node";
 import React from "react";
 import styles from "@authdog/react-elements/styles.css?url";
+import { UserProfile } from "@authdog/react-elements";
 
 // Metadata function
 export const meta: MetaFunction = () => {
@@ -74,6 +75,13 @@ export default function Index() {
             image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
           }}
           onLogout={() => console.log("Logging out...")}
+        />
+        <UserProfile
+          user={{
+            name: "Jaylon Dias",
+            email: "example@clerk.dev",
+            image: "/placeholder-user.jpg"
+          }}
         />
       </React.Suspense>
       {/* <div className="flex h-screen items-center justify-center">
