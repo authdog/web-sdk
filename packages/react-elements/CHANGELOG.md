@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.16
+
+### Patch Changes
+
+- 6a9cb4f: cleanup navbar, handle router action via props
+
 ## 0.0.15
 
 ### Patch Changes
