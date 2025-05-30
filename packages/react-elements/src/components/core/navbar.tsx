@@ -35,7 +35,9 @@ interface NavbarProps {
     email?: string
     image?: string
   }
-  onLogout?: () => void
+  onNavItemClick?: (href: string) => void;
+  onProfileSelected?: () => void;
+  onLogout?: () => void;
 }
 
 export function Navbar({
@@ -51,8 +53,10 @@ export function Navbar({
   user = {
     name: "John Doe",
     email: "john@example.com",
-    image: "/placeholder.svg?height=32&width=32",
+    image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
   },
+  onNavItemClick = (href: string) => console.log(`Navigating to ${href}`),
+  onProfileSelected,
   onLogout = () => console.log("Logout clicked"),
 }: NavbarProps) {
   const [open, setOpen] = useState(false)
@@ -79,16 +83,21 @@ export function Navbar({
           <span className="text-xl font-bold">{logoText}</span>
           <nav className="hidden md:flex gap-6">
             {items?.map((item, index) => (
-              <a
+              <span
                 key={index}
-                href={item.href}
+                // href={item.href}
+                onClick={() => {
+                  if (!item.disabled) {
+                    onNavItemClick(item.href)
+                  }
+                }}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary",
+                  "text-sm font-medium transition-colors hover:text-primary cursor-pointer",
                   item.disabled && "cursor-not-allowed opacity-80"
                 )}
               >
                 {item.title}
-              </a>
+              </span>
             ))}
           </nav>
         </div>
@@ -112,7 +121,7 @@ export function Navbar({
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={onProfileSelected}>
                   {renderIcon(User)}
                   <span>Profile</span>
                 </DropdownMenuItem>

@@ -6,8 +6,8 @@ export const Default: Story = () => (
   <UserProfile
     user={{
       name: "Jaylon Dias",
-      email: "example@clerk.dev",
-      image: "/placeholder-user.jpg"
+      email: "example@authdog.xyz",
+      image: "https://i.pravatar.cc/150?u=a042581f4e29026704d"
     }}
   />
 );
@@ -18,7 +18,7 @@ export const WithCustomUser: Story = () => (
     user={{
       name: "Jane Smith",
       email: "jane@example.com",
-      image: "/placeholder-user.jpg"
+      image: "https://i.pravatar.cc/150?u=a042581f4e29026704d"
     }}
   />
 );
@@ -29,7 +29,7 @@ export const WithMultipleEmails: Story = () => (
     user={{
       name: "John Doe",
       email: "john@example.com",
-      image: "/placeholder-user.jpg"
+      image: "https://i.pravatar.cc/150?u=a042581f4e29026704d"
     }}
     emails={[
       { address: "john@example.com", isPrimary: true },
@@ -45,7 +45,7 @@ export const WithConnectedAccounts: Story = () => (
     user={{
       name: "Alex Johnson",
       email: "alex@example.com",
-      image: "/placeholder-user.jpg"
+      image: ""
     }}
     connectedAccounts={[
       { provider: "Google", email: "alex@gmail.com" },

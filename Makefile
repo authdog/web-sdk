@@ -1,12 +1,12 @@
 .PHONY: dev_next
 dev_next:
 	pnpm turbo dev \
-	    --filter=@playground/nextjs
+	    --filter=@authdog-samples/nextjs-app
 
 .PHONY: ship_next_demo
 ship_next_demo:
 	pnpm turbo ship-demo \
-	    --filter=@playground/nextjs
+	    --filter=@authdog-samples/nextjs-app
 	
 .PHONY: dev_remix
 dev_remix:
@@ -22,7 +22,8 @@ format:
 .PHONY: build
 build:
 	pnpm turbo build \
-	    --filter=@authdog*
+	    --filter=@authdog* \
+		--filter=!@authdog-samples/*
 
 .PHONY: yalc
 yalc:

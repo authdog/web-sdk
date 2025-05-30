@@ -79,8 +79,8 @@ export default function Index() {
         <UserProfile
           user={{
             name: "Jaylon Dias",
-            email: "example@clerk.dev",
-            image: "/placeholder-user.jpg"
+            email: "example@authdog.dev",
+            image: "https://i.pravatar.cc/150?u=a042581f4e29026704d"
           }}
         />
       </React.Suspense>
