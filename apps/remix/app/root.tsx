@@ -10,7 +10,9 @@ import {
 import type { LinksFunction, ActionFunction, LoaderFunction } from "@remix-run/node";
 import { ReloadPage } from "~/components/ReloadPage";
 import { remixAuthLoader } from "@authdog/remix-node";
+import { Layout } from "~/components/Layout";
 import React from "react";
+import styles from "@authdog/react-elements/styles.css?url";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -23,31 +25,10 @@ export const links: LinksFunction = () => [
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
+  { rel: "stylesheet", href: styles },
 ];
 
 export function AuthdogProvider({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
-}
-
-// Create a client-only component for the Navbar
-const ClientNavbar = React.lazy(() => 
-  import("@authdog/react-elements").then(mod => ({ 
-    default: mod.Navbar 
-  }))
-);
-
-// Create a client-only wrapper component
-function ClientOnly({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
-
   return <>{children}</>;
 }
 
@@ -121,25 +102,9 @@ export default function App() {
       </head>
       <body>
         <AuthdogProvider>
-          {/* <ClientOnly> */}
-            {/* {isAuthenticated ? (
-              <form method="post">
-                <button type="submit" className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-                  Logout
-                </button>
-              </form>
-            ) : (
-              <button 
-                className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-                onClick={() => {
-                  location.href = signinUri;
-                }}
-              >
-                Sign in
-              </button>
-            )} */}
-          {/* </ClientOnly> */}
-          <Outlet />
+          <Layout>
+            <Outlet />
+          </Layout>
           <ScrollRestoration />
           <Scripts />
           <ReloadPage />

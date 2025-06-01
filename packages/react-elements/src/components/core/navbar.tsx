@@ -35,6 +35,7 @@ interface NavbarProps {
     email?: string
     image?: string
   }
+  onNavigateHome?: () => void;
   onNavItemClick?: (href: string) => void;
   onProfileSelected?: () => void;
   onLogout?: () => void;
@@ -55,6 +56,7 @@ export function Navbar({
     email: "john@example.com",
     image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
   },
+  onNavigateHome = () => console.log("Navigating to home"),
   onNavItemClick = (href: string) => console.log(`Navigating to ${href}`),
   onProfileSelected,
   onLogout = () => console.log("Logout clicked"),
@@ -80,7 +82,7 @@ export function Navbar({
     <header className={cn("border-b bg-background", className)}>
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <div className="flex items-center gap-4">
-          <span className="text-xl font-bold">{logoText}</span>
+          <span className="text-xl font-bold cursor-pointer" onClick={onNavigateHome}>{logoText}</span>
           <nav className="hidden md:flex gap-6">
             {items?.map((item, index) => (
               <span

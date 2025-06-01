@@ -35,6 +35,7 @@ export default function RootLayout({
                 email: "sarah@acme.com",
                 image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
               }}
+              onNavigateHome={() => router.push("/")}
               onNavItemClick={(href) => router.push(href)}
               onProfileSelected={() => router.push("/profile")}
               onLogout={() => console.log("Logging out...")}
