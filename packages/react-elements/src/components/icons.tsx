@@ -1,5 +1,4 @@
 import { LucideProps } from "lucide-react"
-import { useCallback } from "react"
 
 const iconProps: LucideProps = {
   className: "mr-2 h-4 w-4",
@@ -7,6 +6,8 @@ const iconProps: LucideProps = {
 }
 
 export const renderIcon = ((Icon: any) => {
+  const isMounted = typeof window !== 'undefined'
+  if (!isMounted) return null;
   return <Icon {...iconProps} />
 }) as React.FC<{
   Icon: any

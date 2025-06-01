@@ -28,9 +28,11 @@ export default function Index() {
   const data = useLoaderData<typeof loader>();
   
   return (
+    <div className="max-w-4xl mx-auto text-center flex flex-col items-center justify-center min-h-screen">
      <PlaceholderAlert
         title="Welcome to Authdog remix demo"
         description="This application demonstrates how to use Authdog with Remix.js. You can explore the features and functionalities provided by Authdog for authentication and user management."
       />
+    </div>
   );
 }
