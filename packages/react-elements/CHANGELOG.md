@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.17
+
+### Patch Changes
+
+- 9ec3af6: adding basic navigation home onto navbar
+
 ## 0.0.16
 
 ### Patch Changes
