@@ -1,9 +1,9 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { User, Settings, LogOut, Menu } from "lucide-react"
-import type { LucideProps } from "lucide-react"
+// import type { LucideProps } from "lucide-react"
 
 import { cn } from "../../lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar"
@@ -18,6 +18,7 @@ import {
   DropdownMenuTrigger,
 } from "../../components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "../../components/ui/sheet"
+import { IconWrapper } from "../icons"
 
 interface NavItem {
   title: string
@@ -62,21 +63,21 @@ export function Navbar({
   onLogout = () => console.log("Logout clicked"),
 }: NavbarProps) {
   const [open, setOpen] = useState(false)
-  const [isMounted, setIsMounted] = useState(false)
+  // const [isMounted, setIsMounted] = useState(false)
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
+  // useEffect(() => {
+  //   setIsMounted(true)
+  // }, [])
 
-  const iconProps: LucideProps = {
-    className: "mr-2 h-4 w-4",
-    "aria-hidden": "true"
-  }
+  // const iconProps: LucideProps = {
+  //   className: "mr-2 h-4 w-4",
+  //   "aria-hidden": "true"
+  // }
 
-  const renderIcon = (Icon: any) => {
-    if (!isMounted) return null
-    return <Icon {...iconProps} />
-  }
+  // const renderIcon = (Icon: any) => {
+  //   if (!isMounted) return null
+  //   return <Icon {...iconProps} />
+  // }
 
   return (
     <header className={cn("border-b bg-background", className)}>
@@ -124,17 +125,20 @@ export function Navbar({
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
                 <DropdownMenuItem onClick={onProfileSelected}>
-                  {renderIcon(User)}
+                  {/* {renderIcon(User)} */}
+                  <IconWrapper Icon={User} />
                   <span>Profile</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  {renderIcon(Settings)}
+                  {/* {renderIcon(Settings)} */}
+                  <IconWrapper Icon={Settings} />
                   <span>Settings</span>
                 </DropdownMenuItem>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={onLogout}>
-                {renderIcon(LogOut)}
+                {/* {renderIcon(LogOut)} */}
+                <IconWrapper Icon={LogOut} />
                 <span>Log out</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -142,7 +146,8 @@ export function Navbar({
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden" aria-label="Open Menu">
-                {renderIcon(Menu)}
+                {/* {renderIcon(Menu)} */}
+                <IconWrapper Icon={Menu} />
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="pr-0">
