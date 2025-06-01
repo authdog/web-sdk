@@ -50,7 +50,7 @@ export function Navbar({
   ],
   children,
   className,
-  logoText = "Company",
+  logoText = "ACME Corp",
   user = {
     name: "John Doe",
     email: "john@example.com",
