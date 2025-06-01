@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.20
+
+### Patch Changes
+
+- 9abef65: fix hydration
+
 ## 0.0.19
 
 ### Patch Changes
