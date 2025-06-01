@@ -4,7 +4,7 @@ import {
 } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { remixAuthLoader } from "@authdog/remix-node";
-import React from "react";
+import { PlaceholderAlert } from "@authdog/react-elements";
 
 // Metadata function
 export const meta: MetaFunction = () => {
@@ -28,8 +28,9 @@ export default function Index() {
   const data = useLoaderData<typeof loader>();
   
   return (
-    <div className="flex h-screen items-center justify-center">
-      <h1 className="text-4xl font-bold">Welcome to Authdog Remix Demo</h1>
-    </div>
+     <PlaceholderAlert
+        title="Welcome to Authdog remix demo"
+        description="This application demonstrates how to use Authdog with Remix.js. You can explore the features and functionalities provided by Authdog for authentication and user management."
+      />
   );
 }
