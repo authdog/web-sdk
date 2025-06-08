@@ -23,11 +23,7 @@ export const LoginForm = () => {
     setError("")
 
     try {
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000))
-
-      // Redirect after successful login
-      // router.push('/dashboard')
     } catch (err) {
       setError("Invalid email or password")
     } finally {
