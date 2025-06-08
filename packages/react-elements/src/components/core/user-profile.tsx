@@ -224,7 +224,7 @@ export const UserProfile = ({
         )}
       </div>
 
-      <div className="absolute bottom-4 text-xs text-gray-500 flex items-center">
+      {/* <div className="absolute bottom-4 text-xs text-gray-500 flex items-center">
         Secured by
         <span className="ml-1 font-medium flex items-center">
           <svg
@@ -239,7 +239,7 @@ export const UserProfile = ({
           </svg>
           Authdog
         </span>
-      </div>
+      </div> */}
     </div>
   )
 }

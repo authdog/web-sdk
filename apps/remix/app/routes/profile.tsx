@@ -51,7 +51,6 @@ export default function Profile() {
   
   return (
     <div className="max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8">Profile Settings</h1>
       <ClientOnly>
         <React.Suspense fallback={<div>Loading profile...</div>}>
           <ClientUserProfile

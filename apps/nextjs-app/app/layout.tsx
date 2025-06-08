@@ -27,9 +27,9 @@ export default function RootLayout({
           <div className="min-h-screen flex flex-col">
             <Navbar
               logoText="Acme Inc"
-              items={[
-                { title: "Home", href: "/" },
-              ]}
+              // items={[
+              //   { title: "Home", href: "/" },
+              // ]}
               user={{
                 name: "Sarah Johnson",
                 email: "sarah@acme.com",

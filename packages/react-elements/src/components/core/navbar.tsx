@@ -129,11 +129,11 @@ export function Navbar({
                   <IconWrapper Icon={User} />
                   <span>Profile</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  {/* {renderIcon(Settings)} */}
+                 {/* <DropdownMenuItem>
                   <IconWrapper Icon={Settings} />
                   <span>Settings</span>
                 </DropdownMenuItem>
+                */}
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={onLogout}>
