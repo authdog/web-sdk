@@ -50,7 +50,7 @@ export default function Profile() {
   const data = useLoaderData<typeof loader>();
   
   return (
-    <div className="max-w-4xl mx-auto">
+    <>
       <ClientOnly>
         <React.Suspense fallback={<div>Loading profile...</div>}>
           <ClientUserProfile
@@ -62,6 +62,6 @@ export default function Profile() {
           />
         </React.Suspense>
       </ClientOnly>
-    </div>
+    </>
   );
 }
