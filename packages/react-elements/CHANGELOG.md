@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.21
+
+### Patch Changes
+
+- 8283049: cleanup default options react-elements
+
 ## 0.0.20
 
 ### Patch Changes
