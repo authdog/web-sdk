@@ -25,6 +25,7 @@ export default function RootLayout({
               // items={[
               //   { title: "Home", href: "/" },
               // ]}
+              items={[]}
               user={{
                 name: "Sarah Johnson",
                 email: "sarah@acme.com",
@@ -35,10 +36,10 @@ export default function RootLayout({
               onProfileSelected={() => router.push("/profile")}
               onLogout={() => console.log("Logging out...")}
             >
-              <Button variant="ghost" size="sm">
+              {/* <Button variant="ghost" size="sm">
                 Docs
               </Button>
-              <Button size="sm">Get Started</Button>
+              <Button size="sm">Get Started</Button> */}
             </Navbar>
             <main className="flex-1">
               {children}
