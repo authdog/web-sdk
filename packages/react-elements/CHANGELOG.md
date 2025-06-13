@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.22
+
+### Patch Changes
+
+- 5f63070: fix hydration icons
+
 ## 0.0.21
 
 ### Patch Changes
