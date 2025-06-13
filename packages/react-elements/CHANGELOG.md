@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.23
+
+### Patch Changes
+
+- ad71221: fix authentication nextjs sample
+
 ## 0.0.22
 
 ### Patch Changes
