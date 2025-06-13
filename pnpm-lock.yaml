@@ -94,6 +94,9 @@ importers:
 
   apps/nextjs-app:
     dependencies:
+      '@authdog/nextjs-app':
+        specifier: workspace:*
+        version: link:../../packages/nextjs-app
       '@authdog/react-elements':
         specifier: workspace:*
         version: link:../../packages/react-elements

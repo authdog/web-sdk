@@ -1,50 +1,44 @@
-"use client";
-
-// import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { JSX } from "react";
 import "@authdog/react-elements/styles.css";
-import { Button, Navbar } from "@authdog/react-elements";
-import { useRouter } from "next/navigation";
 
-const inter = Inter({ subsets: ["latin"] });
+import type { Metadata } from "next";
+import "./globals.css";
+import { AuthdogProvider } from "@authdog/nextjs-app/client";
+import { ClientNavbar } from "./components/ClientNavbar";
+import { Suspense } from "react";
+// import { useRouter } from "next/navigation";
+
+
+// const geistSans = localFont({
+//   src: "./fonts/GeistVF.woff",
+//   variable: "--font-geist-sans",
+// });
+// const geistMono = localFont({
+//   src: "./fonts/GeistMonoVF.woff",
+//   variable: "--font-geist-mono",
+// });
+
+export const metadata: Metadata = {
+  title: "Authdog - Demo next",
+  description: "kindly hosted on Vercel",
+};
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}): JSX.Element {
-      const router = useRouter();
-
+}>) {
+  // const router = useRouter();
   return (
     <html lang="en">
-        <body className={inter.className}>
-          <div className="min-h-screen flex flex-col">
-            <Navbar
-              logoText="Acme Inc"
-              // items={[
-              //   { title: "Home", href: "/" },
-              // ]}
-              items={[]}
-              user={{
-                name: "Sarah Johnson",
-                email: "sarah@acme.com",
-                image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-              }}
-              onNavigateHome={() => router.push("/")}
-              onNavItemClick={(href) => router.push(href)}
-              onProfileSelected={() => router.push("/profile")}
-              onLogout={() => console.log("Logging out...")}
-            >
-              {/* <Button variant="ghost" size="sm">
-                Docs
-              </Button>
-              <Button size="sm">Get Started</Button> */}
-            </Navbar>
-            <main className="flex-1">
-              {children}
-            </main>
-          </div>
+      <body>
+        <AuthdogProvider>
+          <Suspense fallback={<div>Loading...</div>}>
+            <ClientNavbar />
+          </Suspense>
+          <main className="flex-1">
+            {children}
+          </main>
+        </AuthdogProvider>
       </body>
     </html>
   );

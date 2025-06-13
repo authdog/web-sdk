@@ -7,9 +7,10 @@ interface PlaceholderAlertProps {
   description?: string;
 }
 
-export const PlaceholderAlert = (
-    { title = "Placeholder Alert", description = "This is a placeholder alert." }: PlaceholderAlertProps
-) => {
+export const PlaceholderAlert = (props: PlaceholderAlertProps) => {
+  const title = props.title ?? "Placeholder Alert";
+  const description = props.description ?? "This is a placeholder alert.";
+
   return (      
     <div className="grid w-full max-w-xl items-start gap-4">
       <Alert>
@@ -19,7 +20,6 @@ export const PlaceholderAlert = (
             {description}
         </AlertDescription>
       </Alert>
-
     </div>
   )
 }
