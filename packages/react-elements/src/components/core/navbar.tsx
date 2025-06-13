@@ -31,6 +31,7 @@ interface NavbarProps {
   children?: React.ReactNode
   className?: string
   logoText?: string
+  isLoading?: boolean
   user?: {
     name?: string
     email?: string
@@ -61,23 +62,10 @@ export function Navbar({
   onNavItemClick = (href: string) => console.log(`Navigating to ${href}`),
   onProfileSelected,
   onLogout = () => console.log("Logout clicked"),
+  isLoading = false
 }: NavbarProps) {
   const [open, setOpen] = useState(false)
-  // const [isMounted, setIsMounted] = useState(false)
-
-  // useEffect(() => {
-  //   setIsMounted(true)
-  // }, [])
-
-  // const iconProps: LucideProps = {
-  //   className: "mr-2 h-4 w-4",
-  //   "aria-hidden": "true"
-  // }
-
-  // const renderIcon = (Icon: any) => {
-  //   if (!isMounted) return null
-  //   return <Icon {...iconProps} />
-  // }
+  const [loading, setLoading] = useState(isLoading ?? false)
 
   return (
     <header className={cn("border-b bg-background", className)}>
@@ -106,47 +94,61 @@ export function Navbar({
         </div>
         <div className="flex items-center gap-4">
           {children}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                <Avatar className="h-8 w-8">
-                  <AvatarImage src={user.image || "/placeholder.svg"} alt={user.name} />
-                  <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
-                </Avatar>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="end" forceMount>
-              <DropdownMenuLabel className="font-normal">
-                <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">{user.name}</p>
-                  <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
-                </div>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuGroup>
-                <DropdownMenuItem onClick={onProfileSelected}>
-                  {/* {renderIcon(User)} */}
-                  <IconWrapper Icon={User} />
-                  <span>Profile</span>
-                </DropdownMenuItem>
-                 {/* <DropdownMenuItem>
-                  <IconWrapper Icon={Settings} />
-                  <span>Settings</span>
-                </DropdownMenuItem>
-                */}
-              </DropdownMenuGroup>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={onLogout}>
-                {/* {renderIcon(LogOut)} */}
-                <IconWrapper Icon={LogOut} />
-                <span>Log out</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+
+
+          {
+            user?.name && (
+              <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="relative h-8 w-8 rounded-full" disabled={loading}>
+                  <Avatar className="h-8 w-8">
+                    {loading ? (
+                      <div className="h-8 w-8 animate-pulse bg-muted rounded-full" />
+                    ) : (
+                      <>
+                        <AvatarImage src={user.image || "/placeholder.svg"} alt={user.name} />
+                        <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
+                      </>
+                    )}
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56" align="end" forceMount>
+                {loading ? (
+                  <div className="p-4">
+                    <div className="h-4 w-3/4 animate-pulse bg-muted rounded mb-2" />
+                    <div className="h-3 w-1/2 animate-pulse bg-muted rounded" />
+                  </div>
+                ) : (
+                  <>
+                    <DropdownMenuLabel className="font-normal">
+                      <div className="flex flex-col space-y-1">
+                        <p className="text-sm font-medium leading-none">{user.name}</p>
+                        <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                      </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuGroup>
+                      <DropdownMenuItem onClick={onProfileSelected}>
+                        <IconWrapper Icon={User} />
+                        <span>Profile</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={onLogout}>
+                      <IconWrapper Icon={LogOut} />
+                      <span>Log out</span>
+                    </DropdownMenuItem>
+                  </>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            )
+          }
+         
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden" aria-label="Open Menu">
-                {/* {renderIcon(Menu)} */}
                 <IconWrapper Icon={Menu} />
               </Button>
             </SheetTrigger>
