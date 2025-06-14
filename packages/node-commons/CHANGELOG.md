@@ -1,5 +1,11 @@
 # @authdog/node-commons
 
+## 0.0.22
+
+### Patch Changes
+
+- 20ae693: handle user in navbar
+
 ## 0.0.21
 
 ### Patch Changes
