@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.24
+
+### Patch Changes
+
+- 20ae693: handle user in navbar
+
 ## 0.0.23
 
 ### Patch Changes
