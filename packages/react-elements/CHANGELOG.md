@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.25
+
+### Patch Changes
+
+- 1720b55: handle authenticated action
+
 ## 0.0.24
 
 ### Patch Changes
