@@ -25,7 +25,7 @@ build:
 	    --filter=@authdog* \
 		--filter=!@authdog-samples/*
 
-.PHONY: yalc
-yalc:
-	pnpm yalc:all
-     
+.PHONY: build_libs
+build_libs:
+	pnpm turbo build \
+	    --filter=@authdog/react-elements

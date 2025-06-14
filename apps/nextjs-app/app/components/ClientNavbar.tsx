@@ -117,6 +117,7 @@ function ClientNavbarComponent() {
   const [mounted, setMounted] = useState(false);
 
   const { user, isLoading } = useUser();
+  const [payload, setPayload] = useState<ReturnType<typeof getPublicKeyPayload> | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -129,7 +130,7 @@ function ClientNavbarComponent() {
     }
 
     try {
-      const payload = getPublicKeyPayload(publicKey);
+      setPayload(getPublicKeyPayload(publicKey));
       console.log(payload);
     } catch (error) {
       console.error('Error getting public key payload:', error);
@@ -157,6 +158,10 @@ function ClientNavbarComponent() {
         localStorage.removeItem("token");
         location.reload();
       }}
+      {...(payload && {
+        environmentId: payload.environmentId,
+        identityHost: payload.identityHost,
+      })}
     />
   );
 }

@@ -41,14 +41,17 @@ interface NavbarProps {
   onNavItemClick?: (href: string) => void;
   onProfileSelected?: () => void;
   onLogout?: () => void;
+  // signinUrl?: string;
+  identityHost?: string;
+  environmentId?: string;
 }
 
 export function Navbar({
   items = [
-    { title: "Dashboard", href: "/dashboard" },
-    { title: "Projects", href: "/projects" },
-    { title: "Team", href: "/team" },
-    { title: "Reports", href: "/reports" },
+    // { title: "Dashboard", href: "/dashboard" },
+    // { title: "Projects", href: "/projects" },
+    // { title: "Team", href: "/team" },
+    // { title: "Reports", href: "/reports" },
   ],
   children,
   className,
@@ -62,10 +65,16 @@ export function Navbar({
   onNavItemClick = (href: string) => console.log(`Navigating to ${href}`),
   onProfileSelected,
   onLogout = () => console.log("Logout clicked"),
-  isLoading = false
+  isLoading = false,
+  // signinUrl = "https://www.example.com",
+  identityHost = "https://stg-id.authdog.xyz",
+  environmentId = "58be35b0-708f-49f6-84f0-6695d307d997",
 }: NavbarProps) {
   const [open, setOpen] = useState(false)
-  const [loading, setLoading] = useState(isLoading ?? false)
+  const [loading, setLoading] = useState(isLoading ?? false);
+
+  const isAuthenticated = user !== null && user !== undefined && user.name !== null && user.name !== undefined;
+
 
   return (
     <header className={cn("border-b bg-background", className)}>
@@ -97,7 +106,7 @@ export function Navbar({
 
 
           {
-            user?.name && (
+            isAuthenticated ? (
               <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full" disabled={loading}>
@@ -144,6 +153,24 @@ export function Navbar({
               </DropdownMenuContent>
             </DropdownMenu>
             )
+          
+          : (
+            <Button variant="default" aria-label="Sign in" onClick={() => {
+              if (!environmentId) {
+                throw new Error("Environment ID is required");
+              }
+
+              if (!identityHost) {
+                throw new Error("Identity Host is required");
+              }
+              
+              const signinUrl = `${identityHost}/signin/${environmentId}`;
+              window.open(signinUrl, "_blank");
+              // window.open("https://stg-id.authdog.xyz/signin/58be35b0-708f-49f6-84f0-6695d307d997", "_blank");
+            }}>
+              Sign in
+            </Button>
+          )
           }
          
           <Sheet open={open} onOpenChange={setOpen}>
