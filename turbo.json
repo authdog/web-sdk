@@ -60,6 +60,10 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "ladle": {
+      "cache": false,
+      "persistent": true
     }
   }
 }

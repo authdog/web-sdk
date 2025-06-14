@@ -2,8 +2,7 @@
 
 import type React from "react"
 import { useState } from "react"
-import { User, Settings, LogOut, Menu } from "lucide-react"
-// import type { LucideProps } from "lucide-react"
+import { User, LogOut, Menu } from "lucide-react"
 
 import { cn } from "../../lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar"
@@ -66,16 +65,11 @@ export function Navbar({
   onProfileSelected,
   onLogout = () => console.log("Logout clicked"),
   isLoading = false,
-  // signinUrl = "https://www.example.com",
   identityHost = "https://stg-id.authdog.xyz",
   environmentId = "58be35b0-708f-49f6-84f0-6695d307d997",
 }: NavbarProps) {
   const [open, setOpen] = useState(false)
-  const [loading, setLoading] = useState(isLoading ?? false);
-
   const isAuthenticated = user !== null && user !== undefined && user.name !== null && user.name !== undefined;
-
-
   return (
     <header className={cn("border-b bg-background", className)}>
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
@@ -85,7 +79,6 @@ export function Navbar({
             {items?.map((item, index) => (
               <span
                 key={index}
-                // href={item.href}
                 onClick={() => {
                   if (!item.disabled) {
                     onNavItemClick(item.href)
@@ -109,9 +102,9 @@ export function Navbar({
             isAuthenticated ? (
               <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-8 w-8 rounded-full" disabled={loading}>
+                <Button variant="ghost" className="relative h-8 w-8 rounded-full" disabled={isLoading}>
                   <Avatar className="h-8 w-8">
-                    {loading ? (
+                    {isLoading ? (
                       <div className="h-8 w-8 animate-pulse bg-muted rounded-full" />
                     ) : (
                       <>
@@ -123,7 +116,7 @@ export function Navbar({
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56" align="end" forceMount>
-                {loading ? (
+                {isLoading ? (
                   <div className="p-4">
                     <div className="h-4 w-3/4 animate-pulse bg-muted rounded mb-2" />
                     <div className="h-3 w-1/2 animate-pulse bg-muted rounded" />
@@ -166,7 +159,6 @@ export function Navbar({
               
               const signinUrl = `${identityHost}/signin/${environmentId}`;
               window.open(signinUrl, "_blank");
-              // window.open("https://stg-id.authdog.xyz/signin/58be35b0-708f-49f6-84f0-6695d307d997", "_blank");
             }}>
               Sign in
             </Button>

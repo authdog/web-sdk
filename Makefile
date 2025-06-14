@@ -29,3 +29,11 @@ build:
 build_libs:
 	pnpm turbo build \
 	    --filter=@authdog/react-elements
+
+
+.PHONY: ui
+ui:
+	pnpm turbo ladle \
+	    --filter=@authdog/react-elements
+
+
