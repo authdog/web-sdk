@@ -5,11 +5,10 @@ export const ReloadPage = () => {
     if (typeof window !== "undefined") {
       const url = new URL(window.location.href);
       const token = url.searchParams.get("token");
-
       if (token) {
-        // Remove token from URL without triggering a page reload
         url.searchParams.delete("token");
         window.history.replaceState({}, document.title, url.toString());
+        localStorage.setItem("token", token);
         return;
       }
     }

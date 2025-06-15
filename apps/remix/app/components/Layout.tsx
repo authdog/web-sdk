@@ -1,63 +1,35 @@
-import React from "react";
+import { Navbar } from "@authdog/react-elements";
+import { useLoaderData } from "@remix-run/react";
+import type { loader } from "~/root";
 import { useNavigate } from "@remix-run/react";
-// § styles from "@authdog/react-elements/styles.css?url";
 
-// Create a client-only component for the Navbar
-const ClientNavbar = React.lazy(() => 
-  import("@authdog/react-elements").then(mod => ({ 
-    default: mod.Navbar 
-  }))
-);
-
-// Create a client-only wrapper component
-function ClientOnly({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
-
-  return <>{children}</>;
-}
-
-interface LayoutProps {
-  children: React.ReactNode;
-}
-
-export function Layout({ children }: LayoutProps) {
+export const Layout = ({ children }: { children: React.ReactNode }) => {
+  const {
+    user,
+    isLoading,
+    signinUri
+  } = useLoaderData<typeof loader>();
   const navigate = useNavigate();
 
-  return (
-    <div className="min-h-screen">
-      <ClientOnly>
-        <React.Suspense fallback={<div>Loading...</div>}>
-          <ClientNavbar
-            logoText="Acme Inc"
-            items={[
-              // { title: "Home", href: "/" },
-              // { title: "Features", href: "/features" },
-              // { title: "Pricing", href: "/pricing" },
-              // { title: "About", href: "/about" },
-            ]}
-            user={{
-              name: "Sarah Johnson",
-              email: "sarah@acme.com",
-              image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-            }}
-            onNavigateHome={() => navigate("/")}
-            onNavItemClick={(href) => navigate(href)}
-            onProfileSelected={() => navigate("/profile")}
-            onLogout={() => console.log("Logging out...")}
-          />
-        </React.Suspense>
-      </ClientOnly>
-      <main className="">
-        {children}
-      </main>
-    </div>
-  );
-} 
+  return <div>
+    <Navbar
+      key={user?.id}
+      logoText={"ACME Corp"}
+      items={[]}
+      isLoading={isLoading}
+      user={user as any}
+      onLogout={() => {
+        navigate("/logout");
+      }}
+      onProfileSelected={() => {
+        navigate("/profile");
+      }}
+      onNavigateHome={() => {
+        navigate("/");
+      }}
+      identityHost={new URL(signinUri).origin}
+      environmentId={new URL(signinUri).pathname.split("/").pop()}
+    />
+    {children}
+  </div>;
+};

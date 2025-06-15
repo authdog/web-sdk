@@ -21,7 +21,7 @@ import { LogoutDropdown } from "@/components/auth/logout-dropdown";
 import { LogoutButton } from "@/components/auth/logout-btn";
 
 import { ReactElementsPlayground } from "../components/commons/navbar";
-import { Card, CardDescription, CardHeader, CardTitle, Switch } from "@authdog/react-elements";
+// import { Card, CardDescription, CardHeader, CardTitle, Switch } from "@authdog/react-elements";
 
 
 export default async function Dashboard() {

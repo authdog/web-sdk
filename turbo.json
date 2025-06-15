@@ -17,6 +17,8 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": ["dist/**"]
     },
+
+    
     "@authdog/remix-node#dev": {
       "dependsOn": ["@authdog/node-commons#build", "^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],

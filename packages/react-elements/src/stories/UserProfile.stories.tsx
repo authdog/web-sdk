@@ -5,10 +5,15 @@ import "../global.css";
 export const Default: Story = () => (
   <UserProfile
     user={{
-      name: "Jaylon Dias",
-      email: "example@authdog.xyz",
-      image: "https://i.pravatar.cc/150?u=a042581f4e29026704d"
+      id: "123",
+      displayName: "Jaylon Dias",
+      emails: [{ value: "example@authdog.xyz" }],
+      photos: [{ value: "https://i.pravatar.cc/150?u=a042581f4e29026704d" }],
+      provider: "authdog", 
     }}
+    loading={false}
+    handleAuthenticated={() => {}}
+    emails={[{ address: "example@authdog.xyz", isPrimary: true }]}
   />
 );
 Default.storyName = 'Default User Profile';
@@ -16,10 +21,15 @@ Default.storyName = 'Default User Profile';
 export const WithCustomUser: Story = () => (
   <UserProfile 
     user={{
-      name: "Jane Smith",
-      email: "jane@example.com",
-      image: "https://i.pravatar.cc/150?u=a042581f4e29026704d"
+      id: "123",
+      displayName: "Jaylon Dias",
+      emails: [{ value: "example@authdog.xyz" }],
+      photos: [{ value: "https://i.pravatar.cc/150?u=a042581f4e29026704d" }],
+      provider: "authdog", 
     }}
+    loading={false}
+    handleAuthenticated={() => {}}
+    emails={[{ address: "example@authdog.xyz", isPrimary: true }]}
   />
 );
 WithCustomUser.storyName = 'User Profile with Custom User';
@@ -27,15 +37,15 @@ WithCustomUser.storyName = 'User Profile with Custom User';
 export const WithMultipleEmails: Story = () => (
   <UserProfile 
     user={{
-      name: "John Doe",
-      email: "john@example.com",
-      image: "https://i.pravatar.cc/150?u=a042581f4e29026704d"
+      id: "123",
+      displayName: "Jaylon Dias",
+      emails: [{ value: "example@authdog.xyz" }, { value: "example@gmail.com" }],
+      photos: [{ value: "https://i.pravatar.cc/150?u=a042581f4e29026704d" }],
+      provider: "authdog", 
     }}
-    emails={[
-      { address: "john@example.com", isPrimary: true },
-      { address: "john@personal.com", isPrimary: false },
-      { address: "john@work.com", isPrimary: false }
-    ]}
+    loading={false}
+    handleAuthenticated={() => {}}
+    emails={[{ address: "example@authdog.xyz", isPrimary: true }, { address: "example@gmail.com", isPrimary: false }]}
   />
 );
 WithMultipleEmails.storyName = 'User Profile with Multiple Emails';
@@ -43,14 +53,15 @@ WithMultipleEmails.storyName = 'User Profile with Multiple Emails';
 export const WithConnectedAccounts: Story = () => (
   <UserProfile 
     user={{
-      name: "Alex Johnson",
-      email: "alex@example.com",
-      image: ""
+      id: "123",
+      displayName: "Alex Johnson",
+      emails: [{ value: "alex@example.com" }],
+      photos: [{ value: "https://i.pravatar.cc/150?u=a042581f4e29026704d" }],
+      provider: "authdog", 
     }}
-    connectedAccounts={[
-      { provider: "Google", email: "alex@gmail.com" },
-      { provider: "GitHub", email: "alex@github.com" }
-    ]}
+    loading={false}
+    handleAuthenticated={() => {}}
+    emails={[{ address: "alex@example.com", isPrimary: true }]}
   />
 );
 WithConnectedAccounts.storyName = 'User Profile with Connected Accounts'; 

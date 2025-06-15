@@ -88,9 +88,6 @@ export const getPublicKeyPayload = (publicKey: string): any => {
 };
 
 export default function App() {
-  const data = useLoaderData<typeof loader>();
-  const isAuthenticated = data?.user?.id !== undefined;
-  const signinUri = data?.signinUri;
 
   return (
     <html lang="en">
@@ -102,9 +99,7 @@ export default function App() {
       </head>
       <body>
         <AuthdogProvider>
-          <Layout>
-            <Outlet />
-          </Layout>
+          <Outlet />
           <ScrollRestoration />
           <Scripts />
           <ReloadPage />

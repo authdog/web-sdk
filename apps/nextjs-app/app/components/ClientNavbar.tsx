@@ -6,7 +6,6 @@ import { Navbar } from "@authdog/react-elements";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-
 function ClientNavbarComponent() {
   const router = useRouter();
   const publicKey = process.env.NEXT_PUBLIC_PK_AUTHDOG as string;

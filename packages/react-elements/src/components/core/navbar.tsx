@@ -44,9 +44,6 @@ interface NavbarProps {
 export function Navbar({
   items = [
     // { title: "Dashboard", href: "/dashboard" },
-    // { title: "Projects", href: "/projects" },
-    // { title: "Team", href: "/team" },
-    // { title: "Reports", href: "/reports" },
   ],
   children,
   className,
@@ -92,9 +89,6 @@ export function Navbar({
         </div>
         <div className="flex items-center gap-4">
           {children}
-
-
-
 
           {
             isAuthenticated ? (

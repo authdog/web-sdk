@@ -5,6 +5,7 @@ import {
 import { useLoaderData } from "@remix-run/react";
 import { remixAuthLoader } from "@authdog/remix-node";
 import React from "react";
+import { Layout } from "~/components/Layout";
 
 // Create a client-only component for the UserProfile
 const ClientUserProfile = React.lazy(() => 
@@ -47,21 +48,19 @@ export const loader: LoaderFunction = async ({ context, request }) =>
   });
 
 export default function Profile() {
-  const data = useLoaderData<typeof loader>();
+
+  const { user } = useLoaderData<typeof loader>();
   
   return (
-    <>
+    <Layout>
       <ClientOnly>
         <React.Suspense fallback={<div>Loading profile...</div>}>
           <ClientUserProfile
-            user={{
-              name: "Sarah Johnson",
-              email: "sarah@acme.com",
-              image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-            }}
+            user={user}
+            loading={false}
           />
         </React.Suspense>
       </ClientOnly>
-    </>
+    </Layout>
   );
 }
