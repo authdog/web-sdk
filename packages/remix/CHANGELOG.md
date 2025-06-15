@@ -1,5 +1,11 @@
 # @authdog/remix-node
 
+## 0.0.11
+
+### Patch Changes
+
+- 3730c31: add logout loader for remix
+
 ## 0.0.10
 
 ### Patch Changes
