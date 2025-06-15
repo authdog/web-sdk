@@ -26,16 +26,12 @@ interface NavItem {
 }
 
 interface NavbarProps {
-  items?: NavItem[]
+  items?: NavItem[] | undefined;
   children?: React.ReactNode
   className?: string
   logoText?: string
   isLoading?: boolean
-  user?: {
-    name?: string
-    email?: string
-    image?: string
-  }
+  user?: any;
   onNavigateHome?: () => void;
   onNavItemClick?: (href: string) => void;
   onProfileSelected?: () => void;
@@ -69,7 +65,7 @@ export function Navbar({
   environmentId = "58be35b0-708f-49f6-84f0-6695d307d997",
 }: NavbarProps) {
   const [open, setOpen] = useState(false)
-  const isAuthenticated = user !== null && user !== undefined && user.name !== null && user.name !== undefined;
+  const isAuthenticated = user !== null && user !== undefined && user.id !== null && user.id !== undefined;
   return (
     <header className={cn("border-b bg-background", className)}>
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
@@ -98,6 +94,8 @@ export function Navbar({
           {children}
 
 
+
+
           {
             isAuthenticated ? (
               <DropdownMenu>
@@ -108,8 +106,8 @@ export function Navbar({
                       <div className="h-8 w-8 animate-pulse bg-muted rounded-full" />
                     ) : (
                       <>
-                        <AvatarImage src={user.image || "/placeholder.svg"} alt={user.name} />
-                        <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
+                        <AvatarImage src={user.photos?.[0]?.value || "/placeholder.svg"} alt={user.displayName} />
+                        <AvatarFallback>{user.displayName?.charAt(0)}</AvatarFallback>
                       </>
                     )}
                   </Avatar>
@@ -125,8 +123,8 @@ export function Navbar({
                   <>
                     <DropdownMenuLabel className="font-normal">
                       <div className="flex flex-col space-y-1">
-                        <p className="text-sm font-medium leading-none">{user.name}</p>
-                        <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                        <p className="text-sm font-medium leading-none">{user.displayName}</p>
+                        <p className="text-xs leading-none text-muted-foreground">{user.emails?.[0]?.value}</p>
                       </div>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />

@@ -3,28 +3,19 @@
 import { useEffect, useState } from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar"
 import { Button } from "../../components/ui/button"
-import { Card } from "../../components/ui/card"
 import { Badge } from "../../components/ui/badge"
-import { PlusCircle, User, Shield, X, LucideProps } from "lucide-react"
+import { User, LucideProps } from "lucide-react"
 
 export interface UserProfileProps {
   loading: boolean;
   user: any;
   emails?: { address: string; isPrimary?: boolean }[];
-  // connectedAccounts?: { provider: string; email?: string }[];
   handleAuthenticated?: () => void;
 }
 
 export const UserProfile = ({
   loading,
   user,
-  emails = [],
-  // connectedAccounts = [
-  //   {
-  //     provider: "Google OAuth2.0",
-  //     email: "john@example.com",
-  //   },
-  // ],
   handleAuthenticated
 }: UserProfileProps) => {
   const [isMounted, setIsMounted] = useState(false)
@@ -35,7 +26,7 @@ export const UserProfile = ({
   }, []);
 
   useEffect(() => {
-    if (!loading && !user && handleAuthenticated) {
+    if (!loading && handleAuthenticated) {
       handleAuthenticated();
     }
   }, [loading, user, handleAuthenticated]);
@@ -106,7 +97,7 @@ export const UserProfile = ({
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <Avatar className="h-12 w-12 mr-4 border">
-                    <AvatarImage src={user.images?.[0]?.value} alt="Profile picture" />
+                    <AvatarImage src={user.photos?.[0]?.value} alt="Profile picture" />
                     <AvatarFallback>{user.displayName?.split(" ").map((n: string) => n[0]).join("")}</AvatarFallback>
                   </Avatar>
                   <span className="font-medium">{user.displayName}</span>

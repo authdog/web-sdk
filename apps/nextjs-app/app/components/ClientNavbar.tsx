@@ -43,11 +43,7 @@ function ClientNavbarComponent() {
       logoText={"ACME Corp"}
       items={[]}
       isLoading={isLoading}
-      user={{
-        name: user?.displayName,
-        email: user?.emails[0].value,
-        image: user?.photos[0].value,
-      }}
+      user={user as any}
       onNavigateHome={() => router.push("/")}
       onProfileSelected={() => router.push("/profile")}
       onLogout={() => {
