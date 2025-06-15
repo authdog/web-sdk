@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.26
+
+### Patch Changes
+
+- 799fb2e: display email/connected account in profile
+
 ## 0.0.25
 
 ### Patch Changes
