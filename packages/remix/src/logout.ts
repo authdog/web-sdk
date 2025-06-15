@@ -1,6 +1,6 @@
 import { LoaderFunction, redirect } from "@remix-run/node";
 
-export const loader: LoaderFunction = async ({ context, request }) => {
+export const logoutLoader: LoaderFunction = async ({ context, request }) => {
   const headers = new Headers();
   
   const publicKey = process.env.PK_AUTHDOG;

@@ -234,4 +234,5 @@ export const remixAuthLoader = async ({
   });
 };
 
-export { AuthdogProvider } from "./provider.tsx";
+export { AuthdogProvider } from "./provider";
+export {logoutLoader} from "./logout"
