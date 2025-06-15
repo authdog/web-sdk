@@ -11,7 +11,7 @@ export interface UserProfileProps {
   loading: boolean;
   user: any;
   emails?: { address: string; isPrimary?: boolean }[];
-  connectedAccounts?: { provider: string; email?: string }[];
+  // connectedAccounts?: { provider: string; email?: string }[];
   handleAuthenticated?: () => void;
 }
 
@@ -19,12 +19,12 @@ export const UserProfile = ({
   loading,
   user,
   emails = [],
-  connectedAccounts = [
-    {
-      provider: "Google OAuth2.0",
-      email: "john@example.com",
-    },
-  ],
+  // connectedAccounts = [
+  //   {
+  //     provider: "Google OAuth2.0",
+  //     email: "john@example.com",
+  //   },
+  // ],
   handleAuthenticated
 }: UserProfileProps) => {
   const [isMounted, setIsMounted] = useState(false)
@@ -121,6 +121,9 @@ export const UserProfile = ({
             <div>
               <h3 className="text-sm font-medium mb-4">Email addresses</h3>
               <div className="space-y-3">
+
+                {/* {JSON.stringify(user)} */}
+
                 {/* {(emails.length > 0 ? emails : [{ address: user.email, isPrimary: true }]).map((email, i) => (
                   <div className="flex items-center justify-between" key={email.address}>
                     <span>{email.address}</span>
@@ -131,6 +134,19 @@ export const UserProfile = ({
                     )}
                   </div>
                 ))} */}
+
+                {
+                  user.emails.map((email: any, idx: number) => (
+                    <div className="flex items-center justify-between" key={email.value}>
+                      <span>{email.value}</span>
+                      {idx === 0 && (
+                        <Badge variant="outline" className="text-xs bg-gray-100 text-gray-700 hover:bg-gray-100">
+                          Primary
+                        </Badge>
+                      )}
+                    </div>
+                  ))
+                }
                 {/* <Button variant="ghost" size="sm" className="flex items-center text-gray-700">
                   {renderIcon(PlusCircle)}
                   Add email address
@@ -156,22 +172,19 @@ export const UserProfile = ({
             </div> */}
 
             {/* Connected Accounts Section */}
-            {/* <div>
+            <div>
               <h3 className="text-sm font-medium mb-4">Connected accounts</h3>
               <div className="space-y-3">
-                {connectedAccounts.length > 0 && connectedAccounts.map((acc, i) => (
-                  <div className="flex items-center justify-between" key={acc.provider + acc.email}>
+                <div className="flex items-center justify-between" key={user.provider}>
                     <div className="flex items-center">
                       <div className="mr-2">
-                        <span>{acc.provider}</span>
+                        <span>{user.provider}</span>
                       </div>
                     </div>
-                    <span className="text-sm text-gray-500">{acc.email}</span>
+                    <span className="text-sm text-gray-500">{user?.emails?.[0]?.value}</span>
                   </div>
-                )) }
-     
               </div>
-            </div> */}
+            </div>
           </div>
         ) : (
           <div className="space-y-8">

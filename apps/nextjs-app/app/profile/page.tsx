@@ -32,7 +32,6 @@ export default function Profile() {
               router.push('/');
             }
           }}
-          // isAuthenticated={user?.id !== null}
         />
       </>
 
