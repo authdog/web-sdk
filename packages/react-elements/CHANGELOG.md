@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.27
+
+### Patch Changes
+
+- df1cbf4: handle photos, user payload in navbar and profile
+
 ## 0.0.26
 
 ### Patch Changes
