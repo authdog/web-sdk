@@ -1,5 +1,11 @@
 # @authdog/remix-node
 
+## 0.0.10
+
+### Patch Changes
+
+- 3d56a5d: handling auth session in remix sdk
+
 ## 0.0.9
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.28
+
+### Patch Changes
+
+- 3d56a5d: handling auth session in remix sdk
+
 ## 0.0.27
 
 ### Patch Changes
