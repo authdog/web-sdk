@@ -6,6 +6,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
+// @ts-ignore
 import styles from "@authdog/react-elements/styles.css?url";
 import { AuthdogProvider, ReloadPage } from "@authdog/remix-node/client";
 
