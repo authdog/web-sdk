@@ -5,7 +5,7 @@ import { useLoaderData } from "@remix-run/react";
 import { identityLoader } from "@authdog/remix-node";
 import React from "react";
 import { Layout } from "~/components/Layout";
-import { ClientOnly } from "~/components/ClientOnly";
+import { ClientOnly } from "@authdog/react-elements";
 
 const ClientUserProfile = React.lazy(() => 
   import("@authdog/react-elements").then(mod => ({ 
@@ -13,7 +13,6 @@ const ClientUserProfile = React.lazy(() =>
   }))
 );
 
-// Metadata function
 export const meta: MetaFunction = () => {
   return [
     { title: "Profile - Authdog Remix Demo" },
@@ -21,9 +20,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-// Loader function
 export const loader = identityLoader();
-
 
 export default function Profile() {
 
