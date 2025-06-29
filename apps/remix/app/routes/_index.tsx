@@ -3,7 +3,7 @@ import {
 } from "@remix-run/node";
 import { PlaceholderAlert } from "@authdog/react-elements";
 import { Layout } from "~/components/Layout";
-import { remixAuthLoader } from "@authdog/remix-node";
+import { identityLoader } from "@authdog/remix-node";
 
 export const meta: MetaFunction = () => {
   return [
@@ -13,14 +13,7 @@ export const meta: MetaFunction = () => {
 };
 
 // Loader function
-export const loader = async ({ context, request }: any) =>
-  await remixAuthLoader({
-    request,
-    context,
-    params: {
-      publicKey: process.env.PK_AUTHDOG,
-    },
-  });
+export const loader = identityLoader;
 
 export default function Index() {
   return (

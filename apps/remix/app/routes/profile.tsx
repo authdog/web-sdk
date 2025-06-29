@@ -2,7 +2,7 @@ import {
   type MetaFunction,
 } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { remixAuthLoader } from "@authdog/remix-node";
+import { identityLoader, remixAuthLoader } from "@authdog/remix-node";
 import React from "react";
 import { Layout } from "~/components/Layout";
 
@@ -35,14 +35,8 @@ export const meta: MetaFunction = () => {
 };
 
 // Loader function
-export const loader = async ({ context, request }: any) =>
-  await remixAuthLoader({
-    request,
-    context,
-    params: {
-      publicKey: process.env.PK_AUTHDOG,
-    },
-  });
+export const loader = identityLoader;
+
 
 export default function Profile() {
 
