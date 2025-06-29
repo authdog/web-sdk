@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.29
+
+### Patch Changes
+
+- 83c8f6c: add client-only to react-elements
+
 ## 0.0.28
 
 ### Patch Changes
