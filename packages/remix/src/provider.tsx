@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useState } from "react";
 
 export const AuthdogProvider = ({
@@ -27,13 +26,28 @@ export const AuthdogProvider = ({
 
       // If no token, we're done loading
       setIsLoading(false);
+    } else {
+      // If we're on the server, don't show loading state
+      setIsLoading(false);
     }
   }, []);
 
-  // Show nothing while loading
-  if (isLoading) {
-    return null;
-  }
-
+  // Show children while loading (don't return null)
   return <>{children}</>;
+};
+
+export const ReloadPage = () => {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      const token = url.searchParams.get("token");
+      if (token) {
+        url.searchParams.delete("token");
+        window.history.replaceState({}, document.title, url.toString());
+        localStorage.setItem("token", token);
+        return;
+      }
+    }
+  }, []);
+  return null;
 };

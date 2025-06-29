@@ -5,17 +5,6 @@ import "./globals.css";
 import { AuthdogProvider } from "@authdog/nextjs-app/client";
 import { ClientNavbar } from "./components/ClientNavbar";
 import { Suspense } from "react";
-// import { useRouter } from "next/navigation";
-
-
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-// });
 
 export const metadata: Metadata = {
   title: "Authdog - Demo next",
@@ -27,7 +16,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const router = useRouter();
   return (
     <html lang="en">
       <body>

@@ -1,14 +1,16 @@
 import { Navbar } from "@authdog/react-elements";
-import { useLoaderData } from "@remix-run/react";
-import type { loader } from "~/root";
-import { useNavigate } from "@remix-run/react";
+import { useLoaderData, useNavigate } from "@remix-run/react";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const {
     user,
-    isLoading,
+    // isAuthenticated,
     signinUri
-  } = useLoaderData<typeof loader>();
+  } = useLoaderData<{
+    user: any;
+    isAuthenticated: boolean;
+    signinUri: string;
+  }>();
   const navigate = useNavigate();
 
   return <div>
@@ -16,7 +18,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       key={user?.id}
       logoText={"ACME Corp"}
       items={[]}
-      isLoading={isLoading}
+      isLoading={false}
       user={user as any}
       onLogout={() => {
         navigate("/logout");

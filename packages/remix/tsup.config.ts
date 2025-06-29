@@ -1,7 +1,7 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/index.ts"], // Entry point for your source code
+  entry: ["src/index.ts", "src/client.ts"], // Build both server and client entry points
   format: ["cjs", "esm"], // Output both CJS and ESM formats
   dts: true, // Generate TypeScript declaration files
   splitting: false,

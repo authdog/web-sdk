@@ -28,7 +28,8 @@ build:
 .PHONY: build_libs
 build_libs:
 	pnpm turbo build \
-	    --filter=@authdog/react-elements
+	    --filter=@authdog/react-elements \
+		--filter=@authdog/remix-node
 
 
 .PHONY: ui

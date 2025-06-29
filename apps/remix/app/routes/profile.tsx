@@ -1,5 +1,4 @@
 import {
-  type LoaderFunction,
   type MetaFunction,
 } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
@@ -7,14 +6,12 @@ import { remixAuthLoader } from "@authdog/remix-node";
 import React from "react";
 import { Layout } from "~/components/Layout";
 
-// Create a client-only component for the UserProfile
 const ClientUserProfile = React.lazy(() => 
   import("@authdog/react-elements").then(mod => ({ 
     default: mod.UserProfile 
   }))
 );
 
-// Create a client-only wrapper component
 function ClientOnly({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = React.useState(false);
 
@@ -38,7 +35,7 @@ export const meta: MetaFunction = () => {
 };
 
 // Loader function
-export const loader: LoaderFunction = async ({ context, request }) =>
+export const loader = async ({ context, request }: any) =>
   await remixAuthLoader({
     request,
     context,
