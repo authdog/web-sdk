@@ -2,29 +2,16 @@ import {
   type MetaFunction,
 } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { identityLoader, remixAuthLoader } from "@authdog/remix-node";
+import { identityLoader } from "@authdog/remix-node";
 import React from "react";
 import { Layout } from "~/components/Layout";
+import { ClientOnly } from "~/components/ClientOnly";
 
 const ClientUserProfile = React.lazy(() => 
   import("@authdog/react-elements").then(mod => ({ 
     default: mod.UserProfile 
   }))
 );
-
-function ClientOnly({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
-
-  return <>{children}</>;
-}
 
 // Metadata function
 export const meta: MetaFunction = () => {
@@ -35,7 +22,7 @@ export const meta: MetaFunction = () => {
 };
 
 // Loader function
-export const loader = identityLoader;
+export const loader = identityLoader();
 
 
 export default function Profile() {

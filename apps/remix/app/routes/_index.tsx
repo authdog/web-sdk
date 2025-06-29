@@ -13,7 +13,7 @@ export const meta: MetaFunction = () => {
 };
 
 // Loader function
-export const loader = identityLoader;
+export const loader = identityLoader();
 
 export default function Index() {
   return (
