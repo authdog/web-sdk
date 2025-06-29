@@ -1,5 +1,11 @@
 # @authdog/remix-node
 
+## 0.0.12
+
+### Patch Changes
+
+- 1dcfb03: cleanup remix package structure, isolate client
+
 ## 0.0.11
 
 ### Patch Changes
