@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.30
+
+### Patch Changes
+
+- 732d717: add totp validator component
+
 ## 0.0.29
 
 ### Patch Changes
