@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.32
+
+### Patch Changes
+
+- ef53b12: fix text user-profile on dark mode
+
 ## 0.0.31
 
 ### Patch Changes

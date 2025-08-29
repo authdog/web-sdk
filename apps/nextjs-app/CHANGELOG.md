@@ -1,5 +1,12 @@
 # nextjs-app
 
+## 0.1.30
+
+### Patch Changes
+
+- Updated dependencies [ef53b12]
+  - @authdog/react-elements@0.0.32
+
 ## 0.1.29
 
 ### Patch Changes
