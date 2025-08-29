@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.31
+
+### Patch Changes
+
+- 829c52a: fix padding user-profile
+
 ## 0.0.30
 
 ### Patch Changes
