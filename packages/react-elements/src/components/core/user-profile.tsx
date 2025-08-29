@@ -50,9 +50,9 @@ export const UserProfile = ({
   }
   
   return (
-    <div className="grid grid-cols-[16rem,1fr] h-screen bg-gray-100">
-      <div className="h-full border-r p-6 bg-white flex flex-col min-w-0">
-        <div className="mb-6">
+    <div className="grid grid-cols-[14rem,1fr] w-full bg-transparent">
+      <div className="h-full border-r p-3 md:p-4 bg-transparent flex flex-col min-w-0">
+        <div className="mb-3 md:mb-4">
           <h1 className="text-xl font-bold">Account</h1>
           <p className="text-sm text-gray-500">Manage your account info.</p>
         </div>
@@ -79,8 +79,8 @@ export const UserProfile = ({
         </nav>
       </div>
 
-      <div className="h-full p-10 overflow-y-auto min-w-0 bg-white">
-        <div className="flex justify-between items-center mb-6">
+      <div className="h-full p-3 md:p-5 min-w-0 bg-transparent">
+        <div className="flex justify-between items-center mb-3 md:mb-4">
           <h2 className="text-xl font-semibold">
             {activeTab === "profile" ? "Profile details" : "Security settings"}
           </h2>
@@ -90,10 +90,10 @@ export const UserProfile = ({
         </div>
 
         {activeTab === "profile" ? (
-          <div className="space-y-8">
+          <div className="space-y-5 md:space-y-6">
             {/* Profile Section */}
             <div>
-              <h3 className="text-sm font-medium mb-4">Profile</h3>
+              <h3 className="text-sm font-medium mb-3">Profile</h3>
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <Avatar className="h-12 w-12 mr-4 border">
@@ -110,8 +110,8 @@ export const UserProfile = ({
 
             {/* Email Addresses Section */}
             <div>
-              <h3 className="text-sm font-medium mb-4">Email addresses</h3>
-              <div className="space-y-3">
+              <h3 className="text-sm font-medium mb-3">Email addresses</h3>
+              <div className="space-y-2.5">
 
                 {/* {JSON.stringify(user)} */}
 
@@ -126,18 +126,16 @@ export const UserProfile = ({
                   </div>
                 ))} */}
 
-                {
-                  user.emails.map((email: any, idx: number) => (
-                    <div className="flex items-center justify-between" key={email.value}>
-                      <span>{email.value}</span>
-                      {idx === 0 && (
-                        <Badge variant="outline" className="text-xs bg-gray-100 text-gray-700 hover:bg-gray-100">
-                          Primary
-                        </Badge>
-                      )}
-                    </div>
-                  ))
-                }
+                {user.emails.map((email: any, idx: number) => (
+                  <div className="flex items-center justify-between" key={email.value}>
+                    <span>{email.value}</span>
+                    {idx === 0 && (
+                      <Badge variant="outline" className="text-xs bg-gray-100 text-gray-700 hover:bg-gray-100">
+                        Primary
+                      </Badge>
+                    )}
+                  </div>
+                ))}
                 {/* <Button variant="ghost" size="sm" className="flex items-center text-gray-700">
                   {renderIcon(PlusCircle)}
                   Add email address
@@ -147,8 +145,8 @@ export const UserProfile = ({
 
             {/* Phone Number Section */}
             {/* <div>
-              <h3 className="text-sm font-medium mb-4">Phone number</h3>
-              <div className="space-y-3">
+              <h3 className="text-sm font-medium mb-3">Phone number</h3>
+              <div className="space-y-2.5">
                 <div className="flex items-center justify-between">
                   <span>+1 (555) 123-4567</span>
                   <Badge variant="outline" className="text-xs bg-gray-100 text-gray-700 hover:bg-gray-100">
@@ -164,8 +162,8 @@ export const UserProfile = ({
 
             {/* Connected Accounts Section */}
             <div>
-              <h3 className="text-sm font-medium mb-4">Connected accounts</h3>
-              <div className="space-y-3">
+              <h3 className="text-sm font-medium mb-3">Connected accounts</h3>
+              <div className="space-y-2.5">
                 <div className="flex items-center justify-between" key={user.provider}>
                     <div className="flex items-center">
                       <div className="mr-2">
@@ -178,11 +176,11 @@ export const UserProfile = ({
             </div>
           </div>
         ) : (
-          <div className="space-y-8">
+          <div className="space-y-5 md:space-y-6">
             {/* Security Settings */}
             <div key="two-factor">
-              <h3 className="text-sm font-medium mb-4">Two-factor authentication</h3>
-              <div className="space-y-3">
+              <h3 className="text-sm font-medium mb-3">Two-factor authentication</h3>
+              <div className="space-y-2.5">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-medium">Two-factor authentication</p>
@@ -196,8 +194,8 @@ export const UserProfile = ({
             </div>
 
             <div key="password">
-              <h3 className="text-sm font-medium mb-4">Password</h3>
-              <div className="space-y-3">
+              <h3 className="text-sm font-medium mb-3">Password</h3>
+              <div className="space-y-2.5">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-medium">Change password</p>
@@ -211,8 +209,8 @@ export const UserProfile = ({
             </div>
 
             <div key="sessions">
-              <h3 className="text-sm font-medium mb-4">Active sessions</h3>
-              <div className="space-y-3">
+              <h3 className="text-sm font-medium mb-3">Active sessions</h3>
+              <div className="space-y-2.5">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-medium">Current session</p>
