@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.34
+
+### Patch Changes
+
+- 2d78aba: scaffold tabs security and preferences in userprofile
+
 ## 0.0.33
 
 ### Patch Changes
