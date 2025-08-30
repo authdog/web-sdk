@@ -5,7 +5,7 @@ import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
 import { Check, ChevronRight, Circle } from "lucide-react"
 import type { ComponentType } from "react"
 
-import { cn } from "@authdog/react-elements/lib/utils"
+import { cn } from "../../lib/utils"
 
 const CheckIcon = Check as ComponentType<React.SVGProps<SVGSVGElement>>
 const CircleIcon = Circle as ComponentType<React.SVGProps<SVGSVGElement>>

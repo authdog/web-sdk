@@ -1,5 +1,5 @@
 import React from 'react';
-import '../dist/styles.css';
+import './global.css';
 
 // This is the main entry point for Ladle
 export default function Main({ children }: { children: React.ReactNode }) {
