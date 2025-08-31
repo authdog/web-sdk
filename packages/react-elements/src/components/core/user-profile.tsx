@@ -159,8 +159,16 @@ export const UserProfile = ({
                     <div className="flex items-start justify-between gap-2" key={email.value}>
                       <div className="flex flex-col">
                         <span className="text-foreground">{email.value}</span>
-                        <div className="mt-1 text-xs text-muted-foreground">
-                          {isVerified ? "Verified" : "Not verified"}
+                        <div className="mt-1">
+                          {isVerified ? (
+                            <Badge className="text-xs bg-green-600 text-white border-green-700 dark:bg-green-500 dark:text-white dark:border-green-600">
+                              Verified
+                            </Badge>
+                          ) : (
+                            <Badge className="text-xs bg-amber-500 text-white border-amber-600 dark:bg-amber-500 dark:text-white dark:border-amber-600">
+                              Not verified
+                            </Badge>
+                          )}
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
