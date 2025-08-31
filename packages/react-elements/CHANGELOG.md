@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.35
+
+### Patch Changes
+
+- 5248882: enhance verified email ui for user profile
+
 ## 0.0.34
 
 ### Patch Changes
