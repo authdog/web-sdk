@@ -13,6 +13,7 @@ export interface UserProfileProps {
   handleAuthenticated?: () => void;
   onRequestEmailVerification?: (email: string) => Promise<{ success: boolean; message?: string } | void>;
   onVerifyEmail?: (email: string, code: string) => Promise<{ success: boolean; message?: string } | void>;
+  onAddEmail?: (email: string) => Promise<{ success: boolean; message?: string } | void>;
 }
 
 export const UserProfile = ({
@@ -21,11 +22,14 @@ export const UserProfile = ({
   handleAuthenticated,
   onRequestEmailVerification,
   onVerifyEmail,
+  onAddEmail,
 }: UserProfileProps) => {
   const [isMounted, setIsMounted] = useState(false)
   const [activeTab, setActiveTab] = useState<"profile" | "security" | "preferences">("profile");
   const [verifyingEmail, setVerifyingEmail] = useState<string | null>(null)
   const [codeByEmail, setCodeByEmail] = useState<Record<string, string>>({})
+  const [addingEmail, setAddingEmail] = useState<boolean>(false)
+  const [newEmail, setNewEmail] = useState<string>("")
 
   useEffect(() => {
     setIsMounted(true);
@@ -161,11 +165,11 @@ export const UserProfile = ({
                         <span className="text-foreground">{email.value}</span>
                         <div className="mt-1">
                           {isVerified ? (
-                            <Badge className="text-xs bg-green-600 text-white border-green-700 dark:bg-green-500 dark:text-white dark:border-green-600">
+                            <Badge className="text-xs rounded-full px-2.5 py-0.5 bg-green-100 text-green-800 border border-green-300 dark:bg-green-500/20 dark:text-green-200 dark:border-green-400/40">
                               Verified
                             </Badge>
                           ) : (
-                            <Badge className="text-xs bg-amber-500 text-white border-amber-600 dark:bg-amber-500 dark:text-white dark:border-amber-600">
+                            <Badge className="text-xs rounded-full px-2.5 py-0.5 bg-amber-100 text-amber-800 border border-amber-300 dark:bg-amber-500/20 dark:text-amber-200 dark:border-amber-400/40">
                               Not verified
                             </Badge>
                           )}
@@ -225,10 +229,40 @@ export const UserProfile = ({
                     </div>
                   )
                 })}
-                {/* <Button variant="ghost" size="sm" className="flex items-center text-gray-700">
-                  {renderIcon(PlusCircle)}
-                  Add email address
-                </Button> */}
+                <div className="mt-2">
+                  {addingEmail ? (
+                    <div className="flex items-center gap-2">
+                      <input
+                        className="h-8 w-56 text-sm rounded-md border border-border bg-background px-2 text-foreground"
+                        placeholder="Add new email"
+                        value={newEmail}
+                        onChange={(e) => setNewEmail(e.target.value)}
+                      />
+                      <button
+                        className="h-8 rounded-md border border-border px-3 text-xs"
+                        onClick={async () => {
+                          const v = String(newEmail || "").trim().toLowerCase()
+                          if (!v) return
+                          if (onAddEmail) await onAddEmail(v)
+                          setAddingEmail(false)
+                          setNewEmail("")
+                        }}
+                      >
+                        Add
+                      </button>
+                      <button
+                        className="h-8 rounded-md border border-border px-3 text-xs"
+                        onClick={() => { setAddingEmail(false); setNewEmail("") }}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <Button variant="outline" size="sm" className="text-xs" onClick={() => setAddingEmail(true)}>
+                      Add email
+                    </Button>
+                  )}
+                </div>
               </div>
             </div>
 

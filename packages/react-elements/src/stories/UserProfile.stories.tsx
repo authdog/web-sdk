@@ -1,67 +1,46 @@
-import type { Story } from '@ladle/react';
-import { UserProfile, UserProfileProps } from '../components/core/user-profile';
-import "../global.css";
+import type { StoryDefault, Story } from "@ladle/react"
+import { UserProfile } from "../components/core/user-profile"
+import "../global.css"
 
-export const Default: Story = () => (
-  <UserProfile
-    user={{
-      id: "123",
-      displayName: "Jaylon Dias",
-      emails: [{ value: "example@authdog.xyz" }],
-      photos: [{ value: "https://i.pravatar.cc/150?u=a042581f4e29026704d" }],
-      provider: "authdog", 
-    }}
-    loading={false}
-    handleAuthenticated={() => {}}
-    emails={[{ address: "example@authdog.xyz", isPrimary: true }]}
-  />
-);
-Default.storyName = 'Default User Profile';
+export default {
+  title: "Core/UserProfile",
+} satisfies StoryDefault
 
-export const WithCustomUser: Story = () => (
-  <UserProfile 
-    user={{
-      id: "123",
-      displayName: "Jaylon Dias",
-      emails: [{ value: "example@authdog.xyz" }],
-      photos: [{ value: "https://i.pravatar.cc/150?u=a042581f4e29026704d" }],
-      provider: "authdog", 
-    }}
-    loading={false}
-    handleAuthenticated={() => {}}
-    emails={[{ address: "example@authdog.xyz", isPrimary: true }]}
-  />
-);
-WithCustomUser.storyName = 'User Profile with Custom User';
+const baseUser: any = {
+  id: "user_123",
+  displayName: "Jane Doe",
+  provider: "google-oauth20",
+  emails: [{ id: "e1", value: "jane.primary@example.com" }],
+  verifications: [],
+  photos: [],
+}
 
-export const WithMultipleEmails: Story = () => (
-  <UserProfile 
-    user={{
-      id: "123",
-      displayName: "Jaylon Dias",
-      emails: [{ value: "example@authdog.xyz" }, { value: "example@gmail.com" }],
-      photos: [{ value: "https://i.pravatar.cc/150?u=a042581f4e29026704d" }],
-      provider: "authdog", 
-    }}
-    loading={false}
-    handleAuthenticated={() => {}}
-    emails={[{ address: "example@authdog.xyz", isPrimary: true }, { address: "example@gmail.com", isPrimary: false }]}
-  />
-);
-WithMultipleEmails.storyName = 'User Profile with Multiple Emails';
+export const EmailNotVerified: Story = () => {
+  return (
+    <div className="p-6 bg-background text-foreground">
+      <UserProfile loading={false} user={{ ...baseUser }} />
+    </div>
+  )
+}
+EmailNotVerified.storyName = "Email not verified"
 
-export const WithConnectedAccounts: Story = () => (
-  <UserProfile 
-    user={{
-      id: "123",
-      displayName: "Alex Johnson",
-      emails: [{ value: "alex@example.com" }],
-      photos: [{ value: "https://i.pravatar.cc/150?u=a042581f4e29026704d" }],
-      provider: "authdog", 
-    }}
-    loading={false}
-    handleAuthenticated={() => {}}
-    emails={[{ address: "alex@example.com", isPrimary: true }]}
-  />
-);
-WithConnectedAccounts.storyName = 'User Profile with Connected Accounts'; 
+export const EmailVerified: Story = () => {
+  const verifiedUser = {
+    ...baseUser,
+    verifications: [
+      {
+        id: "v1",
+        email: "jane.primary@example.com",
+        verified: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+    ],
+  }
+  return (
+    <div className="p-6 bg-background text-foreground">
+      <UserProfile loading={false} user={verifiedUser} />
+    </div>
+  )
+}
+EmailVerified.storyName = "Email verified" 
