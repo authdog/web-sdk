@@ -4,6 +4,16 @@ import { useEffect, useState } from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar"
 import { Button } from "../../components/ui/button"
 import { Badge } from "../../components/ui/badge"
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "../../components/ui/card"
+import { Input } from "../../components/ui/input"
+import { Label } from "../../components/ui/label"
 import { User, Shield, SlidersHorizontal, LucideProps } from "lucide-react"
 
 export interface UserProfileProps {
@@ -231,31 +241,57 @@ export const UserProfile = ({
                 })}
                 <div className="mt-2">
                   {addingEmail ? (
-                    <div className="flex items-center gap-2">
-                      <input
-                        className="h-8 w-56 text-sm rounded-md border border-border bg-background px-2 text-foreground"
-                        placeholder="Add new email"
-                        value={newEmail}
-                        onChange={(e) => setNewEmail(e.target.value)}
-                      />
-                      <button
-                        className="h-8 rounded-md border border-border px-3 text-xs"
-                        onClick={async () => {
-                          const v = String(newEmail || "").trim().toLowerCase()
-                          if (!v) return
-                          if (onAddEmail) await onAddEmail(v)
-                          setAddingEmail(false)
-                          setNewEmail("")
-                        }}
-                      >
-                        Add
-                      </button>
-                      <button
-                        className="h-8 rounded-md border border-border px-3 text-xs"
-                        onClick={() => { setAddingEmail(false); setNewEmail("") }}
-                      >
-                        Cancel
-                      </button>
+                    <div className="max-w-md">
+                      <Card>
+                        <CardHeader>
+                          <CardTitle>Add email address</CardTitle>
+                          <CardDescription>
+                            You'll need to verify this email address before it can be added to your account.
+                          </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="space-y-2">
+                            <Label htmlFor="new-email">Email address</Label>
+                            <Input
+                              id="new-email"
+                              placeholder="Enter your email address"
+                              value={newEmail}
+                              onChange={(e) => setNewEmail(e.target.value)}
+                              onKeyDown={async (e) => {
+                                if (e.key === "Enter") {
+                                  const v = String(newEmail || "").trim().toLowerCase()
+                                  if (!v) return
+                                  if (onAddEmail) await onAddEmail(v)
+                                  setAddingEmail(false)
+                                  setNewEmail("")
+                                }
+                              }}
+                            />
+                          </div>
+                        </CardContent>
+                        <CardFooter className="justify-end gap-2">
+                          <Button
+                            variant="ghost"
+                            onClick={() => {
+                              setAddingEmail(false)
+                              setNewEmail("")
+                            }}
+                          >
+                            Cancel
+                          </Button>
+                          <Button
+                            onClick={async () => {
+                              const v = String(newEmail || "").trim().toLowerCase()
+                              if (!v) return
+                              if (onAddEmail) await onAddEmail(v)
+                              setAddingEmail(false)
+                              setNewEmail("")
+                            }}
+                          >
+                            Add
+                          </Button>
+                        </CardFooter>
+                      </Card>
                     </div>
                   ) : (
                     <Button variant="outline" size="sm" className="text-xs" onClick={() => setAddingEmail(true)}>

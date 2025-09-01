@@ -87,8 +87,8 @@ export const UserDropdown = ({ trigger, user, className, onManageAccount, onSign
           )
         })}
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer text-red-600 focus:text-red-700 py-2" onClick={() => onSignout?.()}>
-          <LogOut className="mr-2 h-4 w-4" />
+        <DropdownMenuItem className="cursor-pointer py-2 rounded-md font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 hover:text-red-700 dark:hover:text-red-300 focus:bg-red-50 dark:focus:bg-red-950/40 focus:text-red-700 dark:focus:text-red-300" onClick={() => onSignout?.()}>
+          <LogOut className="mr-2 h-4 w-4 text-red-600 dark:text-red-400" />
           <span>Sign out</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
