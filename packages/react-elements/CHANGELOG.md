@@ -1,5 +1,12 @@
 # @authdog/react-elements
 
+## 0.0.36
+
+### Patch Changes
+
+- 7d2c857: enhance email management
+- 6f3aa8c: fix display sign out
+
 ## 0.0.35
 
 ### Patch Changes
