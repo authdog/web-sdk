@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.38
+
+### Patch Changes
+
+- a7f7bdd: additional changes to modal setup
+
 ## 0.0.37
 
 ### Patch Changes
