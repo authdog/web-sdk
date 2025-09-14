@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.37
+
+### Patch Changes
+
+- fdb4af0: address shift behavior on profile trigger
+
 ## 0.0.36
 
 ### Patch Changes
