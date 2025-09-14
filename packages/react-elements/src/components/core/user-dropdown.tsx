@@ -29,6 +29,7 @@ export interface UserDropdownProps {
   side?: "top" | "right" | "bottom" | "left"
   align?: "start" | "center" | "end"
   sideOffset?: number
+  modal?: boolean
 }
 
 const getInitials = (name?: string) => {
@@ -38,7 +39,7 @@ const getInitials = (name?: string) => {
   return initials || "?"
 }
 
-export const UserDropdown = ({ trigger, user, className, onManageAccount, onSignout, links = [], side = "bottom", align = "end", sideOffset = 8 }: UserDropdownProps) => {
+export const UserDropdown = ({ trigger, user, className, onManageAccount, onSignout, links = [], side = "bottom", align = "end", sideOffset = 8, modal = false }: UserDropdownProps) => {
   const primaryEmail = user?.emails?.[0]?.value || user?.email || ""
   const displayName = user?.displayName || user?.name || ""
   const avatar = user?.photos?.[0]?.value || user?.avatar || ""
@@ -57,7 +58,7 @@ export const UserDropdown = ({ trigger, user, className, onManageAccount, onSign
   const IconExternal = ExternalLink as any
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={modal}>
       <DropdownMenuTrigger asChild>
         {trigger}
       </DropdownMenuTrigger>
