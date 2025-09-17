@@ -9,6 +9,9 @@ catalogs:
     '@types/eslint':
       specifier: ^8
       version: 8.56.12
+    '@types/node':
+      specifier: ^20
+      version: 20.19.16
     lucide-react:
       specifier: ^0.451.0
       version: 0.451.0
@@ -57,10 +60,10 @@ importers:
         version: link:packages/typescript-config
       '@changesets/cli':
         specifier: ^2.28.1
-        version: 2.29.7(@types/node@22.15.34)
+        version: 2.29.7(@types/node@22.18.5)
       '@types/node':
         specifier: ^22.10.7
-        version: 20.19.16
+        version: 22.18.5
       '@types/react':
         specifier: ^19.1.0
         version: 19.1.8
@@ -90,7 +93,7 @@ importers:
         version: 41.7.8(@swc/core@1.12.7)(rollup@4.44.1)
       vitest:
         specifier: ^2.1.8
-        version: 2.1.9(@edge-runtime/vm@3.2.0)(@types/node@20.19.16)(terser@5.43.1)
+        version: 2.1.9(@edge-runtime/vm@3.2.0)(@types/node@22.18.5)(terser@5.43.1)
 
   apps/nextjs-app:
     dependencies:
@@ -270,7 +273,7 @@ importers:
         version: 9.0.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@types/node':
         specifier: ^22.10.5
-        version: 20.19.16
+        version: 22.18.5
       '@types/react':
         specifier: catalog:react19
         version: 19.1.8
@@ -288,13 +291,13 @@ importers:
         version: 5.8.3
       vitest:
         specifier: ^2.1.8
-        version: 2.1.9(@edge-runtime/vm@3.2.0)(@types/node@20.19.16)(terser@5.43.1)
+        version: 2.1.9(@edge-runtime/vm@3.2.0)(@types/node@22.18.5)(terser@5.43.1)
 
   packages/node-commons:
     devDependencies:
       '@types/node':
         specifier: ^22.14.1
-        version: 20.19.16
+        version: 22.18.5
       dotenv:
         specifier: ^16.4.7
         version: 16.6.1
@@ -309,7 +312,7 @@ importers:
         version: 5.8.3
       vitest:
         specifier: ^2.1.8
-        version: 2.1.9(@edge-runtime/vm@3.2.0)(@types/node@20.19.16)(terser@5.43.1)
+        version: 2.1.9(@edge-runtime/vm@3.2.0)(@types/node@22.18.5)(terser@5.43.1)
 
   packages/react-elements:
     dependencies:
@@ -400,7 +403,7 @@ importers:
         version: 3.4.17(ts-node@10.9.1(@swc/core@1.12.7)(@types/node@20.19.16)(typescript@5.8.3))
       ts-loader:
         specifier: ^9.5.1
-        version: 9.5.2(typescript@5.8.3)(webpack@5.99.9(@swc/core@1.12.7))
+        version: 9.5.4(typescript@5.8.3)(webpack@5.99.9(@swc/core@1.12.7))
       typescript:
         specifier: 'catalog:'
         version: 5.8.3
@@ -425,7 +428,7 @@ importers:
     devDependencies:
       '@types/node':
         specifier: ^22.14.1
-        version: 20.19.16
+        version: 22.18.5
       '@types/react':
         specifier: ^18.2.0
         version: 18.3.23
@@ -2324,6 +2327,9 @@ packages:
   '@types/node@20.19.16':
     resolution: {integrity: sha512-VS6TTONVdgwJwtJr7U+ghEjpfmQdqehLLpg/iMYGOd1+ilaFjdBJwFuPggJ4EAYPDCzWfDUHoIxyVnu+tOWVuQ==}
 
+  '@types/node@22.18.5':
+    resolution: {integrity: sha512-g9BpPfJvxYBXUWI9bV37j6d6LTMNQ88hPwdWWUeYZnMhlo66FIg9gCc1/DZb15QylJSKwOZjwrckvOTWpOiChg==}
+
   '@types/node@24.5.1':
     resolution: {integrity: sha512-/SQdmUP2xa+1rdx7VwB9yPq8PaKej8TD5cQ+XfKDPWWC+VDJU4rvVVagXqKUzhKjtFoNA8rXDJAkCxQPAe00+Q==}
 
@@ -3360,6 +3366,10 @@ packages:
 
   enhanced-resolve@5.18.2:
     resolution: {integrity: sha512-6Jw4sE1maoRJo3q8MsSIn2onJFbLTOjY9hlx4DZXmOKvLRd1Ok2kXmAGXaafL2+ijsJZ1ClYbl/pmqr9+k4iUQ==}
+    engines: {node: '>=10.13.0'}
+
+  enhanced-resolve@5.18.3:
+    resolution: {integrity: sha512-d4lC8xfavMeBjzGr2vECC3fsGXziXZQyJxD868h2M/mBI3PwAuODxAkLkq5HYuvrPYcUtiLzsTo8U3PgX3Ocww==}
     engines: {node: '>=10.13.0'}
 
   enquirer@2.4.1:
@@ -5840,6 +5850,10 @@ packages:
     resolution: {integrity: sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==}
     engines: {node: '>= 8'}
 
+  source-map@0.7.6:
+    resolution: {integrity: sha512-i5uvt8C3ikiWeNZSVZNWcfZPItFQOsYTUAOkcUPGd8DqDy1uOUikjt5dG+uRlwyvR108Fb9DOd4GvXfT0N2/uQ==}
+    engines: {node: '>= 12'}
+
   source-map@0.8.0-beta.0:
     resolution: {integrity: sha512-2ymg6oRBpebeZi9UUNsgQ89bhx01TcTkmNTGnNO88imTmbSgy4nfujrgVEFKWpMTEGA11EDkTt7mqObTPdigIA==}
     engines: {node: '>= 8'}
@@ -6030,6 +6044,10 @@ packages:
     resolution: {integrity: sha512-Re10+NauLTMCudc7T5WLFLAwDhQ0JWdrMK+9B2M8zR5hRExKmsRDCBA7/aV/pNJFltmBFO5BAMlQFi/vq3nKOg==}
     engines: {node: '>=6'}
 
+  tapable@2.2.3:
+    resolution: {integrity: sha512-ZL6DDuAlRlLGghwcfmSn9sK3Hr6ArtyudlSAiCqQ6IfE+b+HHbydbYDIG15IfS5do+7XQQBdBiubF/cV2dnDzg==}
+    engines: {node: '>=6'}
+
   tar-fs@2.1.3:
     resolution: {integrity: sha512-090nwYJDmlhwFwEW3QQl+vaNnxsO2yVsd45eTKRBzSzu+hlb1w2K9inVq5b0ngXuLVqQ4ApvsUHHnu/zQNkWAg==}
 
@@ -6153,8 +6171,8 @@ packages:
   ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
-  ts-loader@9.5.2:
-    resolution: {integrity: sha512-Qo4piXvOTWcMGIgRiuFa6nHNm+54HbYaZCKqc9eeZCLRy3XqafQgwX2F7mofrbJG3g7EEb+lkiR+z2Lic2s3Zw==}
+  ts-loader@9.5.4:
+    resolution: {integrity: sha512-nCz0rEwunlTZiy6rXFByQU1kVVpCIgUpc/psFiKVrUwrizdnIbRFu8w7bxhUF0X613DYwT4XzrZHpVyMe758hQ==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       typescript: '*'
@@ -7006,7 +7024,7 @@ snapshots:
     dependencies:
       '@changesets/types': 6.1.0
 
-  '@changesets/cli@2.29.7(@types/node@22.15.34)':
+  '@changesets/cli@2.29.7(@types/node@22.18.5)':
     dependencies:
       '@changesets/apply-release-plan': 7.0.13
       '@changesets/assemble-release-plan': 6.0.9
@@ -7022,7 +7040,7 @@ snapshots:
       '@changesets/should-skip-package': 0.1.2
       '@changesets/types': 6.1.0
       '@changesets/write': 0.4.0
-      '@inquirer/external-editor': 1.0.2(@types/node@22.15.34)
+      '@inquirer/external-editor': 1.0.2(@types/node@22.18.5)
       '@manypkg/get-packages': 1.1.3
       ansi-colors: 4.1.3
       ci-info: 3.9.0
@@ -7583,12 +7601,12 @@ snapshots:
   '@img/sharp-win32-x64@0.34.2':
     optional: true
 
-  '@inquirer/external-editor@1.0.2(@types/node@22.15.34)':
+  '@inquirer/external-editor@1.0.2(@types/node@22.18.5)':
     dependencies:
       chardet: 2.1.0
       iconv-lite: 0.7.0
     optionalDependencies:
-      '@types/node': 22.15.34
+      '@types/node': 22.18.5
 
   '@isaacs/cliui@8.0.2':
     dependencies:
@@ -8573,6 +8591,10 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
+  '@types/node@22.18.5':
+    dependencies:
+      undici-types: 6.21.0
+
   '@types/node@24.5.1':
     dependencies:
       undici-types: 7.12.0
@@ -8941,13 +8963,13 @@ snapshots:
       chai: 5.2.0
       tinyrainbow: 1.2.0
 
-  '@vitest/mocker@2.1.9(vite@5.4.19(@types/node@20.19.16)(terser@5.43.1))':
+  '@vitest/mocker@2.1.9(vite@5.4.19(@types/node@22.18.5)(terser@5.43.1))':
     dependencies:
       '@vitest/spy': 2.1.9
       estree-walker: 3.0.3
       magic-string: 0.30.17
     optionalDependencies:
-      vite: 5.4.19(@types/node@20.19.16)(terser@5.43.1)
+      vite: 5.4.19(@types/node@22.18.5)(terser@5.43.1)
 
   '@vitest/pretty-format@2.1.9':
     dependencies:
@@ -9786,6 +9808,11 @@ snapshots:
       graceful-fs: 4.2.11
       tapable: 2.2.2
 
+  enhanced-resolve@5.18.3:
+    dependencies:
+      graceful-fs: 4.2.11
+      tapable: 2.2.3
+
   enquirer@2.4.1:
     dependencies:
       ansi-colors: 4.1.3
@@ -10238,7 +10265,7 @@ snapshots:
     dependencies:
       '@types/estree-jsx': 1.0.5
       astring: 1.9.0
-      source-map: 0.7.4
+      source-map: 0.7.6
 
   estree-util-value-to-estree@1.3.0:
     dependencies:
@@ -12842,6 +12869,8 @@ snapshots:
 
   source-map@0.7.4: {}
 
+  source-map@0.7.6: {}
+
   source-map@0.8.0-beta.0:
     dependencies:
       whatwg-url: 7.1.0
@@ -13093,6 +13122,8 @@ snapshots:
 
   tapable@2.2.2: {}
 
+  tapable@2.2.3: {}
+
   tar-fs@2.1.3:
     dependencies:
       chownr: 1.1.4
@@ -13210,13 +13241,13 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  ts-loader@9.5.2(typescript@5.8.3)(webpack@5.99.9(@swc/core@1.12.7)):
+  ts-loader@9.5.4(typescript@5.8.3)(webpack@5.99.9(@swc/core@1.12.7)):
     dependencies:
       chalk: 4.1.2
-      enhanced-resolve: 5.18.2
+      enhanced-resolve: 5.18.3
       micromatch: 4.0.8
       semver: 7.7.2
-      source-map: 0.7.4
+      source-map: 0.7.6
       typescript: 5.8.3
       webpack: 5.99.9(@swc/core@1.12.7)
 
@@ -13640,13 +13671,13 @@ snapshots:
       - supports-color
       - terser
 
-  vite-node@2.1.9(@types/node@20.19.16)(terser@5.43.1):
+  vite-node@2.1.9(@types/node@22.18.5)(terser@5.43.1):
     dependencies:
       cac: 6.7.14
       debug: 4.4.1
       es-module-lexer: 1.7.0
       pathe: 1.1.2
-      vite: 5.4.19(@types/node@20.19.16)(terser@5.43.1)
+      vite: 5.4.19(@types/node@22.18.5)(terser@5.43.1)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -13707,13 +13738,13 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.43.1
 
-  vite@5.4.19(@types/node@20.19.16)(terser@5.43.1):
+  vite@5.4.19(@types/node@22.18.5)(terser@5.43.1):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.5.6
       rollup: 4.44.1
     optionalDependencies:
-      '@types/node': 20.19.16
+      '@types/node': 22.18.5
       fsevents: 2.3.3
       terser: 5.43.1
 
@@ -13727,10 +13758,10 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.43.1
 
-  vitest@2.1.9(@edge-runtime/vm@3.2.0)(@types/node@20.19.16)(terser@5.43.1):
+  vitest@2.1.9(@edge-runtime/vm@3.2.0)(@types/node@22.18.5)(terser@5.43.1):
     dependencies:
       '@vitest/expect': 2.1.9
-      '@vitest/mocker': 2.1.9(vite@5.4.19(@types/node@20.19.16)(terser@5.43.1))
+      '@vitest/mocker': 2.1.9(vite@5.4.19(@types/node@22.18.5)(terser@5.43.1))
       '@vitest/pretty-format': 2.1.9
       '@vitest/runner': 2.1.9
       '@vitest/snapshot': 2.1.9
@@ -13746,12 +13777,12 @@ snapshots:
       tinyexec: 0.3.2
       tinypool: 1.1.1
       tinyrainbow: 1.2.0
-      vite: 5.4.19(@types/node@20.19.16)(terser@5.43.1)
-      vite-node: 2.1.9(@types/node@20.19.16)(terser@5.43.1)
+      vite: 5.4.19(@types/node@22.18.5)(terser@5.43.1)
+      vite-node: 2.1.9(@types/node@22.18.5)(terser@5.43.1)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@edge-runtime/vm': 3.2.0
-      '@types/node': 20.19.16
+      '@types/node': 22.18.5
     transitivePeerDependencies:
       - less
       - lightningcss
