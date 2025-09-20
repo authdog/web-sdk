@@ -13,8 +13,8 @@ catalogs:
       specifier: ^20
       version: 20.19.16
     lucide-react:
-      specifier: ^0.451.0
-      version: 0.451.0
+      specifier: ^0.544.0
+      version: 0.544.0
     prettier:
       specifier: ^3.3.3
       version: 3.6.2
@@ -45,6 +45,9 @@ catalogs:
       specifier: ^19.1.0
       version: 19.1.6
     react:
+      specifier: ^19.1.0
+      version: 19.1.0
+    react-dom:
       specifier: ^19.1.0
       version: 19.1.0
 
@@ -110,8 +113,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       lucide-react:
-        specifier: ^0.509.0
-        version: 0.509.0(react@18.3.1)
+        specifier: ^0.544.0
+        version: 0.544.0(react@18.3.1)
       next:
         specifier: 15.4.7
         version: 15.4.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -342,7 +345,7 @@ importers:
         version: 2.1.1
       lucide-react:
         specifier: 'catalog:'
-        version: 0.451.0(react@19.1.0)
+        version: 0.544.0(react@19.1.0)
       react:
         specifier: catalog:react19
         version: 19.1.0
@@ -4553,13 +4556,8 @@ packages:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
 
-  lucide-react@0.451.0:
-    resolution: {integrity: sha512-OwQ3uljZLp2cerj8sboy5rnhtGTCl9UCJIhT1J85/yOuGVlEH+xaUPR7tvNdddPvmV5M5VLdr7cQuWE3hzA4jw==}
-    peerDependencies:
-      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc
-
-  lucide-react@0.509.0:
-    resolution: {integrity: sha512-xCJHn6Uh5qF6PGml25vveCTrHJZcqS1G1MVzWZK54ZQsOiCVJk4fwY3oyo5EXS2S+aqvTpWYIfJN+PesJ0quxg==}
+  lucide-react@0.544.0:
+    resolution: {integrity: sha512-t5tS44bqd825zAW45UQxpG2CvcC4urOwn2TrwSH8u+MjeE+1NnWl6QqeQ/6NdjMqdOygyiT9p3Ev0p1NJykxjw==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -11215,13 +11213,13 @@ snapshots:
 
   lru-cache@7.18.3: {}
 
-  lucide-react@0.451.0(react@19.1.0):
-    dependencies:
-      react: 19.1.0
-
-  lucide-react@0.509.0(react@18.3.1):
+  lucide-react@0.544.0(react@18.3.1):
     dependencies:
       react: 18.3.1
+
+  lucide-react@0.544.0(react@19.1.0):
+    dependencies:
+      react: 19.1.0
 
   magic-string@0.27.0:
     dependencies:
