@@ -89,7 +89,7 @@ export const UserProfile = ({
             {renderIcon(User)}
             Profile
           </button>
-          <button
+          {/* <button
             onClick={() => setActiveTab("security")}
             className={`flex items-center w-full px-3 py-2 text-sm rounded-md ${
               activeTab === "security"
@@ -110,7 +110,7 @@ export const UserProfile = ({
           >
             {renderIcon(SlidersHorizontal)}
             Preferences
-          </button>
+          </button> */}
         </nav>
       </div>
 
