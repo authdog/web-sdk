@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.39
+
+### Patch Changes
+
+- b554d49: update profile component
+
 ## 0.0.38
 
 ### Patch Changes
