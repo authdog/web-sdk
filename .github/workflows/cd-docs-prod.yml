@@ -42,7 +42,7 @@ jobs:
 
       - uses: pnpm/action-setup@v4
         with:
-          version: 9.0.0
+          version: 9.15.9
 
       - name: Use taobao registry
         run: npm config set registry https://registry.npmmirror.com/
