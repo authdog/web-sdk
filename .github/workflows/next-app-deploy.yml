@@ -41,7 +41,7 @@ jobs:
       - name: Setup PNPM
         uses: pnpm/action-setup@v4
         with:
-          version: 9.12.0
+          version: 9.15.9
 
       - name: Set PNPM store path
         run: pnpm config set store-dir ${{ env.STORE_PATH }}
