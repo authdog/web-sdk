@@ -12,15 +12,15 @@
   "dependencies": {
     "@authdog/react-elements": "workspace:*",
     "@authdog/remix-node": "workspace:*",
-    "@remix-run/node": "2.16.7",
-    "@remix-run/react": "2.16.7",
-    "@remix-run/serve": "2.16.7",
+    "@remix-run/node": "2.17.1",
+    "@remix-run/react": "2.17.1",
+    "@remix-run/serve": "2.17.1",
     "isbot": "^4.1.0",
     "react": "catalog:react18",
     "react-dom": "catalog:react18"
   },
   "devDependencies": {
-    "@remix-run/dev": "2.16.7",
+    "@remix-run/dev": "2.17.1",
     "@types/react": "catalog:react18",
     "@types/react-dom": "catalog:react18",
     "@vercel/remix": "^2.16.6",
