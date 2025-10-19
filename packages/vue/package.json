@@ -1,6 +1,6 @@
 {
     "name": "@authdog/vue",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "Authdog Vue SDK",
     "source": "src/index.ts",
     "main": "dist/index.js",
