@@ -19,7 +19,7 @@
   "devDependencies": {
     "@authdog/eslint-config": "workspace:*",
     "@authdog/typescript-config": "workspace:*",
-    "@ladle/react": "^2.0.0",
+    "@ladle/react": "^5.0.0",
     "@types/node": "catalog:",
     "@types/react": "catalog:react19",
     "@types/react-dom": "catalog:react19",
