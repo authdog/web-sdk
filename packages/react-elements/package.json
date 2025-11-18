@@ -23,7 +23,7 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:react19",
     "@types/react-dom": "catalog:react19",
-    "@vitejs/plugin-react": "^4.4.1",
+    "@vitejs/plugin-react": "^5.0.0",
     "autoprefixer": "^10",
     "css-loader": "^6.8.1",
     "postcss": "^8",
