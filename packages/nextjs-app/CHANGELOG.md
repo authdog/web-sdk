@@ -1,5 +1,11 @@
 # @authdog/nextjs-app
 
+## 1.0.0
+
+### Major Changes
+
+- 1c254f8: Enhance session handling for nextjs-app
+
 ## 0.1.0
 
 ### Minor Changes
