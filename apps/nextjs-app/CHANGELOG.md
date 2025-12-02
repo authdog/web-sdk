@@ -1,5 +1,14 @@
 # nextjs-app
 
+## 1.0.1
+
+### Patch Changes
+
+- 624984c: Prettify
+- Updated dependencies [624984c]
+  - @authdog/react-elements@0.0.40
+  - @authdog/nextjs-app@1.0.1
+
 ## 1.0.0
 
 ### Major Changes

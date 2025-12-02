@@ -1,5 +1,11 @@
 # @authdog/nextjs-app
 
+## 1.0.1
+
+### Patch Changes
+
+- 624984c: Prettify
+
 ## 1.0.0
 
 ### Major Changes
