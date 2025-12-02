@@ -4,50 +4,52 @@ export const getTokenFromUri = (url: string): string | null => {
   return new URL(url).searchParams.get("token");
 };
 
-interface IFetchUserData {
-  user: {
+export interface AuthdogUser {
+  id: string;
+  environmentId: string;
+  externalId: string;
+  userName: string;
+  displayName: string;
+  nickName: string;
+  profileUrl: string;
+  title: string;
+  userType: string;
+  preferredLanguage: string | null;
+  locale: string | null;
+  timezone: string | null;
+  active: boolean;
+  provider: string;
+  lastLogin: string;
+  createdAt: string;
+  updatedAt: string;
+  names: {
     id: string;
-    environmentId: string;
-    externalId: string;
-    userName: string;
-    displayName: string;
-    nickName: string;
-    profileUrl: string;
-    title: string;
-    userType: string;
-    preferredLanguage: string | null;
-    locale: string | null;
-    timezone: string | null;
-    active: boolean;
-    provider: string;
-    lastLogin: string;
+    userId: string;
+    formatted: string | null;
+    familyName: string;
+    givenName: string;
+    middleName: string | null;
+    honorificPrefix: string | null;
+    honorificSuffix: string | null;
     createdAt: string;
     updatedAt: string;
-    names: {
-      id: string;
-      userId: string;
-      formatted: string | null;
-      familyName: string;
-      givenName: string;
-      middleName: string | null;
-      honorificPrefix: string | null;
-      honorificSuffix: string | null;
-      createdAt: string;
-      updatedAt: string;
-    };
-    addresses: [];
-    emails: {
-      value: string;
-      primary: boolean;
-      type: string;
-    }[];
-    phoneNumbers: [];
-    ims: [];
-    photos: {
-      value: string;
-      type: string;
-    }[];
   };
+  addresses: [];
+  emails: {
+    value: string;
+    primary: boolean;
+    type: string;
+  }[];
+  phoneNumbers: [];
+  ims: [];
+  photos: {
+    value: string;
+    type: string;
+  }[];
+}
+
+export interface AuthdogUserResponse {
+  user: AuthdogUser;
   meta: {
     code: number;
     message: string;
@@ -67,7 +69,7 @@ export const validatePublicKey = (publicKey: string) => {
 export const fetchUserData = async (
   publicKey: string,
   token: string,
-): Promise<IFetchUserData | null> => {
+): Promise<AuthdogUserResponse | null> => {
   validatePublicKey(publicKey);
   const publicKeyObj = getPublicKeyPayload(publicKey);
   const userData = await fetch(

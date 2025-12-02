@@ -1,6 +1,6 @@
 'use client';
 
-import { useUser } from "@/lib/utils";
+import { useUser } from "@authdog/nextjs-app";
 import { getPublicKeyPayload } from "@authdog/nextjs-app/client";
 import { Navbar } from "@authdog/react-elements";
 import { useRouter } from "next/navigation";

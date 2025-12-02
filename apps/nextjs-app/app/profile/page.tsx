@@ -1,6 +1,6 @@
 "use client";
-import { useUser } from "@/lib/utils";
-import { UserProfile} from "@authdog/react-elements"
+import { useUser } from "@authdog/nextjs-app";
+import { UserProfile } from "@authdog/react-elements";
 import "@authdog/react-elements/styles.css";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
