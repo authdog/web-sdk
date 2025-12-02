@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.40
+
+### Patch Changes
+
+- 624984c: Prettify
+
 ## 0.0.39
 
 ### Patch Changes

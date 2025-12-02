@@ -1,5 +1,13 @@
 # vue-app
 
+## 0.1.2
+
+### Patch Changes
+
+- 624984c: Prettify
+- Updated dependencies [624984c]
+  - @authdog/vue@0.0.2
+
 ## 0.1.1
 
 ### Patch Changes
