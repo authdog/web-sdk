@@ -5,7 +5,16 @@ Authdog web SDK is curated set of libraries aiming to accelerate identity integr
 [![packages-publish](https://github.com/authdog-labs/web-sdk/actions/workflows/packages-publish.yml/badge.svg)](https://github.com/authdog-labs/web-sdk/actions/workflows/packages-publish.yml)
 [![next-app-deploy](https://github.com/authdog-labs/web-sdk/actions/workflows/next-app-deploy.yml/badge.svg)](https://github.com/authdog-labs/web-sdk/actions/workflows/next-app-deploy.yml)
 [![remix-demo-deploy](https://github.com/authdog-labs/web-sdk/actions/workflows/remix-demo-deploy.yml/badge.svg)](https://github.com/authdog-labs/web-sdk/actions/workflows/remix-demo-deploy.yml)
-[![ladle-deploy](https://github.com/authdog-labs/web-sdk/actions/workflows/ladle-deploy.yml/badge.svg)](https://github.com/authdog-labs/web-sdk/actions/workflows/ladle-deploy.yml)
+
+### Component playground
+
+We've migrated to [React Cosmos](https://reactcosmos.org) for developing the React Elements library. Launch the playground locally with:
+
+```bash
+pnpm --filter @authdog/react-elements cosmos
+```
+
+Cosmos watches `src/fixtures/**` for component scenarios and applies the shared `src/global.css` tokens automatically.
 
 ## Integrations
 

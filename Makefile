@@ -34,7 +34,7 @@ build_libs:
 
 .PHONY: ui
 ui:
-	pnpm turbo ladle \
+	pnpm turbo cosmos \
 	    --filter=@authdog/react-elements
 
 

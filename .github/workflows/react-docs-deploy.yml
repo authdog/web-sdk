@@ -1,4 +1,4 @@
-name: ladle-deploy
+name: react-docs-deploy
 
 on:
   workflow_dispatch:
@@ -60,14 +60,16 @@ jobs:
       - name: "Replace catalog: tags with latest versions"
         run: node .github/scripts/replace-catalog.js 'packages/react-elements/package.json'
 
+      - name: Build React Cosmos
+        run: pnpm --filter @authdog/react-elements cosmos-export
+
       - name: Deploy to Vercel
         run: |
           pnpx vercel deploy \
-            --cwd packages/react-elements \
+            --cwd packages/react-elements/cosmos \
             --token ${{ secrets.VERCEL_CD_TOKEN }} \
             --scope ${{ env.SCOPE_VERCEL }} \
             --name ${{ env.PROJECT_VERCEL }} \
             --force \
             --yes \
-            --prod \
-            --build-env NODE_PATH=$PWD/node_modules
+            --prod

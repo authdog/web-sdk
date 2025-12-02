@@ -12,7 +12,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "../../components/ui/avatar";
-import { cn } from "@authdog/react-elements/lib/utils";
+import { cn } from "../../lib/utils";
 import { LogOut, Settings, ExternalLink } from "lucide-react";
 
 export type UserDropdownLink = {
@@ -40,6 +40,8 @@ export interface UserDropdownProps {
   align?: "start" | "center" | "end";
   sideOffset?: number;
   modal?: boolean;
+  triggerAsChild?: boolean;
+  triggerWrapperClassName?: string;
 }
 
 const getInitials = (name?: string) => {
@@ -63,6 +65,8 @@ export const UserDropdown = ({
   align = "end",
   sideOffset = 8,
   modal = false,
+  triggerAsChild = false,
+  triggerWrapperClassName,
 }: UserDropdownProps) => {
   const primaryEmail = user?.emails?.[0]?.value || user?.email || "";
   const displayName = user?.displayName || user?.name || "";
@@ -83,7 +87,18 @@ export const UserDropdown = ({
 
   return (
     <DropdownMenu modal={modal}>
-      <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
+      {triggerAsChild ? (
+        <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
+      ) : (
+        <DropdownMenuTrigger
+          className={cn(
+            "inline-flex items-center justify-center bg-transparent p-0 border-0 outline-none focus-visible:outline-none",
+            triggerWrapperClassName,
+          )}
+        >
+          {trigger}
+        </DropdownMenuTrigger>
+      )}
       <DropdownMenuContent
         align={align}
         side={side}

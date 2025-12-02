@@ -5,7 +5,7 @@ import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import type { ComponentType } from "react";
 
-import { cn } from "@authdog/react-elements/lib/utils";
+import { cn } from "../../lib/utils";
 
 const XIcon = X as ComponentType<React.SVGProps<SVGSVGElement>>;
 

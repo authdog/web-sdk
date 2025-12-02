@@ -9,20 +9,28 @@
     "lint": "eslint .",
     "build:styles": "postcss src/global.css -o dist/styles.css",
     "build": "pnpm tsup && pnpm build:styles",
-    "ladle": "ladle serve",
-    "ladle:build": "ladle build"
+    "cosmos": "cosmos dev",
+    "cosmos-export": "cosmos-export"
   },
   "peerDependencies": {
-    "react": "catalog:react19",
-    "react-dom": "catalog:react19"
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
   },
   "devDependencies": {
     "@authdog/eslint-config": "workspace:*",
     "@authdog/typescript-config": "workspace:*",
-    "@ladle/react": "^2.0.0",
-    "@types/node": "catalog:",
-    "@types/react": "catalog:react19",
-    "@types/react-dom": "catalog:react19",
+    "@types/node": "22.10.10",
+    "@types/react": "19.0.8",
+    "@types/react-dom": "19.0.3",
+    "next": "15.1.6",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-cosmos": "7.0.0",
+    "react-cosmos-dom": "7.0.0",
+    "react-cosmos-next": "7.0.0",
+    "react-cosmos-plugin-open-fixture": "7.0.0",
+    "react-cosmos-plugin-vite": "7.0.0",
+    "react-tweet": "^3.2.1",
     "@vitejs/plugin-react": "^4.4.1",
     "autoprefixer": "^10",
     "css-loader": "^6.8.1",
@@ -33,7 +41,8 @@
     "style-loader": "^3.3.3",
     "tailwindcss": "catalog:",
     "ts-loader": "^9.5.1",
-    "typescript": "catalog:",
+    "typescript": "5.7.3",
+    "vite": "^4.5.0",
     "webpack": "^5.89.0"
   },
   "dependencies": {
