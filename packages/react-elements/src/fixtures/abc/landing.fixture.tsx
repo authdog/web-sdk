@@ -167,10 +167,11 @@ const trigger = (
   </div>
 );
 
-const landingContent = (
-  <div className="min-h-screen bg-slate-950 text-white">
-    <div className="mx-auto flex max-w-6xl flex-col gap-16 px-6 py-16">
-      <section className="grid items-center gap-12 lg:grid-cols-[1.2fr_minmax(0,1fr)]">
+function LandingFixture() {
+  return (
+    <div className="min-h-screen bg-slate-950 text-white">
+      <div className="mx-auto flex max-w-6xl flex-col gap-16 px-6 py-16">
+        <section className="grid items-center gap-12 lg:grid-cols-[1.2fr_minmax(0,1fr)]">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-300">
             Authdog React Elements
@@ -327,9 +328,10 @@ const landingContent = (
           ))}
         </div>
         </section>
+      </div>
     </div>
-  </div>
-);
+  );
+}
 
-export default landingContent;
+export default LandingFixture;
 

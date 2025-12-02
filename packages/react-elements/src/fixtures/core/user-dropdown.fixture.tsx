@@ -19,16 +19,20 @@ const Trigger = () => (
   </span>
 );
 
-export default (
-  <div className="p-10">
-    <UserDropdown
-      trigger={<Trigger />}
-      user={demoUser}
-      onManageAccount={() => alert("Manage account")}
-      onSignout={() => alert("Sign out")}
-      links={[{ label: "My Organizations", href: "/organizations" }]}
-      side="bottom"
-      align="start"
-    />
-  </div>
-);
+function UserDropdownFixture() {
+  return (
+    <div className="p-10">
+      <UserDropdown
+        trigger={<Trigger />}
+        user={demoUser}
+        onManageAccount={() => alert("Manage account")}
+        onSignout={() => alert("Sign out")}
+        links={[{ label: "My Organizations", href: "/organizations" }]}
+        side="bottom"
+        align="start"
+      />
+    </div>
+  );
+}
+
+export default UserDropdownFixture;

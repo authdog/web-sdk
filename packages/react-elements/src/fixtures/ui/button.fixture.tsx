@@ -3,4 +3,8 @@
 import React from "react";
 import { Button } from "../../components/ui/button";
 
-export default <Button>Click me</Button>;
+function ButtonFixture() {
+  return <Button>Click me</Button>;
+}
+
+export default ButtonFixture;

@@ -12,8 +12,12 @@ const baseUser: any = {
   photos: [],
 };
 
-export default (
-  <div className="bg-background p-6 text-foreground">
-    <UserProfile loading={false} user={{ ...baseUser }} />
-  </div>
-);
+function UserProfileFixture() {
+  return (
+    <div className="bg-background p-6 text-foreground">
+      <UserProfile loading={false} user={{ ...baseUser }} />
+    </div>
+  );
+}
+
+export default UserProfileFixture;
