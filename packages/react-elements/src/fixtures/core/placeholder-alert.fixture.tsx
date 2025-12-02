@@ -3,9 +3,11 @@
 import React from "react";
 import { PlaceholderAlert } from "../../components/core/placeholder-alert";
 
-export default (
+const placeholderContent = (
   <PlaceholderAlert
     title="Custom Alert Title"
     description="This is a custom description for the placeholder alert."
   />
 );
+
+export default placeholderContent;
