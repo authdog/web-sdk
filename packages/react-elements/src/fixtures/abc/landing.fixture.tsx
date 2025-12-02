@@ -333,5 +333,5 @@ function LandingFixture() {
   );
 }
 
-export default LandingFixture;
+export default React.createElement(LandingFixture);
 
