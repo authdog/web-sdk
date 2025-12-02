@@ -1,13 +1,8 @@
 "use client";
 
 import React from "react";
-
 import { UserDropdown } from "../../components/core/user-dropdown";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "../../components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
 
 const demoUser = {
   displayName: "Jane Doe",
@@ -24,7 +19,7 @@ const Trigger = () => (
   </span>
 );
 
-export default () => (
+export default (
   <div className="p-10">
     <UserDropdown
       trigger={<Trigger />}

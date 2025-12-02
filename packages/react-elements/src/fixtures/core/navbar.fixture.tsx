@@ -1,11 +1,9 @@
 "use client";
 
 import React from "react";
-
 import { Navbar } from "../../components/core/navbar";
-import { Button } from "../../components/ui/button";
 
-export default () => (
+export default (
   <Navbar
     logoText="Authdog"
     items={[
