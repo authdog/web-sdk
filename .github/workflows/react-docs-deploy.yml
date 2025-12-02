@@ -66,7 +66,7 @@ jobs:
       - name: Deploy to Vercel
         run: |
           pnpx vercel deploy \
-            --cwd packages/react-elements/cosmos \
+            --cwd packages/react-elements/cosmos-export \
             --token ${{ secrets.VERCEL_CD_TOKEN }} \
             --scope ${{ env.SCOPE_VERCEL }} \
             --name ${{ env.PROJECT_VERCEL }} \
