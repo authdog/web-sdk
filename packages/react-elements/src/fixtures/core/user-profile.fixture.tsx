@@ -13,30 +13,8 @@ const baseUser: any = {
   photos: [],
 };
 
-const verifiedUser = {
-  ...baseUser,
-  verifications: [
-    {
-      id: "v1",
-      email: "jane.primary@example.com",
-      verified: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    },
-  ],
-};
-
-export const EmailNotVerified = (
+export default () => (
   <div className="bg-background p-6 text-foreground">
     <UserProfile loading={false} user={{ ...baseUser }} />
   </div>
 );
-
-export const EmailVerified = (
-  <div className="bg-background p-6 text-foreground">
-    <UserProfile loading={false} user={verifiedUser} />
-  </div>
-);
-
-export default EmailNotVerified;
-

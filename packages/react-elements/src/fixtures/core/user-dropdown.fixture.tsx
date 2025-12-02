@@ -24,7 +24,7 @@ const Trigger = () => (
   </span>
 );
 
-export const Basic = (
+export default () => (
   <div className="p-10">
     <UserDropdown
       trigger={<Trigger />}
@@ -37,6 +37,3 @@ export const Basic = (
     />
   </div>
 );
-
-export default Basic;
-

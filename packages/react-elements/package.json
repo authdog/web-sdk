@@ -10,7 +10,8 @@
     "build:styles": "postcss src/global.css -o dist/styles.css",
     "build": "pnpm tsup && pnpm build:styles",
     "cosmos": "cosmos dev",
-    "cosmos-export": "cosmos-export"
+    "cosmos-export": "cosmos-export",
+    "deploy-docs": "pnpm run cosmos-export && cp wrangler.prod.toml wrangler.toml && wrangler pages deploy"
   },
   "peerDependencies": {
     "react": "19.0.0",

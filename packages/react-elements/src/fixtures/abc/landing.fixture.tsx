@@ -167,7 +167,7 @@ const trigger = (
   </div>
 );
 
-export const LandingOverview = (
+export default () => (
   <div className="min-h-screen bg-slate-950 text-white">
     <div className="mx-auto flex max-w-6xl flex-col gap-16 px-6 py-16">
       <section className="grid items-center gap-12 lg:grid-cols-[1.2fr_minmax(0,1fr)]">
@@ -331,5 +331,4 @@ export const LandingOverview = (
   </div>
 );
 
-export default LandingOverview;
 

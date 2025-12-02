@@ -1,6 +1,6 @@
 {
   "fixturesDir": "src/fixtures",
-  "fixtureFileSuffix": ".fixture",
+  "fixtureFileSuffix": "fixture",
   "lazy": true,
   "plugins": ["react-cosmos-plugin-vite"],
   "vite": {
