@@ -1,5 +1,16 @@
 # nextjs-app
 
+## 1.0.0
+
+### Major Changes
+
+- 1c254f8: Enhance session handling for nextjs-app
+
+### Patch Changes
+
+- Updated dependencies [1c254f8]
+  - @authdog/nextjs-app@1.0.0
+
 ## 0.1.37
 
 ### Patch Changes
