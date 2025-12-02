@@ -2,10 +2,7 @@
 
 import React, { useEffect } from "react";
 
-import {
-  TOKEN_STORAGE_KEY,
-  TOKEN_UPDATED_EVENT,
-} from "./constants";
+import { TOKEN_STORAGE_KEY, TOKEN_UPDATED_EVENT } from "./constants";
 
 export const AuthdogProvider = ({
   children,

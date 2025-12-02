@@ -1,93 +1,87 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useRef } from "react"
-import { Button } from "../../components/ui/button"
-import { Card, CardContent } from "../../components/ui/card"
-import { Alert, AlertDescription } from "../../components/ui/alert"
-import { Shield, CheckCircle, AlertCircle } from "lucide-react"
+import { useState, useRef } from "react";
+import { Button } from "../../components/ui/button";
+import { Card, CardContent } from "../../components/ui/card";
+import { Alert, AlertDescription } from "../../components/ui/alert";
+import { Shield, CheckCircle, AlertCircle } from "lucide-react";
 
 interface TOTPValidatorProps {
-    onValidate: (code: string) => Promise<void>;
+  onValidate: (code: string) => Promise<void>;
 }
 
-export const TOTPValidator = (
-    {
-        onValidate
-    }: TOTPValidatorProps
-) =>  {
-  const [code, setCode] = useState(["", "", "", "", "", ""])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState(false)
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([])
+export const TOTPValidator = ({ onValidate }: TOTPValidatorProps) => {
+  const [code, setCode] = useState(["", "", "", "", "", ""]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const handleInputChange = (index: number, value: string) => {
     // Only allow digits
-    if (!/^\d*$/.test(value)) return
+    if (!/^\d*$/.test(value)) return;
 
-    const newCode = [...code]
-    newCode[index] = value.slice(-1) // Only take the last character
+    const newCode = [...code];
+    newCode[index] = value.slice(-1); // Only take the last character
 
-    setCode(newCode)
-    setError("")
-    setSuccess(false)
+    setCode(newCode);
+    setError("");
+    setSuccess(false);
 
     // Auto-focus next input
     if (value && index < 5) {
-      inputRefs.current[index + 1]?.focus()
+      inputRefs.current[index + 1]?.focus();
     }
-  }
+  };
 
   const handleKeyDown = (index: number, e: React.KeyboardEvent) => {
     // Handle backspace
     if (e.key === "Backspace" && !code[index] && index > 0) {
-      inputRefs.current[index - 1]?.focus()
+      inputRefs.current[index - 1]?.focus();
     }
 
     // Handle paste
     if (e.key === "v" && (e.ctrlKey || e.metaKey)) {
-      e.preventDefault()
+      e.preventDefault();
       navigator.clipboard.readText().then((text) => {
-        const digits = text.replace(/\D/g, "").slice(0, 6).split("")
-        const newCode = [...code]
+        const digits = text.replace(/\D/g, "").slice(0, 6).split("");
+        const newCode = [...code];
         digits.forEach((digit, i) => {
-          if (i < 6) newCode[i] = digit
-        })
-        setCode(newCode)
+          if (i < 6) newCode[i] = digit;
+        });
+        setCode(newCode);
 
         // Focus the next empty input or the last one
-        const nextIndex = Math.min(digits.length, 5)
-        inputRefs.current[nextIndex]?.focus()
-      })
+        const nextIndex = Math.min(digits.length, 5);
+        inputRefs.current[nextIndex]?.focus();
+      });
     }
-  }
+  };
 
   const validateTOTP = async () => {
-    const totpCode = code.join("")
+    const totpCode = code.join("");
 
     if (totpCode.length !== 6) {
-      setError("Please enter all 6 digits")
-      return
+      setError("Please enter all 6 digits");
+      return;
     }
 
-    setLoading(true)
-    setError("")
+    setLoading(true);
+    setError("");
 
     try {
-        await onValidate(totpCode)
-        setSuccess(true)
+      await onValidate(totpCode);
+      setSuccess(true);
     } catch (error) {
-        setError("Invalid TOTP code. Please try again.")
+      setError("Invalid TOTP code. Please try again.");
     } finally {
-        setLoading(false)
+      setLoading(false);
     }
 
-
-
     // try {
-      // Call your TOTP validation endpoint
+    // Call your TOTP validation endpoint
     //   const response = await fetch("/api/validate-totp", {
     //     method: "POST",
     //     headers: {
@@ -126,20 +120,20 @@ export const TOTPValidator = (
     // } finally {
     //   setLoading(false)
     // }
-  }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    validateTOTP()
-  }
+    e.preventDefault();
+    validateTOTP();
+  };
 
   const clearCode = () => {
-    setCode(["", "", "", "", "", ""])
-    setError("")
-    setSuccess(false)
-    setLoading(false)
-    inputRefs.current[0]?.focus()
-  }
+    setCode(["", "", "", "", "", ""]);
+    setError("");
+    setSuccess(false);
+    setLoading(false);
+    inputRefs.current[0]?.focus();
+  };
 
   if (success) {
     return (
@@ -151,17 +145,25 @@ export const TOTPValidator = (
                 <CheckCircle className="w-8 h-8 text-green-600" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-green-900">Verification Successful!</h3>
-                <p className="text-sm text-green-700 mt-1">Your TOTP code has been validated.</p>
+                <h3 className="text-lg font-semibold text-green-900">
+                  Verification Successful!
+                </h3>
+                <p className="text-sm text-green-700 mt-1">
+                  Your TOTP code has been validated.
+                </p>
               </div>
-              <Button onClick={clearCode} variant="outline" className="bg-white">
+              <Button
+                onClick={clearCode}
+                variant="outline"
+                className="bg-white"
+              >
                 Verify Another Code
               </Button>
             </div>
           </CardContent>
         </Card>
       </div>
-    )
+    );
   }
 
   return (
@@ -174,29 +176,36 @@ export const TOTPValidator = (
                 <Shield className="w-6 h-6 text-blue-600" />
               </div>
               <h3 className="text-lg font-semibold">Enter Verification Code</h3>
-              <p className="text-sm text-muted-foreground mt-1">Enter the 6-digit code from your authenticator app</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                Enter the 6-digit code from your authenticator app
+              </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="flex justify-center gap-2">
                 {code.map((digit, index) => (
-                  <Card key={index} className="w-12 h-14 border-2 focus-within:border-blue-500 transition-colors">
+                  <Card
+                    key={index}
+                    className="w-12 h-14 border-2 focus-within:border-blue-500 transition-colors"
+                  >
                     <CardContent className="p-0 h-full flex items-center justify-center">
                       <input
                         ref={(el) => {
-                          inputRefs.current[index] = el
+                          inputRefs.current[index] = el;
                         }}
                         type="tel"
                         inputMode="numeric"
                         maxLength={1}
                         value={digit}
-                        onChange={(e) => handleInputChange(index, e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange(index, e.target.value)
+                        }
                         onKeyDown={(e) => handleKeyDown(index, e)}
                         className="w-full h-full text-center text-2xl font-bold border-none outline-none bg-transparent"
                         autoComplete="one-time-code"
                         disabled={loading}
                         style={{
-                            height: 'auto'
+                          height: "auto",
                         }}
                       />
                     </CardContent>
@@ -212,20 +221,32 @@ export const TOTPValidator = (
               )}
 
               <div className="space-y-3">
-                <Button type="submit" className="w-full" disabled={loading || code.some((digit) => digit === "")}>
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={loading || code.some((digit) => digit === "")}
+                >
                   {loading ? "Verifying..." : "Verify Code"}
                 </Button>
 
-                <Button type="button" variant="ghost" size="sm" onClick={clearCode} className="w-full text-xs">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={clearCode}
+                  className="w-full text-xs"
+                >
                   Clear Code
                 </Button>
               </div>
             </form>
 
-            <p className="text-xs text-muted-foreground">Codes refresh every 30 seconds</p>
+            <p className="text-xs text-muted-foreground">
+              Codes refresh every 30 seconds
+            </p>
           </div>
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};

@@ -1,6 +1,6 @@
-import React from "react"
-import { UserDropdown } from "../components/core/user-dropdown"
-import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar"
+import React from "react";
+import { UserDropdown } from "../components/core/user-dropdown";
+import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 
 const DemoTrigger = () => (
   <span className="inline-flex items-center justify-center h-10 w-10 rounded-full border bg-white shadow">
@@ -9,15 +9,15 @@ const DemoTrigger = () => (
       <AvatarFallback>JD</AvatarFallback>
     </Avatar>
   </span>
-)
+);
 
 const demoUser = {
   displayName: "Jane Doe",
   emails: [{ value: "jane.doe@example.com" }],
   photos: [{ value: "https://i.pravatar.cc/100" }],
-}
+};
 
-export default { title: "Core/UserDropdown" }
+export default { title: "Core/UserDropdown" };
 
 export const Basic = () => (
   <div className="p-10">
@@ -31,6 +31,4 @@ export const Basic = () => (
       align="start"
     />
   </div>
-)
-
-
+);

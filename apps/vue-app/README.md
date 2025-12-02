@@ -13,6 +13,7 @@ This is an example Vue.js application demonstrating how to use the Authdog Vue S
 ## Getting Started
 
 1. Install dependencies:
+
 ```bash
 pnpm install
 ```
@@ -22,6 +23,7 @@ pnpm install
    - Configure your Authdog environment
 
 3. Start the development server:
+
 ```bash
 pnpm dev
 ```

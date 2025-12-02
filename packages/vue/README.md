@@ -26,7 +26,7 @@ pnpm add @authdog/vue
 </template>
 
 <script setup lang="ts">
-import { AuthdogProvider } from '@authdog/vue/client'
+import { AuthdogProvider } from "@authdog/vue/client";
 </script>
 ```
 
@@ -34,22 +34,22 @@ import { AuthdogProvider } from '@authdog/vue/client'
 
 ```vue
 <script setup lang="ts">
-import { useSession, useUser } from '@authdog/vue'
+import { useSession, useUser } from "@authdog/vue";
 
-const { session, isLoading } = useSession()
-const { user } = useUser()
+const { session, isLoading } = useSession();
+const { user } = useUser();
 </script>
 ```
 
 ### Server-side
 
 ```typescript
-import { createAuthdogServer } from '@authdog/vue/server'
+import { createAuthdogServer } from "@authdog/vue/server";
 
 const authdog = createAuthdogServer({
   publicKey: process.env.AUTHDOG_PUBLIC_KEY!,
   secretKey: process.env.AUTHDOG_SECRET_KEY!,
-})
+});
 ```
 
 ## API Reference

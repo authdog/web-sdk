@@ -23,7 +23,6 @@ import { LogoutButton } from "@/components/auth/logout-btn";
 import { ReactElementsPlayground } from "../components/commons/navbar";
 // import { Card, CardDescription, CardHeader, CardTitle, Switch } from "@authdog/react-elements";
 
-
 export default async function Dashboard() {
   const publicKey = process.env.PK_AUTHDOG as string;
   const sessionCookie = await getSessionCookie(publicKey);
@@ -64,7 +63,7 @@ export default async function Dashboard() {
             </Card> */}
 
             <ReactElementsPlayground />
- 
+
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />

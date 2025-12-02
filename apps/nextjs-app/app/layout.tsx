@@ -23,9 +23,7 @@ export default function RootLayout({
           <Suspense fallback={<div>Loading...</div>}>
             <ClientNavbar />
           </Suspense>
-          <main className="flex-1">
-            {children}
-          </main>
+          <main className="flex-1">{children}</main>
         </AuthdogProvider>
       </body>
     </html>

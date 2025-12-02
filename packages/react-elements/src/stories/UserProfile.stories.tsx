@@ -1,10 +1,10 @@
-import type { StoryDefault, Story } from "@ladle/react"
-import { UserProfile } from "../components/core/user-profile"
-import "../global.css"
+import type { StoryDefault, Story } from "@ladle/react";
+import { UserProfile } from "../components/core/user-profile";
+import "../global.css";
 
 export default {
   title: "Core/UserProfile",
-} satisfies StoryDefault
+} satisfies StoryDefault;
 
 const baseUser: any = {
   id: "user_123",
@@ -13,16 +13,16 @@ const baseUser: any = {
   emails: [{ id: "e1", value: "jane.primary@example.com" }],
   verifications: [],
   photos: [],
-}
+};
 
 export const EmailNotVerified: Story = () => {
   return (
     <div className="p-6 bg-background text-foreground">
       <UserProfile loading={false} user={{ ...baseUser }} />
     </div>
-  )
-}
-EmailNotVerified.storyName = "Email not verified"
+  );
+};
+EmailNotVerified.storyName = "Email not verified";
 
 export const EmailVerified: Story = () => {
   const verifiedUser = {
@@ -36,11 +36,11 @@ export const EmailVerified: Story = () => {
         updatedAt: new Date().toISOString(),
       },
     ],
-  }
+  };
   return (
     <div className="p-6 bg-background text-foreground">
       <UserProfile loading={false} user={verifiedUser} />
     </div>
-  )
-}
-EmailVerified.storyName = "Email verified" 
+  );
+};
+EmailVerified.storyName = "Email verified";

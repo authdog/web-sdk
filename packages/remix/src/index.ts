@@ -3,12 +3,9 @@ export { AuthdogProvider, ReloadPage } from "./provider";
 export {
   createAuthResponse,
   authenticateWithCookies,
-  remixAuthLoader
+  remixAuthLoader,
 } from "./authLoader";
 
-export {logoutLoader} from "./logout";
+export { logoutLoader } from "./logout";
 
-export {
-  identityLoader,
-  identityDevAction 
-} from "./utils";
+export { identityLoader, identityDevAction } from "./utils";

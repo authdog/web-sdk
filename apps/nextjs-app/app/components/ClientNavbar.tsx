@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useUser } from "@authdog/nextjs-app";
 import { getPublicKeyPayload } from "@authdog/nextjs-app/client";
@@ -12,12 +12,13 @@ function ClientNavbarComponent() {
   const [mounted, setMounted] = useState(false);
 
   const { user, isLoading } = useUser();
-  const [payload, setPayload] = useState<ReturnType<typeof getPublicKeyPayload> | null>(null);
+  const [payload, setPayload] = useState<ReturnType<
+    typeof getPublicKeyPayload
+  > | null>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
-
 
   useEffect(() => {
     if (!publicKey) {
@@ -28,7 +29,7 @@ function ClientNavbarComponent() {
       setPayload(getPublicKeyPayload(publicKey));
       console.log(payload);
     } catch (error) {
-      console.error('Error getting public key payload:', error);
+      console.error("Error getting public key payload:", error);
     }
   }, [publicKey]);
 
@@ -58,4 +59,4 @@ function ClientNavbarComponent() {
 }
 
 // Export a client-only version of the component
-export const ClientNavbar = ClientNavbarComponent; 
+export const ClientNavbar = ClientNavbarComponent;

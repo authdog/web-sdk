@@ -17,17 +17,16 @@ export default function Profile() {
 
   const router = useRouter();
   return (
-      <>
-       <UserProfile
-          loading={isLoading}
-          user={user as any}
-          handleAuthenticated={() => {
-            if (user === null) {
-              router.push('/');
-            }
-          }}
-        />
-      </>
-
+    <>
+      <UserProfile
+        loading={isLoading}
+        user={user as any}
+        handleAuthenticated={() => {
+          if (user === null) {
+            router.push("/");
+          }
+        }}
+      />
+    </>
   );
 }

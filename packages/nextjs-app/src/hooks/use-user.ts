@@ -8,10 +8,7 @@ import {
   TOKEN_STORAGE_KEY,
   TOKEN_UPDATED_EVENT,
 } from "../client/constants";
-import {
-  fetchUserData,
-  type AuthdogUser,
-} from "../client/session";
+import { fetchUserData, type AuthdogUser } from "../client/session";
 
 const PUBLIC_KEY = process.env.NEXT_PUBLIC_PK_AUTHDOG;
 

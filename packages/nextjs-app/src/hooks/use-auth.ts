@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import {
   TOKEN_POLL_INTERVAL_MS,
   TOKEN_POLL_MAX_ATTEMPTS,

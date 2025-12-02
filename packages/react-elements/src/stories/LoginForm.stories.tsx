@@ -1,10 +1,10 @@
 // import { useState, useEffect } from "react"
-import type { Story } from "@ladle/react"
-import { LoginForm } from "../components/flow/login"
-import "../global.css"
+import type { Story } from "@ladle/react";
+import { LoginForm } from "../components/flow/login";
+import "../global.css";
 
-export const Default: Story = () => <LoginForm />
-Default.storyName = "Default Login Form"
+export const Default: Story = () => <LoginForm />;
+Default.storyName = "Default Login Form";
 
 // export const Loading: Story = () => {
 //   const [isLoading, setIsLoading] = useState(true)
@@ -26,4 +26,4 @@ Default.storyName = "Default Login Form"
 //   const [email, setEmail] = useState("user@example.com")
 //   return <LoginForm />
 // }
-// WithPrefilledEmail.storyName = "With Pre-filled Email" 
+// WithPrefilledEmail.storyName = "With Pre-filled Email"

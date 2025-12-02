@@ -3,7 +3,7 @@ interface INavbarProps {
   children?: React.ReactNode;
 }
 
-export const Navbar = ({ siteName = "Authdog", children}: INavbarProps) => {
+export const Navbar = ({ siteName = "Authdog", children }: INavbarProps) => {
   return (
     <div style={{ backgroundColor: "blue", padding: "10px", color: "white" }}>
       {siteName}

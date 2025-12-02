@@ -1,12 +1,16 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
-import { User, LogOut, Menu } from "lucide-react"
+import type React from "react";
+import { useState } from "react";
+import { User, LogOut, Menu } from "lucide-react";
 
-import { cn } from "../../lib/utils"
-import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar"
-import { Button } from "../../components/ui/button"
+import { cn } from "../../lib/utils";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "../../components/ui/avatar";
+import { Button } from "../../components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,22 +19,22 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../../components/ui/dropdown-menu"
-import { Sheet, SheetContent, SheetTrigger } from "../../components/ui/sheet"
-import { IconWrapper } from "../icons"
+} from "../../components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetTrigger } from "../../components/ui/sheet";
+import { IconWrapper } from "../icons";
 
 interface NavItem {
-  title: string
-  href: string
-  disabled?: boolean
+  title: string;
+  href: string;
+  disabled?: boolean;
 }
 
 interface NavbarProps {
   items?: NavItem[] | undefined;
-  children?: React.ReactNode
-  className?: string
-  logoText?: string
-  isLoading?: boolean
+  children?: React.ReactNode;
+  className?: string;
+  logoText?: string;
+  isLoading?: boolean;
   user?: any;
   onNavigateHome?: () => void;
   onNavItemClick?: (href: string) => void;
@@ -61,25 +65,34 @@ export function Navbar({
   identityHost = "https://stg-id.authdog.xyz",
   environmentId = "58be35b0-708f-49f6-84f0-6695d307d997",
 }: NavbarProps) {
-  const [open, setOpen] = useState(false)
-  const isAuthenticated = user !== null && user !== undefined && user.id !== null && user.id !== undefined;
+  const [open, setOpen] = useState(false);
+  const isAuthenticated =
+    user !== null &&
+    user !== undefined &&
+    user.id !== null &&
+    user.id !== undefined;
   return (
     <header className={cn("border-b bg-background", className)}>
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <div className="flex items-center gap-4">
-          <span className="text-xl font-bold cursor-pointer" onClick={onNavigateHome}>{logoText}</span>
+          <span
+            className="text-xl font-bold cursor-pointer"
+            onClick={onNavigateHome}
+          >
+            {logoText}
+          </span>
           <nav className="hidden md:flex gap-6">
             {items?.map((item, index) => (
               <span
                 key={index}
                 onClick={() => {
                   if (!item.disabled) {
-                    onNavItemClick(item.href)
+                    onNavItemClick(item.href);
                   }
                 }}
                 className={cn(
                   "text-sm font-medium transition-colors hover:text-primary cursor-pointer",
-                  item.disabled && "cursor-not-allowed opacity-80"
+                  item.disabled && "cursor-not-allowed opacity-80",
                 )}
               >
                 {item.title}
@@ -90,18 +103,26 @@ export function Navbar({
         <div className="flex items-center gap-4">
           {children}
 
-          {
-            isAuthenticated ? (
-              <DropdownMenu>
+          {isAuthenticated ? (
+            <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-8 w-8 rounded-full" disabled={isLoading}>
+                <Button
+                  variant="ghost"
+                  className="relative h-8 w-8 rounded-full"
+                  disabled={isLoading}
+                >
                   <Avatar className="h-8 w-8">
                     {isLoading ? (
                       <div className="h-8 w-8 animate-pulse bg-muted rounded-full" />
                     ) : (
                       <>
-                        <AvatarImage src={user.photos?.[0]?.value || "/placeholder.svg"} alt={user.displayName} />
-                        <AvatarFallback>{user.displayName?.charAt(0)}</AvatarFallback>
+                        <AvatarImage
+                          src={user.photos?.[0]?.value || "/placeholder.svg"}
+                          alt={user.displayName}
+                        />
+                        <AvatarFallback>
+                          {user.displayName?.charAt(0)}
+                        </AvatarFallback>
                       </>
                     )}
                   </Avatar>
@@ -117,8 +138,12 @@ export function Navbar({
                   <>
                     <DropdownMenuLabel className="font-normal">
                       <div className="flex flex-col space-y-1">
-                        <p className="text-sm font-medium leading-none">{user.displayName}</p>
-                        <p className="text-xs leading-none text-muted-foreground">{user.emails?.[0]?.value}</p>
+                        <p className="text-sm font-medium leading-none">
+                          {user.displayName}
+                        </p>
+                        <p className="text-xs leading-none text-muted-foreground">
+                          {user.emails?.[0]?.value}
+                        </p>
                       </div>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
@@ -137,29 +162,35 @@ export function Navbar({
                 )}
               </DropdownMenuContent>
             </DropdownMenu>
-            )
-          
-          : (
-            <Button variant="default" aria-label="Sign in" onClick={() => {
-              if (!environmentId) {
-                throw new Error("Environment ID is required");
-              }
+          ) : (
+            <Button
+              variant="default"
+              aria-label="Sign in"
+              onClick={() => {
+                if (!environmentId) {
+                  throw new Error("Environment ID is required");
+                }
 
-              if (!identityHost) {
-                throw new Error("Identity Host is required");
-              }
-              
-              const signinUrl = `${identityHost}/signin/${environmentId}`;
-              window.open(signinUrl, "_blank");
-            }}>
+                if (!identityHost) {
+                  throw new Error("Identity Host is required");
+                }
+
+                const signinUrl = `${identityHost}/signin/${environmentId}`;
+                window.open(signinUrl, "_blank");
+              }}
+            >
               Sign in
             </Button>
-          )
-          }
-         
+          )}
+
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden" aria-label="Open Menu">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden"
+                aria-label="Open Menu"
+              >
                 <IconWrapper Icon={Menu} />
               </Button>
             </SheetTrigger>
@@ -171,7 +202,7 @@ export function Navbar({
                     href={item.href}
                     className={cn(
                       "flex w-full items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent",
-                      item.disabled && "cursor-not-allowed opacity-80"
+                      item.disabled && "cursor-not-allowed opacity-80",
                     )}
                     onClick={() => setOpen(false)}
                   >
@@ -184,5 +215,5 @@ export function Navbar({
         </div>
       </div>
     </header>
-  )
+  );
 }
