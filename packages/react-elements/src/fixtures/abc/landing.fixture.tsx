@@ -167,7 +167,7 @@ const trigger = (
   </div>
 );
 
-function LandingFixture() {
+const LandingFixture = (() => {
   return (
     <div className="min-h-screen bg-slate-950 text-white">
       <div className="mx-auto flex max-w-6xl flex-col gap-16 px-6 py-16">
@@ -331,7 +331,7 @@ function LandingFixture() {
       </div>
     </div>
   );
-}
+})();
 
-export default React.createElement(LandingFixture);
+export default LandingFixture;
 
