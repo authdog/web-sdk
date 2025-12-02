@@ -3,7 +3,7 @@
 import React from "react";
 import { Navbar } from "../../components/core/navbar";
 
-function NavbarFixture() {
+export const NavbarFixture = () => {
   return (
     <Navbar
       logoText="Authdog"
@@ -17,4 +17,4 @@ function NavbarFixture() {
   );
 }
 
-export default NavbarFixture;
+export default () => <>{NavbarFixture()}</>

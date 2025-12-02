@@ -56,89 +56,101 @@ const buildSteps = [
   },
 ];
 
+function LoginJourneysSlice() {
+  return (
+    <div className="text-left">
+      <div className="space-y-3">
+        <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+          <p className="text-xs uppercase tracking-wide text-white/60">
+            Email address
+          </p>
+          <p className="text-white">designer@studio.com</p>
+        </div>
+        <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+          <p className="text-xs uppercase tracking-wide text-white/60">
+            Magic link sent
+          </p>
+          <p className="text-white">Check your inbox to continue</p>
+        </div>
+        <Button className="w-full bg-white text-slate-900 hover:bg-white/90">
+          Continue
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+function SecurityMomentsSlice() {
+  return (
+    <div className="space-y-3 text-left">
+      <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 px-4 py-3 text-emerald-100">
+        <p className="text-xs uppercase tracking-wide text-emerald-200">
+          One-time passcode
+        </p>
+        <p className="text-3xl font-mono tracking-widest">482 913</p>
+      </div>
+      <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white/80">
+        Trusted device: MacBook Pro · Paris, FR
+      </div>
+      <Button
+        variant="secondary"
+        className="w-full bg-emerald-500/20 text-white hover:bg-emerald-500/30"
+      >
+        Approve & continue
+      </Button>
+    </div>
+  );
+}
+
+function UserContextSlice() {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-left text-white/80">
+      <div className="flex items-center gap-3">
+        <Avatar className="h-12 w-12">
+          <AvatarImage src="https://i.pravatar.cc/140?img=24" alt="Harper" />
+          <AvatarFallback>H</AvatarFallback>
+        </Avatar>
+        <div>
+          <p className="text-lg font-semibold text-white">Harper Reed</p>
+          <p className="text-sm text-white/70">Product Operations</p>
+        </div>
+      </div>
+      <dl className="mt-4 space-y-2 text-sm">
+        <div className="flex items-center justify-between">
+          <dt>Workspace</dt>
+          <dd className="text-white">Orion Health</dd>
+        </div>
+        <div className="flex items-center justify-between">
+          <dt>Role</dt>
+          <dd className="text-white">Global Admin</dd>
+        </div>
+        <div className="flex items-center justify-between">
+          <dt>Last active</dt>
+          <dd className="text-white">2 minutes ago</dd>
+        </div>
+      </dl>
+    </div>
+  );
+}
+
 const componentSlices = [
   {
     title: "Login journeys",
     description:
       "Stateful, validated forms with branded headers, inline errors, and social providers baked in.",
-    render: () => (
-      <div className="text-left">
-        <div className="space-y-3">
-          <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-            <p className="text-xs uppercase tracking-wide text-white/60">
-              Email address
-            </p>
-            <p className="text-white">designer@studio.com</p>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-            <p className="text-xs uppercase tracking-wide text-white/60">
-              Magic link sent
-            </p>
-            <p className="text-white">Check your inbox to continue</p>
-          </div>
-          <Button className="w-full bg-white text-slate-900 hover:bg-white/90">
-            Continue
-          </Button>
-        </div>
-      </div>
-    ),
+    Component: LoginJourneysSlice,
   },
   {
     title: "Security moments",
     description:
       "Ready-made MFA, device approvals, and risk prompts keep your team secure without extra design cycles.",
-    render: () => (
-      <div className="space-y-3 text-left">
-        <div className="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 px-4 py-3 text-emerald-100">
-          <p className="text-xs uppercase tracking-wide text-emerald-200">
-            One-time passcode
-          </p>
-          <p className="text-3xl font-mono tracking-widest">482 913</p>
-        </div>
-        <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white/80">
-          Trusted device: MacBook Pro · Paris, FR
-        </div>
-        <Button
-          variant="secondary"
-          className="w-full bg-emerald-500/20 text-white hover:bg-emerald-500/30"
-        >
-          Approve & continue
-        </Button>
-      </div>
-    ),
+    Component: SecurityMomentsSlice,
   },
   {
     title: "User context",
     description:
       "Profile, session, and organization widgets keep people oriented while you surface critical actions.",
-    render: () => (
-      <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-left text-white/80">
-        <div className="flex items-center gap-3">
-          <Avatar className="h-12 w-12">
-            <AvatarImage src="https://i.pravatar.cc/140?img=24" alt="Harper" />
-            <AvatarFallback>H</AvatarFallback>
-          </Avatar>
-          <div>
-            <p className="text-lg font-semibold text-white">Harper Reed</p>
-            <p className="text-sm text-white/70">Product Operations</p>
-          </div>
-        </div>
-        <dl className="mt-4 space-y-2 text-sm">
-          <div className="flex items-center justify-between">
-            <dt>Workspace</dt>
-            <dd className="text-white">Orion Health</dd>
-          </div>
-          <div className="flex items-center justify-between">
-            <dt>Role</dt>
-            <dd className="text-white">Global Admin</dd>
-          </div>
-          <div className="flex items-center justify-between">
-            <dt>Last active</dt>
-            <dd className="text-white">2 minutes ago</dd>
-          </div>
-        </dl>
-      </div>
-    ),
+    Component: UserContextSlice,
   },
 ];
 
@@ -154,7 +166,7 @@ const showcaseUser = {
   photos: [{ value: "https://i.pravatar.cc/120?img=12" }],
 };
 
-const trigger = (
+const Trigger = () => (
   <div className="flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-3 py-2 text-left text-white shadow-2xl backdrop-blur">
     <Avatar className="h-10 w-10">
       <AvatarImage src={showcaseUser.photos?.[0]?.value} alt="Avery Stone" />
@@ -167,7 +179,7 @@ const trigger = (
   </div>
 );
 
-const LandingFixture = (() => {
+function LandingFixture() {
   return (
     <div className="min-h-screen bg-slate-950 text-white">
       <div className="mx-auto flex max-w-6xl flex-col gap-16 px-6 py-16">
@@ -231,7 +243,7 @@ const LandingFixture = (() => {
           </p>
           <div className="mt-6">
             <UserDropdown
-              trigger={trigger}
+              trigger={<Trigger />}
               triggerWrapperClassName="w-full justify-start"
               user={showcaseUser}
               onManageAccount={() => undefined}
@@ -314,7 +326,7 @@ const LandingFixture = (() => {
           </p>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
-          {componentSlices.map(({ title, description, render }) => (
+          {componentSlices.map(({ title, description, Component }) => (
             <div
               key={title}
               className="flex flex-col gap-4 rounded-[28px] border border-white/10 bg-white/5 p-6 text-white/80"
@@ -323,7 +335,9 @@ const LandingFixture = (() => {
                 <p className="text-lg font-semibold text-white">{title}</p>
                 <p className="text-sm text-white/70">{description}</p>
               </div>
-              <div className="flex-1">{render()}</div>
+              <div className="flex-1">
+                <Component />
+              </div>
             </div>
           ))}
         </div>
@@ -331,7 +345,8 @@ const LandingFixture = (() => {
       </div>
     </div>
   );
-})();
+}
 
-export default LandingFixture;
+const landingFixture = <LandingFixture />;
 
+export default landingFixture;
