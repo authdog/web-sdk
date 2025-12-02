@@ -3,10 +3,15 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import {
+  TOKEN_POLL_INTERVAL_MS,
+  TOKEN_POLL_MAX_ATTEMPTS,
+  TOKEN_STORAGE_KEY,
+  TOKEN_UPDATED_EVENT,
+} from "../client/constants";
+import {
   fetchUserData,
   type AuthdogUser,
 } from "../client/session";
-import { useAuth } from "./use-auth";
 
 const PUBLIC_KEY = process.env.NEXT_PUBLIC_PK_AUTHDOG;
 
@@ -18,7 +23,8 @@ export interface UseUserResult {
 }
 
 export const useUser = (): UseUserResult => {
-  const { token, isLoading: isAuthLoading } = useAuth();
+  const [token, setToken] = useState<string | null>(null);
+  const [isTokenInitialized, setIsTokenInitialized] = useState(false);
   const [user, setUser] = useState<AuthdogUser | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [isFetching, setIsFetching] = useState(false);
@@ -27,6 +33,56 @@ export const useUser = (): UseUserResult => {
   useEffect(() => {
     return () => {
       isMountedRef.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      setToken(null);
+      setIsTokenInitialized(true);
+      return;
+    }
+
+    const readTokenFromStorage = () =>
+      window.localStorage.getItem(TOKEN_STORAGE_KEY);
+
+    const syncToken = () => {
+      const nextToken = readTokenFromStorage();
+      setToken((currentToken) =>
+        currentToken === nextToken ? currentToken : nextToken,
+      );
+    };
+
+    syncToken();
+    setIsTokenInitialized(true);
+
+    const handleTokenUpdate = () => {
+      syncToken();
+    };
+
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === TOKEN_STORAGE_KEY) {
+        syncToken();
+      }
+    };
+
+    window.addEventListener(TOKEN_UPDATED_EVENT, handleTokenUpdate);
+    window.addEventListener("storage", handleStorageChange);
+
+    let pollCount = 0;
+    const pollInterval = window.setInterval(() => {
+      pollCount++;
+      syncToken();
+
+      if (pollCount >= TOKEN_POLL_MAX_ATTEMPTS) {
+        window.clearInterval(pollInterval);
+      }
+    }, TOKEN_POLL_INTERVAL_MS);
+
+    return () => {
+      window.removeEventListener(TOKEN_UPDATED_EVENT, handleTokenUpdate);
+      window.removeEventListener("storage", handleStorageChange);
+      window.clearInterval(pollInterval);
     };
   }, []);
 
@@ -82,14 +138,18 @@ export const useUser = (): UseUserResult => {
   }, [token]);
 
   useEffect(() => {
+    if (!isTokenInitialized) {
+      return;
+    }
+
     fetchProfile().catch(() => {
       /* error is already stored in state */
     });
-  }, [fetchProfile]);
+  }, [fetchProfile, isTokenInitialized]);
 
   return {
     user,
-    isLoading: isAuthLoading || isFetching,
+    isLoading: !isTokenInitialized || isFetching,
     error,
     refetch: fetchProfile,
   };
