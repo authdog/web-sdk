@@ -45,5 +45,3 @@ export const Loading: Story = {
     user: baseUser,
   },
 };
-
-

@@ -21,5 +21,3 @@ export const Basic: Story = {
     description: "This is a custom description for the placeholder alert.",
   },
 };
-
-

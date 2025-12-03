@@ -43,5 +43,3 @@ export const Authenticated: Story = {
     user: demoUser,
   },
 };
-
-

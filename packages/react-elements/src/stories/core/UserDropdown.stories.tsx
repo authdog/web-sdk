@@ -3,7 +3,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { UserDropdown } from "../../components/core/user-dropdown";
-import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "../../components/ui/avatar";
 import React from "react";
 
 const demoUser = {
@@ -50,5 +54,3 @@ export const Default: Story = {
     onSignout: () => console.log("Sign out"),
   },
 };
-
-

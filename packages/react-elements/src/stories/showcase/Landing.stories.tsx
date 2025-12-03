@@ -219,7 +219,10 @@ function LandingShowcase() {
               roadmap—not boilerplate UI.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <Button size="lg" className="bg-white text-slate-900 hover:bg-white/90">
+              <Button
+                size="lg"
+                className="bg-white text-slate-900 hover:bg-white/90"
+              >
                 Explore components
               </Button>
               <Button size="lg" variant="secondary" asChild>
@@ -257,7 +260,9 @@ function LandingShowcase() {
           <div className="rounded-[32px] border border-white/10 bg-white/5 p-6 shadow-[0_40px_120px_rgba(15,23,42,0.35)] backdrop-blur">
             <div className="flex items-center gap-3 text-white/70">
               <Lock className="h-5 w-5 text-white" />
-              <span className="text-sm font-medium">Live component preview</span>
+              <span className="text-sm font-medium">
+                Live component preview
+              </span>
             </div>
             <p className="mt-2 text-sm text-white/60">
               The same dropdown powering production consoles.
@@ -324,7 +329,9 @@ function LandingShowcase() {
                 <p className="text-xs uppercase tracking-wide text-white/60">
                   {step.title}
                 </p>
-                <p className="mt-2 text-sm leading-relaxed">{step.description}</p>
+                <p className="mt-2 text-sm leading-relaxed">
+                  {step.description}
+                </p>
                 <code className="mt-4 inline-block rounded-xl border border-white/20 bg-slate-900/70 px-3 py-2 font-mono text-xs text-emerald-200">
                   {step.meta}
                 </code>
@@ -367,5 +374,3 @@ function LandingShowcase() {
     </div>
   );
 }
-
-
