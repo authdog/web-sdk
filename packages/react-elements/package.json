@@ -11,7 +11,7 @@
     "build": "pnpm tsup && pnpm build:styles",
     "storybook": "storybook dev -p 7007",
     "build-storybook": "storybook build",
-    "deploy-docs": "pnpm build-storybook && wrangler pages deploy storybook-static"
+    "deploy-docs": "pnpm build-storybook && wrangler pages deploy"
   },
   "peerDependencies": {
     "react": "19.0.0",
