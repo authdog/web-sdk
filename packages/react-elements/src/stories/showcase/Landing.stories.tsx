@@ -2,6 +2,7 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { Layers, Lock, Rocket, Shield, Sparkles, Users } from "lucide-react";
+import React from "react";
 
 import { UserDropdown } from "../../components/core/user-dropdown";
 import {
