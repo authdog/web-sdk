@@ -1,3 +1,4 @@
 .vercel
 cosmos-export
 wrangler.toml
+storybook-static

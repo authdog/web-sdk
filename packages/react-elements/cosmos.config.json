@@ -1,8 +1,0 @@
-{
-  "fixturesDir": "src/fixtures",
-  "lazy": false,
-  "plugins": ["react-cosmos-plugin-vite"],
-  "vite": {
-    "entry": "src/cosmos.main.tsx"
-  }
-}
