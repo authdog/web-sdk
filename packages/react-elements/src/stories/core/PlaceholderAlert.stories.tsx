@@ -3,6 +3,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { PlaceholderAlert } from "../../components/core/placeholder-alert";
+import React from "react";
 
 const meta = {
   title: "Core/Placeholder Alert",

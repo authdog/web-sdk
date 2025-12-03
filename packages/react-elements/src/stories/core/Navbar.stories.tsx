@@ -3,6 +3,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Navbar } from "../../components/core/navbar";
+import React from "react";
 
 const demoItems = [
   { title: "Home", href: "/" },

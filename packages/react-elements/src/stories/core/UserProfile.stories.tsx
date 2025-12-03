@@ -3,6 +3,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { UserProfile } from "../../components/core/user-profile";
+import React from "react";
 
 const baseUser = {
   id: "user_123",
