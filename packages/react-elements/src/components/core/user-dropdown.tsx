@@ -14,6 +14,7 @@ import {
 } from "../../components/ui/avatar";
 import { cn } from "../../lib/utils";
 import { LogOut, Settings, ExternalLink } from "lucide-react";
+import type { ComponentType } from "react";
 
 export type UserDropdownLink = {
   label: string;
@@ -84,6 +85,8 @@ export const UserDropdown = ({
   };
 
   const IconExternal = ExternalLink as any;
+  const SettingsIcon = Settings as ComponentType<any>;
+  const LogOutIcon = LogOut as ComponentType<any>;
 
   return (
     <DropdownMenu modal={modal}>
@@ -127,7 +130,7 @@ export const UserDropdown = ({
           className="cursor-pointer py-2"
           onClick={() => onManageAccount?.()}
         >
-          <Settings className="mr-2 h-4 w-4" />
+          <SettingsIcon className="mr-2 h-4 w-4" />
           <span>Manage account</span>
         </DropdownMenuItem>
         {links.map((item, idx) => {
@@ -148,7 +151,7 @@ export const UserDropdown = ({
           className="cursor-pointer py-2 rounded-md font-semibold text-red-600 dark:text-red-300 hover:bg-red-50 hover:text-red-700 focus:bg-red-50 focus:text-red-700 dark:hover:bg-red-500/20 dark:focus:bg-red-500/25 dark:hover:text-red-100 dark:focus:text-red-100 border border-transparent dark:border-red-500/30 ring-0 focus-visible:ring-2 focus-visible:ring-red-400/40 dark:focus-visible:ring-red-400/40"
           onClick={() => onSignout?.()}
         >
-          <LogOut className="mr-2 h-4 w-4 text-red-600 dark:text-red-300" />
+          <LogOutIcon className="mr-2 h-4 w-4 text-red-600 dark:text-red-300" />
           <span>Sign out</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
