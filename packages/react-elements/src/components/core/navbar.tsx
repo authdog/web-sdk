@@ -22,6 +22,7 @@ import {
 } from "../../components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "../../components/ui/sheet";
 import { IconWrapper } from "../icons";
+import { ThemeToggle } from "../ui/theme-toggle";
 
 interface NavItem {
   title: string;
@@ -71,9 +72,15 @@ export function Navbar({
     user !== undefined &&
     user.id !== null &&
     user.id !== undefined;
+
   return (
     <header className={cn("border-b bg-background", className)}>
-      <div className="container flex h-16 items-center justify-between px-4 md:px-6">
+      <div
+        className={cn(
+          "container flex h-16 items-center justify-between px-4 md:px-6",
+          "w-full lg:max-w-[80vw] mx-auto",
+        )}
+      >
         <div className="flex items-center gap-4">
           <span
             className="text-xl font-bold cursor-pointer"
@@ -81,7 +88,10 @@ export function Navbar({
           >
             {logoText}
           </span>
-          <nav className="hidden md:flex gap-6">
+          {children}
+        </div>
+        <div className="flex flex-1 items-center justify-end gap-6">
+          <nav className="hidden md:flex items-center gap-6">
             {items?.map((item, index) => (
               <span
                 key={index}
@@ -99,90 +109,88 @@ export function Navbar({
               </span>
             ))}
           </nav>
-        </div>
-        <div className="flex items-center gap-4">
-          {children}
-
-          {isAuthenticated ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="relative h-8 w-8 rounded-full"
-                  disabled={isLoading}
-                >
-                  <Avatar className="h-8 w-8">
-                    {isLoading ? (
-                      <div className="h-8 w-8 animate-pulse bg-muted rounded-full" />
-                    ) : (
-                      <>
-                        <AvatarImage
-                          src={user.photos?.[0]?.value || "/placeholder.svg"}
-                          alt={user.displayName}
-                        />
-                        <AvatarFallback>
-                          {user.displayName?.charAt(0)}
-                        </AvatarFallback>
-                      </>
-                    )}
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56" align="end" forceMount>
-                {isLoading ? (
-                  <div className="p-4">
-                    <div className="h-4 w-3/4 animate-pulse bg-muted rounded mb-2" />
-                    <div className="h-3 w-1/2 animate-pulse bg-muted rounded" />
-                  </div>
-                ) : (
-                  <>
-                    <DropdownMenuLabel className="font-normal">
-                      <div className="flex flex-col space-y-1">
-                        <p className="text-sm font-medium leading-none">
-                          {user.displayName}
-                        </p>
-                        <p className="text-xs leading-none text-muted-foreground">
-                          {user.emails?.[0]?.value}
-                        </p>
-                      </div>
-                    </DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuGroup>
-                      <DropdownMenuItem onClick={onProfileSelected}>
-                        <IconWrapper Icon={User} />
-                        <span>Profile</span>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            {isAuthenticated ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="relative h-8 w-8 rounded-full"
+                    disabled={isLoading}
+                  >
+                    <Avatar className="h-8 w-8">
+                      {isLoading ? (
+                        <div className="h-8 w-8 animate-pulse bg-muted rounded-full" />
+                      ) : (
+                        <>
+                          <AvatarImage
+                            src={user.photos?.[0]?.value || "/placeholder.svg"}
+                            alt={user.displayName}
+                          />
+                          <AvatarFallback>
+                            {user.displayName?.charAt(0)}
+                          </AvatarFallback>
+                        </>
+                      )}
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="end" forceMount>
+                  {isLoading ? (
+                    <div className="p-4">
+                      <div className="h-4 w-3/4 animate-pulse bg-muted rounded mb-2" />
+                      <div className="h-3 w-1/2 animate-pulse bg-muted rounded" />
+                    </div>
+                  ) : (
+                    <>
+                      <DropdownMenuLabel className="font-normal">
+                        <div className="flex flex-col space-y-1">
+                          <p className="text-sm font-medium leading-none">
+                            {user.displayName}
+                          </p>
+                          <p className="text-xs leading-none text-muted-foreground">
+                            {user.emails?.[0]?.value}
+                          </p>
+                        </div>
+                      </DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuGroup>
+                        <DropdownMenuItem onClick={onProfileSelected}>
+                          <IconWrapper Icon={User} />
+                          <span>Profile</span>
+                        </DropdownMenuItem>
+                      </DropdownMenuGroup>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={onLogout}>
+                        <IconWrapper Icon={LogOut} />
+                        <span>Log out</span>
                       </DropdownMenuItem>
-                    </DropdownMenuGroup>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={onLogout}>
-                      <IconWrapper Icon={LogOut} />
-                      <span>Log out</span>
-                    </DropdownMenuItem>
-                  </>
-                )}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ) : (
-            <Button
-              variant="default"
-              aria-label="Sign in"
-              onClick={() => {
-                if (!environmentId) {
-                  throw new Error("Environment ID is required");
-                }
+                    </>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button
+                variant="default"
+                aria-label="Sign in"
+                onClick={() => {
+                  if (!environmentId) {
+                    throw new Error("Environment ID is required");
+                  }
 
-                if (!identityHost) {
-                  throw new Error("Identity Host is required");
-                }
+                  if (!identityHost) {
+                    throw new Error("Identity Host is required");
+                  }
 
-                const signinUrl = `${identityHost}/signin/${environmentId}`;
-                window.open(signinUrl, "_blank");
-              }}
-            >
-              Sign in
-            </Button>
-          )}
-
+                  const signinUrl = `${identityHost}/signin/${environmentId}`;
+                  window.open(signinUrl, "_blank");
+                }}
+              >
+                Sign in
+              </Button>
+            )}
+          </div>
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button
