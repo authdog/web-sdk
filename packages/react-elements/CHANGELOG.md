@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.41
+
+### Patch Changes
+
+- 0354ca1: Minor syntax fix
+
 ## 0.0.40
 
 ### Patch Changes
