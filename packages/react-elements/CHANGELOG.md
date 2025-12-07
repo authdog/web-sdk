@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.44
+
+### Patch Changes
+
+- cf3409c: add navbar with logo story
+
 ## 0.0.43
 
 ### Patch Changes
