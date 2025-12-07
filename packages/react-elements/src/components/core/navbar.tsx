@@ -36,6 +36,12 @@ interface NavbarProps {
   className?: string;
   logoText?: string;
   logoSrc?: string;
+  /**
+   * Optional custom alt text element rendered next to the logo.
+   * When not provided, the plain `logoText` string is rendered.
+   * Use this to pass in custom typography / font classes.
+   */
+  altText?: React.ReactNode;
   isLoading?: boolean;
   user?: any;
   onNavigateHome?: () => void;
@@ -55,6 +61,7 @@ export function Navbar({
   className,
   logoText = "ACME Corp",
   logoSrc,
+  altText,
   user = {
     name: "John Doe",
     email: "john@example.com",
@@ -111,9 +118,11 @@ export function Navbar({
                 />
               </span>
             )}
-            <span className="text-base font-semibold tracking-tight md:text-lg group-hover:text-primary">
-              {logoText}
-            </span>
+            {altText ?? (
+              <span className="text-base font-semibold tracking-tight md:text-lg group-hover:text-primary">
+                {logoText}
+              </span>
+            )}
           </button>
           {children}
         </div>
