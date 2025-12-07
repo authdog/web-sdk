@@ -1,5 +1,12 @@
 # @authdog/react-elements
 
+## 0.0.48
+
+### Patch Changes
+
+- 1be5751: Fix cursor nav elements
+- 3c9f2fc: Enhance display dropdown avatar
+
 ## 0.0.47
 
 ### Patch Changes
