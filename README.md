@@ -8,13 +8,7 @@ Authdog web SDK is curated set of libraries aiming to accelerate identity integr
 
 ### Component playground
 
-We've migrated to [React Cosmos](https://reactcosmos.org) for developing the React Elements library. Launch the playground locally with:
-
-```bash
-pnpm --filter @authdog/react-elements cosmos
-```
-
-Cosmos watches `src/fixtures/**` for component scenarios and applies the shared `src/global.css` tokens automatically.
+- https://react-elements.authdog.com/
 
 ## Integrations
 
