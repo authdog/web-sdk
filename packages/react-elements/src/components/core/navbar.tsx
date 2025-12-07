@@ -178,7 +178,7 @@ export function Navbar({
                   className="md:hidden"
                   aria-label="Open Menu"
                 >
-                  <IconWrapper Icon={Menu} />
+                  <IconWrapper Icon={Menu} withMargin={false} />
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="pr-0">
@@ -281,6 +281,7 @@ export function Navbar({
             ) : (
               <Button
                 variant="default"
+                className="cursor-pointer"
                 aria-label="Sign in"
                 onClick={() => {
                   if (!environmentId) {
