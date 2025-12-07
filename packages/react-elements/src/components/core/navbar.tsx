@@ -243,29 +243,33 @@ export function Navbar({
                           </p>
                         </div>
                       </DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuGroup>
-                        {dropdownMenuItems.map((item, index) => (
-                          <DropdownMenuItem
-                            key={index}
-                            onClick={() => {
-                              if (!item.disabled) {
-                                // Backward compatibility: if it's the profile item and onProfileSelected exists
-                                if (item.uri === "/profile" && onProfileSelected) {
-                                  onProfileSelected();
-                                }
-                                onDropdownMenuItemClick(item.uri);
-                              }
-                            }}
-                            disabled={item.disabled}
-                            className="cursor-pointer"
-                          >
-                            {item.icon && <IconWrapper Icon={item.icon} />}
-                            <span>{item.name}</span>
-                          </DropdownMenuItem>
-                        ))}
-                      </DropdownMenuGroup>
-                      <DropdownMenuSeparator />
+                      {dropdownMenuItems.length > 0 && (
+                        <>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuGroup>
+                            {dropdownMenuItems.map((item, index) => (
+                              <DropdownMenuItem
+                                key={index}
+                                onClick={() => {
+                                  if (!item.disabled) {
+                                    // Backward compatibility: if it's the profile item and onProfileSelected exists
+                                    if (item.uri === "/profile" && onProfileSelected) {
+                                      onProfileSelected();
+                                    }
+                                    onDropdownMenuItemClick(item.uri);
+                                  }
+                                }}
+                                disabled={item.disabled}
+                                className="cursor-pointer"
+                              >
+                                {item.icon && <IconWrapper Icon={item.icon} />}
+                                <span>{item.name}</span>
+                              </DropdownMenuItem>
+                            ))}
+                          </DropdownMenuGroup>
+                          <DropdownMenuSeparator />
+                        </>
+                      )}
                       <DropdownMenuItem onClick={onLogout} className="cursor-pointer">
                         <IconWrapper Icon={LogOut} />
                         <span>Log out</span>

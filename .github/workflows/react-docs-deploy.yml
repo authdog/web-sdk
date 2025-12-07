@@ -2,12 +2,12 @@ name: react-docs-deploy
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - packages/react-elements/**
-      - .github/workflows/react-docs-deploy.yml
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - packages/react-elements/**
+  #     - .github/workflows/react-docs-deploy.yml
 
 env:
   CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
