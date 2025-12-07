@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.49
+
+### Patch Changes
+
+- 8d39e01: Fix display avatar menu
+
 ## 0.0.48
 
 ### Patch Changes
