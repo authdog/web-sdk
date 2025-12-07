@@ -43,3 +43,9 @@ export const Authenticated: Story = {
     user: demoUser,
   },
 };
+
+export const WithLogo: Story = {
+  args: {
+    logoSrc: "https://dummyimage.com/64x64/111827/ffffff&text=AD",
+  },
+};
