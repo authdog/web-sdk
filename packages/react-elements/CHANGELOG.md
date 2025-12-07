@@ -1,5 +1,12 @@
 # @authdog/react-elements
 
+## 0.0.43
+
+### Patch Changes
+
+- 648d361: enhance navbar element
+- 21efe8c: Improve navbar display
+
 ## 0.0.42
 
 ### Patch Changes
