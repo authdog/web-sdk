@@ -35,6 +35,7 @@ interface NavbarProps {
   children?: React.ReactNode;
   className?: string;
   logoText?: string;
+  logoSrc?: string;
   isLoading?: boolean;
   user?: any;
   onNavigateHome?: () => void;
@@ -53,6 +54,7 @@ export function Navbar({
   children,
   className,
   logoText = "ACME Corp",
+  logoSrc,
   user = {
     name: "John Doe",
     email: "john@example.com",
@@ -67,6 +69,7 @@ export function Navbar({
   environmentId = "58be35b0-708f-49f6-84f0-6695d307d997",
 }: NavbarProps) {
   const [open, setOpen] = useState(false);
+  const [logoFailed, setLogoFailed] = useState(false);
   const isAuthenticated =
     user !== null &&
     user !== undefined &&
@@ -74,20 +77,42 @@ export function Navbar({
     user.id !== undefined;
 
   return (
-    <header className={cn("border-b bg-background", className)}>
+    <header
+      className={cn(
+        "sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60",
+        className,
+      )}
+    >
       <div
         className={cn(
-          "container flex h-16 items-center justify-between px-4 md:px-6",
+          "flex h-16 items-center justify-between px-4 md:px-6",
           "w-full lg:max-w-[80vw] mx-auto",
         )}
       >
-        <div className="flex items-center gap-4">
-          <span
-            className="text-xl font-bold cursor-pointer"
+        <div className="flex items-center gap-3 md:gap-4">
+          <button
+            type="button"
             onClick={onNavigateHome}
+            className={cn(
+              "group inline-flex items-center gap-2 md:gap-3 rounded-md px-1 py-1 text-left",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+            )}
+            aria-label="Go to homepage"
           >
-            {logoText}
-          </span>
+            {logoSrc && !logoFailed && (
+              <span className="inline-flex h-8 w-8 items-center justify-center overflow-hidden rounded-md bg-muted/80 ring-1 ring-border">
+                <img
+                  src={logoSrc}
+                  alt={logoText}
+                  className="h-7 w-7 object-contain"
+                  onError={() => setLogoFailed(true)}
+                />
+              </span>
+            )}
+            <span className="text-base font-semibold tracking-tight md:text-lg group-hover:text-primary">
+              {logoText}
+            </span>
+          </button>
           {children}
         </div>
         <div className="flex flex-1 items-center justify-end gap-6">
@@ -110,6 +135,35 @@ export function Navbar({
             ))}
           </nav>
           <div className="flex items-center gap-3">
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="md:hidden"
+                  aria-label="Open Menu"
+                >
+                  <IconWrapper Icon={Menu} />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="pr-0">
+                <nav className="grid gap-2 py-6">
+                  {items?.map((item, index) => (
+                    <a
+                      key={index}
+                      href={item.href}
+                      className={cn(
+                        "flex w-full items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent",
+                        item.disabled && "cursor-not-allowed opacity-80",
+                      )}
+                      onClick={() => setOpen(false)}
+                    >
+                      {item.title}
+                    </a>
+                  ))}
+                </nav>
+              </SheetContent>
+            </Sheet>
             <ThemeToggle />
             {isAuthenticated ? (
               <DropdownMenu>
@@ -191,35 +245,6 @@ export function Navbar({
               </Button>
             )}
           </div>
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="md:hidden"
-                aria-label="Open Menu"
-              >
-                <IconWrapper Icon={Menu} />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="pr-0">
-              <nav className="grid gap-2 py-6">
-                {items?.map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.href}
-                    className={cn(
-                      "flex w-full items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent",
-                      item.disabled && "cursor-not-allowed opacity-80",
-                    )}
-                    onClick={() => setOpen(false)}
-                  >
-                    {item.title}
-                  </a>
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
         </div>
       </div>
     </header>
