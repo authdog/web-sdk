@@ -24,9 +24,16 @@ import { Sheet, SheetContent, SheetTrigger } from "../../components/ui/sheet";
 import { IconWrapper } from "../icons";
 import { ThemeToggle } from "../ui/theme-toggle";
 
-interface NavItem {
+export interface NavItem {
   title: string;
   href: string;
+  disabled?: boolean;
+}
+
+export interface DropdownMenuItem {
+  name: string;
+  uri: string;
+  icon?: React.ComponentType<{ className?: string }>;
   disabled?: boolean;
 }
 
@@ -46,6 +53,19 @@ interface NavbarProps {
   user?: any;
   onNavigateHome?: () => void;
   onNavItemClick?: (href: string) => void;
+  /**
+   * Custom dropdown menu items that appear in the user avatar dropdown.
+   * If not provided, defaults to a "Profile" link.
+   */
+  dropdownMenuItems?: DropdownMenuItem[];
+  /**
+   * Callback when a dropdown menu item is clicked.
+   * Receives the URI of the clicked item.
+   */
+  onDropdownMenuItemClick?: (uri: string) => void;
+  /**
+   * @deprecated Use dropdownMenuItems with a custom item instead
+   */
   onProfileSelected?: () => void;
   onLogout?: () => void;
   // signinUrl?: string;
@@ -69,6 +89,10 @@ export function Navbar({
   },
   onNavigateHome = () => console.log("Navigating to home"),
   onNavItemClick = (href: string) => console.log(`Navigating to ${href}`),
+  dropdownMenuItems = [
+    { name: "Profile", uri: "/profile", icon: User },
+  ],
+  onDropdownMenuItemClick = (uri: string) => console.log(`Navigating to ${uri}`),
   onProfileSelected,
   onLogout = () => console.log("Logout clicked"),
   isLoading = false,
@@ -103,7 +127,7 @@ export function Navbar({
             type="button"
             onClick={onNavigateHome}
             className={cn(
-              "group inline-flex items-center gap-2 md:gap-3 rounded-md px-1 py-1 text-left",
+              "group inline-flex items-center gap-2 md:gap-3 rounded-md px-1 py-1 text-left cursor-pointer",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
             )}
             aria-label="Go to homepage"
@@ -164,7 +188,7 @@ export function Navbar({
                       key={index}
                       href={item.href}
                       className={cn(
-                        "flex w-full items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent",
+                        "flex w-full items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent cursor-pointer",
                         item.disabled && "cursor-not-allowed opacity-80",
                       )}
                       onClick={() => setOpen(false)}
@@ -221,13 +245,28 @@ export function Navbar({
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuGroup>
-                        <DropdownMenuItem onClick={onProfileSelected}>
-                          <IconWrapper Icon={User} />
-                          <span>Profile</span>
-                        </DropdownMenuItem>
+                        {dropdownMenuItems.map((item, index) => (
+                          <DropdownMenuItem
+                            key={index}
+                            onClick={() => {
+                              if (!item.disabled) {
+                                // Backward compatibility: if it's the profile item and onProfileSelected exists
+                                if (item.uri === "/profile" && onProfileSelected) {
+                                  onProfileSelected();
+                                }
+                                onDropdownMenuItemClick(item.uri);
+                              }
+                            }}
+                            disabled={item.disabled}
+                            className="cursor-pointer"
+                          >
+                            {item.icon && <IconWrapper Icon={item.icon} />}
+                            <span>{item.name}</span>
+                          </DropdownMenuItem>
+                        ))}
                       </DropdownMenuGroup>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={onLogout}>
+                      <DropdownMenuItem onClick={onLogout} className="cursor-pointer">
                         <IconWrapper Icon={LogOut} />
                         <span>Log out</span>
                       </DropdownMenuItem>
