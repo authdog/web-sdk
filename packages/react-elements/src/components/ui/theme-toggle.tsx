@@ -46,6 +46,7 @@ export const ThemeToggle = () => {
     <Button
       variant="ghost"
       size="icon"
+      className="cursor-pointer"
       aria-label={mode === "dark" ? "Switch to light theme" : "Switch to dark theme"}
       onClick={toggle}
     >
