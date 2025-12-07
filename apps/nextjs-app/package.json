@@ -14,7 +14,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.555.0",
-    "next": "15.5.7",
+    "next": "15.4.8",
     "react": "catalog:react18",
     "react-dom": "catalog:react18",
     "tailwind-merge": "^2.3.0"
