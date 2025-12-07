@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.45
+
+### Patch Changes
+
+- 7f8b341: Improve navbar
+
 ## 0.0.44
 
 ### Patch Changes
