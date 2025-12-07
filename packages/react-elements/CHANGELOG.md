@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.46
+
+### Patch Changes
+
+- 25cc8b1: Enhance customization navbar logo
+
 ## 0.0.45
 
 ### Patch Changes
