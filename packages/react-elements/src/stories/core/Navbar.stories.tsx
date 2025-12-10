@@ -44,6 +44,48 @@ export const Authenticated: Story = {
   },
 };
 
+export const LoadingThenAuthenticated: Story = {
+  render: (args) => {
+    const [loading, setLoading] = React.useState(true);
+    const [user, setUser] = React.useState<any | undefined>(undefined);
+
+    React.useEffect(() => {
+      const timer = setTimeout(() => {
+        setUser(demoUser);
+        setLoading(false);
+      }, 1500);
+
+      return () => clearTimeout(timer);
+    }, []);
+
+    return <Navbar {...args} isLoading={loading} user={user} />;
+  },
+  args: {
+    user: undefined,
+    isLoading: true,
+  },
+};
+
+export const LoadingThenGuest: Story = {
+  render: (args) => {
+    const [loading, setLoading] = React.useState(true);
+
+    React.useEffect(() => {
+      const timer = setTimeout(() => {
+        setLoading(false);
+      }, 1500);
+
+      return () => clearTimeout(timer);
+    }, []);
+
+    return <Navbar {...args} isLoading={loading} />;
+  },
+  args: {
+    user: undefined,
+    isLoading: true,
+  },
+};
+
 export const WithLogo: Story = {
   args: {
     logoSrc: "https://dummyimage.com/64x64/111827/ffffff&text=AD",

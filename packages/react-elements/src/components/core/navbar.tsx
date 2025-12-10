@@ -200,7 +200,12 @@ export function Navbar({
               </SheetContent>
             </Sheet>
             <ThemeToggle />
-            {isAuthenticated ? (
+            {isLoading ? (
+              <div
+                className="h-8 w-8 animate-pulse rounded-full bg-muted"
+                aria-label="Loading user"
+              />
+            ) : isAuthenticated ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
