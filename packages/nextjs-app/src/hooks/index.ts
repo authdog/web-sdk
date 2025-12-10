@@ -1,4 +1,4 @@
-export { useAuth } from "./use-auth";
-export type { UseAuthResult } from "./use-auth";
-export { useUser } from "./use-user";
-export type { UseUserResult } from "./use-user";
+export { useAuth } from "./useAuth";
+export type { UseAuthResult } from "./useAuth";
+export { useUser } from "./useUser";
+export type { UseUserResult } from "./useUser";
