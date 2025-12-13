@@ -139,9 +139,7 @@ export const useUser = (): UseUserResult => {
       return;
     }
 
-    fetchProfile().catch(() => {
-      /* error is already stored in state */
-    });
+    fetchProfile()
   }, [fetchProfile, isTokenInitialized]);
 
   return {

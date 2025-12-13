@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.0.50
+
+### Patch Changes
+
+- b2a7971: Adding loader avatar
+
 ## 0.0.49
 
 ### Patch Changes
