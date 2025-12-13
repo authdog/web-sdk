@@ -1,5 +1,12 @@
 # nextjs-app
 
+## 1.0.12
+
+### Patch Changes
+
+- Updated dependencies [e8c8b53]
+  - @authdog/nextjs-app@1.0.2
+
 ## 1.0.11
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @authdog/nextjs-app
 
+## 1.0.2
+
+### Patch Changes
+
+- e8c8b53: Define hasRequiredPermissions, hasRequiredGroups
+
 ## 1.0.1
 
 ### Patch Changes
