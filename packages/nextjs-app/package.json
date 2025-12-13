@@ -1,6 +1,6 @@
 {
     "name": "@authdog/nextjs-app",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Authdog Next.js SDK",
     "source": "src/index.ts",
     "main": "dist/index.js",
@@ -21,12 +21,12 @@
         "dist/"
     ],
     "scripts": {
-    "format": "prettier --config .prettierrc.json --write \"**/*.{ts,md}\"",
-    "type-check": "tsc",
-    "clean": "rm -rf dist",
-    "build": "pnpm clean && tsup",
-    "test": "vitest run",
-    "ship": "pnpm build && pnpm publish --access public --no-git-checks"
+        "format": "prettier --config .prettierrc.json --write \"**/*.{ts,md}\"",
+        "type-check": "tsc",
+        "clean": "rm -rf dist",
+        "build": "pnpm clean && tsup",
+        "test": "vitest run",
+        "ship": "pnpm build && pnpm publish --access public --no-git-checks"
     },
     "dependencies": {
         "next": "^15.4.8",
