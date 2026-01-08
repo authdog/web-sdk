@@ -35,7 +35,7 @@
     "dependencies": {
         "@authdog/node-commons": "workspace:*",
         "@remix-run/node": "^2.15.2",
-        "@remix-run/react": "^2.16.5",
+        "@remix-run/react": "^2.17.3",
         "react": "^18.2.0"
     },
     "devDependencies": {
