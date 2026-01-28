@@ -29,7 +29,7 @@
         "ship": "pnpm build && pnpm publish --access public --no-git-checks"
     },
     "dependencies": {
-        "next": "^15.4.8",
+        "next": "^16.1.5",
         "react": "catalog:react19"
     },
     "devDependencies": {
