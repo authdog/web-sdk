@@ -22,7 +22,7 @@
   "devDependencies": {
     "@authdog/eslint-config": "workspace:*",
     "@authdog/typescript-config": "workspace:*",
-    "@next/eslint-plugin-next": "15.5.3",
+    "@next/eslint-plugin-next": "15.5.11",
     "@types/eslint": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:react18",
