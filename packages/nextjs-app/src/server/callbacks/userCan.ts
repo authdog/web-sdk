@@ -1,3 +1,1 @@
-export const userCan = async (publicKey: string, token: string) => {
-
-}
+export const userCan = async (publicKey: string, token: string) => {};

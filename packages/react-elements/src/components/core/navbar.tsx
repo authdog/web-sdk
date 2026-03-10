@@ -89,10 +89,9 @@ export function Navbar({
   },
   onNavigateHome = () => console.log("Navigating to home"),
   onNavItemClick = (href: string) => console.log(`Navigating to ${href}`),
-  dropdownMenuItems = [
-    { name: "Profile", uri: "/profile", icon: User },
-  ],
-  onDropdownMenuItemClick = (uri: string) => console.log(`Navigating to ${uri}`),
+  dropdownMenuItems = [{ name: "Profile", uri: "/profile", icon: User }],
+  onDropdownMenuItemClick = (uri: string) =>
+    console.log(`Navigating to ${uri}`),
   onProfileSelected,
   onLogout = () => console.log("Logout clicked"),
   isLoading = false,
@@ -258,7 +257,10 @@ export function Navbar({
                                 onClick={() => {
                                   if (!item.disabled) {
                                     // Backward compatibility: if it's the profile item and onProfileSelected exists
-                                    if (item.uri === "/profile" && onProfileSelected) {
+                                    if (
+                                      item.uri === "/profile" &&
+                                      onProfileSelected
+                                    ) {
                                       onProfileSelected();
                                     }
                                     onDropdownMenuItemClick(item.uri);
@@ -275,7 +277,10 @@ export function Navbar({
                           <DropdownMenuSeparator />
                         </>
                       )}
-                      <DropdownMenuItem onClick={onLogout} className="cursor-pointer">
+                      <DropdownMenuItem
+                        onClick={onLogout}
+                        className="cursor-pointer"
+                      >
                         <IconWrapper Icon={LogOut} />
                         <span>Log out</span>
                       </DropdownMenuItem>

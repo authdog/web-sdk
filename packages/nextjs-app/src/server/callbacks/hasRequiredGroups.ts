@@ -1,4 +1,4 @@
-import { runIdentityGraphQLRequest } from "./graphql-client"
+import { runIdentityGraphQLRequest } from "./graphql-client";
 
 const PRINCIPAL_GROUPS_QUERY = `
   query PrincipalGroups($groupIds: [String!]) {
@@ -11,7 +11,7 @@ const PRINCIPAL_GROUPS_QUERY = `
       }
     }
   }
-`
+`;
 
 export const hasRequiredGroups = async (
   publicKey: string,
@@ -20,13 +20,13 @@ export const hasRequiredGroups = async (
 ) => {
   const data = await runIdentityGraphQLRequest<{
     principalGroups: {
-      hasGroups: boolean
-      missingGroups: string[]
-      meta: { code: number; message: string }
-    }
+      hasGroups: boolean;
+      missingGroups: string[];
+      meta: { code: number; message: string };
+    };
   }>(publicKey, token, PRINCIPAL_GROUPS_QUERY, {
     groupIds: groups || [],
-  })
+  });
 
-  return data.principalGroups
-}
+  return data.principalGroups;
+};

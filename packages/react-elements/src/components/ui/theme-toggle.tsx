@@ -15,7 +15,9 @@ const getPreferredTheme = (): ThemeMode => {
   if (stored === "light" || stored === "dark") {
     return stored;
   }
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
 };
 
 const applyTheme = (mode: ThemeMode) => {
@@ -47,10 +49,16 @@ export const ThemeToggle = () => {
       variant="ghost"
       size="icon"
       className="cursor-pointer"
-      aria-label={mode === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+      aria-label={
+        mode === "dark" ? "Switch to light theme" : "Switch to dark theme"
+      }
       onClick={toggle}
     >
-      {mode === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      {mode === "dark" ? (
+        <Sun className="h-4 w-4" />
+      ) : (
+        <Moon className="h-4 w-4" />
+      )}
     </Button>
   );
 };

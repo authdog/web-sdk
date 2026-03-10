@@ -1,4 +1,4 @@
-import { runIdentityGraphQLRequest } from "./graphql-client"
+import { runIdentityGraphQLRequest } from "./graphql-client";
 
 const PRINCIPAL_PERMISSIONS_QUERY = `
   query PrincipalPermissions($permissionIds: [String!]) {
@@ -11,7 +11,7 @@ const PRINCIPAL_PERMISSIONS_QUERY = `
       }
     }
   }
-`
+`;
 
 export const hasRequiredPermissions = async (
   publicKey: string,
@@ -20,13 +20,13 @@ export const hasRequiredPermissions = async (
 ) => {
   const data = await runIdentityGraphQLRequest<{
     principalPermissions: {
-      hasPermissions: boolean
-      missingPermissions: string[]
-      meta: { code: number; message: string }
-    }
+      hasPermissions: boolean;
+      missingPermissions: string[];
+      meta: { code: number; message: string };
+    };
   }>(publicKey, token, PRINCIPAL_PERMISSIONS_QUERY, {
     permissionIds: permissions || [],
-  })
+  });
 
-  return data.principalPermissions
-}
+  return data.principalPermissions;
+};

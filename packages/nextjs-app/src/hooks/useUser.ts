@@ -139,7 +139,7 @@ export const useUser = (): UseUserResult => {
       return;
     }
 
-    fetchProfile()
+    fetchProfile();
   }, [fetchProfile, isTokenInitialized]);
 
   return {
