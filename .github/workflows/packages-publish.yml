@@ -19,19 +19,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: pnpm/action-setup@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          version: 9.15.9
+          bun-version: 1.2.11
 
       - uses: actions/cache@v4
         with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/pnpm-lock.yaml') }}
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-cache-${{ hashFiles('**/bun.lock') }}
 
       - name: Configure NPM token
         run: echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ~/.npmrc
 
-      - run: pnpm install
+      - run: bun install --frozen-lockfile
 
       # - name: Create Release Pull Request
       #   id: changesets-version
@@ -58,7 +58,7 @@ jobs:
         uses: changesets/action@v1
         with:
           version: |
-            pnpm generate-pr
+            bun generate-pr
         env:
           GITHUB_TOKEN: ${{ secrets.GH_AUTOMATION_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
@@ -69,7 +69,7 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: |
-            pnpm publish-packages
+            bun publish-packages
         env:
           GITHUB_TOKEN: ${{ secrets.GH_AUTOMATION_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}

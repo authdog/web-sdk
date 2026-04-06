@@ -15,7 +15,7 @@ This is an example Vue.js application demonstrating how to use the Authdog Vue S
 1. Install dependencies:
 
 ```bash
-pnpm install
+bun install
 ```
 
 2. Set up your Authdog credentials:
@@ -25,7 +25,7 @@ pnpm install
 3. Start the development server:
 
 ```bash
-pnpm dev
+bun dev
 ```
 
 4. Open your browser and navigate to `http://localhost:3001`
@@ -72,7 +72,7 @@ src/
 
 ## Development
 
-- `pnpm dev` - Start development server
-- `pnpm build` - Build for production
-- `pnpm preview` - Preview production build
-- `pnpm type-check` - Run TypeScript type checking
+- `bun dev` - Start development server
+- `bun run build` - Build for production
+- `bun run preview` - Preview production build
+- `bun run type-check` - Run TypeScript type checking

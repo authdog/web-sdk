@@ -3,19 +3,35 @@
   "version": "0.0.50",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "sideEffects": [
+    "./dist/global.css",
+    "./dist/styles.css"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/authdog-labs/web-sdk.git",
+    "directory": "packages/react-elements"
+  },
+  "homepage": "https://github.com/authdog-labs/web-sdk/tree/main/packages/react-elements#readme",
+  "bugs": {
+    "url": "https://github.com/authdog-labs/web-sdk/issues"
+  },
   "scripts": {
-    "ui": "pnpm dlx shadcn@latest",
+    "ui": "bunx shadcn@latest",
     "lint": "eslint .",
     "build:styles": "postcss src/global.css -o dist/styles.css",
-    "build": "pnpm tsup && pnpm build:styles",
+    "build": "tsup && bun run build:styles",
     "storybook": "storybook dev -p 7007",
     "build-storybook": "storybook build",
-    "deploy-docs": "pnpm build-storybook && cp wrangler.prod.toml wrangler.toml && wrangler pages deploy"
+    "deploy-docs": "bun run build-storybook && cp wrangler.prod.toml wrangler.toml && wrangler pages deploy"
   },
   "peerDependencies": {
-    "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react": "^18.2.0 || ^19.0.0",
+    "react-dom": "^18.2.0 || ^19.0.0"
   },
   "devDependencies": {
     "@authdog/eslint-config": "workspace:*",
@@ -41,7 +57,7 @@
     "react-tweet": "^3.2.1",
     "storybook": "^10.1.3",
     "style-loader": "^3.3.3",
-    "tailwindcss": "catalog:",
+    "tailwindcss": "3.4.19",
     "ts-loader": "^9.5.1",
     "typescript": "5.7.3",
     "vite": "^5.0.0",
@@ -56,13 +72,13 @@
     "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "lucide-react": "catalog:",
+    "lucide-react": "^0.555.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"
   },
   "exports": {
     ".": {
-      "types": "./dist/index.d.mts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
@@ -70,16 +86,15 @@
     "./postcss.config": "./dist/postcss.config.mjs",
     "./tailwind.config": "./dist/tailwind.config.ts",
     "./lib/*": {
-      "types": "./dist/lib/*.d.mts",
+      "types": "./dist/lib/*.d.ts",
       "import": "./dist/lib/*.mjs",
       "require": "./dist/lib/*.js"
     },
-    "./components/*": {
-      "types": "./dist/components/ui/*.d.mts",
+    "./components/ui/*": {
+      "types": "./dist/components/ui/*.d.ts",
       "import": "./dist/components/ui/*.mjs",
       "require": "./dist/components/ui/*.js"
     },
-    "./tailwind.preset": "./dist/tailwind.preset.js",
     "./styles.css": "./dist/styles.css"
   },
   "publishConfig": {

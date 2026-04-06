@@ -11,7 +11,7 @@ on:
 
 env:
   # codebase
-  STORE_PATH: ~/.pnpm-store
+  BUN_CACHE_PATH: ~/.bun/install/cache
   ENVFILE_CONSOLE: apps/remix/.env
   SCOPE_VERCEL: david-barrats-projects-b894a911
   PROJECT_VERCEL: remix-demo
@@ -38,26 +38,23 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - uses: pnpm/action-setup@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          version: 9.15.9
+          bun-version: 1.2.11
 
       # - name: Use taobao registry
       #   run: npm config set registry https://registry.npmmirror.com/
 
-      - name: Setup PNPM store path
-        run: pnpm config set store-dir ${{ env.STORE_PATH }}
-
-      - name: Setup Pnpm Cache
+      - name: Cache Bun dependencies
         uses: actions/cache@v4
         with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-cache-${{ hashFiles('**/pnpm-lock.yaml') }}
+          path: ${{ env.BUN_CACHE_PATH }}
+          key: ${{ runner.os }}-bun-cache-${{ hashFiles('**/bun.lock') }}
           restore-keys: |
-            ${{ runner.os }}-pnpm-cache-
+            ${{ runner.os }}-bun-cache-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
       - name: Build workspace packages
         run: |
@@ -65,14 +62,14 @@ jobs:
       
       - name: Install latest dependencies in nextjs
         run: |
-          (cd apps/remix; pnpm add @authdog/remix-node@latest @authdog/react-elements@latest)
+          (cd apps/remix; bun add @authdog/remix-node@latest @authdog/react-elements@latest)
 
       - name: "Replace catalog: tags with latest versions"
         run: node .github/scripts/replace-catalog.js 'apps/remix/package.json'
 
       - name: Ship Remix demo
         run: |
-          npx vercel deploy \
+          bunx vercel deploy \
             --cwd apps/remix \
             --token ${{ secrets.VERCEL_CD_TOKEN }} \
             --scope ${{ env.SCOPE_VERCEL }} \

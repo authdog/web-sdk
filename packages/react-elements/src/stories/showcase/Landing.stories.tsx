@@ -44,7 +44,7 @@ const buildSteps = [
     title: "Install & theme",
     description:
       "Install the React Elements package, extend your Tailwind config, and drop Storybook around your component stories.",
-    meta: "pnpm add @authdog/react-elements",
+    meta: "bun add @authdog/react-elements",
   },
   {
     title: "Connect to Authdog",

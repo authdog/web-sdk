@@ -3,41 +3,61 @@
     "version": "1.0.2",
     "description": "Authdog Next.js SDK",
     "source": "src/index.ts",
-    "main": "dist/index.js",
-    "module": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
     "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js"
+        },
         "./client": {
-            "types": "dist/index.d.ts",
-            "import": "./dist/index.js"
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js"
         },
         "./server": {
-            "types": "dist/index.server.d.ts",
-            "import": "dist/index.server.js",
-            "require": "dist/index.server.js"
+            "types": "./dist/index.server.d.ts",
+            "import": "./dist/index.server.mjs",
+            "require": "./dist/index.server.js"
         }
     },
     "files": [
         "dist/"
     ],
+    "sideEffects": false,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/authdog-labs/web-sdk.git",
+        "directory": "packages/nextjs-app"
+    },
+    "homepage": "https://github.com/authdog-labs/web-sdk/tree/main/packages/nextjs-app#readme",
+    "bugs": {
+        "url": "https://github.com/authdog-labs/web-sdk/issues"
+    },
     "scripts": {
         "format": "prettier --config .prettierrc.json --write \"**/*.{ts,md}\"",
         "type-check": "tsc",
         "clean": "rm -rf dist",
-        "build": "pnpm clean && tsup",
+        "build": "bun run clean && tsup",
         "test": "vitest run",
-        "ship": "pnpm build && pnpm publish --access public --no-git-checks"
+        "ship": "bun run build && bun publish --access public"
     },
-    "dependencies": {
-        "next": "^16.1.5",
-        "react": "catalog:react19"
+    "peerDependencies": {
+        "next": ">=15 <17",
+        "react": "^18.2.0 || ^19.0.0",
+        "react-dom": "^18.2.0 || ^19.0.0"
     },
     "devDependencies": {
-        "@types/next": "^9.0.0",
         "@types/node": "^22.10.5",
-        "@types/react": "catalog:react19",
+        "@types/react": "^19.1.0",
+        "@types/react-dom": "^19.1.0",
         "dotenv": "^16.4.7",
+        "next": "^16.1.5",
         "prettier": "^3.4.2",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
         "tsup": "^8.3.5",
         "typescript": "^5.7.2",
         "vitest": "^2.1.8"

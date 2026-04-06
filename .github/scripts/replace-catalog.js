@@ -2,40 +2,41 @@
 const fs = require('fs');
 const { execSync } = require('child_process');
 const path = require('path');
-const yaml = require('js-yaml');
 
 const defaultPkgPath = path.join(__dirname, '../../apps/nextjs-app/package.json');
 const pkgPath = process.argv[2] || defaultPkgPath;
 const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
-const workspaceYamlPath = path.join(__dirname, '../../pnpm-workspace.yaml');
-const workspaceYaml = yaml.load(fs.readFileSync(workspaceYamlPath, 'utf8'));
+const rootPackageJsonPath = path.join(__dirname, '../../package.json');
+const rootPackageJson = JSON.parse(fs.readFileSync(rootPackageJsonPath, 'utf8'));
+const rootCatalog = rootPackageJson.catalog || rootPackageJson.workspaces?.catalog;
+const rootCatalogs = rootPackageJson.catalogs || rootPackageJson.workspaces?.catalogs;
 
 function getCatalogVersion(pkgName, selector) {
-  // Try to resolve from pnpm-workspace.yaml first
+  // Resolve from the Bun workspace catalogs first.
   if (!selector) {
     // catalog:
-    if (workspaceYaml.catalog && workspaceYaml.catalog[pkgName]) {
-      return workspaceYaml.catalog[pkgName];
+    if (rootCatalog && rootCatalog[pkgName]) {
+      return rootCatalog[pkgName];
     }
   } else {
     // catalog:<selector>
     if (
-      workspaceYaml.catalogs &&
-      workspaceYaml.catalogs[selector] &&
-      workspaceYaml.catalogs[selector][pkgName]
+      rootCatalogs &&
+      rootCatalogs[selector] &&
+      rootCatalogs[selector][pkgName]
     ) {
-      return workspaceYaml.catalogs[selector][pkgName];
+      return rootCatalogs[selector][pkgName];
     }
   }
-  // Fallback to npm
+  // Fallback to npm metadata via bunx so CI stays Bun-first.
   try {
     if (!selector) {
-      return execSync(`npm view ${pkgName} version`).toString().trim();
+      return execSync(`bunx npm view ${pkgName} version`).toString().trim();
     } else {
       try {
-        return execSync(`npm view ${pkgName} dist-tags.${selector}`).toString().trim();
+        return execSync(`bunx npm view ${pkgName} dist-tags.${selector}`).toString().trim();
       } catch (e) {
-        return execSync(`npm view ${pkgName}@${selector} version`).toString().trim();
+        return execSync(`bunx npm view ${pkgName}@${selector} version`).toString().trim();
       }
     }
   } catch (e) {

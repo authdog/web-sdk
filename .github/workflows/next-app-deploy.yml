@@ -10,7 +10,7 @@ on:
   #     - .github/workflows/cd-next-app-deploy.yml
 
 env:
-  STORE_PATH: ~/.pnpm-store
+  BUN_CACHE_PATH: ~/.bun/install/cache
   ENVFILE_CONSOLE: apps/nextjs-app/.env
   SCOPE_VERCEL: david-barrats-projects-b894a911
   PROJECT_VERCEL: nextjs-demo
@@ -38,24 +38,21 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          version: 9.15.9
+          bun-version: 1.2.11
 
-      - name: Set PNPM store path
-        run: pnpm config set store-dir ${{ env.STORE_PATH }}
-
-      - name: Cache PNPM store
+      - name: Cache Bun dependencies
         uses: actions/cache@v4
         with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-cache-${{ hashFiles('**/pnpm-lock.yaml') }}
+          path: ${{ env.BUN_CACHE_PATH }}
+          key: ${{ runner.os }}-bun-cache-${{ hashFiles('**/bun.lock') }}
           restore-keys: |
-            ${{ runner.os }}-pnpm-cache-
+            ${{ runner.os }}-bun-cache-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
       - name: Build workspace packages
         run: make build
@@ -63,14 +60,14 @@ jobs:
       - name: Update Next.js app dependencies
         run: |
           cd apps/nextjs-app
-          pnpm add @authdog/nextjs-app@latest @authdog/react-elements@latest
+          bun add @authdog/nextjs-app@latest @authdog/react-elements@latest
 
       - name: "Replace catalog: tags with latest versions"
         run: node .github/scripts/replace-catalog.js 'apps/nextjs-app/package.json'
 
       - name: Deploy to Vercel
         run: |
-          npx vercel deploy \
+          bunx vercel deploy \
             --cwd apps/nextjs-app \
             --token ${{ secrets.VERCEL_CD_TOKEN }} \
             --scope ${{ env.SCOPE_VERCEL }} \

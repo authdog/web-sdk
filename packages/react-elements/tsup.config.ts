@@ -3,12 +3,7 @@ import { defineConfig } from "tsup";
 export default defineConfig({
   entry: ["src/index.ts", "src/components/ui/*.tsx", "src/lib/*.ts"], // Build all entry points
   format: ["esm", "cjs"],
-  dts: {
-    resolve: true,
-    entry: {
-      index: "src/index.ts",
-    },
-  },
+  dts: true,
   splitting: false,
   sourcemap: true,
   minify: true,

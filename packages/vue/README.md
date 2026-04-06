@@ -5,11 +5,7 @@ Authdog Vue SDK for authentication and user management.
 ## Installation
 
 ```bash
-npm install @authdog/vue
-# or
-yarn add @authdog/vue
-# or
-pnpm add @authdog/vue
+bun add @authdog/vue
 ```
 
 ## Usage
