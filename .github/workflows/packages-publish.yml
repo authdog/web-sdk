@@ -12,12 +12,22 @@ env:
   NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
   GH_AUTOMATION_TOKEN: ${{ secrets.GH_AUTOMATION_TOKEN }}
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
       - uses: oven-sh/setup-bun@v2
         with:
@@ -26,7 +36,9 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: ~/.bun/install/cache
-          key: ${{ runner.os }}-bun-cache-${{ hashFiles('**/bun.lock') }}
+          key: ${{ runner.os }}-bun-cache-${{ hashFiles('bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-cache-
 
       - name: Configure NPM token
         run: echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ~/.npmrc
@@ -58,7 +70,7 @@ jobs:
         uses: changesets/action@v1
         with:
           version: |
-            bun generate-pr
+            bun run generate-pr
         env:
           GITHUB_TOKEN: ${{ secrets.GH_AUTOMATION_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
@@ -69,7 +81,7 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: |
-            bun publish-packages
+            bun run publish-packages
         env:
           GITHUB_TOKEN: ${{ secrets.GH_AUTOMATION_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}

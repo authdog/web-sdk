@@ -19,9 +19,13 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     strategy:
       matrix:
@@ -47,7 +51,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ env.BUN_CACHE_PATH }}
-          key: ${{ runner.os }}-bun-cache-${{ hashFiles('**/bun.lock') }}
+          key: ${{ runner.os }}-bun-cache-${{ hashFiles('bun.lock') }}
           restore-keys: |
             ${{ runner.os }}-bun-cache-
 
@@ -63,7 +67,7 @@ jobs:
           bun add @authdog/nextjs-app@latest @authdog/react-elements@latest
 
       - name: "Replace catalog: tags with latest versions"
-        run: node .github/scripts/replace-catalog.js 'apps/nextjs-app/package.json'
+        run: bun .github/scripts/replace-catalog.js 'apps/nextjs-app/package.json'
 
       - name: Deploy to Vercel
         run: |

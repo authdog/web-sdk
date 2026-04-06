@@ -20,9 +20,13 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     strategy:
       matrix:
@@ -42,14 +46,11 @@ jobs:
         with:
           bun-version: 1.2.11
 
-      # - name: Use taobao registry
-      #   run: npm config set registry https://registry.npmmirror.com/
-
       - name: Cache Bun dependencies
         uses: actions/cache@v4
         with:
           path: ${{ env.BUN_CACHE_PATH }}
-          key: ${{ runner.os }}-bun-cache-${{ hashFiles('**/bun.lock') }}
+          key: ${{ runner.os }}-bun-cache-${{ hashFiles('bun.lock') }}
           restore-keys: |
             ${{ runner.os }}-bun-cache-
 
@@ -65,7 +66,7 @@ jobs:
           (cd apps/remix; bun add @authdog/remix-node@latest @authdog/react-elements@latest)
 
       - name: "Replace catalog: tags with latest versions"
-        run: node .github/scripts/replace-catalog.js 'apps/remix/package.json'
+        run: bun .github/scripts/replace-catalog.js 'apps/remix/package.json'
 
       - name: Ship Remix demo
         run: |

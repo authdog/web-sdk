@@ -22,9 +22,13 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     strategy:
       matrix:
@@ -51,7 +55,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ env.BUN_CACHE_PATH }}
-          key: ${{ runner.os }}-bun-cache-${{ hashFiles('**/bun.lock') }}
+          key: ${{ runner.os }}-bun-cache-${{ hashFiles('bun.lock') }}
           restore-keys: |
             ${{ runner.os }}-bun-cache-
 
