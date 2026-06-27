@@ -1,0 +1,15 @@
+tasks:
+  build:
+    command: 'bun run build'
+    deps:
+      - 'nextjs-app:build'
+      - 'react-elements:build'
+    inputs:
+      - 'src/**/*'
+      - 'app/**/*'
+      - 'tsconfig.json'
+      - 'package.json'
+
+  dev:
+    command: 'bun run dev'
+    preset: 'server'

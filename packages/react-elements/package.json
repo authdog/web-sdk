@@ -37,6 +37,7 @@
     "@authdog/eslint-config": "workspace:*",
     "@authdog/typescript-config": "workspace:*",
     "@storybook/addon-a11y": "^10.1.3",
+    "eslint": "^9.15.0",
     "@storybook/addon-docs": "10.1.3",
     "@storybook/addon-links": "^10.1.3",
     "@storybook/react-vite": "^10.1.3",

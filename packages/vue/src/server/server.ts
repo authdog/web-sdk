@@ -1,5 +1,6 @@
 import { getSessionCookie } from "./cookies";
 import { getServerSidePayloadPublicKey } from "./publicKey";
+import { logoutHandler } from "./logout";
 
 export interface AuthdogServerConfig {
   publicKey: string;
@@ -16,7 +17,7 @@ export interface AuthdogServer {
 export const createAuthdogServer = (
   config: AuthdogServerConfig,
 ): AuthdogServer => {
-  const { publicKey, secretKey, baseUrl } = config;
+  const { publicKey, secretKey } = config;
 
   return {
     getSession: async (request: Request) => {

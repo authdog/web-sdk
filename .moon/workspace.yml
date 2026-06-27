@@ -1,0 +1,20 @@
+projects:
+  # Apps
+  nextjs-app-sample: 'apps/nextjs-app'
+  remix-playground: 'apps/remix'
+  vue-app: 'apps/vue-app'
+
+  # Packages
+  node-commons: 'packages/node-commons'
+  nextjs-app: 'packages/nextjs-app'
+  react-elements: 'packages/react-elements'
+  remix-node: 'packages/remix'
+  vue: 'packages/vue'
+  eslint-config: 'packages/eslint'
+  typescript-config: 'packages/typescript-config'
+
+vcs:
+  provider: 'github'
+  defaultBranch: 'main'
+
+telemetry: false
