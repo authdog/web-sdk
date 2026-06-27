@@ -82,4 +82,72 @@ describe("runIdentityGraphQLRequest", () => {
       runIdentityGraphQLRequest(buildPublicKey(), "token", "query {}", {}),
     ).rejects.toThrow("Failed to parse GraphQL response");
   });
+
+  it("omits the authorization header when no token is provided", async () => {
+    const mockFetch = vi
+      .fn()
+      .mockResolvedValue(
+        makeMockResponse(JSON.stringify({ data: { ok: true } })),
+      );
+    vi.stubGlobal("fetch", mockFetch as unknown as typeof fetch);
+
+    await runIdentityGraphQLRequest(buildPublicKey(), "", "query {}", {});
+
+    const headers = mockFetch.mock.calls[0][1].headers;
+    expect(headers).not.toHaveProperty("authorization");
+  });
+
+  it("throws the first GraphQL error message even on a 200 response", async () => {
+    const mockFetch = vi.fn().mockResolvedValue(
+      makeMockResponse(
+        JSON.stringify({ errors: [{ message: "not allowed" }] }),
+        true,
+        200,
+      ),
+    );
+    vi.stubGlobal("fetch", mockFetch as unknown as typeof fetch);
+
+    await expect(
+      runIdentityGraphQLRequest(buildPublicKey(), "token", "query {}", {}),
+    ).rejects.toThrow("not allowed");
+  });
+
+  it("falls back to a status message when an errored response has no error body", async () => {
+    const mockFetch = vi
+      .fn()
+      .mockResolvedValue(makeMockResponse(JSON.stringify({}), false, 502));
+    vi.stubGlobal("fetch", mockFetch as unknown as typeof fetch);
+
+    await expect(
+      runIdentityGraphQLRequest(buildPublicKey(), "token", "query {}", {}),
+    ).rejects.toThrow("GraphQL request failed (502)");
+  });
+
+  it("throws when the response is missing the data field", async () => {
+    const mockFetch = vi
+      .fn()
+      .mockResolvedValue(makeMockResponse(JSON.stringify({}), true, 200));
+    vi.stubGlobal("fetch", mockFetch as unknown as typeof fetch);
+
+    await expect(
+      runIdentityGraphQLRequest(buildPublicKey(), "token", "query {}", {}),
+    ).rejects.toThrow("GraphQL response is missing data");
+  });
+
+  it("rejects a public key with an untrusted identity host before fetching", async () => {
+    const mockFetch = vi.fn();
+    vi.stubGlobal("fetch", mockFetch as unknown as typeof fetch);
+
+    const untrustedKey = `pk_${Buffer.from(
+      JSON.stringify({
+        identityHost: "https://evil.com",
+        environmentId: "env-123",
+      }),
+    ).toString("base64")}`;
+
+    await expect(
+      runIdentityGraphQLRequest(untrustedKey, "token", "query {}", {}),
+    ).rejects.toThrow("Untrusted identity host");
+    expect(mockFetch).not.toHaveBeenCalled();
+  });
 });

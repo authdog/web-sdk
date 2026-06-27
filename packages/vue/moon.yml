@@ -22,3 +22,12 @@ tasks:
       - 'src/**/*'
       - 'tsconfig.json'
       - 'package.json'
+
+  test:
+    command: 'bun run test'
+    deps:
+      - 'node-commons:build'
+    inputs:
+      - 'src/**/*'
+      - 'tests/**/*'
+      - 'package.json'
