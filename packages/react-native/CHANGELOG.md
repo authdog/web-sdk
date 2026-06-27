@@ -1,5 +1,16 @@
 # @authdog/react-native
 
+## 0.2.0
+
+### Minor Changes
+
+- a4ce926: Update versions
+
+### Patch Changes
+
+- Updated dependencies [a4ce926]
+  - @authdog/node-commons@0.2.0
+
 ## 0.1.0
 
 ### Minor Changes
