@@ -1,6 +1,6 @@
 {
     "name": "@authdog/react-native",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Authdog React Native / Expo SDK",
     "source": "src/index.ts",
     "main": "./dist/index.js",
