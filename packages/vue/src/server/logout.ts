@@ -1,6 +1,7 @@
 export const logoutHandler = async (
   request: Request,
-  secretKey: string,
+  // Reserved for future server-side session revocation; not yet used.
+  _secretKey: string,
 ): Promise<Response> => {
   // Clear the session cookie
   const response = new Response(null, { status: 302 });

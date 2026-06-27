@@ -1,0 +1,25 @@
+tags:
+  - publishable
+
+tasks:
+  build:
+    command: 'bun run build'
+    deps:
+      - 'node-commons:build'
+    inputs:
+      - 'src/**/*'
+      - 'tsconfig.json'
+      - 'tsup.config.ts'
+      - 'package.json'
+    outputs:
+      - 'dist/**'
+
+  lint:
+    command: 'bun run lint'
+    inputs:
+      - 'src/**/*'
+      - 'package.json'
+
+  storybook:
+    command: 'bun run storybook'
+    preset: 'server'

@@ -1,0 +1,16 @@
+tasks:
+  build:
+    command: 'bun run build'
+    deps:
+      - 'remix-node:build'
+      - 'react-elements:build'
+    inputs:
+      - 'app/**/*'
+      - 'package.json'
+
+  dev:
+    command: 'bun run dev'
+    deps:
+      - 'remix-node:build'
+      - 'react-elements:build'
+    preset: 'server'

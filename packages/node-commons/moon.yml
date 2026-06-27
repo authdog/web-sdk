@@ -1,0 +1,20 @@
+tags:
+  - publishable
+
+tasks:
+  build:
+    command: 'bun run build'
+    inputs:
+      - 'src/**/*'
+      - 'tsconfig.json'
+      - 'tsup.config.ts'
+      - 'package.json'
+    outputs:
+      - 'dist/**'
+
+  type-check:
+    command: 'bun run type-check'
+    inputs:
+      - 'src/**/*'
+      - 'tsconfig.json'
+      - 'package.json'

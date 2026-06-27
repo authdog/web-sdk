@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: dbrrt/setup-moon@v1
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.2.11
+
+      - run: bun install --frozen-lockfile
+
+      - run: moon ci

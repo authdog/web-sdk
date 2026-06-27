@@ -6,13 +6,16 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
+    "build": "moon run :build",
+    "dev": "moon run :dev",
+    "lint": "moon run :lint",
+    "check-types": "moon run :type-check",
+    "test": "moon run :test",
+    "ci": "moon ci",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset",
-    "publish-packages": "turbo build --filter=@authdog/*  --filter=!@playground/*  && bunx changeset publish",
-    "generate-pr": "turbo build --filter=@authdog/* --filter=!@playground/* && bunx changeset version"
+    "publish-packages": "moon run '#publishable:build' && bunx changeset publish",
+    "generate-pr": "moon run '#publishable:build' && bunx changeset version"
   },
   "devDependencies": {
     "@authdog/eslint-config": "workspace:*",
@@ -24,7 +27,6 @@
     "prettier": "^3.3.3",
     "tailwindcss-animate": "^1.0.7",
     "tsup": "^8.3.5",
-    "turbo": "^2.3.3",
     "typescript": "^5.7.3",
     "vercel": "^41.4.1",
     "vitest": "^2.1.8",

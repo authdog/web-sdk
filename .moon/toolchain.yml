@@ -1,0 +1,5 @@
+# Pin the same Bun version moon provisions as the one declared in
+# root package.json `packageManager` and used by CI (oven-sh/setup-bun),
+# so local, CI, and moon all agree.
+bun:
+  version: '1.2.11'
