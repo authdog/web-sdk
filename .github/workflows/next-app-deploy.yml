@@ -47,6 +47,9 @@ jobs:
         with:
           bun-version: 1.2.11
 
+      - name: Setup moon
+        uses: dbrrt/setup-moon@v1
+
       - name: Cache Bun dependencies
         uses: actions/cache@v4
         with:
@@ -59,7 +62,7 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Build workspace packages
-        run: make build
+        run: moon run '#publishable:build'
 
       - name: Update Next.js app dependencies
         run: |

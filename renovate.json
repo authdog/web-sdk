@@ -1,6 +1,58 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    ":dependencyDashboard",
+    "group:monorepos"
+  ],
+  "rangeStrategy": "bump",
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "description": "Group React Router (framework) packages",
+      "matchPackageNames": ["react-router", "/^@react-router\\//"],
+      "groupName": "react-router"
+    },
+    {
+      "description": "Group Storybook packages",
+      "matchPackageNames": [
+        "storybook",
+        "eslint-plugin-storybook",
+        "/^@storybook\\//"
+      ],
+      "groupName": "storybook"
+    },
+    {
+      "description": "Group Tailwind packages",
+      "matchPackageNames": [
+        "tailwindcss",
+        "tw-animate-css",
+        "/^@tailwindcss\\//"
+      ],
+      "groupName": "tailwind"
+    },
+    {
+      "description": "Group Radix UI primitives",
+      "matchPackageNames": ["/^@radix-ui\\//"],
+      "groupName": "radix-ui"
+    },
+    {
+      "description": "Group React and its types",
+      "matchPackageNames": [
+        "react",
+        "react-dom",
+        "@types/react",
+        "@types/react-dom"
+      ],
+      "groupName": "react"
+    },
+    {
+      "description": "Automerge devDependency minor/patch updates",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    }
   ]
 }

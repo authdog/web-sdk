@@ -25,9 +25,23 @@ A curated set of libraries to accelerate identity integration into supported fra
 
 ## Getting Started
 
+This monorepo uses [Bun](https://bun.sh) (package manager + workspaces with a
+shared dependency catalog) and [moon](https://moonrepo.dev) (task runner).
+[`just`](https://github.com/casey/just) wraps the common workflows.
+
 ```bash
-bun install
-bun run build
+bun install        # install all workspace dependencies
+just build         # build the publishable packages
+just ci            # run the full CI pipeline (build + lint + test + type-check)
+```
+
+Common development commands:
+
+```bash
+just dev-next      # run the Next.js sample app
+just dev-remix     # run the React Router 7 sample app
+just ui            # run the react-elements Storybook
+moon run :build    # build everything (apps + packages)
 ```
 
 ## Contributing
