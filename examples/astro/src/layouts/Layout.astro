@@ -1,0 +1,39 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title = "Authdog + Astro" } = Astro.props;
+const { isAuthenticated } = Astro.locals.authdog;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/profile">Profile</a>
+      {
+        isAuthenticated ? (
+          <a href="/api/logout">Sign out</a>
+        ) : (
+          <span>Not signed in</span>
+        )
+      }
+    </nav>
+    <main>
+      <slot />
+    </main>
+
+    <script>
+      import { initAuthdog } from "@authdog/astro/client";
+      // Consume the ?token=… left by the login redirect, persist it, reload.
+      initAuthdog();
+    </script>
+  </body>
+</html>

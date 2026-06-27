@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "Authdog RN Demo",
+    "slug": "authdog-rn-demo",
+    "scheme": "authdogdemo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.authdog.rndemo"
+    },
+    "android": {
+      "package": "com.authdog.rndemo"
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}

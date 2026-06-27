@@ -6,7 +6,7 @@
 
 A curated monorepo of framework-native libraries that make it effortless to add
 secure sessions, user management, and auth UI to your React, Next.js, Remix,
-Vue, Angular, React Native, and Node (Express / Fastify) applications.
+Vue, Astro, Angular, React Native, and Node (Express / Fastify) applications.
 
 [![packages-publish](https://github.com/authdog/web-sdk/actions/workflows/packages-publish.yml/badge.svg)](https://github.com/authdog/web-sdk/actions/workflows/packages-publish.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -21,7 +21,7 @@ Vue, Angular, React Native, and Node (Express / Fastify) applications.
 
 ## ✨ Why Authdog Web SDK?
 
-- **🧩 Framework-native** — idiomatic packages for React, Next.js (App Router), Remix, Vue, Angular, React Native, and Node backends (Express / Fastify). No glue code.
+- **🧩 Framework-native** — idiomatic packages for React, Next.js (App Router), Remix, Vue, Astro, Angular, React Native, and Node backends (Express / Fastify). No glue code.
 - **🔐 Secure by default** — token validation, cookie handling, and session lifecycle managed for you.
 - **🎨 Batteries-included UI** — ready-made, accessible components (sign-in, user profile, TOTP, navbar) you can drop in or restyle.
 - **⚡ Tiny & tree-shakeable** — ESM-first, `sideEffects: false`, dual CJS/ESM builds via [tsup](https://tsup.egoist.dev).
@@ -36,6 +36,7 @@ Vue, Angular, React Native, and Node (Express / Fastify) applications.
 | [`@authdog/nextjs-app`](packages/nextjs-app) | [![npm](https://img.shields.io/npm/v/@authdog/nextjs-app)](https://www.npmjs.com/package/@authdog/nextjs-app) | Next.js **App Router** SDK — provider, `useUser` / `useAuth` hooks, server helpers. |
 | [`@authdog/remix-node`](packages/remix) | [![npm](https://img.shields.io/npm/v/@authdog/remix-node)](https://www.npmjs.com/package/@authdog/remix-node) | Remix SDK — auth loaders, provider, and cookie-based session helpers. |
 | [`@authdog/vue`](packages/vue) | [![npm](https://img.shields.io/npm/v/@authdog/vue)](https://www.npmjs.com/package/@authdog/vue) | Vue SDK — provider component and `useSession` / `useUser` composables. |
+| [`@authdog/astro`](packages/astro) | [![npm](https://img.shields.io/npm/v/@authdog/astro)](https://www.npmjs.com/package/@authdog/astro) | Astro SDK — session middleware (`Astro.locals.authdog`), server helpers, and a vanilla client bootstrap. |
 | [`@authdog/angular`](packages/angular) | [![npm](https://img.shields.io/npm/v/@authdog/angular)](https://www.npmjs.com/package/@authdog/angular) | Angular SDK — `provideAuthdog()`, signals-based `AuthdogService`, HTTP interceptor & route guard. |
 | [`@authdog/express`](packages/express) | [![npm](https://img.shields.io/npm/v/@authdog/express)](https://www.npmjs.com/package/@authdog/express) | Express SDK — session middleware, `requireAuth` guard, and logout handler. |
 | [`@authdog/fastify`](packages/fastify) | [![npm](https://img.shields.io/npm/v/@authdog/fastify)](https://www.npmjs.com/package/@authdog/fastify) | Fastify SDK — plugin decorating requests with session + `requireAuth` / `logout`. |
@@ -55,6 +56,9 @@ bun add @authdog/remix-node @authdog/react-elements
 
 # Vue
 bun add @authdog/vue
+
+# Astro
+bun add @authdog/astro
 
 # Angular
 bun add @authdog/angular
@@ -80,6 +84,7 @@ place — use the variable that matches your package:
 | Express (backend)    | `PK_AUTHDOG`             | `createAuthdog({ publicKey })`           |
 | Fastify (backend)    | `AUTHDOG_PK`             | `authdogPlugin({ publicKey })`           |
 | Vue                  | `VITE_AUTHDOG_PUBLIC_KEY`| Vite-exposed (use the `VITE_` prefix)    |
+| Astro                | `PUBLIC_AUTHDOG_PUBLIC_KEY`| Exposed via Astro's `PUBLIC_` prefix   |
 | React Native / Expo  | `EXPO_PUBLIC_PK_AUTHDOG` | Exposed to the app by Expo               |
 | Angular              | —                        | Passed directly to `provideAuthdog(...)` |
 
@@ -144,6 +149,33 @@ const { user, isLoading } = useUser();
 </template>
 ```
 
+### Astro
+
+Wire the middleware once (SSR mode), then read the session anywhere via
+`Astro.locals.authdog`:
+
+```ts
+// src/middleware.ts
+import { defineMiddleware } from "astro:middleware";
+import { authdogMiddleware } from "@authdog/astro/server";
+
+export const onRequest = defineMiddleware(
+  authdogMiddleware({ publicKey: import.meta.env.PUBLIC_AUTHDOG_PUBLIC_KEY }),
+);
+```
+
+```astro
+---
+// src/pages/profile.astro
+import { createAuthdogServer } from "@authdog/astro/server";
+
+const authdog = createAuthdogServer({ publicKey: import.meta.env.PUBLIC_AUTHDOG_PUBLIC_KEY });
+const user = Astro.locals.authdog.isAuthenticated ? await authdog.getUser(Astro.request) : null;
+---
+
+{user ? <p>Welcome, {user.user?.displayName}</p> : <a href="/login">Sign in</a>}
+```
+
 ### Remix
 
 ```ts
@@ -153,7 +185,105 @@ import { remixAuthLoader } from "@authdog/remix-node";
 export const loader = remixAuthLoader;
 ```
 
-> Runnable demos for each framework live in [`apps/`](apps).
+### Angular
+
+Register the SDK (standalone, `app.config.ts`) and add the interceptor to your `HttpClient`:
+
+```ts
+import { provideHttpClient, withInterceptors } from "@angular/common/http";
+import { provideAuthdog, authdogInterceptor } from "@authdog/angular";
+
+export const appConfig = {
+  providers: [
+    provideAuthdog({ publicKey: "pk_xxxxxxxxxxxxxxxx" }),
+    provideHttpClient(withInterceptors([authdogInterceptor])),
+  ],
+};
+```
+
+Read auth state from the signals-based `AuthdogService`:
+
+```ts
+import { Component, inject } from "@angular/core";
+import { AuthdogService } from "@authdog/angular";
+
+@Component({ /* … */ })
+export class ProfileComponent {
+  readonly auth = inject(AuthdogService);
+  // auth.isLoading(), auth.token(), auth.user() — signals
+  // auth.signIn(), auth.signUp(), auth.signOut(), auth.fetchUser()
+}
+```
+
+### Express
+
+```ts
+import express from "express";
+import { createAuthdog } from "@authdog/express";
+
+const app = express();
+const authdog = createAuthdog({ publicKey: process.env.PK_AUTHDOG! });
+
+app.use(authdog.attachSession()); // resolves `req.authdog` for every request
+app.get("/me", authdog.requireAuth, (req, res) => res.json(req.authdog!.user));
+app.get("/logout", authdog.logout);
+```
+
+### Fastify
+
+```ts
+import Fastify from "fastify";
+import { authdogPlugin } from "@authdog/fastify";
+
+const app = Fastify();
+await app.register(authdogPlugin, { publicKey: process.env.AUTHDOG_PK! });
+
+// `request.authdog` is now available everywhere; `app.authdog.requireAuth`
+// is the server-side enforcement point.
+app.get("/me", { preHandler: app.authdog.requireAuth }, async (req) => req.authdog!.user);
+app.get("/logout", (req, reply) => app.authdog.logout(req, reply));
+```
+
+### React Native / Expo
+
+Wrap your app with the provider, backed by hardware-secure storage, and handle the login deep link:
+
+```tsx
+import * as SecureStore from "expo-secure-store";
+import { AuthdogProvider, createSecureStoreAdapter } from "@authdog/react-native";
+
+export default function App() {
+  return (
+    <AuthdogProvider
+      publicKey={process.env.EXPO_PUBLIC_PK_AUTHDOG!}
+      storage={createSecureStoreAdapter(SecureStore)}
+    >
+      <RootNavigator />
+    </AuthdogProvider>
+  );
+}
+```
+
+```tsx
+import { useSignIn, useRedirectHandler } from "@authdog/react-native";
+// signIn("myapp://callback") opens Universal Login; handleRedirect(url)
+// validates the returned token and persists it via your secure storage.
+```
+
+### Runnable examples
+
+Each framework ships a runnable demo under [`examples/`](examples). Set `PK_AUTHDOG` (or the framework's public-key variable) and start one with moon:
+
+| Example | Package showcased | Run |
+| ------- | ----------------- | --- |
+| [`examples/nextjs-app`](examples/nextjs-app) | `@authdog/nextjs-app` + `@authdog/react-elements` | `moon run nextjs-app-sample:dev` |
+| [`examples/remix`](examples/remix) | `@authdog/remix-node` + `@authdog/react-elements` | `moon run remix-playground:dev` |
+| [`examples/vue-app`](examples/vue-app) | `@authdog/vue` (home, login, signup, profile, permissions) | `moon run vue-app:dev` |
+| [`examples/astro`](examples/astro) | `@authdog/astro` (SSR middleware, server `getUser`, logout) | `moon run astro-app:dev` |
+| [`examples/angular`](examples/angular) | `@authdog/angular` (interceptor, guard, signals) | `moon run angular-app:dev` |
+| [`examples/express`](examples/express) | `@authdog/express` (attachSession, requireAuth, logout) | `moon run express-api:dev` |
+| [`examples/fastify`](examples/fastify) | `@authdog/fastify` (plugin, requireAuth, logout) | `moon run fastify-api:dev` |
+| [`examples/react-native`](examples/react-native) | `@authdog/react-native` (Expo, deep-link sign-in, secure store) | `moon run react-native-app:dev` |
 
 ## 🛠 Development
 
@@ -190,12 +320,17 @@ Prefer raw scripts? `bun run build`, `bun run dev`, `bun run test`, `bun run lin
 
 ```
 web-sdk/
-├── apps/            # Runnable demo apps (Next.js, Remix, Vue)
+├── examples/        # Runnable demo apps (Next.js, Remix, Vue, Astro, Angular, Express, Fastify, React Native)
 ├── packages/        # Published SDK packages + shared configs
 │   ├── react-elements/   # React UI components
 │   ├── nextjs-app/       # Next.js App Router SDK
 │   ├── remix/            # Remix SDK (@authdog/remix-node)
 │   ├── vue/              # Vue SDK
+│   ├── astro/            # Astro SDK
+│   ├── angular/          # Angular SDK
+│   ├── express/          # Express SDK
+│   ├── fastify/          # Fastify SDK
+│   ├── react-native/     # React Native / Expo SDK
 │   ├── node-commons/     # Shared Node utilities
 │   ├── eslint/           # Shared ESLint config
 │   └── typescript-config/# Shared tsconfig presets

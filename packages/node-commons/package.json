@@ -34,7 +34,7 @@
         "ship": "bun run build && bun publish --access public"
     },
     "devDependencies": {
-        "@types/node": "^22.14.1",
+        "@types/node": "^24.0.0",
         "dotenv": "^16.4.7",
         "prettier": "^3.4.2",
         "tsup": "^8.3.5",

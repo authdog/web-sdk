@@ -3,7 +3,7 @@ const fs = require('fs');
 const { execSync } = require('child_process');
 const path = require('path');
 
-const defaultPkgPath = path.join(__dirname, '../../apps/nextjs-app/package.json');
+const defaultPkgPath = path.join(__dirname, '../../examples/nextjs-app/package.json');
 const pkgPath = process.argv[2] || defaultPkgPath;
 const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
 const rootPackageJsonPath = path.join(__dirname, '../../package.json');

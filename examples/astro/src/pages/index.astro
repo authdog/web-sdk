@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const { isAuthenticated } = Astro.locals.authdog;
+---
+
+<Layout title="Home — Authdog + Astro">
+  <h1>Authdog + Astro</h1>
+  {
+    isAuthenticated ? (
+      <p>You have an active session. Visit your <a href="/profile">profile</a>.</p>
+    ) : (
+      <p>You are not signed in.</p>
+    )
+  }
+</Layout>

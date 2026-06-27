@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { createAuthdogServer } from "@authdog/astro/server";
+
+const authdog = createAuthdogServer({
+  publicKey: import.meta.env.PUBLIC_AUTHDOG_PUBLIC_KEY ?? "",
+});
+
+// Resolve the full user profile from the identity host using the session
+// cookie. Returns null when there is no valid session.
+const profile = Astro.locals.authdog.isAuthenticated
+  ? await authdog.getUser(Astro.request).catch(() => null)
+  : null;
+---
+
+<Layout title="Profile — Authdog + Astro">
+  <h1>Profile</h1>
+  {
+    profile?.user ? (
+      <pre>{JSON.stringify(profile.user, null, 2)}</pre>
+    ) : (
+      <p>No active session. <a href="/">Go home</a>.</p>
+    )
+  }
+</Layout>

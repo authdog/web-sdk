@@ -5,14 +5,14 @@ on:
     # branches:
     #   - main
     # paths:
-    #   - apps/nextjs/**
+    #   - examples/nextjs/**
     #   - .github/workflows/cd-next-app-demo.yml
   workflow_dispatch:
 
 env:
   # codebase
   BUN_CACHE_PATH: ~/.bun/install/cache
-  ENVFILE_CONSOLE: apps/remix/.env
+  ENVFILE_CONSOLE: examples/remix/.env
   SCOPE_VERCEL: david-barrats-projects-b894a911
   PROJECT_VERCEL: remix-demo
 
@@ -63,15 +63,15 @@ jobs:
       
       - name: Install latest dependencies in nextjs
         run: |
-          (cd apps/remix; bun add @authdog/remix-node@latest @authdog/react-elements@latest)
+          (cd examples/remix; bun add @authdog/remix-node@latest @authdog/react-elements@latest)
 
       - name: "Replace catalog: tags with latest versions"
-        run: bun .github/scripts/replace-catalog.js 'apps/remix/package.json'
+        run: bun .github/scripts/replace-catalog.js 'examples/remix/package.json'
 
       - name: Ship Remix demo
         run: |
           bunx vercel deploy \
-            --cwd apps/remix \
+            --cwd examples/remix \
             --token ${{ secrets.VERCEL_CD_TOKEN }} \
             --scope ${{ env.SCOPE_VERCEL }} \
             --name ${{ env.PROJECT_VERCEL }} \

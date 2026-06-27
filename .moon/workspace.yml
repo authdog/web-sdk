@@ -1,8 +1,13 @@
 projects:
-  # Apps
-  nextjs-app-sample: 'apps/nextjs-app'
-  remix-playground: 'apps/remix'
-  vue-app: 'apps/vue-app'
+  # Examples
+  nextjs-app-sample: 'examples/nextjs-app'
+  remix-playground: 'examples/remix'
+  vue-app: 'examples/vue-app'
+  astro-app: 'examples/astro'
+  angular-app: 'examples/angular'
+  express-api: 'examples/express'
+  fastify-api: 'examples/fastify'
+  react-native-app: 'examples/react-native'
 
   # Packages
   node-commons: 'packages/node-commons'
@@ -10,6 +15,7 @@ projects:
   react-elements: 'packages/react-elements'
   remix-node: 'packages/remix'
   vue: 'packages/vue'
+  astro: 'packages/astro'
   angular: 'packages/angular'
   express: 'packages/express'
   fastify: 'packages/fastify'

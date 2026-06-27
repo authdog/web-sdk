@@ -1,0 +1,15 @@
+tasks:
+  build:
+    command: 'bun run build'
+    deps:
+      - 'fastify:build'
+    inputs:
+      - 'src/**/*'
+      - 'tsconfig.json'
+      - 'package.json'
+
+  dev:
+    command: 'bun run dev'
+    deps:
+      - 'fastify:build'
+    preset: 'server'

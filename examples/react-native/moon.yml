@@ -1,0 +1,16 @@
+tasks:
+  type-check:
+    command: 'bun run type-check'
+    deps:
+      - 'react-native:build'
+    inputs:
+      - '**/*.ts'
+      - '**/*.tsx'
+      - 'tsconfig.json'
+      - 'package.json'
+
+  dev:
+    command: 'bun run dev'
+    deps:
+      - 'react-native:build'
+    preset: 'server'

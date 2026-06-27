@@ -2,7 +2,7 @@
   "name": "web-sdk",
   "private": true,
   "workspaces": [
-    "apps/*",
+    "examples/*",
     "packages/*"
   ],
   "scripts": {

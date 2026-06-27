@@ -11,12 +11,30 @@ dev-next:
 dev-remix:
     moon run remix-playground:dev
 
+dev-vue:
+    moon run vue-app:dev
+
+dev-astro:
+    moon run astro-app:dev
+
+dev-angular:
+    moon run angular-app:dev
+
+dev-express:
+    moon run express-api:dev
+
+dev-fastify:
+    moon run fastify-api:dev
+
+dev-react-native:
+    moon run react-native-app:dev
+
 ui:
     moon run react-elements:storybook
 
 # ── Build ────────────────────────────────────────────────────
 build:
-    moon run node-commons:build nextjs-app:build react-elements:build remix-node:build vue:build
+    moon run node-commons:build nextjs-app:build react-elements:build remix-node:build vue:build astro:build
 
 build-libs:
     moon run react-elements:build remix-node:build

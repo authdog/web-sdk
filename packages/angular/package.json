@@ -44,9 +44,9 @@
     },
     "devDependencies": {
         "@angular/common": "^19.2.16",
-        "@angular/core": "^18.2.0",
-        "@angular/router": "^18.2.0",
-        "@types/node": "^22.10.5",
+        "@angular/core": "^19.2.0",
+        "@angular/router": "^19.2.0",
+        "@types/node": "^24.0.0",
         "dotenv": "^16.4.7",
         "prettier": "^3.4.2",
         "rxjs": "^7.8.1",

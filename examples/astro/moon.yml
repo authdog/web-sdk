@@ -1,0 +1,28 @@
+tasks:
+  build:
+    command: 'bun run build'
+    deps:
+      - 'astro:build'
+    inputs:
+      - 'src/**/*'
+      - 'astro.config.mjs'
+      - 'tsconfig.json'
+      - 'package.json'
+    outputs:
+      - 'dist/**'
+
+  type-check:
+    command: 'bun run type-check'
+    deps:
+      - 'astro:build'
+    inputs:
+      - 'src/**/*'
+      - 'astro.config.mjs'
+      - 'tsconfig.json'
+      - 'package.json'
+
+  dev:
+    command: 'bun run dev'
+    deps:
+      - 'astro:build'
+    preset: 'server'

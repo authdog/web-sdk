@@ -1,0 +1,29 @@
+tasks:
+  build:
+    command: 'bun run build'
+    deps:
+      - 'angular:build'
+    inputs:
+      - 'src/**/*'
+      - 'angular.json'
+      - 'tsconfig.json'
+      - 'tsconfig.app.json'
+      - 'package.json'
+    outputs:
+      - 'dist/**'
+
+  type-check:
+    command: 'bun run type-check'
+    deps:
+      - 'angular:build'
+    inputs:
+      - 'src/**/*'
+      - 'tsconfig.json'
+      - 'tsconfig.app.json'
+      - 'package.json'
+
+  dev:
+    command: 'bun run dev'
+    deps:
+      - 'angular:build'
+    preset: 'server'

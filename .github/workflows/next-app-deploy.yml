@@ -6,12 +6,12 @@ on:
   #   branches:
   #     - main
   #   paths:
-  #     - apps/nextjs-app/**
+  #     - examples/nextjs-app/**
   #     - .github/workflows/cd-next-app-deploy.yml
 
 env:
   BUN_CACHE_PATH: ~/.bun/install/cache
-  ENVFILE_CONSOLE: apps/nextjs-app/.env
+  ENVFILE_CONSOLE: examples/nextjs-app/.env
   SCOPE_VERCEL: david-barrats-projects-b894a911
   PROJECT_VERCEL: nextjs-demo
 
@@ -63,16 +63,16 @@ jobs:
 
       - name: Update Next.js app dependencies
         run: |
-          cd apps/nextjs-app
+          cd examples/nextjs-app
           bun add @authdog/nextjs-app@latest @authdog/react-elements@latest
 
       - name: "Replace catalog: tags with latest versions"
-        run: bun .github/scripts/replace-catalog.js 'apps/nextjs-app/package.json'
+        run: bun .github/scripts/replace-catalog.js 'examples/nextjs-app/package.json'
 
       - name: Deploy to Vercel
         run: |
           bunx vercel deploy \
-            --cwd apps/nextjs-app \
+            --cwd examples/nextjs-app \
             --token ${{ secrets.VERCEL_CD_TOKEN }} \
             --scope ${{ env.SCOPE_VERCEL }} \
             --name ${{ env.PROJECT_VERCEL }} \
