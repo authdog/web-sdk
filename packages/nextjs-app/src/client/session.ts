@@ -3,6 +3,7 @@ import {
   isAuthenticatedUserInfo,
 } from "@authdog/node-commons";
 import { validateAndParsePublicKey } from "../commons";
+import { TOKEN_STORAGE_KEY, TOKEN_UPDATED_EVENT } from "./constants";
 
 export const getTokenFromUri = (url: string): string | null => {
   return new URL(url).searchParams.get("token");
@@ -91,4 +92,20 @@ export const browserCookiesOptions = {
   path: "/",
   secure: true,
   sameSite: "lax" as const,
+};
+
+/**
+ * Clears the client-side Authdog session: removes the locally stored token and
+ * notifies hooks (`useAuth`/`useUser`) via the {@link TOKEN_UPDATED_EVENT}.
+ *
+ * Note: this only clears the browser-side token. The server-side session cookie
+ * (and its hash) must also be cleared via the server logout handler
+ * (`logoutHandler`) to fully log the user out.
+ */
+export const clearAuthdogSession = (): void => {
+  if (typeof window === "undefined") {
+    return;
+  }
+  window.localStorage.removeItem(TOKEN_STORAGE_KEY);
+  window.dispatchEvent(new Event(TOKEN_UPDATED_EVENT));
 };

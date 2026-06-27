@@ -31,7 +31,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
           navigate("/");
         }}
         identityHost={new URL(signinUri).origin}
-        environmentId={new URL(signinUri).pathname.split("/").pop()}
+        environmentId={new URL(signinUri).pathname.split("/").pop() ?? ""}
       />
       {children}
     </div>

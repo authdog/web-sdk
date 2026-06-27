@@ -1,4 +1,4 @@
-import { getPublicKeyPayload } from "../../commons";
+import { validateAndParsePublicKey } from "../../commons";
 
 interface RawGraphQLResponse {
   data?: Record<string, unknown>;
@@ -6,7 +6,7 @@ interface RawGraphQLResponse {
 }
 
 const buildGraphQLEndpoint = (publicKey: string) => {
-  const { identityHost, environmentId } = getPublicKeyPayload(publicKey);
+  const { identityHost, environmentId } = validateAndParsePublicKey(publicKey);
   const trimmedHost = identityHost.replace(/\/+$/, "");
   return `${trimmedHost}/edge/${environmentId}/graphql`;
 };

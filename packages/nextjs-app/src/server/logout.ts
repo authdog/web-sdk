@@ -14,20 +14,21 @@ export const logoutHandler = async (req: NextRequest) => {
   const payload = await getServerSidePayloadPublicKey(publicKey);
 
   const environmentId = payload.environmentId;
+
+  const deleteOptions = {
+    value: "",
+    path: "/",
+    maxAge: 0,
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax" as const,
+  };
+
   const cookieNameSession = `user_session_${environmentId}`;
-
-  const cookieValueSession = cookiesStore.get(cookieNameSession);
-
-  if (cookieValueSession) {
-    cookiesStore.delete(cookieNameSession);
-  }
+  cookiesStore.set({ name: cookieNameSession, ...deleteOptions });
 
   const cookieNameHash = `user_session_hash_${environmentId}`;
-  const cookieValueHash = cookiesStore.get(cookieNameHash);
-
-  if (cookieValueHash) {
-    cookiesStore.delete(cookieNameHash);
-  }
+  cookiesStore.set({ name: cookieNameHash, ...deleteOptions });
 
   return new Response(
     JSON.stringify({

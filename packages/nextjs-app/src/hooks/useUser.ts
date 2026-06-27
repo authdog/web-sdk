@@ -2,12 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import {
-  TOKEN_POLL_INTERVAL_MS,
-  TOKEN_POLL_MAX_ATTEMPTS,
-  TOKEN_STORAGE_KEY,
-  TOKEN_UPDATED_EVENT,
-} from "../client/constants";
+import { TOKEN_STORAGE_KEY, TOKEN_UPDATED_EVENT } from "../client/constants";
 import { fetchUserData, type AuthdogUser } from "../client/session";
 
 const PUBLIC_KEY = process.env.NEXT_PUBLIC_PK_AUTHDOG;
@@ -66,20 +61,9 @@ export const useUser = (): UseUserResult => {
     window.addEventListener(TOKEN_UPDATED_EVENT, handleTokenUpdate);
     window.addEventListener("storage", handleStorageChange);
 
-    let pollCount = 0;
-    const pollInterval = window.setInterval(() => {
-      pollCount++;
-      syncToken();
-
-      if (pollCount >= TOKEN_POLL_MAX_ATTEMPTS) {
-        window.clearInterval(pollInterval);
-      }
-    }, TOKEN_POLL_INTERVAL_MS);
-
     return () => {
       window.removeEventListener(TOKEN_UPDATED_EVENT, handleTokenUpdate);
       window.removeEventListener("storage", handleStorageChange);
-      window.clearInterval(pollInterval);
     };
   }, []);
 
@@ -139,7 +123,7 @@ export const useUser = (): UseUserResult => {
       return;
     }
 
-    fetchProfile();
+    fetchProfile().catch(() => {});
   }, [fetchProfile, isTokenInitialized]);
 
   return {

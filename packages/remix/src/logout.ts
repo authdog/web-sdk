@@ -1,4 +1,5 @@
 import { LoaderFunction, redirect } from "@remix-run/node";
+import { validateAndParsePublicKey } from "@authdog/node-commons";
 
 export const logoutLoader: LoaderFunction = async ({ context, request }) => {
   const headers = new Headers();
@@ -8,11 +9,9 @@ export const logoutLoader: LoaderFunction = async ({ context, request }) => {
     throw new Error("Public key is not defined");
   }
 
-  const payload = JSON.parse(
-    Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8"),
-  );
+  const publicKeyObj = validateAndParsePublicKey(publicKey);
 
-  const environmentId = payload.environmentId;
+  const environmentId = publicKeyObj.environmentId;
 
   headers.append(
     "Set-Cookie",

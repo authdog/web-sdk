@@ -1,7 +1,27 @@
 import { ref, computed, inject } from "vue";
 import { AUTHDOG_CONTEXT_KEY, type AuthdogContext } from "../client/provider";
 
-export const useAuthz = () => {
+/**
+ * ⚠️ PRESENTATIONAL ONLY — NOT A SECURITY BOUNDARY.
+ *
+ * This composable fetches a permission list to drive UI affordances (showing
+ * or hiding buttons, menu items, etc.). It runs entirely in the browser and
+ * is therefore trivially bypassable by any client. It MUST NOT be used to
+ * gate access to data or actions.
+ *
+ * Every protected operation MUST be independently enforced server-side.
+ */
+
+export interface UseAuthzOptions {
+  /**
+   * URL of the endpoint that returns the current user's permissions.
+   * Defaults to "/api/permissions". This endpoint is informational only;
+   * authorization must still be enforced on every protected server endpoint.
+   */
+  permissionsUrl?: string;
+}
+
+export const useAuthz = (options: UseAuthzOptions = {}) => {
   const context = inject<AuthdogContext>(AUTHDOG_CONTEXT_KEY);
   const permissions = ref<string[]>([]);
   const isLoading = ref(false);
@@ -10,6 +30,8 @@ export const useAuthz = () => {
   if (!context) {
     throw new Error("useAuthz must be used within AuthdogProvider");
   }
+
+  const permissionsUrl = options.permissionsUrl ?? "/api/permissions";
 
   const fetchPermissions = async () => {
     if (!context.token) {
@@ -20,16 +42,24 @@ export const useAuthz = () => {
     error.value = null;
 
     try {
-      // This would be implemented based on your authorization API
-      // For now, returning a placeholder
-      const response = await fetch("/api/permissions", {
+      const response = await fetch(permissionsUrl, {
         headers: {
           Authorization: `Bearer ${context.token}`,
         },
       });
 
+      // Distinguish an authentication failure from an empty permission list.
+      // A 401 means the session is invalid/expired and should surface as an
+      // error rather than being silently coerced into "no permissions".
+      if (response.status === 401) {
+        permissions.value = [];
+        throw new Error("Unauthorized: authentication failed (401)");
+      }
+
       if (!response.ok) {
-        throw new Error("Failed to fetch permissions");
+        throw new Error(
+          `Failed to fetch permissions (status ${response.status})`,
+        );
       }
 
       const data = await response.json();
@@ -43,6 +73,12 @@ export const useAuthz = () => {
     }
   };
 
+  /**
+   * ⚠️ PRESENTATIONAL ONLY. Returns whether the locally-cached permission
+   * list contains `permission`. This is for UI hints only and is bypassable;
+   * never rely on it as an access-control check. Enforce permissions
+   * server-side for every protected operation.
+   */
   const hasPermission = (permission: string) => {
     return permissions.value.includes(permission);
   };

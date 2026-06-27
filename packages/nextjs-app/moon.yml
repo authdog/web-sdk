@@ -16,6 +16,8 @@ tasks:
 
   type-check:
     command: 'bun run type-check'
+    deps:
+      - 'node-commons:build'
     inputs:
       - 'src/**/*'
       - 'tsconfig.json'

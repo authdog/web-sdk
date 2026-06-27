@@ -1,3 +1,5 @@
+import { sanitizeRedirectPath } from "@authdog/node-commons";
+
 export const logoutHandler = async (
   request: Request,
   // Reserved for future server-side session revocation; not yet used.
@@ -6,15 +8,21 @@ export const logoutHandler = async (
   // Clear the session cookie
   const response = new Response(null, { status: 302 });
 
-  // Set cookie to expire immediately
+  // Set cookie to expire immediately. Secure is gated on production so local
+  // HTTP development still clears the cookie; HttpOnly + SameSite=Lax retained.
+  const secure = process.env.NODE_ENV === "production" ? " Secure;" : "";
   response.headers.set(
     "Set-Cookie",
-    "authdog-session=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; SameSite=Lax",
+    `authdog-session=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly;${secure} SameSite=Lax`,
   );
 
-  // Redirect to home page or specified redirect URL
+  // Redirect to home page or specified redirect URL. Sanitize to prevent
+  // open-redirect via an attacker-controlled redirect_uri parameter.
   const url = new URL(request.url);
-  const redirectUrl = url.searchParams.get("redirect_uri") || "/";
+  const redirectUrl = sanitizeRedirectPath(
+    url.searchParams.get("redirect_uri"),
+    "/",
+  );
 
   response.headers.set("Location", redirectUrl);
 

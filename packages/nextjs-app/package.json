@@ -45,7 +45,8 @@
         "ship": "bun run build && bun publish --access public"
     },
     "dependencies": {
-        "@authdog/node-commons": "workspace:*"
+        "@authdog/node-commons": "workspace:*",
+        "server-only": "^0.0.1"
     },
     "peerDependencies": {
         "next": ">=15 <17",

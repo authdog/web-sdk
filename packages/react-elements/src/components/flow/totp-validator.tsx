@@ -41,23 +41,30 @@ export const TOTPValidator = ({ onValidate }: TOTPValidatorProps) => {
     if (e.key === "Backspace" && !code[index] && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
+  };
 
-    // Handle paste
-    if (e.key === "v" && (e.ctrlKey || e.metaKey)) {
-      e.preventDefault();
-      navigator.clipboard.readText().then((text) => {
-        const digits = text.replace(/\D/g, "").slice(0, 6).split("");
-        const newCode = [...code];
-        digits.forEach((digit, i) => {
-          if (i < 6) newCode[i] = digit;
-        });
-        setCode(newCode);
+  // Native paste handler: reads from the paste event (works in insecure
+  // contexts / Firefox, no clipboard permission prompt, no unhandled promise).
+  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const digits = e.clipboardData
+      .getData("text")
+      .replace(/\D/g, "")
+      .slice(0, 6)
+      .split("");
+    if (digits.length === 0) return;
 
-        // Focus the next empty input or the last one
-        const nextIndex = Math.min(digits.length, 5);
-        inputRefs.current[nextIndex]?.focus();
-      });
-    }
+    const newCode = [...code];
+    digits.forEach((digit, i) => {
+      if (i < 6) newCode[i] = digit;
+    });
+    setCode(newCode);
+    setError("");
+    setSuccess(false);
+
+    // Focus the next empty input or the last one
+    const nextIndex = Math.min(digits.length, 5);
+    inputRefs.current[nextIndex]?.focus();
   };
 
   const validateTOTP = async () => {
@@ -201,6 +208,7 @@ export const TOTPValidator = ({ onValidate }: TOTPValidatorProps) => {
                           handleInputChange(index, e.target.value)
                         }
                         onKeyDown={(e) => handleKeyDown(index, e)}
+                        onPaste={handlePaste}
                         className="w-full h-full text-center text-2xl font-bold border-none outline-none bg-transparent"
                         autoComplete="one-time-code"
                         disabled={loading}

@@ -42,9 +42,10 @@ export const ReloadPage = () => {
       const url = new URL(window.location.href);
       const token = url.searchParams.get("token");
       if (token) {
+        // The server persists the session as HttpOnly cookies; the client
+        // must not hold the raw token. Just strip it from the URL.
         url.searchParams.delete("token");
         window.history.replaceState({}, document.title, url.toString());
-        localStorage.setItem("token", token);
         return;
       }
     }

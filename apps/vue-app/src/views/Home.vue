@@ -30,7 +30,7 @@ import { useSession } from '@authdog/vue'
 
 const { session, isLoading } = useSession()
 
-const isAuthenticated = computed(() => session.isAuthenticated)
+const isAuthenticated = computed(() => session.value.isAuthenticated)
 </script>
 
 <style scoped>

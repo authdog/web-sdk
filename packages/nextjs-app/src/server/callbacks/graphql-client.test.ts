@@ -3,7 +3,7 @@ import { runIdentityGraphQLRequest } from "./graphql-client";
 
 const buildPublicKey = () => {
   const payload = {
-    identityHost: "https://identity.example.com/",
+    identityHost: "https://identity.authdog.com/",
     environmentId: "env-123",
   };
 
@@ -43,7 +43,7 @@ describe("runIdentityGraphQLRequest", () => {
 
     expect(result).toEqual({ result: "ok" });
     expect(mockFetch).toHaveBeenCalledWith(
-      "https://identity.example.com/edge/env-123/graphql",
+      "https://identity.authdog.com/edge/env-123/graphql",
       expect.objectContaining({
         method: "POST",
         body: JSON.stringify({ query, variables }),

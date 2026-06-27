@@ -1,12 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  TOKEN_POLL_INTERVAL_MS,
-  TOKEN_POLL_MAX_ATTEMPTS,
-  TOKEN_STORAGE_KEY,
-  TOKEN_UPDATED_EVENT,
-} from "../client/constants";
+import { TOKEN_STORAGE_KEY, TOKEN_UPDATED_EVENT } from "../client/constants";
 
 export interface UseAuthResult {
   token: string | null;
@@ -51,20 +46,9 @@ export const useAuth = (): UseAuthResult => {
     window.addEventListener(TOKEN_UPDATED_EVENT, handleTokenUpdate);
     window.addEventListener("storage", handleStorageChange);
 
-    let pollCount = 0;
-    const pollInterval = window.setInterval(() => {
-      pollCount++;
-      syncToken();
-
-      if (pollCount >= TOKEN_POLL_MAX_ATTEMPTS) {
-        window.clearInterval(pollInterval);
-      }
-    }, TOKEN_POLL_INTERVAL_MS);
-
     return () => {
       window.removeEventListener(TOKEN_UPDATED_EVENT, handleTokenUpdate);
       window.removeEventListener("storage", handleStorageChange);
-      window.clearInterval(pollInterval);
     };
   }, []);
 

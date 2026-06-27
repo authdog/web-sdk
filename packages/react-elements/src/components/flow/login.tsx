@@ -1,5 +1,16 @@
 "use client";
 
+/**
+ * DEMO / STUB COMPONENT — NOT FOR PRODUCTION USE.
+ *
+ * This LoginForm performs NO real authentication. The email/password and OAuth
+ * handlers only simulate a network delay (setTimeout) and never contact any auth
+ * backend or validate credentials. It exists purely for visual/Storybook demos
+ * and is intentionally NOT exported from the package's index.ts.
+ *
+ * Do not wire this up to real auth — use the package's actual flow components.
+ */
+
 import type React from "react";
 
 import { useState } from "react";
@@ -122,6 +133,7 @@ export const LoginForm = () => {
               <Input
                 id="email"
                 type="email"
+                autoComplete="username"
                 placeholder="m@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -142,6 +154,7 @@ export const LoginForm = () => {
               <Input
                 id="password"
                 type="password"
+                autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required

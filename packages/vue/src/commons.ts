@@ -1,22 +1,16 @@
-export interface PublicKeyPayload {
-  environmentId: string;
-  identityHost: string;
-}
+import {
+  validateAndParsePublicKey,
+  type PublicKeyPayload,
+} from "@authdog/node-commons";
 
+export type { PublicKeyPayload };
+
+/**
+ * Decodes and validates an Authdog public key. Delegates to the hardened
+ * shared parser in @authdog/node-commons, which validates the payload and
+ * enforces a trusted identity-host allowlist (SSRF / token-exfiltration
+ * protection) rather than blindly decoding base64/JSON.
+ */
 export const getPublicKeyPayload = (publicKey: string): PublicKeyPayload => {
-  if (!publicKey) {
-    throw new Error("Public key is not defined");
-  }
-
-  if (!publicKey.startsWith("pk_")) {
-    throw new Error("Invalid public key");
-  }
-
-  try {
-    return JSON.parse(
-      Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8"),
-    );
-  } catch (e) {
-    throw new Error("Failed to parse public key");
-  }
+  return validateAndParsePublicKey(publicKey);
 };

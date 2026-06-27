@@ -30,7 +30,7 @@ import { AuthdogProvider } from '@authdog/vue/client'
 const { session } = useSession()
 const { signOut } = useSignOut()
 
-const isAuthenticated = computed(() => session.isAuthenticated)
+const isAuthenticated = computed(() => session.value.isAuthenticated)
 
 const handleSignOut = async () => {
   await signOut()

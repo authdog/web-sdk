@@ -87,16 +87,15 @@ export function Navbar({
     email: "john@example.com",
     image: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
   },
-  onNavigateHome = () => console.log("Navigating to home"),
-  onNavItemClick = (href: string) => console.log(`Navigating to ${href}`),
+  onNavigateHome = () => {},
+  onNavItemClick = () => {},
   dropdownMenuItems = [{ name: "Profile", uri: "/profile", icon: User }],
-  onDropdownMenuItemClick = (uri: string) =>
-    console.log(`Navigating to ${uri}`),
+  onDropdownMenuItemClick = () => {},
   onProfileSelected,
-  onLogout = () => console.log("Logout clicked"),
+  onLogout = () => {},
   isLoading = false,
-  identityHost = "https://stg-id.authdog.xyz",
-  environmentId = "58be35b0-708f-49f6-84f0-6695d307d997",
+  identityHost,
+  environmentId,
 }: NavbarProps) {
   const [open, setOpen] = useState(false);
   const [logoFailed, setLogoFailed] = useState(false);
@@ -302,8 +301,10 @@ export function Navbar({
                     throw new Error("Identity Host is required");
                   }
 
-                  const signinUrl = `${identityHost}/signin/${environmentId}`;
-                  window.open(signinUrl, "_blank");
+                  const signinUrl = `${identityHost}/signin/${encodeURIComponent(
+                    environmentId,
+                  )}`;
+                  window.open(signinUrl, "_blank", "noopener,noreferrer");
                 }}
               >
                 Sign in

@@ -1,4 +1,8 @@
 import { LoaderFunction, redirect } from "@remix-run/node";
+import {
+  validateAndParsePublicKey,
+  sanitizeRedirectPath,
+} from "@authdog/node-commons";
 import { remixAuthLoader } from "./authLoader";
 
 export const identityLoader = (): LoaderFunction => {
@@ -18,20 +22,22 @@ export const identityDevAction = async ({
 }: {
   redirectTo: string;
 }) => {
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("identityDevAction is not available in production");
+  }
+
   const publicKey = process.env.PK_AUTHDOG as string;
   if (!publicKey) {
     throw new Error("Public key is not defined");
   }
 
-  const payload = JSON.parse(
-    Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8"),
-  );
+  const publicKeyObj = validateAndParsePublicKey(publicKey);
 
-  const environmentId = payload.environmentId;
+  const environmentId = publicKeyObj.environmentId;
   const cookieNameSession = `user_session_${environmentId}`;
   const cookieNameHash = `user_session_hash_${environmentId}`;
 
-  const response = redirect(redirectTo);
+  const response = redirect(sanitizeRedirectPath(redirectTo));
 
   response.headers.append(
     "Set-Cookie",

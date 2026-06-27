@@ -1,10 +1,13 @@
 "use client";
 
 import { useUser } from "@authdog/nextjs-app";
-import { getPublicKeyPayload } from "@authdog/nextjs-app/client";
+import {
+  clearAuthdogSession,
+  getPublicKeyPayload,
+} from "@authdog/nextjs-app/client";
 import { Navbar } from "@authdog/react-elements";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 function ClientNavbarComponent() {
   const router = useRouter();
@@ -12,26 +15,17 @@ function ClientNavbarComponent() {
   const [mounted, setMounted] = useState(false);
 
   const { user, isLoading } = useUser();
-  const [payload, setPayload] = useState<ReturnType<
-    typeof getPublicKeyPayload
-  > | null>(null);
+
+  const payload = useMemo(() => {
+    if (!publicKey) {
+      throw new Error("Public key is not set");
+    }
+    return getPublicKeyPayload(publicKey);
+  }, [publicKey]);
 
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  useEffect(() => {
-    if (!publicKey) {
-      throw new Error("Public key is not set");
-    }
-
-    try {
-      setPayload(getPublicKeyPayload(publicKey));
-      console.log(payload);
-    } catch (error) {
-      console.error("Error getting public key payload:", error);
-    }
-  }, [publicKey]);
 
   if (!mounted) {
     return null;
@@ -44,16 +38,14 @@ function ClientNavbarComponent() {
       items={[]}
       isLoading={isLoading}
       user={user as any}
+      environmentId={payload.environmentId}
+      identityHost={payload.identityHost}
       onNavigateHome={() => router.push("/")}
       onProfileSelected={() => router.push("/profile")}
       onLogout={() => {
-        localStorage.removeItem("token");
+        clearAuthdogSession();
         location.reload();
       }}
-      {...(payload && {
-        environmentId: payload.environmentId,
-        identityHost: payload.identityHost,
-      })}
     />
   );
 }

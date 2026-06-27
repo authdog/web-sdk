@@ -29,6 +29,8 @@ const meta = {
   args: {
     logoText: "Authdog",
     items: demoItems,
+    identityHost: "https://stg-id.authdog.xyz",
+    environmentId: "58be35b0-708f-49f6-84f0-6695d307d997",
   },
 } satisfies Meta<typeof Navbar>;
 

@@ -194,7 +194,7 @@ export const UserProfile = ({
                   </div>
                 ))} */}
 
-                {user.emails.map((email: any, idx: number) => {
+                {(user.emails ?? []).map((email: any, idx: number) => {
                   const v = (user?.verifications || []).find(
                     (ve: any) => ve.email === email.value,
                   );

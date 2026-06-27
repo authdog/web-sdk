@@ -86,8 +86,13 @@ export const fetchUserData = async (
   return await userData.json();
 };
 
+// NOTE: These options are for cookies usable from the browser. `httpOnly` is
+// intentionally omitted — it is a no-op (and misleading) for client-set
+// cookies since JS cannot set HttpOnly. Session cookies should be set
+// server-side with HttpOnly; do not set session cookies from client JS.
 export const browserCookiesOptions = {
   maxAge: 60 * 60 * 24 * 7, // 1 week
   path: "/",
-  httpOnly: true,
+  secure: true,
+  sameSite: "lax" as const,
 };

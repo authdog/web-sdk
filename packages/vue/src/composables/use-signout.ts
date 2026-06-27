@@ -24,7 +24,7 @@ export const useSignOut = () => {
 
       // Clear token from localStorage
       if (typeof window !== "undefined") {
-        localStorage.removeItem("token");
+        localStorage.removeItem(TOKEN_STORAGE_KEY);
       }
 
       // Redirect to logout endpoint or home page
