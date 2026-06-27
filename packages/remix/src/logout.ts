@@ -1,4 +1,4 @@
-import { LoaderFunction, redirect } from "@remix-run/node";
+import { type LoaderFunction, redirect } from "react-router";
 
 export const logoutLoader: LoaderFunction = async ({ context, request }) => {
   const headers = new Headers();

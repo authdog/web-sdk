@@ -1,5 +1,4 @@
-import { type MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { type MetaFunction, useLoaderData } from "react-router";
 import { identityLoader } from "@authdog/remix-node";
 import React from "react";
 import { Layout } from "~/components/Layout";
@@ -21,7 +20,11 @@ export const meta: MetaFunction = () => {
 export const loader = identityLoader();
 
 export default function Profile() {
-  const { user } = useLoaderData<typeof loader>();
+  const { user } = useLoaderData<{
+    user: any;
+    isAuthenticated: boolean;
+    signinUri: string;
+  }>();
 
   return (
     <Layout>

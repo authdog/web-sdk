@@ -1,5 +1,3 @@
-import { json } from "@remix-run/node";
-
 import {
   parseCookies,
   validateAndParsePublicKey,
@@ -20,7 +18,7 @@ export const createAuthResponse = (
   });
 
   // Create response with cookies
-  const response = json({
+  const response = Response.json({
     user: authenticatedUser.user,
     isAuthenticated: true,
   });
@@ -63,7 +61,7 @@ export const createAuthResponse = (
 
   const publicKeyObj = validateAndParsePublicKey(publicKey);
 
-  return json(
+  return Response.json(
     {
       user: authenticatedUser.user,
       isAuthenticated: true,
@@ -92,7 +90,7 @@ export const authenticateWithCookies = async (
 
     if (cookies.length === 0) {
       console.log("[Authdog] No cookies found, returning unauthenticated");
-      return json({
+      return Response.json({
         user: null,
         isAuthenticated: false,
         signinUri: `${publicKeyObj.identityHost}/signin/${publicKeyObj.environmentId}`,
@@ -121,7 +119,7 @@ export const authenticateWithCookies = async (
         metaCode: authenticatedUser?.meta?.code,
       });
 
-      return json({
+      return Response.json({
         user: authenticatedUser.user,
         isAuthenticated: true,
         signinUri: `${publicKeyObj.identityHost}/signin/${publicKeyObj.environmentId}`,
@@ -207,7 +205,7 @@ export const remixAuthLoader = async ({
         request,
       );
 
-      return json(
+      return Response.json(
         {
           user: authenticatedUser.user,
           isAuthenticated: true,
@@ -232,7 +230,7 @@ export const remixAuthLoader = async ({
     "[Authdog] No authentication methods succeeded, returning unauthenticated",
   );
   // If we get here, we're not authenticated
-  return json({
+  return Response.json({
     user: null,
     isAuthenticated: false,
     signinUri: `${publicKeyObj.identityHost}/signin/${publicKeyObj.environmentId}`,

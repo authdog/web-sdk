@@ -19,6 +19,9 @@ coverage
 .moon/cache
 .moon/docker
 
+# React Router
+.react-router/
+
 # Vercel
 .vercel
 

@@ -4,8 +4,8 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
+  type LinksFunction,
+} from "react-router";
 // @ts-ignore
 import styles from "@authdog/react-elements/styles.css?url";
 import { AuthdogProvider, ReloadPage } from "@authdog/remix-node/client";

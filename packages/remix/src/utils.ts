@@ -1,4 +1,4 @@
-import { LoaderFunction, redirect } from "@remix-run/node";
+import { type LoaderFunction, redirect } from "react-router";
 import { remixAuthLoader } from "./authLoader";
 
 export const identityLoader = (): LoaderFunction => {

@@ -9,7 +9,7 @@ export default defineConfig({
   minify: true,
   clean: true,
   target: "es2020", // Target a more modern environment
-  external: ["@remix-run/node", "react", "react-dom"],
+  external: ["react-router", "react", "react-dom"],
   env: {
     NODE_ENV: process.env.NODE_ENV || "production",
   },

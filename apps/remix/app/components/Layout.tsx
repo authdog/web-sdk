@@ -1,5 +1,5 @@
 import { Navbar } from "@authdog/react-elements";
-import { useLoaderData, useNavigate } from "@remix-run/react";
+import { useLoaderData, useNavigate } from "react-router";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const {
