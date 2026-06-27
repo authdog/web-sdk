@@ -5,8 +5,8 @@
 **Drop-in authentication and identity for modern web frameworks.**
 
 A curated monorepo of framework-native libraries that make it effortless to add
-secure sessions, user management, and auth UI to your React, Next.js, Remix, and
-Vue applications.
+secure sessions, user management, and auth UI to your React, Next.js, Remix,
+Vue, Angular, React Native, and Node (Express / Fastify) applications.
 
 [![packages-publish](https://github.com/authdog/web-sdk/actions/workflows/packages-publish.yml/badge.svg)](https://github.com/authdog/web-sdk/actions/workflows/packages-publish.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -21,7 +21,7 @@ Vue applications.
 
 ## ✨ Why Authdog Web SDK?
 
-- **🧩 Framework-native** — idiomatic packages for React, Next.js (App Router), Remix, and Vue. No glue code.
+- **🧩 Framework-native** — idiomatic packages for React, Next.js (App Router), Remix, Vue, Angular, React Native, and Node backends (Express / Fastify). No glue code.
 - **🔐 Secure by default** — token validation, cookie handling, and session lifecycle managed for you.
 - **🎨 Batteries-included UI** — ready-made, accessible components (sign-in, user profile, TOTP, navbar) you can drop in or restyle.
 - **⚡ Tiny & tree-shakeable** — ESM-first, `sideEffects: false`, dual CJS/ESM builds via [tsup](https://tsup.egoist.dev).
@@ -36,6 +36,10 @@ Vue applications.
 | [`@authdog/nextjs-app`](packages/nextjs-app) | [![npm](https://img.shields.io/npm/v/@authdog/nextjs-app)](https://www.npmjs.com/package/@authdog/nextjs-app) | Next.js **App Router** SDK — provider, `useUser` / `useAuth` hooks, server helpers. |
 | [`@authdog/remix-node`](packages/remix) | [![npm](https://img.shields.io/npm/v/@authdog/remix-node)](https://www.npmjs.com/package/@authdog/remix-node) | Remix SDK — auth loaders, provider, and cookie-based session helpers. |
 | [`@authdog/vue`](packages/vue) | [![npm](https://img.shields.io/npm/v/@authdog/vue)](https://www.npmjs.com/package/@authdog/vue) | Vue SDK — provider component and `useSession` / `useUser` composables. |
+| [`@authdog/angular`](packages/angular) | [![npm](https://img.shields.io/npm/v/@authdog/angular)](https://www.npmjs.com/package/@authdog/angular) | Angular SDK — `provideAuthdog()`, signals-based `AuthdogService`, HTTP interceptor & route guard. |
+| [`@authdog/express`](packages/express) | [![npm](https://img.shields.io/npm/v/@authdog/express)](https://www.npmjs.com/package/@authdog/express) | Express SDK — session middleware, `requireAuth` guard, and logout handler. |
+| [`@authdog/fastify`](packages/fastify) | [![npm](https://img.shields.io/npm/v/@authdog/fastify)](https://www.npmjs.com/package/@authdog/fastify) | Fastify SDK — plugin decorating requests with session + `requireAuth` / `logout`. |
+| [`@authdog/react-native`](packages/react-native) | [![npm](https://img.shields.io/npm/v/@authdog/react-native)](https://www.npmjs.com/package/@authdog/react-native) | React Native / Expo SDK — provider, hooks, pluggable secure storage & deep-link login. |
 | [`@authdog/node-commons`](packages/node-commons) | [![npm](https://img.shields.io/npm/v/@authdog/node-commons)](https://www.npmjs.com/package/@authdog/node-commons) | Shared Node utilities — public-key parsing, cookies, sessions, identity. |
 
 ## 🚀 Quick Start
@@ -51,6 +55,18 @@ bun add @authdog/remix-node @authdog/react-elements
 
 # Vue
 bun add @authdog/vue
+
+# Angular
+bun add @authdog/angular
+
+# Express (backend)
+bun add @authdog/express
+
+# Fastify (backend)
+bun add @authdog/fastify
+
+# React Native / Expo
+bun add @authdog/react-native
 ```
 
 Set your Authdog public key as an environment variable:

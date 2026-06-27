@@ -1,0 +1,61 @@
+{
+    "name": "@authdog/angular",
+    "version": "0.0.1",
+    "description": "Authdog Angular SDK",
+    "source": "src/index.ts",
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js"
+        }
+    },
+    "files": [
+        "dist/"
+    ],
+    "sideEffects": false,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/authdog-labs/web-sdk.git",
+        "directory": "packages/angular"
+    },
+    "homepage": "https://github.com/authdog-labs/web-sdk/tree/main/packages/angular#readme",
+    "bugs": {
+        "url": "https://github.com/authdog-labs/web-sdk/issues"
+    },
+    "scripts": {
+        "format": "prettier --config .prettierrc.json --write \"**/*.{ts,md}\"",
+        "type-check": "tsc",
+        "clean": "rm -rf dist",
+        "build": "bun run clean && tsup",
+        "ship": "bun run build && bun publish --access public"
+    },
+    "dependencies": {
+        "@authdog/node-commons": "workspace:*"
+    },
+    "peerDependencies": {
+        "@angular/common": "^17.0.0 || ^18.0.0 || ^19.0.0",
+        "@angular/core": "^17.0.0 || ^18.0.0 || ^19.0.0",
+        "@angular/router": "^17.0.0 || ^18.0.0 || ^19.0.0",
+        "rxjs": "^7.8.0"
+    },
+    "devDependencies": {
+        "@angular/common": "^18.2.0",
+        "@angular/core": "^18.2.0",
+        "@angular/router": "^18.2.0",
+        "@types/node": "^22.10.5",
+        "dotenv": "^16.4.7",
+        "prettier": "^3.4.2",
+        "rxjs": "^7.8.1",
+        "tsup": "^8.3.5",
+        "typescript": "^5.7.2",
+        "vitest": "^2.1.8"
+    },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/",
+        "access": "public"
+    }
+}

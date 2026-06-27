@@ -18,16 +18,22 @@ function ClientNavbarComponent() {
 
   const payload = useMemo(() => {
     if (!publicKey) {
-      throw new Error("Public key is not set");
+      return null;
     }
-    return getPublicKeyPayload(publicKey);
+    try {
+      return getPublicKeyPayload(publicKey);
+    } catch {
+      return null;
+    }
   }, [publicKey]);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
+  // Render only on the client once we have a valid public-key payload; this
+  // keeps the component prerender-safe when the env var is absent at build time.
+  if (!mounted || !payload) {
     return null;
   }
 

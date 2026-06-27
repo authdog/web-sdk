@@ -10,6 +10,10 @@ projects:
   react-elements: 'packages/react-elements'
   remix-node: 'packages/remix'
   vue: 'packages/vue'
+  angular: 'packages/angular'
+  express: 'packages/express'
+  fastify: 'packages/fastify'
+  react-native: 'packages/react-native'
   eslint-config: 'packages/eslint'
   typescript-config: 'packages/typescript-config'
 
