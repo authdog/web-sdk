@@ -1,7 +1,6 @@
-// export { default } from "@authdog/react-elements/postcss.config";
+/** @type {import('postcss-load-config').Config} */
 export default {
   plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
+    "@tailwindcss/postcss": {},
   },
-}
+};
