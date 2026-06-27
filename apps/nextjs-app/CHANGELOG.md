@@ -1,5 +1,17 @@
 # nextjs-app
 
+## 1.1.0
+
+### Minor Changes
+
+- 01eee99: Modernize codebase, add angular, express, fastify, react-native
+
+### Patch Changes
+
+- Updated dependencies [01eee99]
+  - @authdog/nextjs-app@1.1.0
+  - @authdog/react-elements@0.1.0
+
 ## 1.0.12
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # vue-app
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [01eee99]
+  - @authdog/vue@0.1.0
+
 ## 0.1.2
 
 ### Patch Changes
