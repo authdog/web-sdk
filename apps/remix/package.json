@@ -28,7 +28,7 @@
     "postcss": "^8.4.38",
     "tailwindcss": "catalog:",
     "typescript": "catalog:",
-    "vite": "^5.1.0",
+    "vite": "catalog:",
     "vite-tsconfig-paths": "^4.2.1"
   },
   "engines": {

@@ -60,7 +60,7 @@
     "tw-animate-css": "catalog:",
     "ts-loader": "^9.5.1",
     "typescript": "catalog:",
-    "vite": "^5.0.0",
+    "vite": "catalog:",
     "webpack": "^5.89.0"
   },
   "dependencies": {

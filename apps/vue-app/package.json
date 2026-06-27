@@ -16,9 +16,9 @@
   },
   "devDependencies": {
     "@types/node": "catalog:",
-    "@vitejs/plugin-vue": "^5.0.0",
+    "@vitejs/plugin-vue": "^6.0.0",
     "typescript": "catalog:",
-    "vite": "^5.0.0",
+    "vite": "catalog:",
     "vue-tsc": "^2.0.0"
   }
 }
