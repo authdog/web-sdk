@@ -1,0 +1,26 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: dbrrt/setup-moon@v1.0.0
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.2.11
+
+      - run: bun install --frozen-lockfile
+
+      - run: moon run :test
