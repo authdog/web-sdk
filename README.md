@@ -69,14 +69,28 @@ bun add @authdog/fastify
 bun add @authdog/react-native
 ```
 
-Set your Authdog public key as an environment variable:
+Provide your Authdog public key (`pk_…`). Each framework reads it from a different
+place — use the variable that matches your package:
+
+| Framework            | Variable                 | Where it's read                          |
+| -------------------- | ------------------------ | ---------------------------------------- |
+| Next.js (client)     | `NEXT_PUBLIC_PK_AUTHDOG` | Exposed to the browser by Next.js        |
+| Next.js (server)     | `PK_AUTHDOG`             | Server-only (logout, etc.)               |
+| Remix                | `PK_AUTHDOG`             | Loaders / actions                        |
+| Express (backend)    | `PK_AUTHDOG`             | `createAuthdog({ publicKey })`           |
+| Fastify (backend)    | `AUTHDOG_PK`             | `authdogPlugin({ publicKey })`           |
+| Vue                  | `VITE_AUTHDOG_PUBLIC_KEY`| Vite-exposed (use the `VITE_` prefix)    |
+| React Native / Expo  | `EXPO_PUBLIC_PK_AUTHDOG` | Exposed to the app by Expo               |
+| Angular              | —                        | Passed directly to `provideAuthdog(...)` |
 
 ```bash
-# Next.js
+# Next.js (App Router)
 NEXT_PUBLIC_PK_AUTHDOG=pk_xxxxxxxxxxxxxxxx
 ```
 
-> Your public key (`pk_…`) is available in the [Authdog dashboard](https://authdog.com). It is safe to expose to the browser.
+> Your public key (`pk_…`) is available in the [Authdog dashboard](https://authdog.com).
+> It is safe to expose to the browser. Your **secret key** (`sk_…`), used only by
+> backend packages, must never be committed or shipped to the client.
 
 ## 🧪 Examples
 
