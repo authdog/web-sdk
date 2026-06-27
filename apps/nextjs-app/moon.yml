@@ -13,3 +13,11 @@ tasks:
   dev:
     command: 'bun run dev'
     preset: 'server'
+
+  lint:
+    command: 'bun run lint'
+    inputs:
+      - 'src/**/*'
+      - 'app/**/*'
+      - 'eslint.config.mjs'
+      - 'package.json'

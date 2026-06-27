@@ -1,48 +1,48 @@
 {
-    "name": "@authdog/node-commons",
-    "version": "0.0.22",
-    "description": "Authdog Next.js SDK",
-    "source": "src/index.ts",
-    "main": "./dist/index.js",
-    "module": "./dist/index.mjs",
-    "types": "./dist/index.d.ts",
-    "exports": {
-        ".": {
-            "types": "./dist/index.d.ts",
-            "import": "./dist/index.mjs",
-            "require": "./dist/index.js"
-        }
-    },
-    "files": [
-        "dist/"
-    ],
-    "sideEffects": false,
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/authdog-labs/web-sdk.git",
-        "directory": "packages/node-commons"
-    },
-    "homepage": "https://github.com/authdog-labs/web-sdk/tree/main/packages/node-commons#readme",
-    "bugs": {
-        "url": "https://github.com/authdog-labs/web-sdk/issues"
-    },
-    "scripts": {
-        "format": "prettier --config .prettierrc.json --write \"**/*.{ts,md}\"",
-        "type-check": "tsc",
-        "clean": "rm -rf dist",
-        "build": "bun run clean && tsup",
-        "ship": "bun run build && bun publish --access public"
-    },
-    "devDependencies": {
-        "@types/node": "^22.14.1",
-        "dotenv": "^16.4.7",
-        "prettier": "^3.4.2",
-        "tsup": "^8.3.5",
-        "typescript": "^5.7.2",
-        "vitest": "^2.1.8"
-    },
-    "publishConfig": {
-        "registry": "https://registry.npmjs.org/",
-        "access": "public"
+  "name": "@authdog/node-commons",
+  "version": "0.0.22",
+  "description": "Authdog Next.js SDK",
+  "source": "src/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     }
+  },
+  "files": [
+    "dist/"
+  ],
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/authdog-labs/web-sdk.git",
+    "directory": "packages/node-commons"
+  },
+  "homepage": "https://github.com/authdog-labs/web-sdk/tree/main/packages/node-commons#readme",
+  "bugs": {
+    "url": "https://github.com/authdog-labs/web-sdk/issues"
+  },
+  "scripts": {
+    "format": "prettier --config .prettierrc.json --write \"**/*.{ts,md}\"",
+    "type-check": "tsc",
+    "clean": "rm -rf dist",
+    "build": "bun run clean && tsup",
+    "ship": "bun run build && bun publish --access public"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "dotenv": "catalog:",
+    "prettier": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
 }

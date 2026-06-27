@@ -6,7 +6,7 @@
     "dev": "next dev --port 3005",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@authdog/react-elements": "workspace:*",
@@ -14,24 +14,24 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.555.0",
-    "next": "16.1.6",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "next": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {
     "@authdog/eslint-config": "workspace:*",
     "@authdog/typescript-config": "workspace:*",
-    "@next/eslint-plugin-next": "15.5.11",
+    "@next/eslint-plugin-next": "catalog:",
     "@types/eslint": "^9.0.0",
-    "@types/node": "^20",
-    "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.1",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "autoprefixer": "^10",
-    "eslint": "*",
+    "eslint": "catalog:",
     "postcss": "^8",
     "tailwindcss": "3.4.19",
     "tw-animate-css": "^1.2.9",
-    "typescript": "^5.6.3"
+    "typescript": "catalog:"
   }
 }
