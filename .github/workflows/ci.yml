@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: dbrrt/setup-moon@v1
+      - uses: dbrrt/setup-moon@v1.0.0
 
       - uses: oven-sh/setup-bun@v2
         with:

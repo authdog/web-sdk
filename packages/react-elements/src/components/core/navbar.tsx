@@ -69,8 +69,8 @@ interface NavbarProps {
   onProfileSelected?: () => void;
   onLogout?: () => void;
   // signinUrl?: string;
-  identityHost?: string;
-  environmentId?: string;
+  identityHost: string;
+  environmentId: string;
 }
 
 export function Navbar({

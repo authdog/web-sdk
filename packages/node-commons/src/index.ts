@@ -1,8 +1,10 @@
 export {
   getPublicKeyPayload,
   validateAndParsePublicKey,
+  assertTrustedIdentityHost,
   PublicKeyPayload,
 } from "./public-key";
-export { parseCookies } from "./cookies";
+export { parseCookies, ParsedCookie } from "./cookies";
 export { buildSessionKey } from "./session";
-export { fetchUserData } from "./identity";
+export { fetchUserData, isAuthenticatedUserInfo, UserInfoResponse } from "./identity";
+export { sanitizeRedirectPath } from "./redirects";

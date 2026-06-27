@@ -4,7 +4,10 @@ import {
   parseCookies,
   validateAndParsePublicKey,
   fetchUserData,
+  isAuthenticatedUserInfo,
 } from "@authdog/node-commons";
+
+const isDev = process.env.NODE_ENV !== "production";
 
 // Function to create authentication response with cookies
 export const createAuthResponse = (
@@ -13,26 +16,23 @@ export const createAuthResponse = (
   environmentId: string,
   request: Request,
 ) => {
-  console.log("[Authdog] Creating auth response with:", {
-    hasUser: !!authenticatedUser?.user,
-    environmentId,
-    tokenLength: token?.length,
-  });
-
-  // Create response with cookies
-  const response = json({
-    user: authenticatedUser.user,
-    isAuthenticated: true,
-  });
+  if (isDev) {
+    console.log("[Authdog] Creating auth response with:", {
+      hasUser: !!authenticatedUser?.user,
+      environmentId,
+    });
+  }
 
   // Set cookies in the response headers
-  const headers = new Headers(response.headers);
+  const headers = new Headers();
 
   // Serialize the user object separately
   const userSessionValue = JSON.stringify(authenticatedUser?.user);
   const userSessionHashValue = token;
 
-  console.log("[Authdog] Setting cookies for environment:", environmentId);
+  if (isDev) {
+    console.log("[Authdog] Setting cookies for environment:", environmentId);
+  }
 
   headers.append(
     "Set-Cookie",
@@ -52,8 +52,6 @@ export const createAuthResponse = (
   headers.append("Expires", "0");
   headers.append("Vary", "Cookie");
   headers.append("Content-Type", "application/json");
-  headers.append("Access-Control-Allow-Origin", "*");
-  headers.append("Access-Control-Allow-Credentials", "true");
 
   const publicKey = process.env.PK_AUTHDOG as string;
 
@@ -81,22 +79,28 @@ export const authenticateWithCookies = async (
   publicKeyObj: any,
 ) => {
   try {
-    console.log(
-      "[Authdog] Attempting cookie authentication for environment:",
-      publicKeyObj?.environmentId,
-    );
+    if (isDev) {
+      console.log(
+        "[Authdog] Attempting cookie authentication for environment:",
+        publicKeyObj?.environmentId,
+      );
+    }
 
-    // Get cookies from request
+    // Get cookies from request (parseCookies URL-decodes values)
     const cookieHeader = request.headers.get("Cookie");
     const cookies = parseCookies(cookieHeader);
 
+    const unauthenticated = json({
+      user: null,
+      isAuthenticated: false,
+      signinUri: `${publicKeyObj.identityHost}/signin/${publicKeyObj.environmentId}`,
+    });
+
     if (cookies.length === 0) {
-      console.log("[Authdog] No cookies found, returning unauthenticated");
-      return json({
-        user: null,
-        isAuthenticated: false,
-        signinUri: `${publicKeyObj.identityHost}/signin/${publicKeyObj.environmentId}`,
-      });
+      if (isDev) {
+        console.log("[Authdog] No cookies found, returning unauthenticated");
+      }
+      return unauthenticated;
     }
 
     // Find our specific cookies
@@ -105,9 +109,11 @@ export const authenticateWithCookies = async (
     );
 
     if (userSessionHashCookie) {
-      console.log(
-        "[Authdog] Found session hash cookie, attempting to fetch user data",
-      );
+      if (isDev) {
+        console.log(
+          "[Authdog] Found session hash cookie, attempting to fetch user data",
+        );
+      }
       const userSessionHashValue = userSessionHashCookie.value;
       const authenticatedUser = await fetchUserData(
         publicKeyObj?.identityHost,
@@ -115,18 +121,24 @@ export const authenticateWithCookies = async (
         userSessionHashValue,
       );
 
-      console.log("[Authdog] User data fetch result:", {
-        success: !!authenticatedUser,
-        hasUser: !!authenticatedUser?.user,
-        metaCode: authenticatedUser?.meta?.code,
-      });
+      if (isDev) {
+        console.log("[Authdog] User data fetch result:", {
+          success: !!authenticatedUser,
+          hasUser: !!authenticatedUser?.user,
+          metaCode: authenticatedUser?.meta?.code,
+        });
+      }
+
+      if (!isAuthenticatedUserInfo(authenticatedUser)) {
+        return unauthenticated;
+      }
 
       return json({
         user: authenticatedUser.user,
         isAuthenticated: true,
         signinUri: `${publicKeyObj.identityHost}/signin/${publicKeyObj.environmentId}`,
       });
-    } else {
+    } else if (isDev) {
       console.log(
         "[Authdog] No session hash cookie found for environment:",
         publicKeyObj?.environmentId,
@@ -153,7 +165,9 @@ export const remixAuthLoader = async ({
   context,
   params,
 }: IRemixAuthLoader) => {
-  console.log("[Authdog] Starting authentication loader");
+  if (isDev) {
+    console.log("[Authdog] Starting authentication loader");
+  }
 
   const publicKey = params?.publicKey as string;
 
@@ -163,36 +177,43 @@ export const remixAuthLoader = async ({
 
   const publicKeyObj = validateAndParsePublicKey(publicKey);
 
-  console.log("[Authdog] Public key parsed:", {
-    hasPublicKey: !!publicKey,
-    environmentId: publicKeyObj?.environmentId,
-  });
+  if (isDev) {
+    console.log("[Authdog] Public key parsed:", {
+      hasPublicKey: !!publicKey,
+      environmentId: publicKeyObj?.environmentId,
+    });
+  }
 
   // First check if we have a token in the URL
   const url = new URL(request.url);
   const tokenFromUri = url.searchParams.get("token");
 
-  console.log("[Authdog] URL token check:", {
-    hasToken: !!tokenFromUri,
-    tokenLength: tokenFromUri?.length,
-  });
+  if (isDev) {
+    console.log("[Authdog] URL token check:", {
+      hasToken: !!tokenFromUri,
+    });
+  }
 
   // If we have a token in URL, process it first
   if (tokenFromUri) {
-    console.log("[Authdog] Processing token from URL");
+    if (isDev) {
+      console.log("[Authdog] Processing token from URL");
+    }
     const authenticatedUser = await fetchUserData(
       publicKeyObj?.identityHost,
       publicKeyObj?.environmentId,
       tokenFromUri,
     );
 
-    console.log("[Authdog] Token authentication result:", {
-      success: !!authenticatedUser,
-      hasUser: !!authenticatedUser?.user,
-      metaCode: authenticatedUser?.meta?.code,
-    });
+    if (isDev) {
+      console.log("[Authdog] Token authentication result:", {
+        success: !!authenticatedUser,
+        hasUser: !!authenticatedUser?.user,
+        metaCode: authenticatedUser?.meta?.code,
+      });
+    }
 
-    if (authenticatedUser?.meta && authenticatedUser?.meta?.code === 200) {
+    if (isAuthenticatedUserInfo(authenticatedUser)) {
       // Store in context for later use
       const userSessionValue = JSON.stringify(authenticatedUser?.user);
       context[`user_session_${publicKeyObj?.environmentId}`] = userSessionValue;
@@ -221,16 +242,22 @@ export const remixAuthLoader = async ({
   }
 
   // If no token in URL or token authentication failed, try cookie authentication
-  console.log("[Authdog] Attempting cookie authentication");
+  if (isDev) {
+    console.log("[Authdog] Attempting cookie authentication");
+  }
   const cookieAuthResult = await authenticateWithCookies(request, publicKeyObj);
   if (cookieAuthResult) {
-    console.log("[Authdog] Cookie authentication successful");
+    if (isDev) {
+      console.log("[Authdog] Cookie authentication successful");
+    }
     return cookieAuthResult;
   }
 
-  console.log(
-    "[Authdog] No authentication methods succeeded, returning unauthenticated",
-  );
+  if (isDev) {
+    console.log(
+      "[Authdog] No authentication methods succeeded, returning unauthenticated",
+    );
+  }
   // If we get here, we're not authenticated
   return json({
     user: null,

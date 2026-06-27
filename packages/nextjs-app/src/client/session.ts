@@ -1,4 +1,8 @@
-import { getPublicKeyPayload } from "../commons";
+import {
+  fetchUserData as fetchUserInfo,
+  isAuthenticatedUserInfo,
+} from "@authdog/node-commons";
+import { validateAndParsePublicKey } from "../commons";
 
 export const getTokenFromUri = (url: string): string | null => {
   return new URL(url).searchParams.get("token");
@@ -70,26 +74,21 @@ export const fetchUserData = async (
   publicKey: string,
   token: string,
 ): Promise<AuthdogUserResponse | null> => {
-  validatePublicKey(publicKey);
-  const publicKeyObj = getPublicKeyPayload(publicKey);
-  const userData = await fetch(
-    `${publicKeyObj?.identityHost}/oidc/${publicKeyObj?.environmentId}/userinfo`,
-    {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    },
-  );
+  const { identityHost, environmentId } = validateAndParsePublicKey(publicKey);
 
-  if (!userData.ok) {
-    throw new Error("Failed to fetch user info");
+  const userData = await fetchUserInfo(identityHost, environmentId, token);
+
+  if (!isAuthenticatedUserInfo(userData)) {
+    const status = userData?.meta?.code ?? "unknown";
+    throw new Error(`Failed to fetch user info (status ${status})`);
   }
 
-  return await userData.json();
+  return userData as unknown as AuthdogUserResponse;
 };
 
 export const browserCookiesOptions = {
   maxAge: 60 * 60 * 24 * 7, // 1 week
   path: "/",
-  httpOnly: true,
+  secure: true,
+  sameSite: "lax" as const,
 };

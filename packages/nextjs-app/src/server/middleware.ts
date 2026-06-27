@@ -1,17 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
+import {
+  validateAndParsePublicKey,
+  fetchUserData,
+  isAuthenticatedUserInfo,
+} from "@authdog/node-commons";
 
 export const useAuthMiddleware = (publicKey: string) => {
-  if (!publicKey) {
-    throw new Error("Public key is not defined");
-  }
-
-  if (!publicKey.startsWith("pk_")) {
-    throw new Error("Invalid public key");
-  }
-
-  const publicKeyObj = JSON.parse(
-    Buffer.from(publicKey.replace("pk_", ""), "base64").toString("utf-8"),
-  );
+  const publicKeyObj = validateAndParsePublicKey(publicKey);
 
   return async (request: NextRequest) => {
     const response = NextResponse.next();
@@ -19,31 +14,23 @@ export const useAuthMiddleware = (publicKey: string) => {
       maxAge: 60 * 60 * 24 * 7, // 1 week
       path: "/",
       httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax" as const,
     };
 
     const tokenFromUri = new URL(request.nextUrl).searchParams.get("token");
 
     if (tokenFromUri) {
-      const userData = await fetch(
-        `${publicKeyObj.identityHost}/oidc/${publicKeyObj.environmentId}/userinfo`,
-        {
-          headers: {
-            authorization: `Bearer ${tokenFromUri}`,
-          },
-        },
+      const userData = await fetchUserData(
+        publicKeyObj.identityHost,
+        publicKeyObj.environmentId,
+        tokenFromUri,
       );
 
-      if (!userData.ok) {
-        throw new Error("Failed to fetch user info");
-      }
-
-      const authenticatedUser = await userData.json();
-
-      if (authenticatedUser?.meta?.code === 200) {
-        // TODO: define object in node-commons
+      if (isAuthenticatedUserInfo(userData)) {
         response.cookies.set({
           name: `user_session_${publicKeyObj.environmentId}`,
-          value: JSON.stringify(authenticatedUser.user),
+          value: JSON.stringify(userData.user),
           ...options,
         });
 

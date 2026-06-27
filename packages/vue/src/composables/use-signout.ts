@@ -1,5 +1,9 @@
 import { ref, computed, inject } from "vue";
-import { AUTHDOG_CONTEXT_KEY, type AuthdogContext } from "../client/provider";
+import {
+  AUTHDOG_CONTEXT_KEY,
+  TOKEN_STORAGE_KEY,
+  type AuthdogContext,
+} from "../client/provider";
 
 export const useSignOut = () => {
   const context = inject<AuthdogContext>(AUTHDOG_CONTEXT_KEY);

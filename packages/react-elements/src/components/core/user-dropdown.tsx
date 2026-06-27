@@ -73,11 +73,14 @@ export const UserDropdown = ({
   const displayName = user?.displayName || user?.name || "";
   const avatar = user?.photos?.[0]?.value || user?.avatar || "";
 
+  const isSafeHref = (h: string) =>
+    /^(https?:|\/|\.\/|#|mailto:)/i.test(h) && !/^\s*javascript:/i.test(h);
+
   const handleLink = (item: UserDropdownLink) => {
     if (item.onClick) return item.onClick();
-    if (item.href) {
-      if (item.href.startsWith("http")) {
-        window.open(item.href, "_blank");
+    if (item.href && isSafeHref(item.href)) {
+      if (/^https?:/i.test(item.href)) {
+        window.open(item.href, "_blank", "noopener,noreferrer");
       } else {
         window.location.assign(item.href);
       }

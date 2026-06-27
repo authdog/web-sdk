@@ -7,13 +7,19 @@ import {
 } from "vue";
 
 export interface AuthdogContext {
-  isLoading: boolean;
-  token: string | null;
+  readonly isLoading: boolean;
+  readonly token: string | null;
   setToken: (token: string | null) => void;
 }
 
 export const AUTHDOG_CONTEXT_KEY: InjectionKey<AuthdogContext> =
   Symbol("authdog");
+
+/** Shared localStorage key for the persisted token. */
+export const TOKEN_STORAGE_KEY = "token";
+
+/** JWT shape: three base64url segments separated by dots. */
+const JWT_PATTERN = /^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/;
 
 export const AuthdogProvider = defineComponent({
   name: "AuthdogProvider",
@@ -33,21 +39,25 @@ export const AuthdogProvider = defineComponent({
         const urlToken = url.searchParams.get("token");
 
         if (urlToken) {
-          // Remove token from URL without triggering a page reload
+          // Remove token from URL without triggering a page reload,
+          // regardless of whether the token is valid.
           url.searchParams.delete("token");
           window.history.replaceState({}, document.title, url.toString());
 
-          // Store token and reload to ensure server processes it
-          localStorage.setItem("token", urlToken);
-          setToken(urlToken);
+          // Only persist values that look like a JWT to avoid storing
+          // arbitrary attacker-supplied data.
+          if (JWT_PATTERN.test(urlToken)) {
+            localStorage.setItem(TOKEN_STORAGE_KEY, urlToken);
+            setToken(urlToken);
 
-          // Force a reload to ensure the server processes the token
-          window.location.reload();
-          return;
+            // Force a reload to ensure the server processes the token
+            window.location.reload();
+            return;
+          }
         }
 
         // Check for existing token in localStorage
-        const existingToken = localStorage.getItem("token");
+        const existingToken = localStorage.getItem(TOKEN_STORAGE_KEY);
         if (existingToken) {
           setToken(existingToken);
         }
@@ -60,9 +70,15 @@ export const AuthdogProvider = defineComponent({
       }
     });
 
+    // Expose reactive state through getters so consumers always read the
+    // live ref values rather than a frozen snapshot taken at setup time.
     const context: AuthdogContext = {
-      isLoading: isLoading.value,
-      token: token.value,
+      get isLoading() {
+        return isLoading.value;
+      },
+      get token() {
+        return token.value;
+      },
       setToken,
     };
 

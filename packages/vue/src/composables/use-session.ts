@@ -14,7 +14,7 @@ export const useSession = () => {
   }));
 
   return {
-    session: session.value,
-    isLoading: context.isLoading,
+    session,
+    isLoading: computed(() => context.isLoading),
   };
 };
