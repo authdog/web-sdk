@@ -1,5 +1,16 @@
 # @authdog/remix-node
 
+## 0.2.0
+
+### Minor Changes
+
+- ac11fae: Cleanup packages
+
+### Patch Changes
+
+- Updated dependencies [ac11fae]
+  - @authdog/node-commons@0.3.0
+
 ## 0.1.0
 
 ### Minor Changes
