@@ -40,21 +40,25 @@ jobs:
       # Scan every workspace package against the vulnerability database and fail
       # on high/critical advisories. Lower --audit-level to "moderate" to tighten.
       #
-      # --ignore entries are advisories we cannot resolve under the current
+      # Most advisories are cleared at the source: next bumped to 16.x, astro to 6.x,
+      # and root `overrides` pin vite, @remix-run/server-runtime, @remix-run/router
+      # and valibot to fixed versions (see root package.json).
+      #
+      # --ignore entries are the residue we cannot resolve under the current
       # (safe-only) upgrade policy. Each is dev/build-time or example-app only and
       # does NOT affect the published @authdog/* runtime packages. Revisit when the
       # corresponding major upgrade lands (Dependabot will open the PRs):
       #   GHSA-48r7-hpm6-gfxm / GHSA-39pv-4j6c-2g6v  @angular/common  -> needs Angular 19.2.25+
       #   GHSA-rgjc-h3x7-9mwg                         @angular/core    -> needs Angular 19.2.25+
       #   GHSA-5xrq-8626-4rwp (critical)              vitest UI server -> needs vitest 3.2.6+ (UI unused here)
-      #
-      # NOTE: this allowlist is still being reconciled — the verify pass (examples/*
-      # bumps + tar/@xmldom/xmldom overrides) will clear next/remix/tar/xmldom
-      # advisories so they should NOT be added here.
+      #   GHSA-rxv8-25v2-qmq8                         turbo-stream     -> @remix-run/react@2.17.5 hard-pins
+      #     turbo-stream 2.x (examples/remix); turbo-stream 3.x ships only with React Router 7, so this
+      #     clears only when the playground migrates off Remix 2.
       - name: bun audit
         run: |
           bun audit --audit-level=high \
             --ignore GHSA-48r7-hpm6-gfxm \
             --ignore GHSA-39pv-4j6c-2g6v \
             --ignore GHSA-rgjc-h3x7-9mwg \
-            --ignore GHSA-5xrq-8626-4rwp
+            --ignore GHSA-5xrq-8626-4rwp \
+            --ignore GHSA-rxv8-25v2-qmq8
