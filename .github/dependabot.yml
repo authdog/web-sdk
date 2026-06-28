@@ -1,0 +1,47 @@
+# Dependabot keeps dependencies current across every workspace in the monorepo.
+# Bun-managed JS deps (package.json + bun.lock) use the "npm" ecosystem.
+version: 2
+updates:
+  # JavaScript/TypeScript dependencies — root, published packages, and examples.
+  - package-ecosystem: "npm"
+    directories:
+      - "/"
+      - "/packages/*"
+      - "/examples/*"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    versioning-strategy: increase
+    groups:
+      # One PR for the low-risk churn (types, lint, build tooling, patches/minors).
+      dev-and-minor:
+        applies-to: version-updates
+        patterns:
+          - "@types/*"
+          - "eslint*"
+          - "@eslint/*"
+          - "typescript-eslint"
+          - "prettier"
+          - "tsup"
+          - "vitest"
+        update-types:
+          - "minor"
+          - "patch"
+      # Group remaining minor/patch bumps so majors stay as isolated, reviewable PRs.
+      minor-and-patch:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+    # Security fixes always come through as their own PRs (not grouped/suppressed).
+
+  # Keep GitHub Actions (checkout, setup-bun, changesets/action, …) up to date.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      actions:
+        patterns:
+          - "*"
