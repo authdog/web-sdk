@@ -9,9 +9,9 @@ secure sessions, user management, and auth UI to your React, Next.js, Remix,
 Vue, Astro, Angular, React Native, and Node (Express / Fastify) applications.
 
 [![packages-publish](https://github.com/authdog/web-sdk/actions/workflows/packages-publish.yml/badge.svg)](https://github.com/authdog/web-sdk/actions/workflows/packages-publish.yml)
+[![CI](https://github.com/authdog/web-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/authdog/web-sdk/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contributing)
-[![Built with Bun](https://img.shields.io/badge/built%20with-bun-fbf0df.svg?logo=bun&logoColor=black)](https://bun.sh)
 
 [Quick Start](#-quick-start) · [Packages](#-packages) · [Examples](#-examples) · [Development](#-development) · [Contributing](#-contributing)
 
