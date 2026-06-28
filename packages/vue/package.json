@@ -48,7 +48,7 @@
         "@authdog/node-commons": "workspace:*"
     },
     "peerDependencies": {
-        "vue": "^3.5.0"
+        "vue": "^3.5.39"
     },
     "devDependencies": {
         "@types/node": "^26.0.0",
@@ -57,7 +57,7 @@
         "tsup": "^8.3.5",
         "typescript": "^5.7.2",
         "vitest": "^3.2.6",
-        "vue": "^3.5.0"
+        "vue": "^3.5.39"
     },
     "publishConfig": {
         "registry": "https://registry.npmjs.org/",
