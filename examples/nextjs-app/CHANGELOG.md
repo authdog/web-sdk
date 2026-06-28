@@ -1,5 +1,17 @@
 # nextjs-app
 
+## 1.2.0
+
+### Minor Changes
+
+- ac11fae: Cleanup packages
+
+### Patch Changes
+
+- Updated dependencies [ac11fae]
+  - @authdog/react-elements@0.3.0
+  - @authdog/nextjs-app@2.1.0
+
 ## 1.1.1
 
 ### Patch Changes
