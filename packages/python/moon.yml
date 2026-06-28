@@ -1,23 +1,35 @@
 # Python (FastAPI) SDK. moon runs these as `system` tasks against the local
-# Python toolchain — no Bun/Node involvement. CI provisions Python + deps.
+# Python toolchain — no Bun/Node involvement. `test` / `type-check` depend on
+# `install`, which provisions a project-local `.venv`, so `moon run :test` and
+# `moon ci` work the same locally and on CI regardless of PEP 668
+# (externally-managed) system interpreters.
 tags:
   - publishable
 
 tasks:
   install:
-    command: 'python -m pip install -e .[dev]'
+    # `script` (not `command`) so the shell operators run. Creating the venv is
+    # idempotent — re-running `python -m venv` over an existing one can fail.
+    script: 'test -d .venv || python3 -m venv .venv; .venv/bin/python -m pip install -e .[dev]'
     inputs:
       - 'pyproject.toml'
+    # The venv lives outside moon's output tracking — never serve a cache hit.
+    options:
+      cache: false
 
   test:
-    command: 'python -m pytest -q'
+    command: '.venv/bin/python -m pytest -q'
+    deps:
+      - '~:install'
     inputs:
       - 'src/**/*.py'
       - 'tests/**/*.py'
       - 'pyproject.toml'
 
   type-check:
-    command: 'python -m pytest --collect-only -q'
+    command: '.venv/bin/python -m pytest --collect-only -q'
+    deps:
+      - '~:install'
     inputs:
       - 'src/**/*.py'
       - 'tests/**/*.py'
