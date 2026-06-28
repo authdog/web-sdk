@@ -1,0 +1,30 @@
+tasks:
+  build:
+    command: 'bun run build'
+    deps:
+      - 'sveltekit:build'
+    inputs:
+      - 'src/**/*'
+      - 'svelte.config.js'
+      - 'vite.config.ts'
+      - 'tsconfig.json'
+      - 'package.json'
+    outputs:
+      - 'build/**'
+
+  type-check:
+    command: 'bun run type-check'
+    deps:
+      - 'sveltekit:build'
+    inputs:
+      - 'src/**/*'
+      - 'svelte.config.js'
+      - 'vite.config.ts'
+      - 'tsconfig.json'
+      - 'package.json'
+
+  dev:
+    command: 'bun run dev'
+    deps:
+      - 'sveltekit:build'
+    preset: 'server'

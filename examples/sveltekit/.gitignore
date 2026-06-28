@@ -1,0 +1,15 @@
+# build output
+build/
+.svelte-kit/
+# dependencies
+node_modules/
+# environment variables
+.env
+.env.production
+.env.*.local
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# macOS
+.DS_Store

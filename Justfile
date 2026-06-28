@@ -17,6 +17,9 @@ dev-vue:
 dev-astro:
     moon run astro-app:dev
 
+dev-sveltekit:
+    moon run sveltekit-app:dev
+
 dev-angular:
     moon run angular-app:dev
 
@@ -34,7 +37,7 @@ ui:
 
 # ── Build ────────────────────────────────────────────────────
 build:
-    moon run node-commons:build nextjs-app:build react-elements:build remix-node:build vue:build astro:build
+    moon run node-commons:build nextjs-app:build react-elements:build remix-node:build vue:build astro:build sveltekit:build
 
 build-libs:
     moon run react-elements:build remix-node:build
