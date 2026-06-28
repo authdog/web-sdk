@@ -42,6 +42,16 @@ build:
 build-libs:
     moon run react-elements:build remix-node:build
 
+# ── Backend SDKs (Python / Go / Rust) ────────────────────────
+test-python:
+    moon run python:test
+
+test-go:
+    moon run go:test
+
+test-rust:
+    moon run rust:test
+
 # ── Code Quality ─────────────────────────────────────────────
 format:
     bun run format

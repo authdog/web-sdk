@@ -26,6 +26,11 @@ projects:
   eslint-config: 'packages/eslint'
   typescript-config: 'packages/typescript-config'
 
+  # Non-Node SDKs (run as moon `system` tasks against their native toolchains)
+  python: 'packages/python'
+  go: 'packages/go'
+  rust: 'packages/rust'
+
 vcs:
   provider: 'github'
   defaultBranch: 'main'

@@ -1,0 +1,26 @@
+# Rust (axum) SDK. moon runs these as `system` tasks against the local Cargo
+# toolchain — no Bun/Node involvement. CI provisions Rust.
+tags:
+  - publishable
+
+tasks:
+  build:
+    command: 'cargo build'
+    inputs:
+      - 'src/**/*.rs'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+
+  test:
+    command: 'cargo test'
+    inputs:
+      - 'src/**/*.rs'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+
+  type-check:
+    command: 'cargo check'
+    inputs:
+      - 'src/**/*.rs'
+      - 'Cargo.toml'
+      - 'Cargo.lock'

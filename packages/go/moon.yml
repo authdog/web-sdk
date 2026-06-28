@@ -1,0 +1,26 @@
+# Go (Gin) SDK. moon runs these as `system` tasks against the local Go
+# toolchain — no Bun/Node involvement. CI provisions Go.
+tags:
+  - publishable
+
+tasks:
+  build:
+    command: 'go build ./...'
+    inputs:
+      - '**/*.go'
+      - 'go.mod'
+      - 'go.sum'
+
+  test:
+    command: 'go test ./...'
+    inputs:
+      - '**/*.go'
+      - 'go.mod'
+      - 'go.sum'
+
+  type-check:
+    command: 'go vet ./...'
+    inputs:
+      - '**/*.go'
+      - 'go.mod'
+      - 'go.sum'

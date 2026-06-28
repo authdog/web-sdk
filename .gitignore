@@ -28,6 +28,16 @@ out/
 build
 dist
 
+# Rust
+target/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.venv/
+
 
 # Debug
 npm-debug.log*

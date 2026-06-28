@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "authdog-fastapi"
+version = "0.1.0"
+description = "Authdog SDK for FastAPI — session dependency, auth gate, and logout handler."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Authdog" }]
+keywords = ["authdog", "auth", "authentication", "fastapi", "oidc"]
+dependencies = [
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+fastapi = ["fastapi>=0.110"]
+dev = [
+    "fastapi>=0.110",
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "respx>=0.21",
+]
+
+[project.urls]
+Homepage = "https://github.com/authdog/web-sdk/tree/main/packages/python#readme"
+Repository = "https://github.com/authdog/web-sdk"
+Issues = "https://github.com/authdog/web-sdk/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/authdog"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

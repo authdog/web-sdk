@@ -7,7 +7,8 @@
 A curated monorepo of framework-native libraries that make it effortless to add
 secure sessions, user management, and auth UI to your React, Next.js, Remix,
 TanStack Start, Vue, Astro, SvelteKit, Angular, React Native, and Node
-(Express / Fastify) applications.
+(Express / Fastify) applications — plus backend SDKs for **Python** (FastAPI),
+**Go** (Gin), and **Rust** (axum) that speak the same session protocol.
 
 [![packages-publish](https://github.com/authdog/web-sdk/actions/workflows/packages-publish.yml/badge.svg)](https://github.com/authdog/web-sdk/actions/workflows/packages-publish.yml)
 [![CI](https://github.com/authdog/web-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/authdog/web-sdk/actions/workflows/ci.yml)
@@ -22,7 +23,8 @@ TanStack Start, Vue, Astro, SvelteKit, Angular, React Native, and Node
 
 ## ✨ Why Authdog Web SDK?
 
-- **🧩 Framework-native** — idiomatic packages for React, Next.js (App Router), Remix, TanStack Start, Vue, Astro, SvelteKit, Angular, React Native, and Node backends (Express / Fastify). No glue code.
+- **🧩 Framework-native** — idiomatic packages for React, Next.js (App Router), Remix, TanStack Start, Vue, Astro, SvelteKit, Angular, React Native, and Node backends (Express / Fastify), plus Python (FastAPI), Go (Gin), and Rust (axum) backends. No glue code.
+- **🌍 Polyglot backends** — Node, Python, Go, and Rust services share one `authdog-session` cookie, one OIDC `userinfo` flow, and one trusted identity-host allowlist, so a single Authdog environment works across your whole stack.
 - **🔐 Secure by default** — token validation, cookie handling, and session lifecycle managed for you.
 - **🎨 Batteries-included UI** — ready-made, accessible components (sign-in, user profile, TOTP, navbar) you can drop in or restyle.
 - **⚡ Tiny & tree-shakeable** — ESM-first, `sideEffects: false`, dual CJS/ESM builds via [tsup](https://tsup.egoist.dev).
@@ -45,6 +47,19 @@ TanStack Start, Vue, Astro, SvelteKit, Angular, React Native, and Node
 | [`@authdog/fastify`](packages/fastify) | [![npm](https://img.shields.io/npm/v/@authdog/fastify)](https://www.npmjs.com/package/@authdog/fastify) | Fastify SDK — plugin decorating requests with session + `requireAuth` / `logout`. |
 | [`@authdog/react-native`](packages/react-native) | [![npm](https://img.shields.io/npm/v/@authdog/react-native)](https://www.npmjs.com/package/@authdog/react-native) | React Native / Expo SDK — provider, hooks, pluggable secure storage & deep-link login. |
 | [`@authdog/node-commons`](packages/node-commons) | [![npm](https://img.shields.io/npm/v/@authdog/node-commons)](https://www.npmjs.com/package/@authdog/node-commons) | Shared Node utilities — public-key parsing, cookies, sessions, identity. |
+
+### Backend SDKs for other languages
+
+| Package | Registry | Description |
+| ------- | -------- | ----------- |
+| [`authdog-fastapi`](packages/python) | [PyPI](https://pypi.org/project/authdog-fastapi) | Python / **FastAPI** SDK — `session` dependency, `require_auth` gate, and logout handler. |
+| [`authdog` (Go)](packages/go) | `github.com/authdog/web-sdk/packages/go` | Go SDK with **Gin** middleware — `AttachSession`, `RequireAuth`, and `Logout`. |
+| [`authdog-axum`](packages/rust) | [crates.io](https://crates.io/crates/authdog-axum) | Rust / **axum** SDK — `attach_session` middleware, `AuthContext` extractor, `require_auth`, and `logout`. |
+
+These backend SDKs mirror the Node `@authdog/express` / `@authdog/fastify`
+packages on the wire (same `authdog-session` cookie, same `userinfo` flow, same
+identity-host allowlist), so they validate sessions issued for the same Authdog
+environment.
 
 ## 🚀 Quick Start
 
@@ -82,6 +97,19 @@ bun add @authdog/fastify
 bun add @authdog/react-native
 ```
 
+Backend SDKs for other languages install with their native package managers:
+
+```bash
+# Python (FastAPI)
+pip install authdog-fastapi
+
+# Go (Gin)
+go get github.com/authdog/web-sdk/packages/go@latest
+
+# Rust (axum) — add to Cargo.toml
+cargo add authdog-axum
+```
+
 Provide your Authdog public key (`pk_…`). Each framework reads it from a different
 place — use the variable that matches your package:
 
@@ -98,6 +126,9 @@ place — use the variable that matches your package:
 | SvelteKit            | `PUBLIC_AUTHDOG_PUBLIC_KEY`| Exposed via SvelteKit's `PUBLIC_` prefix |
 | React Native / Expo  | `EXPO_PUBLIC_PK_AUTHDOG` | Exposed to the app by Expo               |
 | Angular              | —                        | Passed directly to `provideAuthdog(...)` |
+| Python (FastAPI)     | `PK_AUTHDOG`             | `Authdog(public_key=...)`                |
+| Go (Gin)             | `PK_AUTHDOG`             | `authdog.New(authdog.Config{PublicKey})` |
+| Rust (axum)          | `PK_AUTHDOG`             | `Authdog::new(...)`                      |
 
 ```bash
 # Next.js (App Router)
@@ -308,6 +339,52 @@ app.get("/me", { preHandler: app.authdog.requireAuth }, async (req) => req.authd
 app.get("/logout", (req, reply) => app.authdog.logout(req, reply));
 ```
 
+### Python (FastAPI)
+
+```python
+import os
+from fastapi import Depends, FastAPI, Request
+from authdog.fastapi import Authdog
+
+app = FastAPI()
+authdog = Authdog(public_key=os.environ["PK_AUTHDOG"])
+
+@app.get("/me")
+async def me(user=Depends(authdog.require_auth)):  # require_auth is the gate
+    return user
+
+@app.get("/logout")
+async def logout(request: Request):
+    return authdog.logout(request)
+```
+
+### Go (Gin)
+
+```go
+ad, _ := authdog.New(authdog.Config{PublicKey: os.Getenv("PK_AUTHDOG")})
+
+r := gin.Default()
+r.Use(ad.AttachSession())                 // resolves *authdog.Context per request
+r.GET("/me", ad.RequireAuth(), func(c *gin.Context) {
+    c.JSON(http.StatusOK, authdog.FromGin(c).User)
+})
+r.GET("/logout", ad.Logout)
+```
+
+### Rust (axum)
+
+```rust
+let authdog = Authdog::new(&std::env::var("PK_AUTHDOG").unwrap()).unwrap();
+
+let app = Router::new()
+    .route("/me", get(me).layer(middleware::from_fn(require_auth)))
+    .route("/logout", get(logout))
+    .layer(middleware::from_fn_with_state(authdog.clone(), attach_session))
+    .with_state(authdog);
+
+async fn me(ctx: AuthContext) -> Json<Value> { Json(ctx.user.unwrap_or(Value::Null)) }
+```
+
 ### React Native / Expo
 
 Wrap your app with the provider, backed by hardware-secure storage, and handle the login deep link:
@@ -399,6 +476,9 @@ web-sdk/
 │   ├── fastify/          # Fastify SDK
 │   ├── react-native/     # React Native / Expo SDK
 │   ├── node-commons/     # Shared Node utilities
+│   ├── python/           # Python SDK (FastAPI) — authdog-fastapi
+│   ├── go/               # Go SDK (Gin)
+│   ├── rust/             # Rust SDK (axum) — authdog-axum
 │   ├── eslint/           # Shared ESLint config
 │   └── typescript-config/# Shared tsconfig presets
 └── .moon/           # moon workspace & toolchain config

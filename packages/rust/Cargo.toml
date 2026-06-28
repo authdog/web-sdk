@@ -1,0 +1,23 @@
+[package]
+name = "authdog-axum"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.75"
+description = "Authdog SDK for axum — session middleware, an auth gate, and a logout handler."
+license = "MIT"
+repository = "https://github.com/authdog/web-sdk"
+homepage = "https://github.com/authdog/web-sdk/tree/main/packages/rust#readme"
+keywords = ["authdog", "auth", "authentication", "axum", "oidc"]
+categories = ["authentication", "web-programming"]
+
+[dependencies]
+axum = "0.8"
+base64 = "0.22"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+url = "2"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }

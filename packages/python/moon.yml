@@ -1,0 +1,23 @@
+# Python (FastAPI) SDK. moon runs these as `system` tasks against the local
+# Python toolchain — no Bun/Node involvement. CI provisions Python + deps.
+tags:
+  - publishable
+
+tasks:
+  install:
+    command: 'python -m pip install -e .[dev]'
+    inputs:
+      - 'pyproject.toml'
+
+  test:
+    command: 'python -m pytest -q'
+    inputs:
+      - 'src/**/*.py'
+      - 'tests/**/*.py'
+      - 'pyproject.toml'
+
+  type-check:
+    command: 'python -m pytest --collect-only -q'
+    inputs:
+      - 'src/**/*.py'
+      - 'tests/**/*.py'
