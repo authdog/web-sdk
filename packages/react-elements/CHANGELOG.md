@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.3.0
+
+### Minor Changes
+
+- ac11fae: Cleanup packages
+
 ## 0.2.0
 
 ### Minor Changes
