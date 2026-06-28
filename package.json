@@ -21,7 +21,7 @@
     "@authdog/eslint-config": "workspace:*",
     "@authdog/typescript-config": "workspace:*",
     "@changesets/cli": "^2.31.0",
-    "@types/node": "^24.13.2",
+    "@types/node": "^26.0.0",
     "@types/react": "^19.2.17",
     "postcss-loader": "^8.2.1",
     "prettier": "^3.9.0",
