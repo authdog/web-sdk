@@ -15,6 +15,7 @@ projects:
   nextjs-app: 'packages/nextjs-app'
   react-elements: 'packages/react-elements'
   remix-node: 'packages/remix'
+  tanstack-start: 'packages/tanstack-start'
   vue: 'packages/vue'
   astro: 'packages/astro'
   sveltekit: 'packages/sveltekit'

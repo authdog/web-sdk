@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+       "allowImportingTsExtensions": true,
+      "target": "ES2020",
+      "module": "NodeNext",
+      "moduleResolution": "nodenext", // Resolve Node.js modules
+      "declaration": true,
+      "declarationDir": "dist/types",
+      "emitDeclarationOnly": true,
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "types": ["@types/node", "react"],
+      "jsx": "react-jsx",
+      "lib": ["DOM", "DOM.Iterable", "ESNext"],
+      "allowJs": true,
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "noEmit": true
+    },
+    "include": ["src/**/*.ts", "src/**/*.tsx"],
+    "exclude": ["node_modules", "dist"]
+  }

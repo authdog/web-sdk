@@ -37,7 +37,7 @@ ui:
 
 # ── Build ────────────────────────────────────────────────────
 build:
-    moon run node-commons:build nextjs-app:build react-elements:build remix-node:build vue:build astro:build sveltekit:build
+    moon run node-commons:build nextjs-app:build react-elements:build remix-node:build tanstack-start:build vue:build astro:build sveltekit:build
 
 build-libs:
     moon run react-elements:build remix-node:build

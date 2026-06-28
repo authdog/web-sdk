@@ -6,7 +6,8 @@
 
 A curated monorepo of framework-native libraries that make it effortless to add
 secure sessions, user management, and auth UI to your React, Next.js, Remix,
-Vue, Astro, SvelteKit, Angular, React Native, and Node (Express / Fastify) applications.
+TanStack Start, Vue, Astro, SvelteKit, Angular, React Native, and Node
+(Express / Fastify) applications.
 
 [![packages-publish](https://github.com/authdog/web-sdk/actions/workflows/packages-publish.yml/badge.svg)](https://github.com/authdog/web-sdk/actions/workflows/packages-publish.yml)
 [![CI](https://github.com/authdog/web-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/authdog/web-sdk/actions/workflows/ci.yml)
@@ -21,7 +22,7 @@ Vue, Astro, SvelteKit, Angular, React Native, and Node (Express / Fastify) appli
 
 ## ✨ Why Authdog Web SDK?
 
-- **🧩 Framework-native** — idiomatic packages for React, Next.js (App Router), Remix, Vue, Astro, SvelteKit, Angular, React Native, and Node backends (Express / Fastify). No glue code.
+- **🧩 Framework-native** — idiomatic packages for React, Next.js (App Router), Remix, TanStack Start, Vue, Astro, SvelteKit, Angular, React Native, and Node backends (Express / Fastify). No glue code.
 - **🔐 Secure by default** — token validation, cookie handling, and session lifecycle managed for you.
 - **🎨 Batteries-included UI** — ready-made, accessible components (sign-in, user profile, TOTP, navbar) you can drop in or restyle.
 - **⚡ Tiny & tree-shakeable** — ESM-first, `sideEffects: false`, dual CJS/ESM builds via [tsup](https://tsup.egoist.dev).
@@ -35,6 +36,7 @@ Vue, Astro, SvelteKit, Angular, React Native, and Node (Express / Fastify) appli
 | [`@authdog/react-elements`](packages/react-elements) | [![npm](https://img.shields.io/npm/v/@authdog/react-elements)](https://www.npmjs.com/package/@authdog/react-elements) | Accessible React UI components — buttons, navbar, user profile & dropdown, TOTP validator. |
 | [`@authdog/nextjs-app`](packages/nextjs-app) | [![npm](https://img.shields.io/npm/v/@authdog/nextjs-app)](https://www.npmjs.com/package/@authdog/nextjs-app) | Next.js **App Router** SDK — provider, `useUser` / `useAuth` hooks, server helpers. |
 | [`@authdog/remix-node`](packages/remix) | [![npm](https://img.shields.io/npm/v/@authdog/remix-node)](https://www.npmjs.com/package/@authdog/remix-node) | Remix SDK — auth loaders, provider, and cookie-based session helpers. |
+| [`@authdog/tanstack-start`](packages/tanstack-start) | [![npm](https://img.shields.io/npm/v/@authdog/tanstack-start)](https://www.npmjs.com/package/@authdog/tanstack-start) | TanStack Start SDK — auth loader, provider, and cookie-based session helpers. |
 | [`@authdog/vue`](packages/vue) | [![npm](https://img.shields.io/npm/v/@authdog/vue)](https://www.npmjs.com/package/@authdog/vue) | Vue SDK — provider component and `useSession` / `useUser` composables. |
 | [`@authdog/astro`](packages/astro) | [![npm](https://img.shields.io/npm/v/@authdog/astro)](https://www.npmjs.com/package/@authdog/astro) | Astro SDK — session middleware (`Astro.locals.authdog`), server helpers, and a vanilla client bootstrap. |
 | [`@authdog/sveltekit`](packages/sveltekit) | [![npm](https://img.shields.io/npm/v/@authdog/sveltekit)](https://www.npmjs.com/package/@authdog/sveltekit) | SvelteKit SDK — session `handle` hook (`event.locals.authdog`), server helpers, and a vanilla client bootstrap. |
@@ -54,6 +56,9 @@ bun add @authdog/nextjs-app @authdog/react-elements
 
 # Remix
 bun add @authdog/remix-node @authdog/react-elements
+
+# TanStack Start
+bun add @authdog/tanstack-start @authdog/react-elements
 
 # Vue
 bun add @authdog/vue
@@ -85,6 +90,7 @@ place — use the variable that matches your package:
 | Next.js (client)     | `NEXT_PUBLIC_PK_AUTHDOG` | Exposed to the browser by Next.js        |
 | Next.js (server)     | `PK_AUTHDOG`             | Server-only (logout, etc.)               |
 | Remix                | `PK_AUTHDOG`             | Loaders / actions                        |
+| TanStack Start       | `PK_AUTHDOG`             | Server functions / route loaders         |
 | Express (backend)    | `PK_AUTHDOG`             | `createAuthdog({ publicKey })`           |
 | Fastify (backend)    | `AUTHDOG_PK`             | `authdogPlugin({ publicKey })`           |
 | Vue                  | `VITE_AUTHDOG_PUBLIC_KEY`| Vite-exposed (use the `VITE_` prefix)    |
@@ -215,6 +221,32 @@ export const load: PageServerLoad = async ({ request, locals }) => {
 import { remixAuthLoader } from "@authdog/remix-node";
 
 export const loader = remixAuthLoader;
+```
+
+### TanStack Start
+
+Resolve the session from a server function (TanStack Start speaks the Web Fetch
+API, so the loader returns a standard `Response`):
+
+```ts
+// app/routes/index.tsx
+import { createServerFn } from "@tanstack/react-start";
+import { getWebRequest } from "@tanstack/react-start/server";
+import { identityLoader } from "@authdog/tanstack-start";
+
+export const loadIdentity = createServerFn({ method: "GET" }).handler(async () => {
+  const response = await identityLoader()({ request: getWebRequest() });
+  return response.json();
+});
+```
+
+Wrap your app with the provider (strips the `?token=…` from the URL after the
+server persists the session):
+
+```tsx
+import { AuthdogProvider } from "@authdog/tanstack-start/client";
+
+<AuthdogProvider>{children}</AuthdogProvider>;
 ```
 
 ### Angular
@@ -358,6 +390,7 @@ web-sdk/
 │   ├── react-elements/   # React UI components
 │   ├── nextjs-app/       # Next.js App Router SDK
 │   ├── remix/            # Remix SDK (@authdog/remix-node)
+│   ├── tanstack-start/   # TanStack Start SDK
 │   ├── vue/              # Vue SDK
 │   ├── astro/            # Astro SDK
 │   ├── sveltekit/        # SvelteKit SDK

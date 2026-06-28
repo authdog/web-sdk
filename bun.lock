@@ -441,6 +441,31 @@
         "@sveltejs/kit": "^2.0.0",
       },
     },
+    "packages/tanstack-start": {
+      "name": "@authdog/tanstack-start",
+      "version": "0.1.0",
+      "dependencies": {
+        "@authdog/node-commons": "workspace:*",
+      },
+      "devDependencies": {
+        "@types/node": "^26.0.0",
+        "@types/react": "^18.2.0",
+        "@types/react-dom": "^18.2.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "vitest": "^3.2.6",
+      },
+      "peerDependencies": {
+        "@tanstack/react-router": "^1.0.0",
+        "@tanstack/react-start": "^1.0.0",
+        "react": "^18.2.0 || ^19.0.0",
+        "react-dom": "^18.2.0 || ^19.0.0",
+      },
+      "optionalPeers": [
+        "@tanstack/react-router",
+        "@tanstack/react-start",
+      ],
+    },
     "packages/typescript-config": {
       "name": "@authdog/typescript-config",
       "version": "0.0.0",
@@ -588,6 +613,8 @@
     "@authdog/remix-node": ["@authdog/remix-node@workspace:packages/remix"],
 
     "@authdog/sveltekit": ["@authdog/sveltekit@workspace:packages/sveltekit"],
+
+    "@authdog/tanstack-start": ["@authdog/tanstack-start@workspace:packages/tanstack-start"],
 
     "@authdog/typescript-config": ["@authdog/typescript-config@workspace:packages/typescript-config"],
 
