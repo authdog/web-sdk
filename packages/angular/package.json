@@ -37,21 +37,21 @@
         "@authdog/node-commons": "workspace:*"
     },
     "peerDependencies": {
-        "@angular/common": "^17.0.0 || ^18.0.0 || ^19.0.0",
-        "@angular/core": "^17.0.0 || ^18.0.0 || ^19.0.0",
-        "@angular/router": "^17.0.0 || ^18.0.0 || ^19.0.0",
+        "@angular/common": "^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0",
+        "@angular/core": "^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0",
+        "@angular/router": "^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0",
         "rxjs": "^7.8.0"
     },
     "devDependencies": {
-        "@angular/common": "^19.2.16",
-        "@angular/core": "^19.2.0",
-        "@angular/router": "^19.2.0",
+        "@angular/common": "^20.3.25",
+        "@angular/core": "^20.3.25",
+        "@angular/router": "^20.3.25",
         "@types/node": "^24.0.0",
         "dotenv": "^16.4.7",
         "prettier": "^3.4.2",
         "rxjs": "^7.8.1",
         "tsup": "^8.3.5",
-        "typescript": "^5.7.2",
+        "typescript": "^5.8.0",
         "vitest": "^3.2.6"
     },
     "publishConfig": {
