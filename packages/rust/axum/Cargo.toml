@@ -1,0 +1,21 @@
+[package]
+name = "authdog-axum"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage = "https://github.com/authdog/web-sdk/tree/main/packages/rust#readme"
+description = "Authdog SDK for axum — session middleware, an auth gate, and a logout handler."
+keywords = ["authdog", "auth", "authentication", "axum", "oidc"]
+categories = ["authentication", "web-programming"]
+
+[dependencies]
+authdog-core.workspace = true
+axum = "0.8"
+reqwest.workspace = true
+serde_json.workspace = true
+
+[dev-dependencies]
+base64.workspace = true
+tokio.workspace = true

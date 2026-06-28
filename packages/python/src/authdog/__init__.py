@@ -1,8 +1,11 @@
-"""Authdog SDK for Python (FastAPI).
+"""Authdog SDK for Python.
 
 Framework-agnostic core (public-key validation, cookie parsing, identity
-lookups, redirect sanitization) lives at the top level; the FastAPI bindings
-live in :mod:`authdog.fastapi`.
+lookups, redirect sanitization) lives at the top level; the per-framework
+bindings live in their own submodules: :mod:`authdog.fastapi`,
+:mod:`authdog.flask`, :mod:`authdog.django`, :mod:`authdog.starlette`, and
+:mod:`authdog.aiohttp`. Each exposes an ``Authdog`` class with a session
+resolver, a ``require_auth`` gate, and a ``logout`` helper.
 """
 
 from __future__ import annotations

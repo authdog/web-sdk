@@ -1,0 +1,21 @@
+[package]
+name = "authdog-warp"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage = "https://github.com/authdog/web-sdk/tree/main/packages/rust#readme"
+description = "Authdog SDK for warp — a session Filter, an auth-gate filter + rejection recovery, and a logout filter."
+keywords = ["authdog", "auth", "authentication", "warp", "oidc"]
+categories = ["authentication", "web-programming"]
+
+[dependencies]
+authdog-core.workspace = true
+warp = "0.3"
+reqwest.workspace = true
+serde_json.workspace = true
+
+[dev-dependencies]
+base64.workspace = true
+tokio.workspace = true

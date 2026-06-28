@@ -1,30 +1,30 @@
-"""FastAPI bindings for Authdog.
+"""Starlette bindings for Authdog.
 
 Exposes an :class:`Authdog` instance that validates the public key once at
-startup and yields FastAPI dependencies:
+startup and integrates with Starlette's ASGI request lifecycle:
 
-* ``authdog.session`` — resolves the request's :class:`AuthdogContext` (never
-  raises; ``is_authenticated`` is ``False`` when there is no valid session).
-* ``authdog.require_auth`` — the real server-side gate; raises ``401`` for
-  unauthenticated requests and otherwise returns the user object.
+* ``authdog.middleware`` — a ``Middleware`` entry that resolves and stashes the
+  :class:`AuthdogContext` on ``request.state.authdog_context`` (never raises).
+* ``authdog.session(request)`` — read the resolved context (resolves lazily if
+  the middleware is not installed).
+* ``authdog.require_auth(request)`` — the real server-side gate; raises
+  ``HTTPException(401)`` for unauthenticated requests and returns the user.
 * ``authdog.logout(request)`` — a ``RedirectResponse`` that clears the session
   cookie and redirects to a sanitized ``redirect_uri``.
 
 ```python
 import os
-from fastapi import Depends, FastAPI
-from authdog.fastapi import Authdog
+from starlette.applications import Starlette
+from starlette.middleware import Middleware
+from authdog.starlette import Authdog
 
-app = FastAPI()
 authdog = Authdog(public_key=os.environ["PK_AUTHDOG"])
 
-@app.get("/me")
-async def me(user=Depends(authdog.require_auth)):
-    return user
+async def me(request):
+    user = await authdog.require_auth(request)
+    return JSONResponse(user)
 
-@app.get("/logout")
-async def logout(request):
-    return authdog.logout(request)
+app = Starlette(routes=[...], middleware=[authdog.middleware])
 ```
 """
 
@@ -34,8 +34,11 @@ import os
 from typing import Any
 
 import httpx
-from fastapi import HTTPException, Request, status
-from fastapi.responses import RedirectResponse
+from starlette.exceptions import HTTPException
+from starlette.middleware import Middleware
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.requests import Request
+from starlette.responses import RedirectResponse
 
 from ._context import AuthdogContext, resolve_context
 from .cookies import SESSION_COOKIE_NAME
@@ -44,14 +47,12 @@ from .redirects import sanitize_redirect_path
 
 __all__ = ["Authdog", "AuthdogContext"]
 
-# Key under which the resolved context is cached on ``request.state`` so the
-# dependency only performs one userinfo round-trip per request even when several
-# dependencies (``session`` + ``require_auth``) resolve it.
-_STATE_KEY = "_authdog_context"
+# Attribute on ``request.state`` caching the resolved context.
+_STATE_KEY = "authdog_context"
 
 
 class Authdog:
-    """An Authdog server instance for FastAPI.
+    """An Authdog server instance for Starlette.
 
     The public key is validated and parsed eagerly here — enforcing the trusted
     identity-host allowlist — so a malformed or untrusted key fails fast at
@@ -86,22 +87,31 @@ class Authdog:
         setattr(request.state, _STATE_KEY, ctx)
         return ctx
 
+    @property
+    def middleware(self) -> Middleware:
+        """A ``Middleware`` entry that attaches ``request.state.authdog_context``."""
+        authdog = self
+
+        class _AuthdogMiddleware(BaseHTTPMiddleware):
+            async def dispatch(self, request: Request, call_next: Any) -> Any:
+                await authdog._resolve(request)
+                return await call_next(request)
+
+        return Middleware(_AuthdogMiddleware)
+
     async def session(self, request: Request) -> AuthdogContext:
-        """FastAPI dependency: the resolved (possibly anonymous) context."""
+        """Return the resolved (possibly anonymous) context for this request."""
         return await self._resolve(request)
 
     async def require_auth(self, request: Request) -> Any:
-        """FastAPI dependency / gate. Raises ``401`` unless authenticated.
+        """Gate. Raises ``HTTPException(401)`` unless authenticated.
 
         ⚠️ This is the real server-side enforcement point. Returns the user
-        object so handlers can ``Depends(authdog.require_auth)`` directly.
+        object.
         """
         ctx = await self._resolve(request)
         if not ctx.is_authenticated:
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Unauthorized",
-            )
+            raise HTTPException(status_code=401, detail="Unauthorized")
         return ctx.user
 
     def logout(self, request: Request) -> RedirectResponse:

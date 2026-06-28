@@ -7,8 +7,9 @@
 A curated monorepo of framework-native libraries that make it effortless to add
 secure sessions, user management, and auth UI to your React, Next.js, Remix,
 TanStack Start, Vue, Astro, SvelteKit, Angular, React Native, and Node
-(Express / Fastify) applications — plus backend SDKs for **Python** (FastAPI),
-**Go** (Gin), and **Rust** (axum) that speak the same session protocol.
+(Express / Fastify) applications — plus backend SDKs for **Python** (FastAPI,
+Flask, Django, Starlette, aiohttp), **Go** (Gin), **Rust** (axum, actix-web,
+Rocket, warp, poem), and **Kotlin** (Ktor) that speak the same session protocol.
 
 [![packages-publish](https://github.com/authdog/web-sdk/actions/workflows/packages-publish.yml/badge.svg)](https://github.com/authdog/web-sdk/actions/workflows/packages-publish.yml)
 [![CI](https://github.com/authdog/web-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/authdog/web-sdk/actions/workflows/ci.yml)
@@ -23,8 +24,8 @@ TanStack Start, Vue, Astro, SvelteKit, Angular, React Native, and Node
 
 ## ✨ Why Authdog Web SDK?
 
-- **🧩 Framework-native** — idiomatic packages for React, Next.js (App Router), Remix, TanStack Start, Vue, Astro, SvelteKit, Angular, React Native, and Node backends (Express / Fastify), plus Python (FastAPI), Go (Gin), and Rust (axum) backends. No glue code.
-- **🌍 Polyglot backends** — Node, Python, Go, and Rust services share one `authdog-session` cookie, one OIDC `userinfo` flow, and one trusted identity-host allowlist, so a single Authdog environment works across your whole stack.
+- **🧩 Framework-native** — idiomatic packages for React, Next.js (App Router), Remix, TanStack Start, Vue, Astro, SvelteKit, Angular, React Native, and Node backends (Express / Fastify), plus Python (FastAPI, Flask, Django, Starlette, aiohttp), Go (Gin), Rust (axum, actix-web, Rocket, warp, poem), and Kotlin (Ktor) backends. No glue code.
+- **🌍 Polyglot backends** — Node, Python, Go, Rust, and Kotlin services share one `authdog-session` cookie, one OIDC `userinfo` flow, and one trusted identity-host allowlist, so a single Authdog environment works across your whole stack.
 - **🔐 Secure by default** — token validation, cookie handling, and session lifecycle managed for you.
 - **🎨 Batteries-included UI** — ready-made, accessible components (sign-in, user profile, TOTP, navbar) you can drop in or restyle.
 - **⚡ Tiny & tree-shakeable** — ESM-first, `sideEffects: false`, dual CJS/ESM builds via [tsup](https://tsup.egoist.dev).
@@ -52,9 +53,10 @@ TanStack Start, Vue, Astro, SvelteKit, Angular, React Native, and Node
 
 | Package | Registry | Description |
 | ------- | -------- | ----------- |
-| [`authdog-fastapi`](packages/python) | [PyPI](https://pypi.org/project/authdog-fastapi) | Python / **FastAPI** SDK — `session` dependency, `require_auth` gate, and logout handler. |
+| [`authdog-fastapi`](packages/python) | [PyPI](https://pypi.org/project/authdog-fastapi) | Python SDK — idiomatic **FastAPI**, **Flask**, **Django**, **Starlette**, and **aiohttp** bindings (`session`, `require_auth` gate, and logout) over one framework-agnostic core. |
 | [`authdog` (Go)](packages/go) | `github.com/authdog/web-sdk/packages/go` | Go SDK with **Gin** middleware — `AttachSession`, `RequireAuth`, and `Logout`. |
-| [`authdog-axum`](packages/rust) | [crates.io](https://crates.io/crates/authdog-axum) | Rust / **axum** SDK — `attach_session` middleware, `AuthContext` extractor, `require_auth`, and `logout`. |
+| [`authdog-axum` & friends](packages/rust) | [crates.io](https://crates.io/crates/authdog-axum) | Rust workspace — `authdog-core` plus per-framework crates `authdog-axum`, `authdog-actix`, `authdog-rocket`, `authdog-warp`, `authdog-poem` (`attach_session`, `AuthContext`, `require_auth`, `logout`). |
+| [`authdog-ktor`](packages/kotlin) | [Maven Central](https://search.maven.org/artifact/com.authdog/authdog-ktor) | Kotlin / **Ktor** SDK — `resolve` session, `requireAuth` gate, and `logout`. |
 
 These backend SDKs mirror the Node `@authdog/express` / `@authdog/fastify`
 packages on the wire (same `authdog-session` cookie, same `userinfo` flow, same
@@ -100,14 +102,17 @@ bun add @authdog/react-native
 Backend SDKs for other languages install with their native package managers:
 
 ```bash
-# Python (FastAPI)
-pip install authdog-fastapi
+# Python — one install, pick your framework's extra
+pip install "authdog-fastapi[fastapi]"   # or [flask], [django], [starlette], [aiohttp]
 
 # Go (Gin)
 go get github.com/authdog/web-sdk/packages/go@latest
 
-# Rust (axum) — add to Cargo.toml
-cargo add authdog-axum
+# Rust — add the crate for your framework to Cargo.toml
+cargo add authdog-axum    # or authdog-actix / authdog-rocket / authdog-warp / authdog-poem
+
+# Kotlin (Ktor) — add to build.gradle.kts
+# implementation("com.authdog:authdog-ktor:0.1.0")
 ```
 
 Provide your Authdog public key (`pk_…`). Each framework reads it from a different
@@ -126,9 +131,10 @@ place — use the variable that matches your package:
 | SvelteKit            | `PUBLIC_AUTHDOG_PUBLIC_KEY`| Exposed via SvelteKit's `PUBLIC_` prefix |
 | React Native / Expo  | `EXPO_PUBLIC_PK_AUTHDOG` | Exposed to the app by Expo               |
 | Angular              | —                        | Passed directly to `provideAuthdog(...)` |
-| Python (FastAPI)     | `PK_AUTHDOG`             | `Authdog(public_key=...)`                |
+| Python (all)         | `PK_AUTHDOG`             | `Authdog(public_key=...)`                |
 | Go (Gin)             | `PK_AUTHDOG`             | `authdog.New(authdog.Config{PublicKey})` |
-| Rust (axum)          | `PK_AUTHDOG`             | `Authdog::new(...)`                      |
+| Rust (all)           | `PK_AUTHDOG`             | `Authdog::new(...)`                      |
+| Kotlin (Ktor)        | `PK_AUTHDOG`             | `Authdog(System.getenv("PK_AUTHDOG"))`   |
 
 ```bash
 # Next.js (App Router)
@@ -358,6 +364,12 @@ async def logout(request: Request):
     return authdog.logout(request)
 ```
 
+The same `Authdog` surface ships for other Python frameworks — import the
+matching module: `authdog.flask` (`@authdog.require_auth` decorator),
+`authdog.django` (middleware + decorator), `authdog.starlette` (ASGI
+middleware), or `authdog.aiohttp` (`@web.middleware`). All share one
+framework-agnostic core.
+
 ### Go (Gin)
 
 ```go
@@ -383,6 +395,29 @@ let app = Router::new()
     .with_state(authdog);
 
 async fn me(ctx: AuthContext) -> Json<Value> { Json(ctx.user.unwrap_or(Value::Null)) }
+```
+
+The same surface ships as a dedicated crate per framework on top of the shared
+`authdog-core`: `authdog-axum`, `authdog-actix` (extractors + middleware),
+`authdog-rocket` (request guards + catcher), `authdog-warp` (composable
+filters), and `authdog-poem` (extractors + middleware).
+
+### Kotlin (Ktor)
+
+```kotlin
+import com.authdog.Authdog
+
+fun Application.module() {
+    val authdog = Authdog(System.getenv("PK_AUTHDOG"))
+
+    routing {
+        get("/me") {
+            val ctx = authdog.requireAuth(call) ?: return@get  // requireAuth is the gate
+            call.respondText(ctx.user.toString())
+        }
+        get("/logout") { authdog.logout(call) }
+    }
+}
 ```
 
 ### React Native / Expo
@@ -476,9 +511,10 @@ web-sdk/
 │   ├── fastify/          # Fastify SDK
 │   ├── react-native/     # React Native / Expo SDK
 │   ├── node-commons/     # Shared Node utilities
-│   ├── python/           # Python SDK (FastAPI) — authdog-fastapi
+│   ├── python/           # Python SDK (FastAPI, Flask, Django, Starlette, aiohttp) — authdog-fastapi
 │   ├── go/               # Go SDK (Gin)
-│   ├── rust/             # Rust SDK (axum) — authdog-axum
+│   ├── rust/             # Rust workspace (axum, actix, rocket, warp, poem) — authdog-core + crates
+│   ├── kotlin/           # Kotlin SDK (Ktor) — authdog-ktor
 │   ├── eslint/           # Shared ESLint config
 │   └── typescript-config/# Shared tsconfig presets
 └── .moon/           # moon workspace & toolchain config

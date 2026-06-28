@@ -31,7 +31,10 @@ pub fn parse_cookies(cookie_header: &str) -> Vec<(String, String)> {
 
 /// Extract the session token, preferring an explicit `Authorization: Bearer
 /// <token>` header over the `authdog-session` cookie.
-pub fn get_session_token(authorization: Option<&str>, cookie_header: Option<&str>) -> Option<String> {
+pub fn get_session_token(
+    authorization: Option<&str>,
+    cookie_header: Option<&str>,
+) -> Option<String> {
     if let Some(auth) = authorization {
         if let Some(rest) = strip_bearer_prefix(auth) {
             let token = rest.trim();
@@ -84,7 +87,10 @@ mod tests {
     #[test]
     fn keeps_equals_in_value() {
         let cookies = parse_cookies("authdog-session=ab=cd==; other=1");
-        assert_eq!(cookies[0], ("authdog-session".to_string(), "ab=cd==".to_string()));
+        assert_eq!(
+            cookies[0],
+            ("authdog-session".to_string(), "ab=cd==".to_string())
+        );
         assert_eq!(cookies[1], ("other".to_string(), "1".to_string()));
     }
 

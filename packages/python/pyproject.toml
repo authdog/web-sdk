@@ -17,10 +17,19 @@ dependencies = [
 
 [project.optional-dependencies]
 fastapi = ["fastapi>=0.110"]
+flask = ["flask>=3.0"]
+django = ["django>=4.2"]
+starlette = ["starlette>=0.37"]
+aiohttp = ["aiohttp>=3.9"]
 dev = [
     "fastapi>=0.110",
+    "flask>=3.0",
+    "django>=4.2",
+    "starlette>=0.37",
+    "aiohttp>=3.9",
     "pytest>=8.0",
     "pytest-asyncio>=0.23",
+    "pytest-aiohttp>=1.0",
     "respx>=0.21",
 ]
 

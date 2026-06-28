@@ -1,0 +1,29 @@
+# Kotlin (Ktor) SDK. moon runs these as `system` tasks against the local JDK +
+# Gradle toolchain — no Bun/Node involvement. CI provisions a JDK and Gradle.
+tags:
+  - publishable
+
+tasks:
+  build:
+    command: 'gradle build'
+    inputs:
+      - 'src/**/*.kt'
+      - 'build.gradle.kts'
+      - 'settings.gradle.kts'
+      - 'gradle.properties'
+
+  test:
+    command: 'gradle test'
+    inputs:
+      - 'src/**/*.kt'
+      - 'build.gradle.kts'
+      - 'settings.gradle.kts'
+      - 'gradle.properties'
+
+  type-check:
+    command: 'gradle compileTestKotlin'
+    inputs:
+      - 'src/**/*.kt'
+      - 'build.gradle.kts'
+      - 'settings.gradle.kts'
+      - 'gradle.properties'

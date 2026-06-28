@@ -1,0 +1,21 @@
+[package]
+name = "authdog-actix"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage = "https://github.com/authdog/web-sdk/tree/main/packages/rust#readme"
+description = "Authdog SDK for actix-web — an AuthContext extractor, an auth gate, and a logout handler."
+keywords = ["authdog", "auth", "authentication", "actix-web", "oidc"]
+categories = ["authentication", "web-programming"]
+
+[dependencies]
+authdog-core.workspace = true
+actix-web = "4"
+reqwest.workspace = true
+serde_json.workspace = true
+
+[dev-dependencies]
+base64.workspace = true
+tokio.workspace = true

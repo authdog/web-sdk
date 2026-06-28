@@ -1,0 +1,19 @@
+[package]
+name = "authdog-core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage = "https://github.com/authdog/web-sdk/tree/main/packages/rust#readme"
+description = "Framework-agnostic core for the Authdog Rust SDKs — public-key validation, session-token extraction, OIDC userinfo lookups, and redirect sanitization."
+keywords = ["authdog", "auth", "authentication", "oidc"]
+categories = ["authentication", "web-programming"]
+
+[dependencies]
+base64.workspace = true
+reqwest.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+url.workspace = true

@@ -30,6 +30,7 @@ projects:
   python: 'packages/python'
   go: 'packages/go'
   rust: 'packages/rust'
+  kotlin: 'packages/kotlin'
 
 vcs:
   provider: 'github'

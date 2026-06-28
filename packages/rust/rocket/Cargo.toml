@@ -1,0 +1,21 @@
+[package]
+name = "authdog-rocket"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage = "https://github.com/authdog/web-sdk/tree/main/packages/rust#readme"
+description = "Authdog SDK for Rocket — an AuthContext request guard, an auth gate guard + catcher, and a logout route."
+keywords = ["authdog", "auth", "authentication", "rocket", "oidc"]
+categories = ["authentication", "web-programming"]
+
+[dependencies]
+authdog-core.workspace = true
+rocket = "0.5"
+reqwest.workspace = true
+serde_json.workspace = true
+
+[dev-dependencies]
+base64.workspace = true
+tokio.workspace = true

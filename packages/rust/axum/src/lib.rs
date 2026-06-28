@@ -1,5 +1,12 @@
-//! axum bindings for Authdog: session middleware, an `AuthContext` extractor,
+//! [axum] bindings for Authdog: session middleware, an `AuthContext` extractor,
 //! an authentication gate, and a logout handler.
+//!
+//! Built on [`authdog_core`], it mirrors the TypeScript `@authdog/express` /
+//! `@authdog/fastify` SDKs on the wire — same `authdog-session` cookie, same
+//! OIDC `userinfo` flow, same trusted identity-host allowlist — so a single
+//! Authdog environment serves Node and Rust services interchangeably.
+//!
+//! [axum]: https://docs.rs/axum
 
 use std::collections::HashMap;
 use std::sync::Arc;
@@ -13,10 +20,10 @@ use axum::{
 };
 use serde_json::{json, Value};
 
-use crate::cookies::{get_session_token, SESSION_COOKIE_NAME};
-use crate::identity::{fetch_user_data, is_authenticated_user_info, UserInfoResponse};
-use crate::public_key::{validate_and_parse_public_key, PublicKeyError, PublicKeyPayload};
-use crate::redirects::sanitize_redirect_path;
+use authdog_core::cookies::{get_session_token, SESSION_COOKIE_NAME};
+use authdog_core::identity::{fetch_user_data, is_authenticated_user_info, UserInfoResponse};
+use authdog_core::public_key::{validate_and_parse_public_key, PublicKeyError, PublicKeyPayload};
+use authdog_core::redirects::sanitize_redirect_path;
 
 struct Inner {
     payload: PublicKeyPayload,
@@ -54,7 +61,9 @@ impl Authdog {
     }
 
     async fn resolve(&self, headers: &HeaderMap) -> AuthContext {
-        let auth = headers.get(header::AUTHORIZATION).and_then(|v| v.to_str().ok());
+        let auth = headers
+            .get(header::AUTHORIZATION)
+            .and_then(|v| v.to_str().ok());
         let cookie = headers.get(header::COOKIE).and_then(|v| v.to_str().ok());
 
         let Some(token) = get_session_token(auth, cookie) else {
@@ -62,7 +71,10 @@ impl Authdog {
         };
 
         if !self.0.fetch_user {
-            return AuthContext { token: Some(token), ..Default::default() };
+            return AuthContext {
+                token: Some(token),
+                ..Default::default()
+            };
         }
 
         match fetch_user_data(
@@ -81,7 +93,10 @@ impl Authdog {
             },
             // A failed/untrusted userinfo lookup is "not authenticated" — never
             // an error response and never an authenticated session.
-            _ => AuthContext { token: Some(token), ..Default::default() },
+            _ => AuthContext {
+                token: Some(token),
+                ..Default::default()
+            },
         }
     }
 }
@@ -161,7 +176,11 @@ pub async fn require_auth(req: Request, next: Next) -> Response {
         .unwrap_or(false);
 
     if !authenticated {
-        return (StatusCode::UNAUTHORIZED, Json(json!({"error": "Unauthorized"}))).into_response();
+        return (
+            StatusCode::UNAUTHORIZED,
+            Json(json!({"error": "Unauthorized"})),
+        )
+            .into_response();
     }
     next.run(req).await
 }
@@ -183,7 +202,11 @@ where
     type Rejection = std::convert::Infallible;
 
     async fn from_request_parts(parts: &mut Parts, _state: &S) -> Result<Self, Self::Rejection> {
-        Ok(parts.extensions.get::<AuthContext>().cloned().unwrap_or_default())
+        Ok(parts
+            .extensions
+            .get::<AuthContext>()
+            .cloned()
+            .unwrap_or_default())
     }
 }
 
@@ -194,7 +217,10 @@ mod tests {
 
     fn make_pk() -> String {
         let json = r#"{"environmentId":"env_1","identityHost":"https://id.authdog.com"}"#;
-        format!("pk_{}", base64::engine::general_purpose::STANDARD.encode(json))
+        format!(
+            "pk_{}",
+            base64::engine::general_purpose::STANDARD.encode(json)
+        )
     }
 
     #[test]
@@ -220,8 +246,15 @@ mod tests {
         assert!(!authed);
 
         let mut req = req;
-        req.extensions_mut()
-            .insert(AuthContext { is_authenticated: true, ..Default::default() });
-        assert!(req.extensions().get::<AuthContext>().unwrap().is_authenticated);
+        req.extensions_mut().insert(AuthContext {
+            is_authenticated: true,
+            ..Default::default()
+        });
+        assert!(
+            req.extensions()
+                .get::<AuthContext>()
+                .unwrap()
+                .is_authenticated
+        );
     }
 }

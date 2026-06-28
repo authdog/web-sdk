@@ -48,7 +48,9 @@ pub struct PublicKeyPayload {
 }
 
 fn is_private_or_loopback_host(hostname: &str) -> bool {
-    let h = hostname.trim_matches(|c| c == '[' || c == ']').to_ascii_lowercase();
+    let h = hostname
+        .trim_matches(|c| c == '[' || c == ']')
+        .to_ascii_lowercase();
     if h == "localhost" || h.ends_with(".localhost") {
         return true;
     }
@@ -73,8 +75,10 @@ fn is_private_or_loopback_host(hostname: &str) -> bool {
 }
 
 fn allowed_host_suffixes() -> Vec<String> {
-    let mut suffixes: Vec<String> =
-        DEFAULT_ALLOWED_HOST_SUFFIXES.iter().map(|s| s.to_string()).collect();
+    let mut suffixes: Vec<String> = DEFAULT_ALLOWED_HOST_SUFFIXES
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
     if let Ok(extra) = std::env::var("AUTHDOG_ALLOWED_IDENTITY_HOSTS") {
         for part in extra.split(',') {
             let trimmed = part.trim().to_ascii_lowercase();
@@ -95,7 +99,10 @@ pub fn assert_trusted_identity_host(identity_host: &str) -> Result<String, Publi
     if url.scheme() != "https" {
         return Err(PublicKeyError::NotHttps);
     }
-    let hostname = url.host_str().ok_or(PublicKeyError::InvalidHost)?.to_ascii_lowercase();
+    let hostname = url
+        .host_str()
+        .ok_or(PublicKeyError::InvalidHost)?
+        .to_ascii_lowercase();
 
     if is_private_or_loopback_host(&hostname) {
         return Err(PublicKeyError::UntrustedHost);
@@ -116,7 +123,9 @@ pub fn validate_and_parse_public_key(public_key: &str) -> Result<PublicKeyPayloa
     if public_key.is_empty() {
         return Err(PublicKeyError::Missing);
     }
-    let raw = public_key.strip_prefix("pk_").ok_or(PublicKeyError::Invalid)?;
+    let raw = public_key
+        .strip_prefix("pk_")
+        .ok_or(PublicKeyError::Invalid)?;
 
     // Tolerate padded and unpadded standard base64.
     let decoded = base64::engine::general_purpose::STANDARD
@@ -144,7 +153,10 @@ mod tests {
     use base64::Engine;
 
     fn make_pk(json: &str) -> String {
-        format!("pk_{}", base64::engine::general_purpose::STANDARD.encode(json))
+        format!(
+            "pk_{}",
+            base64::engine::general_purpose::STANDARD.encode(json)
+        )
     }
 
     #[test]
@@ -175,7 +187,10 @@ mod tests {
             "https://10.0.0.5",
             "https://authdog.com.evil.com",
         ] {
-            assert!(assert_trusted_identity_host(host).is_err(), "{host} should be rejected");
+            assert!(
+                assert_trusted_identity_host(host).is_err(),
+                "{host} should be rejected"
+            );
         }
     }
 

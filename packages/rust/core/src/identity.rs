@@ -94,7 +94,9 @@ mod tests {
         assert!(is_authenticated_user_info(&parse(
             r#"{"meta":{"code":200},"user":{"id":"u1"}}"#
         )));
-        assert!(!is_authenticated_user_info(&parse(r#"{"meta":{"code":401}}"#)));
+        assert!(!is_authenticated_user_info(&parse(
+            r#"{"meta":{"code":401}}"#
+        )));
         assert!(!is_authenticated_user_info(&parse(
             r#"{"meta":{"code":200}}"#
         )));

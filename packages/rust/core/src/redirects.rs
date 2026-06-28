@@ -50,13 +50,23 @@ mod tests {
 
     #[test]
     fn allows_relative_paths() {
-        assert_eq!(sanitize_redirect_path(Some("/dashboard"), "/"), "/dashboard");
+        assert_eq!(
+            sanitize_redirect_path(Some("/dashboard"), "/"),
+            "/dashboard"
+        );
         assert_eq!(sanitize_redirect_path(Some("/a/b?x=1"), "/"), "/a/b?x=1");
     }
 
     #[test]
     fn rejects_open_redirects() {
-        for bad in ["//evil.com", "/\\evil.com", "https://evil.com", "javascript:alert(1)", "", "/\tfoo"] {
+        for bad in [
+            "//evil.com",
+            "/\\evil.com",
+            "https://evil.com",
+            "javascript:alert(1)",
+            "",
+            "/\tfoo",
+        ] {
             assert_eq!(sanitize_redirect_path(Some(bad), "/"), "/", "{bad}");
         }
         assert_eq!(sanitize_redirect_path(None, "/"), "/");

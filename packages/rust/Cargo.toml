@@ -1,23 +1,28 @@
-[package]
-name = "authdog-axum"
+# Authdog Rust SDKs — a Cargo workspace. `authdog-core` holds the
+# framework-agnostic core (public-key validation, cookie/token extraction,
+# OIDC userinfo lookups, redirect sanitization); each framework crate
+# (`authdog-axum`, `authdog-actix`, `authdog-rocket`, `authdog-warp`,
+# `authdog-poem`) builds idiomatic middleware / extractors on top of it.
+#
+# moon runs `cargo build` / `cargo test` / `cargo check` at this directory, so
+# they build and test every member crate.
+[workspace]
+resolver = "2"
+members = ["core", "axum", "actix", "rocket", "warp", "poem"]
+
+[workspace.package]
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.75"
-description = "Authdog SDK for axum — session middleware, an auth gate, and a logout handler."
 license = "MIT"
 repository = "https://github.com/authdog/web-sdk"
-homepage = "https://github.com/authdog/web-sdk/tree/main/packages/rust#readme"
-keywords = ["authdog", "auth", "authentication", "axum", "oidc"]
-categories = ["authentication", "web-programming"]
 
-[dependencies]
-axum = "0.8"
+[workspace.dependencies]
+authdog-core = { version = "0.1.0", path = "core" }
 base64 = "0.22"
 reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 thiserror = "2"
 url = "2"
-
-[dev-dependencies]
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
