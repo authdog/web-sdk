@@ -46,7 +46,7 @@
         "@angular/common": "^20.3.25",
         "@angular/core": "^20.3.25",
         "@angular/router": "^20.3.25",
-        "@types/node": "^24.0.0",
+        "@types/node": "^26.0.0",
         "dotenv": "^16.4.7",
         "prettier": "^3.4.2",
         "rxjs": "^7.8.1",

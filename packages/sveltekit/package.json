@@ -51,7 +51,7 @@
     },
     "devDependencies": {
         "@sveltejs/kit": "^2.15.0",
-        "@types/node": "^24.0.0",
+        "@types/node": "^26.0.0",
         "dotenv": "^16.4.7",
         "prettier": "^3.4.2",
         "svelte": "^5.0.0",
