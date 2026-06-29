@@ -10,7 +10,7 @@ repositories {
     mavenCentral()
 }
 
-val ktorVersion = "3.2.3"
+val ktorVersion = "3.5.1"
 
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
