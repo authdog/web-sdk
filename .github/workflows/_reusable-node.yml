@@ -1,0 +1,32 @@
+# Reusable CI for a single Node/TS package. Called by the thin per-package
+# workflows (one per badge) with the moon project id. moon resolves and builds
+# the package's deps (e.g. node-commons:build) before running its `test` task,
+# so each caller exercises exactly one framework's package in isolation.
+name: _reusable-node
+
+on:
+  workflow_call:
+    inputs:
+      project:
+        description: 'moon project id to test'
+        required: true
+        type: string
+
+jobs:
+  test:
+    name: ${{ inputs.project }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: dbrrt/setup-moon@v1.0.0
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+
+      - run: bun install --frozen-lockfile
+
+      - run: moon run ${{ inputs.project }}:test

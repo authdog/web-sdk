@@ -1,0 +1,32 @@
+name: CI (go)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/go/**"
+      - ".github/workflows/ci-go.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "packages/go/**"
+      - ".github/workflows/ci-go.yml"
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: dbrrt/setup-moon@v1.0.0
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+
+      - run: bun install --frozen-lockfile
+
+      - run: moon run go:test
