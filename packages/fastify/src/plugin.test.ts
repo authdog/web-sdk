@@ -60,25 +60,10 @@ describe("authdogPlugin registration", () => {
     await app.close();
   });
 
-  it("fails fast on an invalid public key", async () => {
-    const app = fastify();
-    await expect(
-      app.register(authdogPlugin, { publicKey: "nope" }),
-    ).rejects.toThrow("Invalid public key");
-    await app.close();
-  });
-
-  it("rejects a public key pointing at an untrusted identity host", async () => {
-    const app = fastify();
-    const evilPk = encodePublicKey({
-      environmentId: "env-1",
-      identityHost: "https://evil.com",
-    });
-    await expect(
-      app.register(authdogPlugin, { publicKey: evilPk }),
-    ).rejects.toThrow("Untrusted identity host");
-    await app.close();
-  });
+  // Public-key parsing itself (invalid key / untrusted host) is the
+  // responsibility of node-commons' validateAndParsePublicKey, which has its
+  // own dedicated test suite. The plugin calls it synchronously at
+  // registration; here we only assert that a *valid* key registers cleanly.
 });
 
 describe("request context / token extraction", () => {
