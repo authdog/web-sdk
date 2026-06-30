@@ -28,6 +28,7 @@
     },
     "scripts": {
         "format": "prettier --config .prettierrc.json --write \"**/*.{ts,tsx,md}\"",
+        "test": "vitest run",
         "type-check": "tsc",
         "clean": "rm -rf dist",
         "build": "bun run clean && tsup",

@@ -40,6 +40,7 @@
         "format": "prettier --config .prettierrc.json --write \"**/*.{ts,md}\"",
         "type-check": "tsc",
         "clean": "rm -rf dist",
+        "test": "vitest run",
         "build": "bun run clean && tsup",
         "ship": "bun run build && bun publish --access public"
     },

@@ -1,6 +1,5 @@
 {
   "lockfileVersion": 1,
-  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "web-sdk",
@@ -373,6 +372,7 @@
         "ts-loader": "^9.5.1",
         "typescript": "5.9.3",
         "vite": "^8.0.0",
+        "vitest": "^3.2.6",
         "webpack": "^5.89.0",
       },
       "peerDependencies": {

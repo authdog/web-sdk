@@ -20,6 +20,12 @@ tasks:
       - 'src/**/*'
       - 'package.json'
 
+  test:
+    command: 'bun run test'
+    inputs:
+      - 'src/**/*'
+      - 'package.json'
+
   storybook:
     command: 'bun run storybook'
     preset: 'server'
