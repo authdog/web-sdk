@@ -54,6 +54,13 @@ jobs:
       #   GHSA-rxv8-25v2-qmq8                         turbo-stream     -> @remix-run/react@2.17.5 hard-pins
       #     turbo-stream 2.x (examples/remix); turbo-stream 3.x ships only with React Router 7, so this
       #     clears only when the playground migrates off Remix 2.
+      #   GHSA-5c6j-r48x-rmvq                         serialize-javascript -> gatsby build tooling (examples/gatsby)
+      #   GHSA-ph9p-34f9-6g65                         tmp (0.0.33)     -> gatsby build tooling (examples/gatsby)
+      #   GHSA-r5fr-rjxr-66jc                         lodash (4.17.23) -> transitive build/dev tooling across
+      #     frameworks (gatsby, next, remix, react-native, storybook); no safe-only fixed version yet.
+      #   GHSA-wf6x-7x77-mvgw                         immutable (3.7.6) -> build tooling (gatsby, next, @angular/build, vite)
+      #     These four are dev/build/example-only and are NOT in any published @authdog/* runtime package
+      #     (whose deps are minimal); revisit when the frameworks bump their transitive deps.
       - name: bun audit
         run: |
           bun audit --audit-level=high \
@@ -61,4 +68,8 @@ jobs:
             --ignore GHSA-39pv-4j6c-2g6v \
             --ignore GHSA-rgjc-h3x7-9mwg \
             --ignore GHSA-5xrq-8626-4rwp \
-            --ignore GHSA-rxv8-25v2-qmq8
+            --ignore GHSA-rxv8-25v2-qmq8 \
+            --ignore GHSA-5c6j-r48x-rmvq \
+            --ignore GHSA-ph9p-34f9-6g65 \
+            --ignore GHSA-r5fr-rjxr-66jc \
+            --ignore GHSA-wf6x-7x77-mvgw
