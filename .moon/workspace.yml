@@ -9,6 +9,8 @@ projects:
   express-api: 'examples/express'
   fastify-api: 'examples/fastify'
   react-native-app: 'examples/react-native'
+  gatsby-app: 'examples/gatsby'
+  redwood-app: 'examples/redwood'
 
   # Packages
   node-commons: 'packages/node-commons'
@@ -23,6 +25,8 @@ projects:
   express: 'packages/express'
   fastify: 'packages/fastify'
   react-native: 'packages/react-native'
+  gatsby: 'packages/gatsby'
+  redwood: 'packages/redwood'
   eslint-config: 'packages/eslint'
   typescript-config: 'packages/typescript-config'
 

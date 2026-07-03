@@ -1,0 +1,12 @@
+# RedwoodJS project config. The Authdog web SDK reads the public key from the
+# browser via the REDWOOD_ENV_ prefix, so it must be listed here for the web
+# build to inline it.
+[web]
+  title = "Authdog Redwood Example"
+  port = 8910
+  apiUrl = "/.redwood/functions"
+  includeEnvironmentVariables = ["REDWOOD_ENV_AUTHDOG_PUBLIC_KEY"]
+[api]
+  port = 8911
+[browser]
+  open = true

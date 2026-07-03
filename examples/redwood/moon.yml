@@ -1,0 +1,11 @@
+tasks:
+  type-check:
+    command: 'bun run type-check'
+    deps:
+      - 'redwood:build'
+      - 'react-elements:build'
+    inputs:
+      - 'api/**/*'
+      - 'web/**/*'
+      - 'tsconfig.json'
+      - 'package.json'

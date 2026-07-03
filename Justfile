@@ -20,6 +20,9 @@ dev-astro:
 dev-sveltekit:
     moon run sveltekit-app:dev
 
+dev-gatsby:
+    moon run gatsby-app:dev
+
 dev-angular:
     moon run angular-app:dev
 
@@ -37,7 +40,7 @@ ui:
 
 # ── Build ────────────────────────────────────────────────────
 build:
-    moon run node-commons:build nextjs-app:build react-elements:build remix-node:build tanstack-start:build vue:build astro:build sveltekit:build
+    moon run node-commons:build nextjs-app:build react-elements:build remix-node:build tanstack-start:build vue:build astro:build sveltekit:build gatsby:build redwood:build
 
 build-libs:
     moon run react-elements:build remix-node:build
