@@ -1,0 +1,26 @@
+$ bun run clean && tsup
+$ rm -rf dist
+CLI Building entry: src/client.ts, src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+CLI Using tsup config: /home/david/dev/authdog/web-sdk/packages/remix/tsup.config.ts
+CLI Target: es2020
+CLI Cleaning output folder
+CJS Build start
+ESM Build start
+ESM dist/client.mjs     740.00 B
+ESM dist/index.mjs      5.19 KB
+ESM dist/client.mjs.map 2.48 KB
+ESM dist/index.mjs.map  15.93 KB
+ESM ⚡️ Build success in 80ms
+CJS dist/client.js     1.17 KB
+CJS dist/index.js      5.73 KB
+CJS dist/client.js.map 2.67 KB
+CJS dist/index.js.map  16.39 KB
+CJS ⚡️ Build success in 81ms
+DTS Build start
+DTS ⚡️ Build success in 4386ms
+DTS dist/index.d.ts   1.28 KB
+DTS dist/client.d.ts  280.00 B
+DTS dist/index.d.mts  1.28 KB
+DTS dist/client.d.mts 280.00 B

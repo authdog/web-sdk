@@ -1,0 +1,28 @@
+$ bun run clean && tsup
+$ rm -rf dist
+CLI Building entry: src/index.server.ts, src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.0
+CLI Using tsup config: /home/david/dev/authdog/web-sdk/packages/nextjs-app/tsup.config.ts
+CLI Target: node16
+CLI Cleaning output folder
+ESM Build start
+CJS Build start
+ESM dist/index.server.mjs     3.54 KB
+ESM dist/index.mjs            3.01 KB
+ESM dist/index.server.mjs.map 8.73 KB
+ESM dist/index.mjs.map        14.12 KB
+ESM ⚡️ Build success in 127ms
+CJS dist/index.js            3.85 KB
+CJS dist/index.server.js     3.59 KB
+CJS dist/index.js.map        14.35 KB
+CJS dist/index.server.js.map 9.01 KB
+CJS ⚡️ Build success in 128ms
+DTS Build start
+DTS ⚡️ Build success in 5027ms
+DTS dist/index.server.d.mts     724.00 B
+DTS dist/index.d.mts            2.10 KB
+DTS dist/commons-CoLIU2e7.d.mts 226.00 B
+DTS dist/index.server.d.ts      723.00 B
+DTS dist/index.d.ts             2.10 KB
+DTS dist/commons-CoLIU2e7.d.ts  226.00 B

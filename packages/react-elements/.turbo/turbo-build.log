@@ -1,0 +1,64 @@
+$ tsup && bun run build:styles
+CLI Building entry: src/index.ts, src/lib/utils.ts, src/components/ui/alert.tsx, src/components/ui/avatar.tsx, src/components/ui/badge.tsx, src/components/ui/button.tsx, src/components/ui/card.tsx, src/components/ui/dropdown-menu.tsx, src/components/ui/input.tsx, src/components/ui/label.tsx, src/components/ui/separator.tsx, src/components/ui/sheet.tsx, src/components/ui/theme-toggle.tsx
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+CLI Using tsup config: /home/david/dev/authdog/web-sdk/packages/react-elements/tsup.config.ts
+CLI Target: es2020
+CLI Cleaning output folder
+ESM Build start
+CJS Build start
+CJS dist/index.js                           35.20 KB
+CJS dist/lib/utils.js                       620.00 B
+CJS dist/components/ui/alert.js             1.65 KB
+CJS dist/components/ui/avatar.js            1.34 KB
+CJS dist/components/ui/badge.js             1.78 KB
+CJS dist/components/ui/button.js            1.94 KB
+CJS dist/components/ui/card.js              1.85 KB
+CJS dist/components/ui/dropdown-menu.js     6.77 KB
+CJS dist/components/ui/input.js             1.37 KB
+CJS dist/components/ui/label.js             1.14 KB
+CJS dist/components/ui/separator.js         1.18 KB
+CJS dist/components/ui/sheet.js             3.36 KB
+CJS dist/components/ui/theme-toggle.js      2.72 KB
+CJS dist/index.js.map                       100.69 KB
+CJS dist/lib/utils.js.map                   520.00 B
+CJS dist/components/ui/avatar.js.map        2.30 KB
+CJS dist/components/ui/alert.js.map         3.00 KB
+CJS dist/components/ui/badge.js.map         2.78 KB
+CJS dist/components/ui/button.js.map        3.17 KB
+CJS dist/components/ui/card.js.map          3.80 KB
+CJS dist/components/ui/dropdown-menu.js.map 14.87 KB
+CJS dist/components/ui/input.js.map         1.78 KB
+CJS dist/components/ui/label.js.map         1.43 KB
+CJS dist/components/ui/separator.js.map     1.63 KB
+CJS dist/components/ui/sheet.js.map         6.76 KB
+CJS dist/components/ui/theme-toggle.js.map  5.69 KB
+CJS ⚡️ Build success in 177ms
+ESM dist/index.mjs                           32.70 KB
+ESM dist/lib/utils.mjs                       166.00 B
+ESM dist/components/ui/alert.mjs             1.19 KB
+ESM dist/components/ui/avatar.mjs            749.00 B
+ESM dist/components/ui/badge.mjs             1.34 KB
+ESM dist/components/ui/button.mjs            1.36 KB
+ESM dist/components/ui/card.mjs              1.35 KB
+ESM dist/components/ui/dropdown-menu.mjs     6.02 KB
+ESM dist/components/ui/input.mjs             949.00 B
+ESM dist/components/ui/label.mjs             566.00 B
+ESM dist/components/ui/separator.mjs         604.00 B
+ESM dist/components/ui/sheet.mjs             2.68 KB
+ESM dist/components/ui/theme-toggle.mjs      2.13 KB
+ESM dist/index.mjs.map                       101.28 KB
+ESM dist/lib/utils.mjs.map                   415.00 B
+ESM dist/components/ui/alert.mjs.map         2.82 KB
+ESM dist/components/ui/avatar.mjs.map        2.12 KB
+ESM dist/components/ui/badge.mjs.map         2.62 KB
+ESM dist/components/ui/button.mjs.map        3.01 KB
+ESM dist/components/ui/card.mjs.map          3.54 KB
+ESM dist/components/ui/dropdown-menu.mjs.map 14.41 KB
+ESM dist/components/ui/input.mjs.map         1.65 KB
+ESM dist/components/ui/label.mjs.map         1.31 KB
+ESM dist/components/ui/separator.mjs.map     1.50 KB
+ESM dist/components/ui/sheet.mjs.map         6.49 KB
+ESM dist/components/ui/theme-toggle.mjs.map  5.63 KB
+ESM ⚡️ Build success in 191ms
+DTS Build start
