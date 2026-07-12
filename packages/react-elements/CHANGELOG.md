@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.3.1
+
+### Patch Changes
+
+- bddce7d: Harden security
+
 ## 0.3.0
 
 ### Minor Changes

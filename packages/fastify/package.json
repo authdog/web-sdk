@@ -1,6 +1,6 @@
 {
     "name": "@authdog/fastify",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "Authdog Fastify SDK",
     "source": "src/index.ts",
     "main": "./dist/index.js",

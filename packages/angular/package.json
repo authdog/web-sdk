@@ -1,6 +1,6 @@
 {
     "name": "@authdog/angular",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "Authdog Angular SDK",
     "source": "src/index.ts",
     "main": "./dist/index.js",
