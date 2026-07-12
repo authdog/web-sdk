@@ -53,17 +53,29 @@ Rocket, warp, poem), and **Kotlin** (Ktor) that speak the same session protocol.
 
 ### Backend SDKs for other languages
 
-| Package                                   | Registry                                                                    | Description                                             | CI                                                                                                                                                                                              |
-| ----------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`authdog-fastapi`](packages/python)      | [PyPI](https://pypi.org/project/authdog-fastapi)                            | Python SDK — FastAPI, Flask, Django, Starlette, aiohttp | [![python](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-python.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-python.yml) |
-| [`authdog` (Go)](packages/go)             | `github.com/authdog/web-sdk/packages/go`                                    | Go SDK with Gin middleware                              | [![go](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-go.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-go.yml)             |
-| [`authdog-axum` & friends](packages/rust) | [crates.io](https://crates.io/crates/authdog-axum)                          | Rust workspace — Axum, Actix, Rocket, Warp, Poem        | [![rust](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-rust.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-rust.yml)       |
-| [`authdog-ktor`](packages/kotlin)         | [Maven Central](https://search.maven.org/artifact/com.authdog/authdog-ktor) | Kotlin / Ktor SDK                                       | [![kotlin](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-kotlin.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-kotlin.yml) |
+| Package                                  | Registry                                                                    | Description                                             | CI                                                                                                                                                                                              |
+| ---------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`authdog-fastapi`](packages/python)     | [PyPI](https://pypi.org/project/authdog-fastapi)                            | Python SDK — FastAPI, Flask, Django, Starlette, aiohttp | [![python](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-python.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-python.yml) |
+| [`authdog` (Go)](packages/go)            | `github.com/authdog/web-sdk/packages/go`                                    | Go SDK with Gin middleware                              | [![go](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-go.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-go.yml)             |
+| [`authdog-core`](packages/rust/core)     | [crates.io](https://crates.io/crates/authdog-core)                          | Framework-agnostic Rust core                            | [![rust](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-rust.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-rust.yml)       |
+| [`authdog-axum`](packages/rust/axum)     | [crates.io](https://crates.io/crates/authdog-axum)                          | Rust SDK for Axum                                       | [![rust](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-rust.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-rust.yml)       |
+| [`authdog-actix`](packages/rust/actix)   | [crates.io](https://crates.io/crates/authdog-actix)                         | Rust SDK for Actix Web                                  | [![rust](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-rust.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-rust.yml)       |
+| [`authdog-rocket`](packages/rust/rocket) | [crates.io](https://crates.io/crates/authdog-rocket)                        | Rust SDK for Rocket                                     | [![rust](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-rust.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-rust.yml)       |
+| [`authdog-warp`](packages/rust/warp)     | [crates.io](https://crates.io/crates/authdog-warp)                          | Rust SDK for Warp                                       | [![rust](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-rust.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-rust.yml)       |
+| [`authdog-poem`](packages/rust/poem)     | [crates.io](https://crates.io/crates/authdog-poem)                          | Rust SDK for Poem                                       | [![rust](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-rust.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-rust.yml)       |
+| [`authdog-ktor`](packages/kotlin)        | [Maven Central](https://search.maven.org/artifact/com.authdog/authdog-ktor) | Kotlin / Ktor SDK                                       | [![kotlin](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-kotlin.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-kotlin.yml) |
 
 These backend SDKs mirror the Node `@authdog/express` / `@authdog/fastify`
 packages on the wire (same `authdog-session` cookie, same `userinfo` flow, same
 identity-host allowlist), so they validate sessions issued for the same Authdog
 environment.
+
+### Internal workspace packages
+
+| Package                                                    | Description                      |
+| ---------------------------------------------------------- | -------------------------------- |
+| [`@authdog/eslint-config`](packages/eslint)                | Shared ESLint configurations     |
+| [`@authdog/typescript-config`](packages/typescript-config) | Shared TypeScript configurations |
 
 ## 🚀 Quick Start
 
@@ -385,7 +397,9 @@ Read auth state from the signals-based `AuthdogService`:
 import { Component, inject } from "@angular/core";
 import { AuthdogService } from "@authdog/angular";
 
-@Component({/* … */})
+@Component({
+  /* … */
+})
 export class ProfileComponent {
   readonly auth = inject(AuthdogService);
   // auth.isLoading(), auth.token(), auth.user() — signals
