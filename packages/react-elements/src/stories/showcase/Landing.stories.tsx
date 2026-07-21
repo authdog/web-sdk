@@ -4,12 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Layers, Lock, Rocket, Shield, Sparkles, Users } from "lucide-react";
 import React from "react";
 
-import { UserDropdown } from "../../components/core/user-dropdown";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "../../components/ui/avatar";
+import { UserButton } from "../../components/core/user-button";
 import { Button } from "../../components/ui/button";
 
 const highlights = [
@@ -56,7 +51,7 @@ const buildSteps = [
     title: "Ship polished surfaces",
     description:
       "Combine core UI, flows, and utilities to cover onboarding, profile management, and secure recovery.",
-    meta: "<UserDropdown user={currentUser} />",
+    meta: "<UserButton user={currentUser} accounts={otherAccounts} />",
   },
 ];
 
@@ -170,19 +165,6 @@ const showcaseUser = {
   photos: [{ value: "https://i.pravatar.cc/120?img=12" }],
 };
 
-const Trigger = () => (
-  <div className="flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-3 py-2 text-left text-white shadow-2xl backdrop-blur">
-    <Avatar className="h-10 w-10">
-      <AvatarImage src={showcaseUser.photos?.[0]?.value} alt="Avery Stone" />
-      <AvatarFallback>AS</AvatarFallback>
-    </Avatar>
-    <div>
-      <p className="text-sm font-semibold leading-tight">Avery Stone</p>
-      <p className="text-xs text-white/70">Product Lead · Northwind</p>
-    </div>
-  </div>
-);
-
 const meta = {
   title: "Showcase/Landing",
   component: LandingShowcase,
@@ -265,21 +247,30 @@ function LandingShowcase() {
               </span>
             </div>
             <p className="mt-2 text-sm text-white/60">
-              The same dropdown powering production consoles.
+              Clerk-style user button with multi-account switching.
             </p>
-            <div className="mt-6">
-              <UserDropdown
-                trigger={<Trigger />}
-                triggerWrapperClassName="w-full justify-start"
-                user={showcaseUser}
-                onManageAccount={() => undefined}
-                onSignout={() => undefined}
-                links={[
-                  { label: "Open Admin", href: "https://app.authdog.com" },
-                  { label: "Switch workspace", href: "#" },
+            <div className="mt-6 flex justify-end">
+              <UserButton
+                user={{
+                  id: "user_personal",
+                  displayName: showcaseUser.displayName,
+                  email: showcaseUser.emails?.[0]?.value,
+                  avatarUrl: showcaseUser.photos?.[0]?.value,
+                }}
+                accounts={[
+                  {
+                    id: "user_work",
+                    displayName: showcaseUser.displayName || "User",
+                    email: "work@example.com",
+                    avatarUrl: "https://i.pravatar.cc/100?u=work",
+                  },
                 ]}
-                side="bottom"
-                align="start"
+                onManageAccount={() => undefined}
+                onSignOut={() => undefined}
+                onSwitchAccount={() => undefined}
+                onAddAccount={() => undefined}
+                onSignOutAll={() => undefined}
+                align="end"
               />
             </div>
           </div>

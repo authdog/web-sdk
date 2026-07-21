@@ -1,58 +1,221 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import type { LucideIcon } from "lucide-react";
 import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "../../components/ui/avatar";
-import { Button } from "../../components/ui/button";
-import { Badge } from "../../components/ui/badge";
+  CheckCircle2,
+  CircleCheck,
+  Clock3,
+  KeyRound,
+  Plus,
+  User,
+  Users,
+  X,
+} from "lucide-react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
 import {
   Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "../../components/ui/card";
-import { Input } from "../../components/ui/input";
-import { Label } from "../../components/ui/label";
-import { User, Shield, SlidersHorizontal, LucideProps } from "lucide-react";
+} from "../ui/card";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { cn } from "../../lib/utils";
+import {
+  BackupCodesRemainingCard,
+  GroupsPanel,
+  MfaStatusCard,
+  PasskeysPanel,
+  SessionsPanel,
+  TokensPanel,
+} from "./account-panels";
+import type {
+  AccountGroup,
+  AccountSession,
+  AccountTabId,
+  AccountToken,
+  AccountUser,
+  ActionResult,
+  PasskeyCredential,
+  TotpStatus,
+} from "./account-types";
+import { SectionCard } from "./section-card";
+
+export type {
+  AccountGroup,
+  AccountSession,
+  AccountTabId,
+  AccountToken,
+  AccountUser,
+  ActionResult,
+  PasskeyCredential,
+  TotpStatus,
+} from "./account-types";
+
+type TabConfig = {
+  id: AccountTabId;
+  label: string;
+  description: string;
+  icon: LucideIcon;
+};
+
+const accountTabs: TabConfig[] = [
+  {
+    id: "profile",
+    label: "Profile",
+    description: "Manage your personal details, emails, and linked account.",
+    icon: User,
+  },
+  {
+    id: "mfa",
+    label: "MFA",
+    description:
+      "Protect your account with authenticator apps, passkeys, and recovery codes.",
+    icon: CircleCheck,
+  },
+  {
+    id: "sessions",
+    label: "Sessions",
+    description:
+      "Review and revoke the devices and browsers that are signed in.",
+    icon: Clock3,
+  },
+  {
+    id: "groups",
+    label: "Groups",
+    description:
+      "See which groups currently grant you access in this environment.",
+    icon: Users,
+  },
+  {
+    id: "tokens",
+    label: "Tokens",
+    description:
+      "Create and manage personal access tokens for programmatic access.",
+    icon: KeyRound,
+  },
+];
+
+function getInitials(name?: string) {
+  const trimmed = String(name || "").trim();
+  if (!trimmed) return "U";
+  return trimmed
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join("");
+}
+
+function hasSuccess(r: unknown): r is ActionResult {
+  return !!r && typeof r === "object" && "success" in r;
+}
 
 export interface UserProfileProps {
   loading: boolean;
-  user: any;
-  emails?: { address: string; isPrimary?: boolean }[];
+  user: AccountUser | null | undefined;
+  logo?: ReactNode;
+  productName?: string;
+  onClose?: () => void;
   handleAuthenticated?: () => void;
+  onTabChange?: (tab: AccountTabId) => void;
   onRequestEmailVerification?: (
     email: string,
-  ) => Promise<{ success: boolean; message?: string } | void>;
+  ) => Promise<ActionResult | void> | ActionResult | void;
   onVerifyEmail?: (
     email: string,
     code: string,
-  ) => Promise<{ success: boolean; message?: string } | void>;
+  ) => Promise<ActionResult | void> | ActionResult | void;
   onAddEmail?: (
     email: string,
-  ) => Promise<{ success: boolean; message?: string } | void>;
+  ) => Promise<ActionResult | void> | ActionResult | void;
+  totpStatus?: TotpStatus;
+  onGenerateTotpSecret?: () => Promise<ActionResult | void> | ActionResult | void;
+  onEnableTotp?: (
+    secret: string,
+    code: string,
+  ) => Promise<ActionResult | void> | ActionResult | void;
+  onDisableTotp?: (
+    code: string,
+  ) => Promise<ActionResult | void> | ActionResult | void;
+  onVerifyTotp?: (
+    code: string,
+  ) => Promise<ActionResult | void> | ActionResult | void;
+  sessions?: AccountSession[];
+  sessionsLoading?: boolean;
+  onRevokeSession?: (sessionId: string) => Promise<void> | void;
+  groups?: AccountGroup[];
+  groupsLoading?: boolean;
+  tokens?: AccountToken[];
+  tokensLoading?: boolean;
+  onCreateToken?: () => Promise<void> | void;
+  onRevokeToken?: (tokenId: string) => Promise<void> | void;
+  passkeys?: PasskeyCredential[];
+  passkeysLoading?: boolean;
+  onAddPasskey?: () => Promise<void> | void;
+  onRemovePasskey?: (id: string) => Promise<void> | void;
 }
 
+/** Presentational Account shell (Profile / MFA / Sessions / Groups / Tokens). */
 export const UserProfile = ({
   loading,
   user,
+  logo,
+  productName = "Account",
+  onClose,
   handleAuthenticated,
+  onTabChange,
   onRequestEmailVerification,
   onVerifyEmail,
   onAddEmail,
+  totpStatus,
+  onGenerateTotpSecret,
+  onEnableTotp,
+  onDisableTotp,
+  onVerifyTotp,
+  sessions,
+  sessionsLoading,
+  onRevokeSession,
+  groups,
+  groupsLoading,
+  tokens,
+  tokensLoading,
+  onCreateToken,
+  onRevokeToken,
+  passkeys,
+  passkeysLoading,
+  onAddPasskey,
+  onRemovePasskey,
 }: UserProfileProps) => {
+  const EMAIL_VERIFICATION_CODE_LENGTH = 6;
   const [isMounted, setIsMounted] = useState(false);
-  const [activeTab, setActiveTab] = useState<
-    "profile" | "security" | "preferences"
-  >("profile");
+  const [activeTab, setActiveTab] = useState<AccountTabId>("profile");
   const [verifyingEmail, setVerifyingEmail] = useState<string | null>(null);
   const [codeByEmail, setCodeByEmail] = useState<Record<string, string>>({});
-  const [addingEmail, setAddingEmail] = useState<boolean>(false);
-  const [newEmail, setNewEmail] = useState<string>("");
+  const [emailCodeErrorByEmail, setEmailCodeErrorByEmail] = useState<
+    Record<string, string>
+  >({});
+  const [addingEmail, setAddingEmail] = useState(false);
+  const [newEmail, setNewEmail] = useState("");
+  const [generatingSecret, setGeneratingSecret] = useState(false);
+  const [enableTotpFlow, setEnableTotpFlow] = useState<{
+    secret?: string;
+    qrCodeDataUrl?: string;
+  } | null>(null);
+  const [enablingTotp, setEnablingTotp] = useState(false);
+  const [disablingTotp, setDisablingTotp] = useState(false);
+  const [totpCode, setTotpCode] = useState("");
+  const [showBackupCodes, setShowBackupCodes] = useState(false);
+  const [displayedBackupCodes, setDisplayedBackupCodes] = useState<string[]>(
+    [],
+  );
+  const [verifyTotpCode, setVerifyTotpCode] = useState("");
+  const [showDisableTotp, setShowDisableTotp] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -64,257 +227,467 @@ export const UserProfile = ({
     }
   }, [loading, user, handleAuthenticated]);
 
-  const iconProps: LucideProps = {
-    className: "mr-2 h-4 w-4",
-    "aria-hidden": "true",
+  const handleTabChange = (tab: AccountTabId) => {
+    setActiveTab(tab);
+    onTabChange?.(tab);
   };
 
-  const renderIcon = (Icon: any) => {
-    if (!isMounted) return null;
-    return <Icon {...iconProps} />;
+  const normalizeEmailVerificationCode = (value: string) =>
+    value.replace(/\D/g, "").slice(0, EMAIL_VERIFICATION_CODE_LENGTH);
+
+  const handleEmailVerificationSubmit = async (
+    email: string,
+    rawCode: string,
+  ) => {
+    if (!onVerifyEmail) return;
+    const normalizedCode = normalizeEmailVerificationCode(rawCode);
+    if (normalizedCode.length !== EMAIL_VERIFICATION_CODE_LENGTH) {
+      setEmailCodeErrorByEmail((map) => ({
+        ...map,
+        [email]: "Verification code must be 6 digits.",
+      }));
+      return;
+    }
+    const result = await onVerifyEmail(email, normalizedCode);
+    if (hasSuccess(result) && !result.success) {
+      setEmailCodeErrorByEmail((map) => ({
+        ...map,
+        [email]: result.message || "Invalid verification code",
+      }));
+      return;
+    }
+    setCodeByEmail((map) => ({ ...map, [email]: "" }));
+    setEmailCodeErrorByEmail((map) => ({ ...map, [email]: "" }));
+    setVerifyingEmail(null);
   };
+
+  const handleGenerateSecret = async () => {
+    if (!onGenerateTotpSecret) return;
+    setGeneratingSecret(true);
+    try {
+      const result = await onGenerateTotpSecret();
+      if (hasSuccess(result) && result.success && result.secret) {
+        setEnableTotpFlow({
+          secret: result.secret,
+          qrCodeDataUrl: result.qrCodeDataUrl,
+        });
+      }
+    } finally {
+      setGeneratingSecret(false);
+    }
+  };
+
+  const handleEnableTotp = async () => {
+    if (!onEnableTotp || !enableTotpFlow?.secret || !totpCode) return;
+    setEnablingTotp(true);
+    try {
+      const result = await onEnableTotp(enableTotpFlow.secret, totpCode);
+      if (hasSuccess(result) && result.success) {
+        setDisplayedBackupCodes(result.backupCodes || []);
+        setShowBackupCodes(Boolean(result.backupCodes?.length));
+        setEnableTotpFlow(null);
+        setTotpCode("");
+      }
+    } finally {
+      setEnablingTotp(false);
+    }
+  };
+
+  const handleDisableTotp = async () => {
+    if (!verifyTotpCode) return;
+    setDisablingTotp(true);
+    try {
+      if (onVerifyTotp) {
+        const verify = await onVerifyTotp(verifyTotpCode);
+        if (!hasSuccess(verify) || !verify.success) return;
+      }
+      if (!onDisableTotp) return;
+      const result = await onDisableTotp(verifyTotpCode);
+      if (hasSuccess(result) && result.success) {
+        setVerifyTotpCode("");
+        setShowDisableTotp(false);
+      }
+    } finally {
+      setDisablingTotp(false);
+    }
+  };
+
+  const userEmails = user?.emails || [];
+  const primaryEmail =
+    userEmails.find((e) => e.primary)?.value ||
+    userEmails[0]?.value ||
+    user?.userName ||
+    "No email";
+
+  const verifiedEmailCount = useMemo(
+    () =>
+      userEmails.filter((email) => {
+        if (typeof email.verified === "boolean") return email.verified;
+        const verification = (user?.verifications || []).find(
+          (item) => item.email === email.value,
+        );
+        return verification?.verified === true;
+      }).length,
+    [user?.verifications, userEmails],
+  );
+
+  const activeTabConfig: TabConfig =
+    accountTabs.find((tab) => tab.id === activeTab) ?? accountTabs[0]!;
 
   if (!isMounted || loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex h-full min-h-[28rem] items-center justify-center rounded-2xl border border-border/70 bg-background/60">
+        <div className="text-sm text-muted-foreground">
+          Loading account settings...
+        </div>
+      </div>
+    );
   }
 
   if (!user) {
-    return <div>No user</div>;
+    return (
+      <div className="flex h-full min-h-[28rem] items-center justify-center rounded-2xl border border-dashed border-border bg-background/60">
+        <div className="text-sm text-muted-foreground">
+          No user data available.
+        </div>
+      </div>
+    );
   }
 
-  return (
-    <div className="grid grid-cols-[14rem,1fr] w-full bg-transparent">
-      <div className="h-full border-r border-border p-3 md:p-4 bg-transparent flex flex-col min-w-0">
-        <div className="mb-3 md:mb-4">
-          <h1 className="text-xl font-bold text-foreground">Account</h1>
-          <p className="text-sm text-muted-foreground">
-            Manage your account info.
-          </p>
-        </div>
-
-        <nav className="space-y-1 flex-1">
-          <button
-            onClick={() => setActiveTab("profile")}
-            className={`flex items-center w-full px-3 py-2 text-sm rounded-md ${
-              activeTab === "profile"
-                ? "bg-muted text-foreground"
-                : "text-muted-foreground hover:bg-muted/50"
-            }`}
-          >
-            {renderIcon(User)}
-            Profile
-          </button>
-
-          {/* <button
-            onClick={() => setActiveTab("security")}
-            className={`flex items-center w-full px-3 py-2 text-sm rounded-md ${
-              activeTab === "security"
-                ? "bg-muted text-foreground"
-                : "text-muted-foreground hover:bg-muted/50"
-            }`}
-          >
-            {renderIcon(Shield)}
-            Security
-          </button>
-          <button
-            onClick={() => setActiveTab("preferences")}
-            className={`flex items-center w-full px-3 py-2 text-sm rounded-md ${
-              activeTab === "preferences"
-                ? "bg-muted text-foreground"
-                : "text-muted-foreground hover:bg-muted/50"
-            }`}
-          >
-            {renderIcon(SlidersHorizontal)}
-            Preferences
-          </button> */}
-        </nav>
+  const sidebarFooter = (
+    <div className="flex items-center gap-2.5 rounded-lg border border-border/70 bg-background/70 p-2">
+      <Avatar className="h-9 w-9 border border-border/70">
+        <AvatarImage
+          src={user.photos?.[0]?.value}
+          alt={`${user.displayName || "User"} avatar`}
+        />
+        <AvatarFallback>{getInitials(user.displayName)}</AvatarFallback>
+      </Avatar>
+      <div className="min-w-0">
+        <p className="truncate text-sm font-medium text-foreground">
+          {user.displayName || "Account"}
+        </p>
+        <p className="truncate text-xs text-muted-foreground">{primaryEmail}</p>
       </div>
+    </div>
+  );
 
-      <div className="h-full p-3 md:p-5 min-w-0 bg-transparent">
-        <div className="flex justify-between items-center mb-3 md:mb-4">
-          <h2 className="text-xl font-semibold text-foreground">
-            {activeTab === "profile"
-              ? "Profile details"
-              : activeTab === "security"
-                ? "Security settings"
-                : "Preferences"}
-          </h2>
-          {/* <button className="text-gray-500 hover:text-gray-700">
-            {renderIcon(X)}
-          </button> */}
-        </div>
-
-        {activeTab === "profile" ? (
-          <div className="space-y-5 md:space-y-6">
-            {/* Profile Section */}
-            <div>
-              <h3 className="text-sm font-medium mb-3 text-foreground">
-                Profile
-              </h3>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <Avatar className="h-12 w-12 mr-4 border">
-                    <AvatarImage
-                      src={user.photos?.[0]?.value}
-                      alt="Profile picture"
-                    />
-                    <AvatarFallback>
-                      {user.displayName
-                        ?.split(" ")
-                        .map((n: string) => n[0])
-                        .join("")}
-                    </AvatarFallback>
-                  </Avatar>
-                  <span className="font-medium text-foreground">
-                    {user.displayName}
-                  </span>
+  return (
+    <div className="flex h-full min-h-0 flex-col gap-0 overflow-hidden bg-muted/20 lg:flex-row lg:gap-4 lg:bg-transparent">
+      <aside className="hidden min-w-0 lg:flex lg:h-full lg:w-[14rem] lg:shrink-0 lg:flex-col">
+        <div className="flex min-h-0 flex-col rounded-xl border border-border/70 bg-card/80 p-3 shadow-sm backdrop-blur lg:h-full">
+          <div className="border-b border-border/70 pb-3">
+            <div className="flex items-start gap-2.5">
+              {logo ? (
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white p-1.5 shadow-sm ring-1 ring-black/5 dark:bg-white dark:ring-white/15">
+                  {logo}
                 </div>
-                {/* <Button variant="outline" size="sm">
-                  Edit profile
-                </Button> */}
+              ) : (
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <User className="h-4 w-4" />
+                </div>
+              )}
+              <div className="min-w-0">
+                <h2 className="text-lg font-semibold text-foreground">
+                  {productName}
+                </h2>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Manage your account info.
+                </p>
               </div>
             </div>
+          </div>
 
-            {/* Email Addresses Section */}
-            <div>
-              <h3 className="text-sm font-medium mb-3 text-foreground">
-                Email addresses
-              </h3>
-              <div className="space-y-2.5">
-                {/* {JSON.stringify(user)} */}
-
-                {/* {(emails.length > 0 ? emails : [{ address: user.email, isPrimary: true }]).map((email, i) => (
-                  <div className="flex items-center justify-between" key={email.address}>
-                    <span>{email.address}</span>
-                    {email.isPrimary && (
-                      <Badge variant="outline" className="text-xs bg-gray-100 text-gray-700 hover:bg-gray-100">
-                        Primary
-                      </Badge>
+          <nav className="mt-3 grid gap-1 pb-2">
+            {accountTabs.map((tab) => {
+              const Icon = tab.icon;
+              const isActive = tab.id === activeTab;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => handleTabChange(tab.id)}
+                  className={cn(
+                    "flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left transition-colors",
+                    isActive
+                      ? "bg-muted text-primary"
+                      : "text-foreground/75 hover:bg-muted/60 hover:text-foreground",
+                  )}
+                >
+                  <div
+                    className={cn(
+                      "flex h-8 w-8 items-center justify-center rounded-lg",
+                      isActive
+                        ? "bg-background text-primary"
+                        : "text-muted-foreground",
                     )}
+                  >
+                    <Icon className="h-4 w-4" />
                   </div>
-                ))} */}
+                  <div className="min-w-0 text-sm font-medium">{tab.label}</div>
+                </button>
+              );
+            })}
+          </nav>
 
-                {(user.emails ?? []).map((email: any, idx: number) => {
-                  const v = (user?.verifications || []).find(
-                    (ve: any) => ve.email === email.value,
-                  );
-                  const isVerified = v?.verified === true;
-                  const codeInput = codeByEmail[email.value] || "";
-                  return (
-                    <div
-                      className="flex items-start justify-between gap-2"
-                      key={email.value}
-                    >
-                      <div className="flex flex-col">
-                        <span className="text-foreground">{email.value}</span>
-                        <div className="mt-1">
-                          {isVerified ? (
-                            <Badge className="text-xs rounded-full px-2.5 py-0.5 bg-green-100 text-green-800 border border-green-300 dark:bg-green-500/20 dark:text-green-200 dark:border-green-400/40">
-                              Verified
-                            </Badge>
-                          ) : (
-                            <Badge className="text-xs rounded-full px-2.5 py-0.5 bg-amber-100 text-amber-800 border border-amber-300 dark:bg-amber-500/20 dark:text-amber-200 dark:border-amber-400/40">
-                              Not verified
-                            </Badge>
-                          )}
+          <div className="mt-auto pt-3">{sidebarFooter}</div>
+        </div>
+      </aside>
+
+      <section className="flex min-h-0 min-w-0 w-full flex-1 flex-col overflow-y-auto lg:overflow-visible">
+        <div className="mx-auto flex min-w-0 w-full max-w-2xl flex-col bg-transparent lg:mx-0 lg:h-full lg:min-h-0 lg:max-w-none lg:flex-1 lg:rounded-xl lg:border lg:border-border/70 lg:bg-card/80 lg:shadow-sm lg:backdrop-blur">
+          <div className="relative px-4 pb-3 pt-4 sm:px-5 lg:border-b lg:border-border/70 lg:py-3">
+            {onClose ? (
+              <button
+                type="button"
+                onClick={onClose}
+                className="absolute right-3 top-3 rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
+                aria-label="Close account"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            ) : null}
+            <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between lg:pr-10">
+              <div className="min-w-0">
+                <h2 className="text-lg font-semibold text-foreground sm:text-xl">
+                  {activeTabConfig.label}
+                </h2>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                  {activeTabConfig.description}
+                </p>
+              </div>
+              <div className="flex max-w-full flex-wrap items-center gap-2 lg:shrink-0 lg:justify-end">
+                <Badge
+                  variant="outline"
+                  className="hidden rounded-full border-border/70 bg-background/80 px-3 py-1 text-xs lg:inline-flex"
+                >
+                  {user.provider || "Local account"}
+                </Badge>
+                <Badge
+                  className={cn(
+                    "rounded-full px-3 py-1 text-xs",
+                    totpStatus?.enabled
+                      ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+                      : "bg-amber-500/10 text-amber-700 dark:text-amber-300",
+                  )}
+                >
+                  {totpStatus?.enabled ? "MFA enabled" : "MFA recommended"}
+                </Badge>
+              </div>
+            </div>
+          </div>
+
+          <div className="px-3 pb-4 sm:px-5 lg:min-h-0 lg:flex-1 lg:overflow-y-auto lg:py-5">
+            {activeTab === "profile" ? (
+              <div className="space-y-3 lg:space-y-4">
+                <SectionCard
+                  title="Profile"
+                  description="Basic identity details for this account."
+                >
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex items-center gap-3">
+                      <Avatar className="h-12 w-12 border border-border/70">
+                        <AvatarImage
+                          src={user.photos?.[0]?.value}
+                          alt={`${user.displayName || "User"} avatar`}
+                        />
+                        <AvatarFallback>
+                          {getInitials(user.displayName)}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <div className="text-sm font-semibold text-foreground">
+                          {user.displayName || "Unknown user"}
+                        </div>
+                        <div className="text-xs text-muted-foreground sm:text-sm">
+                          Signed in with {user.provider || "your account"}
                         </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        {idx === 0 && (
-                          <Badge
-                            variant="outline"
-                            className="text-xs bg-muted text-foreground hover:bg-muted"
-                          >
-                            Primary
-                          </Badge>
-                        )}
-                        {!isVerified && (
-                          <>
-                            {verifyingEmail === email.value ? (
-                              <div className="flex items-center gap-1">
-                                <input
-                                  className="h-7 w-24 text-sm rounded-md border border-border bg-background px-2 text-foreground"
-                                  placeholder="Code"
-                                  value={codeInput}
-                                  onChange={(e) =>
-                                    setCodeByEmail((m) => ({
-                                      ...m,
-                                      [email.value]: e.target.value,
-                                    }))
-                                  }
-                                />
-                                <button
-                                  className="h-7 rounded-md border border-border px-2 text-xs"
-                                  onClick={async () => {
-                                    if (!onVerifyEmail) return;
-                                    await onVerifyEmail(email.value, codeInput);
-                                  }}
-                                >
-                                  Verify
-                                </button>
-                                <button
-                                  className="h-7 rounded-md border border-border px-2 text-xs"
-                                  onClick={() => setVerifyingEmail(null)}
-                                >
-                                  Cancel
-                                </button>
+                    </div>
+                    <Badge
+                      variant="outline"
+                      className="w-fit rounded-full bg-muted/60 px-3 py-1 text-xs"
+                    >
+                      Account owner
+                    </Badge>
+                  </div>
+                </SectionCard>
+
+                <SectionCard
+                  title="Email addresses"
+                  description="Verified emails are used for sign-in, recovery, and security notifications."
+                  action={
+                    !addingEmail && userEmails.length < 5 && onAddEmail ? (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="gap-2"
+                        onClick={() => setAddingEmail(true)}
+                      >
+                        <Plus className="h-4 w-4" />
+                        Add email
+                      </Button>
+                    ) : null
+                  }
+                >
+                  <div className="space-y-3">
+                    {userEmails.map((email, idx) => {
+                      const verification = (user.verifications || []).find(
+                        (item) => item.email === email.value,
+                      );
+                      const isVerified =
+                        typeof email.verified === "boolean"
+                          ? email.verified
+                          : verification?.verified === true ||
+                            (idx === 0 && verifiedEmailCount > 0);
+                      const codeInput = codeByEmail[email.value] || "";
+                      const codeError =
+                        emailCodeErrorByEmail[email.value] || "";
+                      const isCodeValid =
+                        normalizeEmailVerificationCode(codeInput).length ===
+                        EMAIL_VERIFICATION_CODE_LENGTH;
+
+                      return (
+                        <div
+                          key={email.value}
+                          className="rounded-lg border border-border/70 bg-background p-3"
+                        >
+                          <div className="flex flex-col gap-2.5 lg:flex-row lg:items-start lg:justify-between">
+                            <div className="min-w-0">
+                              <div className="break-all text-sm font-medium text-foreground">
+                                {email.value}
                               </div>
-                            ) : (
-                              <>
-                                <button
-                                  className="h-7 rounded-md border border-border px-2 text-xs"
+                              <div className="mt-2 flex flex-wrap gap-2">
+                                <Badge
+                                  className={cn(
+                                    "rounded-full px-3 py-1 text-xs",
+                                    isVerified
+                                      ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+                                      : "bg-amber-500/10 text-amber-700 dark:text-amber-300",
+                                  )}
+                                >
+                                  {isVerified ? "Verified" : "Not verified"}
+                                </Badge>
+                                {idx === 0 || email.primary ? (
+                                  <Badge
+                                    variant="outline"
+                                    className="rounded-full bg-muted/60 px-3 py-1 text-xs"
+                                  >
+                                    Primary
+                                  </Badge>
+                                ) : null}
+                              </div>
+                            </div>
+
+                            {!isVerified ? (
+                              verifyingEmail === email.value ? (
+                                <div className="flex w-full flex-col gap-2 sm:w-auto sm:min-w-[18rem]">
+                                  <Input
+                                    className="h-9"
+                                    placeholder="Verification code"
+                                    value={codeInput}
+                                    onChange={(e) => {
+                                      const nextCode =
+                                        normalizeEmailVerificationCode(
+                                          e.target.value,
+                                        );
+                                      setCodeByEmail((map) => ({
+                                        ...map,
+                                        [email.value]: nextCode,
+                                      }));
+                                      setEmailCodeErrorByEmail((map) => ({
+                                        ...map,
+                                        [email.value]: "",
+                                      }));
+                                    }}
+                                  />
+                                  {codeError ? (
+                                    <p className="text-xs text-destructive">
+                                      {codeError}
+                                    </p>
+                                  ) : (
+                                    <p className="text-xs text-muted-foreground">
+                                      Enter the 6-digit code sent to this email.
+                                    </p>
+                                  )}
+                                  <div className="flex gap-2">
+                                    <Button
+                                      size="sm"
+                                      disabled={!isCodeValid}
+                                      onClick={() =>
+                                        void handleEmailVerificationSubmit(
+                                          email.value,
+                                          codeInput,
+                                        )
+                                      }
+                                    >
+                                      Verify
+                                    </Button>
+                                    <Button
+                                      size="sm"
+                                      variant="outline"
+                                      onClick={() => {
+                                        setVerifyingEmail(null);
+                                        setCodeByEmail((map) => ({
+                                          ...map,
+                                          [email.value]: "",
+                                        }));
+                                      }}
+                                    >
+                                      Cancel
+                                    </Button>
+                                  </div>
+                                </div>
+                              ) : (
+                                <Button
+                                  variant="outline"
+                                  size="sm"
                                   onClick={async () => {
-                                    if (onRequestEmailVerification)
+                                    if (onRequestEmailVerification) {
                                       await onRequestEmailVerification(
                                         email.value,
                                       );
+                                    }
                                     setVerifyingEmail(email.value);
                                   }}
                                 >
                                   Send code
-                                </button>
-                              </>
+                                </Button>
+                              )
+                            ) : (
+                              <div className="flex items-center gap-2 text-sm text-emerald-700 dark:text-emerald-300">
+                                <CheckCircle2 className="h-4 w-4" />
+                                Ready for sign-in
+                              </div>
                             )}
-                          </>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-                <div className="mt-2">
-                  {addingEmail ? (
-                    <div className="max-w-md">
-                      <Card>
-                        <CardHeader>
-                          <CardTitle>Add email address</CardTitle>
+                          </div>
+                        </div>
+                      );
+                    })}
+
+                    {addingEmail ? (
+                      <Card className="border-dashed border-border/80 bg-muted/20 py-0 shadow-none">
+                        <CardHeader className="p-4">
+                          <CardTitle className="text-base">
+                            Add email address
+                          </CardTitle>
                           <CardDescription>
-                            You'll need to verify this email address before it
-                            can be added to your account.
+                            You&apos;ll need to verify the new address before it
+                            can be used on this account.
                           </CardDescription>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className="px-4 pb-0">
                           <div className="space-y-2">
                             <Label htmlFor="new-email">Email address</Label>
                             <Input
                               id="new-email"
-                              placeholder="Enter your email address"
+                              placeholder="name@company.com"
                               value={newEmail}
                               onChange={(e) => setNewEmail(e.target.value)}
-                              onKeyDown={async (e) => {
-                                if (e.key === "Enter") {
-                                  const v = String(newEmail || "")
-                                    .trim()
-                                    .toLowerCase();
-                                  if (!v) return;
-                                  if (onAddEmail) await onAddEmail(v);
-                                  setAddingEmail(false);
-                                  setNewEmail("");
-                                }
-                              }}
                             />
                           </div>
                         </CardContent>
-                        <CardFooter className="justify-end gap-2">
+                        <CardFooter className="justify-end gap-2 p-4">
                           <Button
                             variant="ghost"
                             onClick={() => {
@@ -326,196 +699,257 @@ export const UserProfile = ({
                           </Button>
                           <Button
                             onClick={async () => {
-                              const v = String(newEmail || "")
+                              const value = String(newEmail || "")
                                 .trim()
                                 .toLowerCase();
-                              if (!v) return;
-                              if (onAddEmail) await onAddEmail(v);
+                              if (!value) return;
+                              if (onAddEmail) await onAddEmail(value);
                               setAddingEmail(false);
                               setNewEmail("");
                             }}
                           >
-                            Add
+                            Add email
                           </Button>
                         </CardFooter>
                       </Card>
-                    </div>
-                  ) : (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="text-xs"
-                      onClick={() => setAddingEmail(true)}
-                    >
-                      Add email
-                    </Button>
-                  )}
-                </div>
-              </div>
-            </div>
+                    ) : null}
+                  </div>
+                </SectionCard>
 
-            {/* Phone Number Section */}
-            {/* <div>
-              <h3 className="text-sm font-medium mb-3">Phone number</h3>
-              <div className="space-y-2.5">
-                <div className="flex items-center justify-between">
-                  <span>+1 (555) 123-4567</span>
-                  <Badge variant="outline" className="text-xs bg-gray-100 text-gray-700 hover:bg-gray-100">
-                    Primary
-                  </Badge>
-                </div>
-                <Button variant="ghost" size="sm" className="flex items-center text-gray-700">
-                  {renderIcon(PlusCircle)}
-                  Add phone number
-                </Button>
-              </div>
-            </div> */}
-
-            {/* Connected Accounts Section */}
-            <div>
-              <h3 className="text-sm font-medium mb-3 text-gray-900 dark:text-gray-100">
-                Connected accounts
-              </h3>
-              <div className="space-y-2.5">
-                <div
-                  className="flex items-center justify-between"
-                  key={user.provider}
+                <SectionCard
+                  title="Connected account"
+                  description="Identity provider currently linked to this account."
                 >
-                  <div className="flex items-center">
-                    <div className="mr-2">
-                      <span className="text-gray-900 dark:text-gray-100">
-                        {user.provider}
-                      </span>
+                  <div className="flex flex-col gap-2.5 rounded-lg border border-border/70 bg-background p-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-foreground">
+                        {user.provider || "Unknown provider"}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {primaryEmail}
+                      </p>
+                    </div>
+                    <Badge
+                      variant="outline"
+                      className="w-fit rounded-full bg-muted/60 px-3 py-1 text-xs"
+                    >
+                      Active connection
+                    </Badge>
+                  </div>
+                </SectionCard>
+              </div>
+            ) : null}
+
+            {activeTab === "mfa" ? (
+              <div className="space-y-4">
+                {enableTotpFlow ? (
+                  <SectionCard
+                    title="Set up authenticator app"
+                    description="Scan the QR code or use the secret manually, then enter the 6-digit code from your app."
+                  >
+                    <div className="space-y-4">
+                      {enableTotpFlow.qrCodeDataUrl ? (
+                        <div className="flex flex-col items-center gap-4 rounded-2xl border border-border/70 bg-muted/20 p-5">
+                          <div className="rounded-2xl border-2 border-border bg-white p-4 shadow-sm">
+                            <img
+                              src={`https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(enableTotpFlow.qrCodeDataUrl)}`}
+                              alt="TOTP QR Code"
+                              className="h-52 w-52"
+                            />
+                          </div>
+                        </div>
+                      ) : null}
+                      <div className="rounded-2xl border border-border/70 bg-muted/30 p-4">
+                        <p className="mb-2 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                          Manual setup key
+                        </p>
+                        <code className="break-all rounded-xl bg-background px-3 py-2 font-mono text-sm text-foreground">
+                          {enableTotpFlow.secret}
+                        </code>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="totp-code">
+                          Enter the 6-digit code from your app
+                        </Label>
+                        <div className="flex flex-col gap-2 sm:flex-row">
+                          <Input
+                            id="totp-code"
+                            placeholder="000000"
+                            value={totpCode}
+                            onChange={(e) =>
+                              setTotpCode(
+                                e.target.value.replace(/\D/g, "").slice(0, 6),
+                              )
+                            }
+                            maxLength={6}
+                            className="font-mono text-center tracking-[0.35em] sm:max-w-xs"
+                          />
+                          <Button
+                            onClick={() => void handleEnableTotp()}
+                            disabled={totpCode.length !== 6 || enablingTotp}
+                          >
+                            {enablingTotp ? "Verifying..." : "Verify and enable"}
+                          </Button>
+                          <Button
+                            variant="outline"
+                            onClick={() => {
+                              setEnableTotpFlow(null);
+                              setTotpCode("");
+                            }}
+                          >
+                            Cancel
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </SectionCard>
+                ) : null}
+
+                {showBackupCodes && displayedBackupCodes.length > 0 ? (
+                  <SectionCard
+                    title="Save your backup codes"
+                    description="Store these codes somewhere safe. Each code can be used once if you lose access to your authenticator."
+                  >
+                    <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+                      {displayedBackupCodes.map((code) => (
+                        <div
+                          key={code}
+                          className="rounded-xl border border-border/70 bg-background px-3 py-2"
+                        >
+                          <code className="font-mono text-sm">{code}</code>
+                        </div>
+                      ))}
+                    </div>
+                    <Button
+                      className="mt-4"
+                      variant="outline"
+                      onClick={() => setShowBackupCodes(false)}
+                    >
+                      I&apos;ve saved these codes
+                    </Button>
+                  </SectionCard>
+                ) : null}
+
+                <MfaStatusCard
+                  enabled={Boolean(totpStatus?.enabled)}
+                  generating={generatingSecret}
+                  onSetup={() => void handleGenerateSecret()}
+                  onRemove={
+                    onDisableTotp
+                      ? () => {
+                          setShowDisableTotp(true);
+                          setVerifyTotpCode("");
+                        }
+                      : undefined
+                  }
+                />
+
+                {totpStatus?.enabled && showDisableTotp ? (
+                  <div className="rounded-2xl border border-red-200/80 bg-red-50/70 p-4 dark:border-red-900/60 dark:bg-red-950/20">
+                    <p className="mb-3 text-sm text-muted-foreground">
+                      Enter your current TOTP code or a backup code to disable
+                      multifactor authentication.
+                    </p>
+                    <div className="flex flex-col gap-2 sm:flex-row">
+                      <Input
+                        placeholder="Enter code"
+                        value={verifyTotpCode}
+                        onChange={(e) =>
+                          setVerifyTotpCode(
+                            e.target.value.replace(/\D/g, "").slice(0, 8),
+                          )
+                        }
+                        className="font-mono text-center sm:max-w-xs"
+                      />
+                      <Button
+                        variant="destructive"
+                        onClick={() => void handleDisableTotp()}
+                        disabled={verifyTotpCode.length < 6 || disablingTotp}
+                      >
+                        {disablingTotp ? "Disabling..." : "Disable MFA"}
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          setShowDisableTotp(false);
+                          setVerifyTotpCode("");
+                        }}
+                      >
+                        Cancel
+                      </Button>
                     </div>
                   </div>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {user?.emails?.[0]?.value}
-                  </span>
-                </div>
+                ) : null}
+
+                <PasskeysPanel
+                  passkeys={passkeys}
+                  loading={passkeysLoading}
+                  onAddPasskey={onAddPasskey}
+                  onRemovePasskey={onRemovePasskey}
+                />
+
+                {totpStatus?.enabled ? (
+                  <BackupCodesRemainingCard
+                    remaining={totpStatus.backupCodesRemaining ?? 0}
+                  />
+                ) : null}
               </div>
-            </div>
+            ) : null}
+
+            {activeTab === "sessions" ? (
+              <SessionsPanel
+                sessions={sessions}
+                loading={sessionsLoading}
+                onRevokeSession={onRevokeSession}
+              />
+            ) : null}
+
+            {activeTab === "groups" ? (
+              <GroupsPanel groups={groups} loading={groupsLoading} />
+            ) : null}
+
+            {activeTab === "tokens" ? (
+              <TokensPanel
+                tokens={tokens}
+                loading={tokensLoading}
+                onCreateToken={onCreateToken}
+                onRevokeToken={onRevokeToken}
+              />
+            ) : null}
           </div>
-        ) : activeTab === "security" ? (
-          <div className="space-y-5 md:space-y-6">
-            {/* Password row */}
-            <div className="border rounded-md overflow-hidden">
-              <div className="flex items-center justify-between px-4 py-3">
-                <div className="text-sm text-gray-700 dark:text-gray-300">
-                  Password
-                </div>
-                <button className="text-sm text-indigo-600 hover:underline">
-                  Set password
-                </button>
-              </div>
-            </div>
+        </div>
+      </section>
 
-            {/* Passkeys row */}
-            <div className="border rounded-md overflow-hidden">
-              <div className="flex items-center justify-between px-4 py-3">
-                <div className="text-sm text-gray-700 dark:text-gray-300">
-                  Passkeys
-                </div>
-                <button className="text-sm text-indigo-600 hover:underline">
-                  +&nbsp;Add a passkey
-                </button>
-              </div>
-            </div>
-
-            {/* Two-step verification row */}
-            <div className="border rounded-md overflow-hidden">
-              <div className="flex items-center justify-between px-4 py-3">
-                <div className="text-sm text-gray-700 dark:text-gray-300">
-                  Two-step verification
-                </div>
-                <button className="text-sm text-indigo-600 hover:underline">
-                  +&nbsp;Add two-step verification
-                </button>
-              </div>
-            </div>
-
-            {/* Active devices list (scaffold) */}
-            <div className="border rounded-md overflow-hidden">
-              <div className="px-4 py-3 border-b text-sm font-medium text-gray-900 dark:text-gray-100">
-                Active devices
-              </div>
-              <div className="p-4 space-y-3">
-                <div className="text-sm">
-                  <div className="flex items-center gap-2">
-                    <span className="inline-block h-5 w-5 rounded-sm bg-gray-900 dark:bg-white" />
-                    <span className="font-medium">X11</span>
-                    <span className="text-xs rounded-md border px-2 py-0.5 text-gray-600 dark:text-gray-300">
-                      This device
-                    </span>
-                  </div>
-                  <div className="text-gray-600 dark:text-gray-400 mt-1">
-                    Firefox 142.0
-                  </div>
-                  <div className="text-gray-600 dark:text-gray-400">
-                    127.0.0.1 (Local), (Your City)
-                  </div>
-                  <div className="text-gray-600 dark:text-gray-400">
-                    Today at 7:08 PM
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Delete account */}
-            <div className="border rounded-md overflow-hidden">
-              <div className="flex items-center justify-between px-4 py-3">
-                <div className="text-sm text-gray-700 dark:text-gray-300">
-                  Delete account
-                </div>
-                <button className="text-sm text-red-600 hover:underline">
-                  Delete account
-                </button>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="space-y-5 md:space-y-6">
-            {/* Preferences */}
-            <div>
-              <h3 className="text-sm font-medium mb-3 text-gray-900 dark:text-gray-100">
-                Preferences
-              </h3>
-              <div className="space-y-3 text-sm">
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-700 dark:text-gray-300">
-                    Locale
-                  </span>
-                  <span className="text-gray-500 dark:text-gray-400">Auto</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-700 dark:text-gray-300">
-                    Theme
-                  </span>
-                  <span className="text-gray-500 dark:text-gray-400">
-                    System
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* <div className="absolute bottom-4 text-xs text-gray-500 flex items-center">
-        Secured by
-        <span className="ml-1 font-medium flex items-center">
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="mr-1"
-          >
-            <path d="M8 0L14.9282 4V12L8 16L1.07179 12V4L8 0Z" fill="#6C47FF" />
-          </svg>
-          Authdog
-        </span>
-      </div> */}
+      <nav
+        aria-label="Account sections"
+        className="z-30 shrink-0 border-t border-border/70 bg-background/95 pb-[env(safe-area-inset-bottom,0px)] backdrop-blur lg:hidden"
+      >
+        <div className="mx-auto grid max-w-2xl grid-cols-5 gap-0.5 px-1.5 py-1">
+          {accountTabs.map((tab) => {
+            const Icon = tab.icon;
+            const isActive = tab.id === activeTab;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => handleTabChange(tab.id)}
+                className={cn(
+                  "flex min-h-12 flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-medium transition-colors",
+                  isActive
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:bg-muted/50 hover:text-foreground",
+                )}
+              >
+                <Icon className="h-4 w-4 shrink-0" />
+                <span className="truncate">{tab.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </nav>
     </div>
   );
 };
+
+/** Alias for docs / drop-in Account usage. */
+export const Account = UserProfile;

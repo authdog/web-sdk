@@ -25,6 +25,7 @@ projects:
   express: 'packages/express'
   fastify: 'packages/fastify'
   react-native: 'packages/react-native'
+  chrome-extension: 'packages/chrome-extension'
   gatsby: 'packages/gatsby'
   redwood: 'packages/redwood'
   eslint-config: 'packages/eslint'

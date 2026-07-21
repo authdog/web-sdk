@@ -1,0 +1,54 @@
+{
+  "name": "@authdog/chrome-extension",
+  "version": "0.1.0",
+  "description": "Authdog SDK for Chrome extensions",
+  "source": "src/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/"
+  ],
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/authdog-labs/web-sdk.git",
+    "directory": "packages/chrome-extension"
+  },
+  "homepage": "https://github.com/authdog-labs/web-sdk/tree/main/packages/chrome-extension#readme",
+  "bugs": {
+    "url": "https://github.com/authdog-labs/web-sdk/issues"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "type-check": "tsc",
+    "clean": "rm -rf dist",
+    "build": "bun run clean && tsup"
+  },
+  "dependencies": {
+    "@authdog/node-commons": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0",
+    "@types/react": "^19.2.0",
+    "react": "^19.2.0",
+    "react-test-renderer": "^19.2.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.6"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
+}

@@ -1,5 +1,6 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "web-sdk",
@@ -21,7 +22,7 @@
     },
     "examples/angular": {
       "name": "@authdog-samples/angular",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "dependencies": {
         "@angular/common": "^20.3.25",
         "@angular/compiler": "^20.3.25",
@@ -44,7 +45,7 @@
     },
     "examples/astro": {
       "name": "astro-app",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "dependencies": {
         "@astrojs/node": "^10.1.4",
         "@authdog/astro": "workspace:*",
@@ -58,7 +59,7 @@
     },
     "examples/express": {
       "name": "@authdog-samples/express",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "dependencies": {
         "@authdog/express": "workspace:*",
         "express": "^5.0.0",
@@ -71,7 +72,7 @@
     },
     "examples/fastify": {
       "name": "@authdog-samples/fastify",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "dependencies": {
         "@authdog/fastify": "workspace:*",
         "fastify": "^5.0.0",
@@ -83,7 +84,7 @@
     },
     "examples/gatsby": {
       "name": "gatsby-app",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "dependencies": {
         "@authdog/gatsby": "workspace:*",
         "@authdog/react-elements": "workspace:*",
@@ -100,7 +101,7 @@
     },
     "examples/nextjs-app": {
       "name": "@authdog-samples/nextjs-app",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "dependencies": {
         "@authdog/nextjs-app": "workspace:*",
         "@authdog/react-elements": "workspace:*",
@@ -130,7 +131,7 @@
     },
     "examples/react-native": {
       "name": "@authdog-samples/react-native",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "dependencies": {
         "@authdog/react-native": "workspace:*",
         "expo": "~51.0.0",
@@ -147,7 +148,7 @@
     },
     "examples/redwood": {
       "name": "redwood-app",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "dependencies": {
         "@authdog/react-elements": "workspace:*",
         "@authdog/redwood": "workspace:*",
@@ -188,7 +189,7 @@
     },
     "examples/sveltekit": {
       "name": "sveltekit-app",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "dependencies": {
         "@authdog/sveltekit": "workspace:*",
       },
@@ -204,7 +205,7 @@
     },
     "examples/vue-app": {
       "name": "vue-app",
-      "version": "0.1.5",
+      "version": "0.1.6",
       "dependencies": {
         "@authdog/vue": "workspace:*",
         "vue": "^3.5.39",
@@ -220,7 +221,7 @@
     },
     "packages/angular": {
       "name": "@authdog/angular",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "dependencies": {
         "@authdog/node-commons": "workspace:*",
       },
@@ -245,7 +246,7 @@
     },
     "packages/astro": {
       "name": "@authdog/astro",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "dependencies": {
         "@authdog/node-commons": "workspace:*",
       },
@@ -262,9 +263,28 @@
         "astro": "^5.0.0 || ^6.0.0",
       },
     },
+    "packages/chrome-extension": {
+      "name": "@authdog/chrome-extension",
+      "version": "0.1.0",
+      "dependencies": {
+        "@authdog/node-commons": "workspace:*",
+      },
+      "devDependencies": {
+        "@types/node": "^26.0.0",
+        "@types/react": "^19.2.0",
+        "react": "^19.2.0",
+        "react-test-renderer": "^19.2.0",
+        "tsup": "^8.5.1",
+        "typescript": "^5.9.3",
+        "vitest": "^3.2.6",
+      },
+      "peerDependencies": {
+        "react": "^18.2.0 || ^19.0.0",
+      },
+    },
     "packages/eslint": {
       "name": "@authdog/eslint-config",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "dependencies": {
         "@eslint/js": "^9.17.0",
         "@next/eslint-plugin-next": "^16.0.0",
@@ -286,7 +306,7 @@
     },
     "packages/express": {
       "name": "@authdog/express",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "dependencies": {
         "@authdog/node-commons": "workspace:*",
       },
@@ -305,7 +325,7 @@
     },
     "packages/fastify": {
       "name": "@authdog/fastify",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "dependencies": {
         "@authdog/node-commons": "workspace:*",
         "fastify-plugin": "^6.0.0",
@@ -325,7 +345,7 @@
     },
     "packages/gatsby": {
       "name": "@authdog/gatsby",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "dependencies": {
         "@authdog/node-commons": "workspace:*",
       },
@@ -347,7 +367,7 @@
     },
     "packages/nextjs-app": {
       "name": "@authdog/nextjs-app",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "dependencies": {
         "@authdog/node-commons": "workspace:*",
         "server-only": "^0.0.1",
@@ -373,7 +393,7 @@
     },
     "packages/node-commons": {
       "name": "@authdog/node-commons",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "devDependencies": {
         "@types/node": "^26.0.0",
         "dotenv": "^17.0.0",
@@ -383,9 +403,31 @@
         "vitest": "^3.2.6",
       },
     },
+    "packages/react": {
+      "name": "@authdog/react",
+      "version": "0.1.0",
+      "dependencies": {
+        "@authdog/node-commons": "workspace:*",
+        "@authdog/react-elements": "workspace:*",
+      },
+      "devDependencies": {
+        "@types/node": "^26.0.0",
+        "@types/react": "^19.2.0",
+        "@types/react-dom": "^19.2.0",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0",
+        "tsup": "^8.5.1",
+        "typescript": "^5.9.3",
+        "vitest": "^3.2.6",
+      },
+      "peerDependencies": {
+        "react": "^18.2.0 || ^19.0.0",
+        "react-dom": "^18.2.0 || ^19.0.0",
+      },
+    },
     "packages/react-elements": {
       "name": "@authdog/react-elements",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "dependencies": {
         "@radix-ui/react-avatar": "^1.1.9",
         "@radix-ui/react-dialog": "^1.1.13",
@@ -437,7 +479,7 @@
     },
     "packages/react-native": {
       "name": "@authdog/react-native",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "dependencies": {
         "@authdog/node-commons": "workspace:*",
       },
@@ -458,7 +500,7 @@
     },
     "packages/redwood": {
       "name": "@authdog/redwood",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "dependencies": {
         "@authdog/node-commons": "workspace:*",
       },
@@ -479,7 +521,7 @@
     },
     "packages/remix": {
       "name": "@authdog/remix-node",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "dependencies": {
         "@authdog/node-commons": "workspace:*",
       },
@@ -500,7 +542,7 @@
     },
     "packages/sveltekit": {
       "name": "@authdog/sveltekit",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "dependencies": {
         "@authdog/node-commons": "workspace:*",
       },
@@ -520,7 +562,7 @@
     },
     "packages/tanstack-start": {
       "name": "@authdog/tanstack-start",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "dependencies": {
         "@authdog/node-commons": "workspace:*",
       },
@@ -545,11 +587,11 @@
     },
     "packages/typescript-config": {
       "name": "@authdog/typescript-config",
-      "version": "0.0.0",
+      "version": "0.0.1",
     },
     "packages/vue": {
       "name": "@authdog/vue",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "dependencies": {
         "@authdog/node-commons": "workspace:*",
       },
@@ -675,6 +717,8 @@
 
     "@authdog/astro": ["@authdog/astro@workspace:packages/astro"],
 
+    "@authdog/chrome-extension": ["@authdog/chrome-extension@workspace:packages/chrome-extension"],
+
     "@authdog/eslint-config": ["@authdog/eslint-config@workspace:packages/eslint"],
 
     "@authdog/express": ["@authdog/express@workspace:packages/express"],
@@ -686,6 +730,8 @@
     "@authdog/nextjs-app": ["@authdog/nextjs-app@workspace:packages/nextjs-app"],
 
     "@authdog/node-commons": ["@authdog/node-commons@workspace:packages/node-commons"],
+
+    "@authdog/react": ["@authdog/react@workspace:packages/react"],
 
     "@authdog/react-elements": ["@authdog/react-elements@workspace:packages/react-elements"],
 
@@ -4757,7 +4803,7 @@
 
     "react-error-overlay": ["react-error-overlay@6.1.0", "", {}, "sha512-SN/U6Ytxf1QGkw/9ve5Y+NxBbZM6Ht95tuXNMKs8EJyFa/Vy/+Co3stop3KBHARfn/giv+Lj1uUnTfOJ3moFEQ=="],
 
-    "react-is": ["react-is@17.0.2", "", {}, "sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w=="],
+    "react-is": ["react-is@19.2.7", "", {}, "sha512-kZFnouyVv7eP/Phmrlo9FK+zcAdriZJvzxXHF1Sl1P377WSGe2G/JxVolhTrB/jeV47lKImhNUsijjHAAbcl/A=="],
 
     "react-native": ["react-native@0.74.5", "", { "dependencies": { "@jest/create-cache-key-function": "^29.6.3", "@react-native-community/cli": "13.6.9", "@react-native-community/cli-platform-android": "13.6.9", "@react-native-community/cli-platform-ios": "13.6.9", "@react-native/assets-registry": "0.74.87", "@react-native/codegen": "0.74.87", "@react-native/community-cli-plugin": "0.74.87", "@react-native/gradle-plugin": "0.74.87", "@react-native/js-polyfills": "0.74.87", "@react-native/normalize-colors": "0.74.87", "@react-native/virtualized-lists": "0.74.87", "abort-controller": "^3.0.0", "anser": "^1.4.9", "ansi-regex": "^5.0.0", "base64-js": "^1.5.1", "chalk": "^4.0.0", "event-target-shim": "^5.0.1", "flow-enums-runtime": "^0.0.6", "invariant": "^2.2.4", "jest-environment-node": "^29.6.3", "jsc-android": "^250231.0.0", "memoize-one": "^5.0.0", "metro-runtime": "^0.80.3", "metro-source-map": "^0.80.3", "mkdirp": "^0.5.1", "nullthrows": "^1.1.1", "pretty-format": "^26.5.2", "promise": "^8.3.0", "react-devtools-core": "^5.0.0", "react-refresh": "^0.14.0", "react-shallow-renderer": "^16.15.0", "regenerator-runtime": "^0.13.2", "scheduler": "0.24.0-canary-efb381bbf-20230505", "stacktrace-parser": "^0.1.10", "whatwg-fetch": "^3.0.0", "ws": "^6.2.2", "yargs": "^17.6.2" }, "peerDependencies": { "@types/react": "^18.2.6", "react": "18.2.0" }, "optionalPeers": ["@types/react"], "bin": { "react-native": "cli.js" } }, "sha512-Bgg2WvxaGODukJMTZFTZBNMKVaROHLwSb8VAGEdrlvKwfb1hHg/3aXTUICYk7dwgAnb+INbGMwnF8yeAgIUmqw=="],
 
@@ -4776,6 +4822,8 @@
     "react-shallow-renderer": ["react-shallow-renderer@16.15.0", "", { "dependencies": { "object-assign": "^4.1.1", "react-is": "^16.12.0 || ^17.0.0 || ^18.0.0" }, "peerDependencies": { "react": "^16.0.0 || ^17.0.0 || ^18.0.0" } }, "sha512-oScf2FqQ9LFVQgA73vr86xl2NaOIX73rh+YFqcOp68CWj56tSfgtGKrEbyhCj0rSijyG9M1CYprTh39fBi5hzA=="],
 
     "react-style-singleton": ["react-style-singleton@2.2.3", "", { "dependencies": { "get-nonce": "^1.0.0", "tslib": "^2.0.0" }, "peerDependencies": { "@types/react": "*", "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc" }, "optionalPeers": ["@types/react"] }, "sha512-b6jSvxvVnyptAiLjbkWLE/lOnR4lfTtDAl+eUC7RZy+QQWc6wRzIV2CE6xBuMmDxc2qIihtDCZD5NPOFl7fRBQ=="],
+
+    "react-test-renderer": ["react-test-renderer@19.2.7", "", { "dependencies": { "react-is": "^19.2.7", "scheduler": "^0.27.0" }, "peerDependencies": { "react": "^19.2.7" } }, "sha512-U4TyPDJ9MsC8rFimXuJum8w40aPc9kbOZYO8Pc2/4A884i8hwJsMNA/JNyuOc/f2/37wHvk7HjpVl1V4re7Dig=="],
 
     "read": ["read@1.0.7", "", { "dependencies": { "mute-stream": "~0.0.4" } }, "sha512-rSOKNYUmaxy0om1BNjMN4ezNT6VKK+2xF4GBhc81mkH7L60i6dp8qPYrkndNLT3QPphoII3maL9PVC9XmhHwVQ=="],
 
@@ -5751,6 +5799,8 @@
 
     "@authdog-samples/react-native/typescript": ["typescript@5.3.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw=="],
 
+    "@authdog/chrome-extension/react": ["react@19.2.7", "", {}, "sha512-HNe9WslTbXmFK8o8cmwgAeJFSBvt1bPdHCVKtaaV+WlAN36mpT4hcRpwbf3fY56ar2oIXzsBpOAiIRHAdY0OlQ=="],
+
     "@authdog/eslint-config/@next/eslint-plugin-next": ["@next/eslint-plugin-next@16.2.10", "", { "dependencies": { "fast-glob": "3.3.1" } }, "sha512-Gs8D2m21VnJeFo9qvYIIqJH94frWerWYu41BprU1pLtRVF7PCQNLiFZZ3fG+iPuj3K83Cwv/rt+msLOy8Qgu3Q=="],
 
     "@authdog/eslint-config/eslint": ["eslint@9.39.4", "", { "dependencies": { "@eslint-community/eslint-utils": "^4.8.0", "@eslint-community/regexpp": "^4.12.1", "@eslint/config-array": "^0.21.2", "@eslint/config-helpers": "^0.4.2", "@eslint/core": "^0.17.0", "@eslint/eslintrc": "^3.3.5", "@eslint/js": "9.39.4", "@eslint/plugin-kit": "^0.4.1", "@humanfs/node": "^0.16.6", "@humanwhocodes/module-importer": "^1.0.1", "@humanwhocodes/retry": "^0.4.2", "@types/estree": "^1.0.6", "ajv": "^6.14.0", "chalk": "^4.0.0", "cross-spawn": "^7.0.6", "debug": "^4.3.2", "escape-string-regexp": "^4.0.0", "eslint-scope": "^8.4.0", "eslint-visitor-keys": "^4.2.1", "espree": "^10.4.0", "esquery": "^1.5.0", "esutils": "^2.0.2", "fast-deep-equal": "^3.1.3", "file-entry-cache": "^8.0.0", "find-up": "^5.0.0", "glob-parent": "^6.0.2", "ignore": "^5.2.0", "imurmurhash": "^0.1.4", "is-glob": "^4.0.0", "json-stable-stringify-without-jsonify": "^1.0.1", "lodash.merge": "^4.6.2", "minimatch": "^3.1.5", "natural-compare": "^1.4.0", "optionator": "^0.9.3" }, "peerDependencies": { "jiti": "*" }, "optionalPeers": ["jiti"], "bin": { "eslint": "bin/eslint.js" } }, "sha512-XoMjdBOwe/esVgEvLmNsD3IRHkm7fbKIUGvrleloJXUZgDHig2IPWNniv+GwjyJXzuNqVjlr5+4yVUZjycJwfQ=="],
@@ -5762,6 +5812,10 @@
     "@authdog/nextjs-app/react": ["react@19.2.7", "", {}, "sha512-HNe9WslTbXmFK8o8cmwgAeJFSBvt1bPdHCVKtaaV+WlAN36mpT4hcRpwbf3fY56ar2oIXzsBpOAiIRHAdY0OlQ=="],
 
     "@authdog/nextjs-app/react-dom": ["react-dom@19.2.7", "", { "dependencies": { "scheduler": "^0.27.0" }, "peerDependencies": { "react": "^19.2.7" } }, "sha512-t0BRVXvbiE/o20Hfw669rLbMCDWtYZLvmJigy2f0MxsXF+71pxhR3xOkspmsO8h3ZlNzyibAmtCa3l4lYKk6gQ=="],
+
+    "@authdog/react/react": ["react@19.2.7", "", {}, "sha512-HNe9WslTbXmFK8o8cmwgAeJFSBvt1bPdHCVKtaaV+WlAN36mpT4hcRpwbf3fY56ar2oIXzsBpOAiIRHAdY0OlQ=="],
+
+    "@authdog/react/react-dom": ["react-dom@19.2.7", "", { "dependencies": { "scheduler": "^0.27.0" }, "peerDependencies": { "react": "^19.2.7" } }, "sha512-t0BRVXvbiE/o20Hfw669rLbMCDWtYZLvmJigy2f0MxsXF+71pxhR3xOkspmsO8h3ZlNzyibAmtCa3l4lYKk6gQ=="],
 
     "@authdog/react-elements/eslint": ["eslint@9.39.4", "", { "dependencies": { "@eslint-community/eslint-utils": "^4.8.0", "@eslint-community/regexpp": "^4.12.1", "@eslint/config-array": "^0.21.2", "@eslint/config-helpers": "^0.4.2", "@eslint/core": "^0.17.0", "@eslint/eslintrc": "^3.3.5", "@eslint/js": "9.39.4", "@eslint/plugin-kit": "^0.4.1", "@humanfs/node": "^0.16.6", "@humanwhocodes/module-importer": "^1.0.1", "@humanwhocodes/retry": "^0.4.2", "@types/estree": "^1.0.6", "ajv": "^6.14.0", "chalk": "^4.0.0", "cross-spawn": "^7.0.6", "debug": "^4.3.2", "escape-string-regexp": "^4.0.0", "eslint-scope": "^8.4.0", "eslint-visitor-keys": "^4.2.1", "espree": "^10.4.0", "esquery": "^1.5.0", "esutils": "^2.0.2", "fast-deep-equal": "^3.1.3", "file-entry-cache": "^8.0.0", "find-up": "^5.0.0", "glob-parent": "^6.0.2", "ignore": "^5.2.0", "imurmurhash": "^0.1.4", "is-glob": "^4.0.0", "json-stable-stringify-without-jsonify": "^1.0.1", "lodash.merge": "^4.6.2", "minimatch": "^3.1.5", "natural-compare": "^1.4.0", "optionator": "^0.9.3" }, "peerDependencies": { "jiti": "*" }, "optionalPeers": ["jiti"], "bin": { "eslint": "bin/eslint.js" } }, "sha512-XoMjdBOwe/esVgEvLmNsD3IRHkm7fbKIUGvrleloJXUZgDHig2IPWNniv+GwjyJXzuNqVjlr5+4yVUZjycJwfQ=="],
 
@@ -6961,6 +7015,8 @@
 
     "pretty-format/@jest/types": ["@jest/types@26.6.2", "", { "dependencies": { "@types/istanbul-lib-coverage": "^2.0.0", "@types/istanbul-reports": "^3.0.0", "@types/node": "*", "@types/yargs": "^15.0.0", "chalk": "^4.0.0" } }, "sha512-fC6QCp7Sc5sX6g8Tvbmj4XUTbyrik0akgRy03yjXbQaBWWNWGE7SGtJk98m0N8nzegD/7SggrUlivxo5ax4KWQ=="],
 
+    "pretty-format/react-is": ["react-is@17.0.2", "", {}, "sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w=="],
+
     "promise-retry/retry": ["retry@0.12.0", "", {}, "sha512-9LkiTwjUh6rT555DtE9rTX+BKByPfrMzEAtnlEtdEwr3Nkffwiihqe2bWADg+OQRjt9gl6ICdmB/ZFDCGAtSow=="],
 
     "prompts/kleur": ["kleur@3.0.3", "", {}, "sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w=="],
@@ -6998,6 +7054,10 @@
     "react-server-dom-webpack/react": ["react@19.2.7", "", {}, "sha512-HNe9WslTbXmFK8o8cmwgAeJFSBvt1bPdHCVKtaaV+WlAN36mpT4hcRpwbf3fY56ar2oIXzsBpOAiIRHAdY0OlQ=="],
 
     "react-shallow-renderer/react-is": ["react-is@18.3.1", "", {}, "sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg=="],
+
+    "react-test-renderer/react": ["react@19.2.7", "", {}, "sha512-HNe9WslTbXmFK8o8cmwgAeJFSBvt1bPdHCVKtaaV+WlAN36mpT4hcRpwbf3fY56ar2oIXzsBpOAiIRHAdY0OlQ=="],
+
+    "react-test-renderer/scheduler": ["scheduler@0.27.0", "", {}, "sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q=="],
 
     "read/mute-stream": ["mute-stream@0.0.8", "", {}, "sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA=="],
 
@@ -7409,6 +7469,8 @@
 
     "@authdog/react-native/react-native/yargs": ["yargs@17.7.3", "", { "dependencies": { "cliui": "^8.0.1", "escalade": "^3.1.1", "get-caller-file": "^2.0.5", "require-directory": "^2.1.1", "string-width": "^4.2.3", "y18n": "^5.0.5", "yargs-parser": "^21.1.1" } }, "sha512-GZtjxm/J/4TSxuL3FNYjCmLktBTnIw/rVmKSIyKeYAZpmJB2ig9VauCC5xsa82GNKVKDAqpOn3KVzNt0zmrU0g=="],
 
+    "@authdog/react/react-dom/scheduler": ["scheduler@0.27.0", "", {}, "sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q=="],
+
     "@authdog/redwood/react-dom/scheduler": ["scheduler@0.27.0", "", {}, "sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q=="],
 
     "@babel/eslint-parser/eslint/@eslint/config-array": ["@eslint/config-array@0.21.2", "", { "dependencies": { "@eslint/object-schema": "^2.1.7", "debug": "^4.3.1", "minimatch": "^3.1.5" } }, "sha512-nJl2KGTlrf9GjLimgIru+V/mzgSK0ABCDQRvxw5BjURL7WfH5uoWmizbH7QB6MmnMBd8cIC9uceWnezL1VZWWw=="],
@@ -7816,6 +7878,8 @@
     "@storybook/addon-docs/react-dom/scheduler": ["scheduler@0.27.0", "", {}, "sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q=="],
 
     "@testing-library/dom/pretty-format/ansi-styles": ["ansi-styles@5.2.0", "", {}, "sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA=="],
+
+    "@testing-library/dom/pretty-format/react-is": ["react-is@17.0.2", "", {}, "sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w=="],
 
     "@ts-morph/common/fast-glob/glob-parent": ["glob-parent@5.1.2", "", { "dependencies": { "is-glob": "^4.0.1" } }, "sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow=="],
 

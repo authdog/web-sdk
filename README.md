@@ -7,7 +7,7 @@
 A curated monorepo of framework-native libraries that make it effortless to add
 secure sessions, user management, and auth UI to your React, Next.js, Remix,
 TanStack Start, Vue, Astro, SvelteKit, Gatsby, RedwoodJS, Angular, React Native,
-and Node (Express / Fastify) applications — plus backend SDKs for **Python** (FastAPI,
+Chrome extensions, and Node (Express / Fastify) applications — plus backend SDKs for **Python** (FastAPI,
 Flask, Django, Starlette, aiohttp), **Go** (Gin), **Rust** (axum, actix-web,
 Rocket, warp, poem), and **Kotlin** (Ktor) that speak the same session protocol.
 
@@ -34,22 +34,24 @@ Rocket, warp, poem), and **Kotlin** (Ktor) that speak the same session protocol.
 
 ## 📦 Packages
 
-| Package                                              | Version                                                                                                               | Description             | CI                                                                                                                                                                                                                      |
-| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`@authdog/react-elements`](packages/react-elements) | [![npm](https://img.shields.io/npm/v/@authdog/react-elements)](https://www.npmjs.com/package/@authdog/react-elements) | React UI components     | [![react-elements](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-react-elements.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-react-elements.yml) |
-| [`@authdog/nextjs-app`](packages/nextjs-app)         | [![npm](https://img.shields.io/npm/v/@authdog/nextjs-app)](https://www.npmjs.com/package/@authdog/nextjs-app)         | Next.js App Router SDK  | [![nextjs-app](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-nextjs-app.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-nextjs-app.yml)             |
-| [`@authdog/remix-node`](packages/remix)              | [![npm](https://img.shields.io/npm/v/@authdog/remix-node)](https://www.npmjs.com/package/@authdog/remix-node)         | Remix SDK               | [![remix-node](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-remix-node.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-remix-node.yml)             |
-| [`@authdog/tanstack-start`](packages/tanstack-start) | [![npm](https://img.shields.io/npm/v/@authdog/tanstack-start)](https://www.npmjs.com/package/@authdog/tanstack-start) | TanStack Start SDK      | [![tanstack-start](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-tanstack-start.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-tanstack-start.yml) |
-| [`@authdog/vue`](packages/vue)                       | [![npm](https://img.shields.io/npm/v/@authdog/vue)](https://www.npmjs.com/package/@authdog/vue)                       | Vue SDK                 | [![vue](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-vue.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-vue.yml)                                  |
-| [`@authdog/astro`](packages/astro)                   | [![npm](https://img.shields.io/npm/v/@authdog/astro)](https://www.npmjs.com/package/@authdog/astro)                   | Astro SDK               | [![astro](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-astro.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-astro.yml)                            |
-| [`@authdog/sveltekit`](packages/sveltekit)           | [![npm](https://img.shields.io/npm/v/@authdog/sveltekit)](https://www.npmjs.com/package/@authdog/sveltekit)           | SvelteKit SDK           | [![sveltekit](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-sveltekit.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-sveltekit.yml)                |
-| [`@authdog/gatsby`](packages/gatsby)                 | [![npm](https://img.shields.io/npm/v/@authdog/gatsby)](https://www.npmjs.com/package/@authdog/gatsby)                 | Gatsby SDK              | [![gatsby](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-gatsby.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-gatsby.yml)                         |
-| [`@authdog/redwood`](packages/redwood)               | [![npm](https://img.shields.io/npm/v/@authdog/redwood)](https://www.npmjs.com/package/@authdog/redwood)               | RedwoodJS SDK           | [![redwood](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-redwood.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-redwood.yml)                      |
-| [`@authdog/angular`](packages/angular)               | [![npm](https://img.shields.io/npm/v/@authdog/angular)](https://www.npmjs.com/package/@authdog/angular)               | Angular SDK             | [![angular](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-angular.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-angular.yml)                      |
-| [`@authdog/express`](packages/express)               | [![npm](https://img.shields.io/npm/v/@authdog/express)](https://www.npmjs.com/package/@authdog/express)               | Express SDK             | [![express](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-express.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-express.yml)                      |
-| [`@authdog/fastify`](packages/fastify)               | [![npm](https://img.shields.io/npm/v/@authdog/fastify)](https://www.npmjs.com/package/@authdog/fastify)               | Fastify SDK             | [![fastify](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-fastify.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-fastify.yml)                      |
-| [`@authdog/react-native`](packages/react-native)     | [![npm](https://img.shields.io/npm/v/@authdog/react-native)](https://www.npmjs.com/package/@authdog/react-native)     | React Native / Expo SDK | [![react-native](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-react-native.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-react-native.yml)       |
-| [`@authdog/node-commons`](packages/node-commons)     | [![npm](https://img.shields.io/npm/v/@authdog/node-commons)](https://www.npmjs.com/package/@authdog/node-commons)     | Shared Node utilities   | [![node-commons](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-node-commons.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-node-commons.yml)       |
+| Package                                                  | Version                                                                                                                   | Description             | CI                                                                                                                                                                                                                            |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`@authdog/react-elements`](packages/react-elements)     | [![npm](https://img.shields.io/npm/v/@authdog/react-elements)](https://www.npmjs.com/package/@authdog/react-elements)     | React UI components (Account, UserButton, …) | [![react-elements](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-react-elements.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-react-elements.yml)       |
+| [`@authdog/react`](packages/react)                       | [![npm](https://img.shields.io/npm/v/@authdog/react)](https://www.npmjs.com/package/@authdog/react)                       | Framework-agnostic React SDK (provider, hooks, AccountButton) | — |
+| [`@authdog/nextjs-app`](packages/nextjs-app)             | [![npm](https://img.shields.io/npm/v/@authdog/nextjs-app)](https://www.npmjs.com/package/@authdog/nextjs-app)             | Next.js App Router SDK  | [![nextjs-app](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-nextjs-app.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-nextjs-app.yml)                   |
+| [`@authdog/remix-node`](packages/remix)                  | [![npm](https://img.shields.io/npm/v/@authdog/remix-node)](https://www.npmjs.com/package/@authdog/remix-node)             | Remix SDK               | [![remix-node](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-remix-node.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-remix-node.yml)                   |
+| [`@authdog/tanstack-start`](packages/tanstack-start)     | [![npm](https://img.shields.io/npm/v/@authdog/tanstack-start)](https://www.npmjs.com/package/@authdog/tanstack-start)     | TanStack Start SDK      | [![tanstack-start](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-tanstack-start.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-tanstack-start.yml)       |
+| [`@authdog/vue`](packages/vue)                           | [![npm](https://img.shields.io/npm/v/@authdog/vue)](https://www.npmjs.com/package/@authdog/vue)                           | Vue SDK                 | [![vue](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-vue.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-vue.yml)                                        |
+| [`@authdog/astro`](packages/astro)                       | [![npm](https://img.shields.io/npm/v/@authdog/astro)](https://www.npmjs.com/package/@authdog/astro)                       | Astro SDK               | [![astro](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-astro.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-astro.yml)                                  |
+| [`@authdog/sveltekit`](packages/sveltekit)               | [![npm](https://img.shields.io/npm/v/@authdog/sveltekit)](https://www.npmjs.com/package/@authdog/sveltekit)               | SvelteKit SDK           | [![sveltekit](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-sveltekit.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-sveltekit.yml)                      |
+| [`@authdog/gatsby`](packages/gatsby)                     | [![npm](https://img.shields.io/npm/v/@authdog/gatsby)](https://www.npmjs.com/package/@authdog/gatsby)                     | Gatsby SDK              | [![gatsby](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-gatsby.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-gatsby.yml)                               |
+| [`@authdog/redwood`](packages/redwood)                   | [![npm](https://img.shields.io/npm/v/@authdog/redwood)](https://www.npmjs.com/package/@authdog/redwood)                   | RedwoodJS SDK           | [![redwood](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-redwood.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-redwood.yml)                            |
+| [`@authdog/angular`](packages/angular)                   | [![npm](https://img.shields.io/npm/v/@authdog/angular)](https://www.npmjs.com/package/@authdog/angular)                   | Angular SDK             | [![angular](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-angular.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-angular.yml)                            |
+| [`@authdog/express`](packages/express)                   | [![npm](https://img.shields.io/npm/v/@authdog/express)](https://www.npmjs.com/package/@authdog/express)                   | Express SDK             | [![express](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-express.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-express.yml)                            |
+| [`@authdog/fastify`](packages/fastify)                   | [![npm](https://img.shields.io/npm/v/@authdog/fastify)](https://www.npmjs.com/package/@authdog/fastify)                   | Fastify SDK             | [![fastify](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-fastify.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-fastify.yml)                            |
+| [`@authdog/react-native`](packages/react-native)         | [![npm](https://img.shields.io/npm/v/@authdog/react-native)](https://www.npmjs.com/package/@authdog/react-native)         | React Native / Expo SDK | [![react-native](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-react-native.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-react-native.yml)             |
+| [`@authdog/chrome-extension`](packages/chrome-extension) | [![npm](https://img.shields.io/npm/v/@authdog/chrome-extension)](https://www.npmjs.com/package/@authdog/chrome-extension) | Chrome Extension SDK    | [![chrome-extension](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-chrome-extension.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-chrome-extension.yml) |
+| [`@authdog/node-commons`](packages/node-commons)         | [![npm](https://img.shields.io/npm/v/@authdog/node-commons)](https://www.npmjs.com/package/@authdog/node-commons)         | Shared Node utilities   | [![node-commons](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-node-commons.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-node-commons.yml)             |
 
 ### Backend SDKs for other languages
 
@@ -117,6 +119,9 @@ bun add @authdog/fastify
 
 # React Native / Expo
 bun add @authdog/react-native
+
+# Chrome Extension
+bun add @authdog/chrome-extension
 ```
 
 Backend SDKs for other languages install with their native package managers:
@@ -138,27 +143,28 @@ cargo add authdog-axum    # or authdog-actix / authdog-rocket / authdog-warp / a
 Provide your Authdog public key (`pk_…`). Each framework reads it from a different
 place — use the variable that matches your package:
 
-| Framework           | Variable                         | Where it's read                             |
-| ------------------- | -------------------------------- | ------------------------------------------- |
-| Next.js (client)    | `NEXT_PUBLIC_PK_AUTHDOG`         | Exposed to the browser by Next.js           |
-| Next.js (server)    | `PK_AUTHDOG`                     | Server-only (logout, etc.)                  |
-| Remix               | `PK_AUTHDOG`                     | Loaders / actions                           |
-| TanStack Start      | `PK_AUTHDOG`                     | Server functions / route loaders            |
-| Express (backend)   | `PK_AUTHDOG`                     | `createAuthdog({ publicKey })`              |
-| Fastify (backend)   | `AUTHDOG_PK`                     | `authdogPlugin({ publicKey })`              |
-| Vue                 | `VITE_AUTHDOG_PUBLIC_KEY`        | Vite-exposed (use the `VITE_` prefix)       |
-| Astro               | `PUBLIC_AUTHDOG_PUBLIC_KEY`      | Exposed via Astro's `PUBLIC_` prefix        |
-| SvelteKit           | `PUBLIC_AUTHDOG_PUBLIC_KEY`      | Exposed via SvelteKit's `PUBLIC_` prefix    |
-| Gatsby (client)     | `GATSBY_AUTHDOG_PUBLIC_KEY`      | Exposed via Gatsby's `GATSBY_` prefix       |
-| Gatsby (functions)  | `PK_AUTHDOG`                     | Gatsby Functions (server-only)              |
-| RedwoodJS (web)     | `REDWOOD_ENV_AUTHDOG_PUBLIC_KEY` | Exposed via Redwood's `REDWOOD_ENV_` prefix |
-| RedwoodJS (api)     | `PK_AUTHDOG`                     | API functions / services (server-only)      |
-| React Native / Expo | `EXPO_PUBLIC_PK_AUTHDOG`         | Exposed to the app by Expo                  |
-| Angular             | —                                | Passed directly to `provideAuthdog(...)`    |
-| Python (all)        | `PK_AUTHDOG`                     | `Authdog(public_key=...)`                   |
-| Go (Gin)            | `PK_AUTHDOG`                     | `authdog.New(authdog.Config{PublicKey})`    |
-| Rust (all)          | `PK_AUTHDOG`                     | `Authdog::new(...)`                         |
-| Kotlin (Ktor)       | `PK_AUTHDOG`                     | `Authdog(System.getenv("PK_AUTHDOG"))`      |
+| Framework           | Variable                           | Where it's read                             |
+| ------------------- | ---------------------------------- | ------------------------------------------- |
+| Next.js (client)    | `NEXT_PUBLIC_PK_AUTHDOG`           | Exposed to the browser by Next.js           |
+| Next.js (server)    | `PK_AUTHDOG`                       | Server-only (logout, etc.)                  |
+| Remix               | `PK_AUTHDOG`                       | Loaders / actions                           |
+| TanStack Start      | `PK_AUTHDOG`                       | Server functions / route loaders            |
+| Express (backend)   | `PK_AUTHDOG`                       | `createAuthdog({ publicKey })`              |
+| Fastify (backend)   | `AUTHDOG_PK`                       | `authdogPlugin({ publicKey })`              |
+| Vue                 | `VITE_AUTHDOG_PUBLIC_KEY`          | Vite-exposed (use the `VITE_` prefix)       |
+| Astro               | `PUBLIC_AUTHDOG_PUBLIC_KEY`        | Exposed via Astro's `PUBLIC_` prefix        |
+| SvelteKit           | `PUBLIC_AUTHDOG_PUBLIC_KEY`        | Exposed via SvelteKit's `PUBLIC_` prefix    |
+| Gatsby (client)     | `GATSBY_AUTHDOG_PUBLIC_KEY`        | Exposed via Gatsby's `GATSBY_` prefix       |
+| Gatsby (functions)  | `PK_AUTHDOG`                       | Gatsby Functions (server-only)              |
+| RedwoodJS (web)     | `REDWOOD_ENV_AUTHDOG_PUBLIC_KEY`   | Exposed via Redwood's `REDWOOD_ENV_` prefix |
+| RedwoodJS (api)     | `PK_AUTHDOG`                       | API functions / services (server-only)      |
+| React Native / Expo | `EXPO_PUBLIC_PK_AUTHDOG`           | Exposed to the app by Expo                  |
+| Chrome Extension    | `PLASMO_PUBLIC_AUTHDOG_PUBLIC_KEY` | Exposed to the extension by Plasmo          |
+| Angular             | —                                  | Passed directly to `provideAuthdog(...)`    |
+| Python (all)        | `PK_AUTHDOG`                       | `Authdog(public_key=...)`                   |
+| Go (Gin)            | `PK_AUTHDOG`                       | `authdog.New(authdog.Config{PublicKey})`    |
+| Rust (all)          | `PK_AUTHDOG`                       | `Authdog::new(...)`                         |
+| Kotlin (Ktor)       | `PK_AUTHDOG`                       | `Authdog(System.getenv("PK_AUTHDOG"))`      |
 
 ```bash
 # Next.js (App Router)
@@ -397,9 +403,7 @@ Read auth state from the signals-based `AuthdogService`:
 import { Component, inject } from "@angular/core";
 import { AuthdogService } from "@authdog/angular";
 
-@Component({
-  /* … */
-})
+@Component({/* … */})
 export class ProfileComponent {
   readonly auth = inject(AuthdogService);
   // auth.isLoading(), auth.token(), auth.user() — signals
@@ -544,6 +548,27 @@ import { useSignIn, useRedirectHandler } from "@authdog/react-native";
 // validates the returned token and persists it via your secure storage.
 ```
 
+### Chrome Extension
+
+Use Chrome's Identity API for hosted authentication and persist the session in
+`chrome.storage.local`:
+
+```tsx
+import {
+  AuthdogProvider,
+  SignedIn,
+  SignedOut,
+  SignInButton,
+} from "@authdog/chrome-extension";
+
+<AuthdogProvider publicKey={process.env.PLASMO_PUBLIC_AUTHDOG_PUBLIC_KEY!}>
+  <SignedOut>
+    <SignInButton />
+  </SignedOut>
+  <SignedIn>Signed in</SignedIn>
+</AuthdogProvider>;
+```
+
 ### Runnable examples
 
 Each framework ships a runnable demo under [`examples/`](examples). Set `PK_AUTHDOG` (or the framework's public-key variable) and start one with moon:
@@ -612,6 +637,7 @@ web-sdk/
 │   ├── express/          # Express SDK
 │   ├── fastify/          # Fastify SDK
 │   ├── react-native/     # React Native / Expo SDK
+│   ├── chrome-extension/ # Chrome Extension SDK
 │   ├── node-commons/     # Shared Node utilities
 │   ├── python/           # Python SDK (FastAPI, Flask, Django, Starlette, aiohttp) — authdog-fastapi
 │   ├── go/               # Go SDK (Gin)

@@ -1,0 +1,36 @@
+import { Meta, Canvas, Markdown } from "@storybook/addon-docs/blocks";
+
+<Meta title="Introduction" />
+
+# Authdog React Elements
+
+Drop-in identity UI for React apps. Install once, theme with Tailwind, and compose Account, Navbar, and UserButton into your product.
+
+## Install
+
+```bash
+bun add @authdog/react-elements
+```
+
+```tsx
+import "@authdog/react-elements/styles.css"
+import { Account, UserButton, Navbar } from "@authdog/react-elements"
+```
+
+## Catalog
+
+| Group | Components |
+| --- | --- |
+| **Core** | `Account` / `UserProfile`, `UserButton`, `UserDropdown`, `Navbar`, `SectionCard`, `PlaceholderAlert`, `ClientOnly` |
+| **Flows** | `TOTPValidator`, `LoginForm` (demo stub) |
+| **UI** | `Button`, `Badge`, `Avatar`, `Card`, `Input`, `Label`, `Alert`, `Separator`, `Sheet`, `ThemeToggle`, `DropdownMenu` |
+
+## Account shell
+
+`Account` is the full manage-account surface (Profile / MFA / Sessions / Groups / Tokens). It is presentational — pass user data and callbacks from your host app or `@authdog/react`.
+
+See **Core → Account** for the live demo matching the production console layout.
+
+## Framework SDK
+
+For session provider + sign-in redirect + `AccountButton`, use [`@authdog/react`](https://github.com/authdog/web-sdk/tree/main/packages/react) on top of these elements.
