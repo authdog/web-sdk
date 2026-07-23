@@ -1,0 +1,56 @@
+{
+    "name": "@authdog/koa",
+    "version": "0.3.0",
+    "description": "Authdog Koa SDK",
+    "source": "src/index.ts",
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js"
+        }
+    },
+    "files": [
+        "dist/"
+    ],
+    "sideEffects": false,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/authdog-labs/web-sdk.git",
+        "directory": "packages/koa"
+    },
+    "homepage": "https://github.com/authdog-labs/web-sdk/tree/main/packages/koa#readme",
+    "bugs": {
+        "url": "https://github.com/authdog-labs/web-sdk/issues"
+    },
+    "scripts": {
+        "format": "prettier --config .prettierrc.json --write \"**/*.{ts,md}\"",
+        "type-check": "tsc",
+        "clean": "rm -rf dist",
+        "test": "vitest run",
+        "build": "bun run clean && tsup",
+        "ship": "bun run build && bun publish --access public"
+    },
+    "dependencies": {
+        "@authdog/node-commons": "workspace:*"
+    },
+    "peerDependencies": {
+        "koa": "^2.15.0 || ^3.0.0"
+    },
+    "devDependencies": {
+        "@types/koa": "^2.15.0",
+        "@types/node": "^26.0.0",
+        "koa": "^2.15.3",
+        "prettier": "^3.4.2",
+        "tsup": "^8.3.5",
+        "typescript": "^5.7.2",
+        "vitest": "^3.2.6"
+    },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/",
+        "access": "public"
+    }
+}

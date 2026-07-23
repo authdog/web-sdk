@@ -8,6 +8,12 @@ const meta = {
   title: "UI/Badge",
   component: Badge,
   tags: ["autodocs"],
+  argTypes: {
+    variant: {
+      control: "select",
+      options: ["default", "secondary", "destructive", "outline"],
+    },
+  },
 } satisfies Meta<typeof Badge>;
 
 export default meta;
