@@ -13,7 +13,7 @@ import {
   demoTokens,
   demoUser,
 } from "../_fixtures";
-
+import { HostedPreview } from "../_hosted";
 
 const defaultArgs = {
   loading: false,
@@ -46,7 +46,7 @@ const defaultArgs = {
 };
 
 const meta = {
-  title: "Core/Account",
+  title: "User Authentication/UserProfile",
   component: Account,
   tags: ["autodocs"],
   parameters: {
@@ -54,7 +54,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Full Account management shell: Profile, MFA, Sessions, Groups, and Tokens. Presentational — supply data and async callbacks from the host.",
+          "`<UserProfile />` — full account management shell: Profile, MFA, Sessions, Groups, and Tokens. Exported as `UserProfile` / `Account`; presentational — supply data and async callbacks from the host. Also available as the hosted `/account` identity screen.",
       },
     },
   },
@@ -139,4 +139,13 @@ export const WithUserButton: Story = {
       </div>
     );
   },
+};
+
+/** The hosted `/account` identity screen — same preview embedded on authdog.com. */
+export const Hosted: Story = {
+  args: defaultArgs,
+  parameters: { layout: "centered" },
+  render: () => (
+    <HostedPreview route="account" extra="&demo=true" title="<UserProfile />" />
+  ),
 };

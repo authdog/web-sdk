@@ -29,6 +29,29 @@ export type {
   UserButtonAccount,
 } from "./components/core/user-account-utils";
 export { PlaceholderAlert } from "./components/core/placeholder-alert";
+
+export { Eyebrow } from "./components/marketing/eyebrow";
+export type { EyebrowProps } from "./components/marketing/eyebrow";
+export { GradientText } from "./components/marketing/gradient-text";
+export {
+  GlassyCtaButton,
+  glassyCtaButtonVariants,
+} from "./components/marketing/glassy-cta-button";
+export type { GlassyCtaButtonProps } from "./components/marketing/glassy-cta-button";
+export {
+  BentoGrid,
+  BentoCard,
+  BentoCardTitle,
+  BentoCardDescription,
+} from "./components/marketing/bento";
+export { ShowcasePanel } from "./components/marketing/showcase-panel";
+export { GradientCtaBanner } from "./components/marketing/gradient-cta-banner";
+export type { GradientCtaBannerProps } from "./components/marketing/gradient-cta-banner";
+export { FloatingNavbar } from "./components/marketing/floating-navbar";
+export type {
+  FloatingNavbarProps,
+  FloatingNavbarLink,
+} from "./components/marketing/floating-navbar";
 export { TOTPValidator } from "./components/flow/totp-validator";
 export { SectionCard } from "./components/core/section-card";
 

@@ -38,6 +38,9 @@ dev-react-native:
 ui:
     moon run react-elements:storybook
 
+storybook:
+    moon run react-elements:storybook
+
 # ── Build ────────────────────────────────────────────────────
 build:
     moon run node-commons:build nextjs-app:build react-elements:build remix-node:build tanstack-start:build vue:build astro:build sveltekit:build gatsby:build redwood:build

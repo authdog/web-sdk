@@ -19,17 +19,39 @@ import { Account, UserButton, Navbar } from "@authdog/react-elements"
 
 ## Catalog
 
+The identity component catalog mirrors the embedded-components section on
+authdog.com — same categories, same fifteen components:
+
+| Category | Components |
+| --- | --- |
+| **User Authentication** | `<SignUp />`, `<SignIn />`, `<MagicLink />`, `<UserProfile />`, `<Consent />` |
+| **MFA** | `<MultiFactor />` |
+| **Organizations** | `<OrganizationSwitcher />`, `<OrganizationProfile />`, `<CreateOrganization />`, `<OrganizationList />` |
+| **Enterprise** | `<EnterpriseSSO />`, `<DomainVerification />`, `<AdminPortal />` |
+| **Members & Roles** | `<MemberInvitations />`, `<RoleManagement />` |
+
+`<UserProfile />` (`Account`) and `<MultiFactor />` (`TOTPValidator`) are
+React components exported from this package and rendered live. The other
+entries are hosted identity screens served by the Authdog identity app —
+their stories embed the same live previews the marketing site uses.
+
+Building blocks shipped alongside the catalog:
+
 | Group | Components |
 | --- | --- |
 | **Core** | `Account` / `UserProfile`, `UserButton`, `UserDropdown`, `Navbar`, `SectionCard`, `PlaceholderAlert`, `ClientOnly` |
-| **Flows** | `TOTPValidator`, `LoginForm` (demo stub) |
+| **Marketing** | `Eyebrow`, `GradientText`, `GlassyCtaButton`, `BentoGrid` / `BentoCard`, `ShowcasePanel`, `GradientCtaBanner`, `FloatingNavbar` |
 | **UI** | `Button`, `Badge`, `Avatar`, `Card`, `Input`, `Label`, `Alert`, `Separator`, `Sheet`, `ThemeToggle`, `DropdownMenu` |
+
+The **Marketing** group mirrors the building blocks of the Authdog landing
+page (authdog.com) — same brand purple `#6c47ff`, pill CTAs, bento feature
+cards, and glassy floating nav.
 
 ## Account shell
 
 `Account` is the full manage-account surface (Profile / MFA / Sessions / Groups / Tokens). It is presentational — pass user data and callbacks from your host app or `@authdog/react`.
 
-See **Core → Account** for the live demo matching the production console layout.
+See **User Authentication → UserProfile** for the live demo matching the production console layout.
 
 ## Framework SDK
 

@@ -614,6 +614,7 @@ The repo ships a [`Justfile`](Justfile) for ergonomic shortcuts:
 | `just dev-next`  | Run the Next.js demo app                |
 | `just dev-remix` | Run the Remix demo app                  |
 | `just ui`        | Launch the Storybook component explorer |
+| `just storybook` | Alias for `just ui`                     |
 | `just ci`        | Run the full CI pipeline locally        |
 
 Prefer raw scripts? `bun run build`, `bun run dev`, `bun run test`, `bun run lint`, and `bun run check-types` all work via moon.
