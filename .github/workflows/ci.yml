@@ -40,16 +40,16 @@ jobs:
       # Scan every workspace package against the vulnerability database and fail
       # on high/critical advisories. Lower --audit-level to "moderate" to tighten.
       #
-      # Most advisories are cleared at the source: next bumped to 16.x, astro to 6.x,
-      # and root `overrides` pin vite, @remix-run/server-runtime, @remix-run/router
-      # and valibot to fixed versions (see root package.json).
+      # Most advisories are cleared at the source: next bumped to 16.2.12, astro to
+      # 6.x/7.x, Angular examples bumped to 20.3.29, and root `overrides` pin
+      # vite, js-yaml, nanoid, postcss, sharp, ip-address, brace-expansion, fast-uri,
+      # @remix-run/server-runtime, @remix-run/router and valibot to fixed versions
+      # (see root package.json).
       #
       # --ignore entries are the residue we cannot resolve under the current
       # (safe-only) upgrade policy. Each is dev/build-time or example-app only and
       # does NOT affect the published @authdog/* runtime packages. Revisit when the
       # corresponding major upgrade lands (Dependabot will open the PRs):
-      #   GHSA-48r7-hpm6-gfxm / GHSA-39pv-4j6c-2g6v  @angular/common  -> needs Angular 19.2.25+
-      #   GHSA-rgjc-h3x7-9mwg                         @angular/core    -> needs Angular 19.2.25+
       #   GHSA-5xrq-8626-4rwp (critical)              vitest UI server -> needs vitest 3.2.6+ (UI unused here)
       #   GHSA-rxv8-25v2-qmq8                         turbo-stream     -> @remix-run/react@2.17.5 hard-pins
       #     turbo-stream 2.x (examples/remix); turbo-stream 3.x ships only with React Router 7, so this
@@ -58,18 +58,27 @@ jobs:
       #   GHSA-ph9p-34f9-6g65                         tmp (0.0.33)     -> gatsby build tooling (examples/gatsby)
       #   GHSA-r5fr-rjxr-66jc                         lodash (4.17.23) -> transitive build/dev tooling across
       #     frameworks (gatsby, next, remix, react-native, storybook); no safe-only fixed version yet.
-      #   GHSA-wf6x-7x77-mvgw                         immutable (3.7.6) -> build tooling (gatsby, next, @angular/build, vite)
-      #     These four are dev/build/example-only and are NOT in any published @authdog/* runtime package
-      #     (whose deps are minimal); revisit when the frameworks bump their transitive deps.
+      #   GHSA-wf6x-7x77-mvgw / GHSA-xvcm-6775-5m9r /
+      #   GHSA-v56q-mh7h-f735                         immutable (3.7.6) -> @ardatan/relay-compiler
+      #     (react-native/expo) hard-pins "~3.7.6"; the fixed 4.x/5.x line is used everywhere else via
+      #     root overrides-equivalent resolution, this one dev-only pin cannot be bumped without a
+      #     relay-compiler major upgrade.
+      #   GHSA-w3rx-r6r6-pgpr / GHSA-5p2g-fcmc-qvqq   image-size (2.0.2) -> react-native build tooling
+      #     (examples/react-native); 2.0.2 is the latest published release and is still in the
+      #     vulnerable range - no fixed version exists upstream yet.
+      #   These entries are dev/build/example-only and are NOT in any published @authdog/* runtime
+      #   package (whose deps are minimal); revisit when the frameworks bump their transitive deps or
+      #   upstream ships a fix.
       - name: bun audit
         run: |
           bun audit --audit-level=high \
-            --ignore GHSA-48r7-hpm6-gfxm \
-            --ignore GHSA-39pv-4j6c-2g6v \
-            --ignore GHSA-rgjc-h3x7-9mwg \
             --ignore GHSA-5xrq-8626-4rwp \
             --ignore GHSA-rxv8-25v2-qmq8 \
             --ignore GHSA-5c6j-r48x-rmvq \
             --ignore GHSA-ph9p-34f9-6g65 \
             --ignore GHSA-r5fr-rjxr-66jc \
-            --ignore GHSA-wf6x-7x77-mvgw
+            --ignore GHSA-wf6x-7x77-mvgw \
+            --ignore GHSA-xvcm-6775-5m9r \
+            --ignore GHSA-v56q-mh7h-f735 \
+            --ignore GHSA-w3rx-r6r6-pgpr \
+            --ignore GHSA-5p2g-fcmc-qvqq
