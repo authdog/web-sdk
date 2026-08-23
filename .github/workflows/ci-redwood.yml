@@ -11,6 +11,7 @@ on:
     paths:
       - "packages/redwood/**"
       - ".github/workflows/ci-redwood.yml"
+  workflow_dispatch:
 
 jobs:
   test:

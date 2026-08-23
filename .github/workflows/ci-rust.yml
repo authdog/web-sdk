@@ -11,6 +11,7 @@ on:
     paths:
       - "packages/rust/**"
       - ".github/workflows/ci-rust.yml"
+  workflow_dispatch:
 
 jobs:
   test:

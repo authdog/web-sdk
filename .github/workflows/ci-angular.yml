@@ -11,6 +11,7 @@ on:
     paths:
       - "packages/angular/**"
       - ".github/workflows/ci-angular.yml"
+  workflow_dispatch:
 
 jobs:
   test:
