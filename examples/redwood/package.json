@@ -1,6 +1,6 @@
 {
   "name": "redwood-app",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "dev": "echo 'Copy api/ + web/ into a RedwoodJS app and run: yarn rw dev' && exit 0",

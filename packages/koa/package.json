@@ -1,6 +1,6 @@
 {
     "name": "@authdog/koa",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "description": "Authdog Koa SDK",
     "source": "src/index.ts",
     "main": "./dist/index.js",

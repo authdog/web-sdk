@@ -1,6 +1,6 @@
 {
   "name": "@authdog/chrome-extension",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Authdog SDK for Chrome extensions",
   "source": "src/index.ts",
   "main": "./dist/index.js",
