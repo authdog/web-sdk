@@ -12,7 +12,7 @@ categories = ["authentication", "web-programming"]
 
 [dependencies]
 authdog-core.workspace = true
-warp = "0.3"
+warp = "0.4"
 reqwest.workspace = true
 serde_json.workspace = true
 
