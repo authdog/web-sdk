@@ -11,6 +11,7 @@ on:
     paths:
       - "packages/react-native/**"
       - ".github/workflows/ci-react-native.yml"
+  workflow_dispatch:
 
 jobs:
   test:

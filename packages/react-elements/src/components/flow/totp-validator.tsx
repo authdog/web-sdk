@@ -145,25 +145,21 @@ export const TOTPValidator = ({ onValidate }: TOTPValidatorProps) => {
   if (success) {
     return (
       <div className="max-w-md mx-auto">
-        <Card className="border-green-200 bg-green-50">
+        <Card className="border-emerald-200 bg-emerald-50 dark:border-emerald-900/60 dark:bg-emerald-950/20">
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
-              <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-                <CheckCircle className="w-8 h-8 text-green-600" />
+              <div className="mx-auto w-16 h-16 bg-emerald-100 dark:bg-emerald-500/10 rounded-full flex items-center justify-center">
+                <CheckCircle className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-green-900">
+                <h3 className="text-lg font-semibold text-emerald-900 dark:text-emerald-200">
                   Verification Successful!
                 </h3>
-                <p className="text-sm text-green-700 mt-1">
+                <p className="text-sm text-emerald-700 dark:text-emerald-300 mt-1">
                   Your TOTP code has been validated.
                 </p>
               </div>
-              <Button
-                onClick={clearCode}
-                variant="outline"
-                className="bg-white"
-              >
+              <Button onClick={clearCode} variant="outline">
                 Verify Another Code
               </Button>
             </div>
@@ -179,8 +175,8 @@ export const TOTPValidator = ({ onValidate }: TOTPValidatorProps) => {
         <CardContent className="pt-6">
           <div className="text-center space-y-6">
             <div>
-              <div className="mx-auto w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <Shield className="w-6 h-6 text-blue-600" />
+              <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                <Shield className="w-6 h-6 text-primary" />
               </div>
               <h3 className="text-lg font-semibold">Enter Verification Code</h3>
               <p className="text-sm text-muted-foreground mt-1">
@@ -191,33 +187,30 @@ export const TOTPValidator = ({ onValidate }: TOTPValidatorProps) => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="flex justify-center gap-2">
                 {code.map((digit, index) => (
-                  <Card
+                  <div
                     key={index}
-                    className="w-12 h-14 border-2 focus-within:border-blue-500 transition-colors"
+                    className={`w-12 h-12 rounded-lg border bg-card flex items-center justify-center transition-colors focus-within:border-primary focus-within:ring-[3px] focus-within:ring-primary/20 ${
+                      error
+                        ? "border-destructive"
+                        : "border-input"
+                    }`}
                   >
-                    <CardContent className="p-0 h-full flex items-center justify-center">
-                      <input
-                        ref={(el) => {
-                          inputRefs.current[index] = el;
-                        }}
-                        type="tel"
-                        inputMode="numeric"
-                        maxLength={1}
-                        value={digit}
-                        onChange={(e) =>
-                          handleInputChange(index, e.target.value)
-                        }
-                        onKeyDown={(e) => handleKeyDown(index, e)}
-                        onPaste={handlePaste}
-                        className="w-full h-full text-center text-2xl font-bold border-none outline-none bg-transparent"
-                        autoComplete="one-time-code"
-                        disabled={loading}
-                        style={{
-                          height: "auto",
-                        }}
-                      />
-                    </CardContent>
-                  </Card>
+                    <input
+                      ref={(el) => {
+                        inputRefs.current[index] = el;
+                      }}
+                      type="tel"
+                      inputMode="numeric"
+                      maxLength={1}
+                      value={digit}
+                      onChange={(e) => handleInputChange(index, e.target.value)}
+                      onKeyDown={(e) => handleKeyDown(index, e)}
+                      onPaste={handlePaste}
+                      className="w-full h-full text-center text-xl font-semibold tabular-nums border-none outline-none bg-transparent"
+                      autoComplete="one-time-code"
+                      disabled={loading}
+                    />
+                  </div>
                 ))}
               </div>
 
@@ -239,10 +232,10 @@ export const TOTPValidator = ({ onValidate }: TOTPValidatorProps) => {
 
                 <Button
                   type="button"
-                  variant="ghost"
+                  variant="link"
                   size="sm"
                   onClick={clearCode}
-                  className="w-full text-xs"
+                  className="w-full"
                 >
                   Clear Code
                 </Button>

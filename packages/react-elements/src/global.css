@@ -19,8 +19,11 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Authdog brand purple (#6c47ff), matches the marketing landing page */
+    --primary: 252 100% 63.9%;
+    --primary-foreground: 0 0% 100%;
+    --brand-purple-rgb: 108 71 255;
+    --brand-purple-hover: 251.4 85.7% 59%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -28,12 +31,12 @@
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
-    --destructive: 0 100% 50%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --ring: 215 20.2% 65.1%;
+    --ring: 252 100% 63.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.625rem;
   }
 
   .dark {
@@ -52,8 +55,10 @@
     --border: 216 34% 17%;
     --input: 216 34% 17%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 1.2%;
+    --primary: 254 100% 71.4%;
+    --primary-foreground: 0 0% 100%;
+    --brand-purple-rgb: 143 109 255;
+    --brand-purple-hover: 252 100% 63.9%;
 
     --secondary: 222.2 47.4% 11.2%;
     --secondary-foreground: 210 40% 98%;
@@ -64,9 +69,49 @@
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
 
-    --ring: 216 34% 17%;
+    --ring: 254 100% 71.4%;
 
-    --radius: 0.5rem;
+    --radius: 0.625rem;
+  }
+}
+
+@layer utilities {
+  /* Diagonal light sweep on hover (marketing Avatar treatment) */
+  .shine-effect {
+    position: relative;
+    overflow: hidden;
+  }
+  .shine-effect::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.35),
+      transparent
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
+  }
+  .shine-effect:hover::after {
+    animation: shine 0.7s;
+  }
+  @keyframes shine {
+    100% {
+      left: 125%;
+    }
+  }
+
+  /* 8px pixel-grid backdrop (marketing hero) */
+  .hero-grid-background {
+    background-image:
+      linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+    background-size: 8px 8px;
   }
 }
 

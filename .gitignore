@@ -19,6 +19,9 @@ coverage
 .moon/cache
 .moon/docker
 
+# Legacy Turbo cache
+.turbo
+
 # Vercel
 .vercel
 

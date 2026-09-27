@@ -11,6 +11,7 @@ on:
     paths:
       - "packages/node-commons/**"
       - ".github/workflows/ci-node-commons.yml"
+  workflow_dispatch:
 
 jobs:
   test:

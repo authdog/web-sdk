@@ -1,2 +1,0 @@
-$ vue-tsc && vite build
-src/App.vue(28,10): error TS2305: Module '"@authdog/vue/client"' has no exported member 'AuthdogProvider'.

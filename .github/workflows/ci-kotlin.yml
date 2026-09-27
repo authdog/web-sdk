@@ -11,6 +11,7 @@ on:
     paths:
       - "packages/kotlin/**"
       - ".github/workflows/ci-kotlin.yml"
+  workflow_dispatch:
 
 jobs:
   test:

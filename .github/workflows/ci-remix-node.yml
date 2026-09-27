@@ -11,6 +11,7 @@ on:
     paths:
       - "packages/remix/**"
       - ".github/workflows/ci-remix-node.yml"
+  workflow_dispatch:
 
 jobs:
   test:

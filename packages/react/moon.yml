@@ -1,0 +1,35 @@
+tags:
+  - publishable
+
+tasks:
+  build:
+    command: 'bun run build'
+    deps:
+      - 'node-commons:build'
+      - 'react-elements:build'
+    inputs:
+      - 'src/**/*'
+      - 'tsconfig.json'
+      - 'tsup.config.ts'
+      - 'package.json'
+    outputs:
+      - 'dist/**'
+
+  type-check:
+    command: 'bun run type-check'
+    deps:
+      - 'node-commons:build'
+      - 'react-elements:build'
+    inputs:
+      - 'src/**/*'
+      - 'tsconfig.json'
+      - 'package.json'
+
+  test:
+    command: 'bun run test'
+    deps:
+      - 'node-commons:build'
+      - 'react-elements:build'
+    inputs:
+      - 'src/**/*'
+      - 'package.json'

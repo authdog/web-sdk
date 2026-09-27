@@ -11,6 +11,7 @@ on:
     paths:
       - "packages/sveltekit/**"
       - ".github/workflows/ci-sveltekit.yml"
+  workflow_dispatch:
 
 jobs:
   test:
