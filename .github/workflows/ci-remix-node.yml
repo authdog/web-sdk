@@ -1,11 +1,6 @@
 name: CI (remix-node)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/remix/**"
-      - ".github/workflows/ci-remix-node.yml"
   pull_request:
     branches: [main]
     paths:

@@ -1,11 +1,6 @@
 name: CI (angular)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/angular/**"
-      - ".github/workflows/ci-angular.yml"
   pull_request:
     branches: [main]
     paths:

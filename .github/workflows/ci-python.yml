@@ -1,11 +1,6 @@
 name: CI (python)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/python/**"
-      - ".github/workflows/ci-python.yml"
   pull_request:
     branches: [main]
     paths:

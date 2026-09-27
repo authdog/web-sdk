@@ -1,11 +1,6 @@
 name: CI (nextjs-app)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/nextjs-app/**"
-      - ".github/workflows/ci-nextjs-app.yml"
   pull_request:
     branches: [main]
     paths:

@@ -1,11 +1,6 @@
 name: CI (node-commons)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/node-commons/**"
-      - ".github/workflows/ci-node-commons.yml"
   pull_request:
     branches: [main]
     paths:

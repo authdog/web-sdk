@@ -1,11 +1,6 @@
 name: CI (redwood)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/redwood/**"
-      - ".github/workflows/ci-redwood.yml"
   pull_request:
     branches: [main]
     paths:

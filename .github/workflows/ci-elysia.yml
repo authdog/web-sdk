@@ -1,11 +1,6 @@
 name: CI (elysia)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/elysia/**"
-      - ".github/workflows/ci-elysia.yml"
   pull_request:
     branches: [main]
     paths:

@@ -1,11 +1,6 @@
 name: CI (vue)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/vue/**"
-      - ".github/workflows/ci-vue.yml"
   pull_request:
     branches: [main]
     paths:

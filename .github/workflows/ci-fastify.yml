@@ -1,11 +1,6 @@
 name: CI (fastify)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/fastify/**"
-      - ".github/workflows/ci-fastify.yml"
   pull_request:
     branches: [main]
     paths:

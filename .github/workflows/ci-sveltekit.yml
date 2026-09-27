@@ -1,11 +1,6 @@
 name: CI (sveltekit)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/sveltekit/**"
-      - ".github/workflows/ci-sveltekit.yml"
   pull_request:
     branches: [main]
     paths:

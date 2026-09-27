@@ -1,11 +1,6 @@
 name: CI (koa)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/koa/**"
-      - ".github/workflows/ci-koa.yml"
   pull_request:
     branches: [main]
     paths:

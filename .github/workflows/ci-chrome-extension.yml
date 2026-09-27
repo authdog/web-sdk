@@ -1,11 +1,6 @@
 name: CI (chrome-extension)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/chrome-extension/**"
-      - ".github/workflows/ci-chrome-extension.yml"
   pull_request:
     branches: [main]
     paths:

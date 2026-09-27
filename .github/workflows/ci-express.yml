@@ -1,11 +1,6 @@
 name: CI (express)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/express/**"
-      - ".github/workflows/ci-express.yml"
   pull_request:
     branches: [main]
     paths:

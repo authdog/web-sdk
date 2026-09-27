@@ -1,11 +1,6 @@
 name: CI (react-router)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/react-router/**"
-      - ".github/workflows/ci-react-router.yml"
   pull_request:
     branches: [main]
     paths:

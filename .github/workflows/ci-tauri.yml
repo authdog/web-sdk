@@ -1,11 +1,6 @@
 name: CI (tauri)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/tauri/**"
-      - ".github/workflows/ci-tauri.yml"
   pull_request:
     branches: [main]
     paths:

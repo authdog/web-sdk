@@ -1,11 +1,6 @@
 name: CI (astro)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/astro/**"
-      - ".github/workflows/ci-astro.yml"
   pull_request:
     branches: [main]
     paths:

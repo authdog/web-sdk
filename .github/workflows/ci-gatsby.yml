@@ -1,11 +1,6 @@
 name: CI (gatsby)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/gatsby/**"
-      - ".github/workflows/ci-gatsby.yml"
   pull_request:
     branches: [main]
     paths:

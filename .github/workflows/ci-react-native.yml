@@ -1,11 +1,6 @@
 name: CI (react-native)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/react-native/**"
-      - ".github/workflows/ci-react-native.yml"
   pull_request:
     branches: [main]
     paths:

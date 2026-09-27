@@ -1,11 +1,6 @@
 name: CI (solid)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/solid/**"
-      - ".github/workflows/ci-solid.yml"
   pull_request:
     branches: [main]
     paths:

@@ -1,11 +1,6 @@
 name: CI (react-elements)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/react-elements/**"
-      - ".github/workflows/ci-react-elements.yml"
   pull_request:
     branches: [main]
     paths:

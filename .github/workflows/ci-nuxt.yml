@@ -1,11 +1,6 @@
 name: CI (nuxt)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/nuxt/**"
-      - ".github/workflows/ci-nuxt.yml"
   pull_request:
     branches: [main]
     paths:

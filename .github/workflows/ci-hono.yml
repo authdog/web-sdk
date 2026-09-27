@@ -1,11 +1,6 @@
 name: CI (hono)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/hono/**"
-      - ".github/workflows/ci-hono.yml"
   pull_request:
     branches: [main]
     paths:

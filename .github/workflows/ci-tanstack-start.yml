@@ -1,11 +1,6 @@
 name: CI (tanstack-start)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "packages/tanstack-start/**"
-      - ".github/workflows/ci-tanstack-start.yml"
   pull_request:
     branches: [main]
     paths:
