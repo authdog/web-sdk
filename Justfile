@@ -32,6 +32,30 @@ dev-express:
 dev-fastify:
     moon run fastify-api:dev
 
+dev-hono:
+    moon run hono-api:dev
+
+dev-koa:
+    moon run koa-api:dev
+
+dev-elysia:
+    moon run elysia-api:dev
+
+dev-react-router:
+    moon run react-router-app:dev
+
+dev-nuxt:
+    moon run nuxt-app:dev
+
+dev-solid:
+    moon run solid-app:dev
+
+dev-javascript:
+    moon run javascript-app:dev
+
+dev-tauri:
+    moon run tauri-app:dev
+
 dev-react-native:
     moon run react-native-app:dev
 

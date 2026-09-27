@@ -1,0 +1,28 @@
+tasks:
+  build:
+    command: 'bun run build'
+    deps:
+      - 'javascript:build'
+    inputs:
+      - 'src/**/*'
+      - 'index.html'
+      - 'tsconfig.json'
+      - 'vite.config.ts'
+      - 'package.json'
+
+  type-check:
+    command: 'bun run type-check'
+    deps:
+      - 'javascript:build'
+    inputs:
+      - 'src/**/*'
+      - 'server/**/*'
+      - 'tsconfig.json'
+      - 'vite.config.ts'
+      - 'package.json'
+
+  dev:
+    command: 'bun run dev'
+    deps:
+      - 'javascript:build'
+    preset: 'server'

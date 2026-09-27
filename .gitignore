@@ -56,3 +56,8 @@ yarn-error.log*
 
 # Claude Code
 .claude/
+
+# Cursor local/agent state (keep committed spec-kit skills)
+.cursor/*
+!.cursor/skills/
+!.cursor/skills/**

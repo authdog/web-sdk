@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Authdog × Tauri example</title>
+  </head>
+  <body>
+    <main>
+      <h1>Authdog × Tauri</h1>
+      <p>This harness injects <code>openUrl</code> and a callback. It does not build a native desktop bundle.</p>
+      <p id="status">Signed in: …</p>
+      <pre id="opened"></pre>
+      <pre id="profile"></pre>
+      <button id="sign-in" type="button">Sign in</button>
+      <label>
+        Callback URL
+        <input id="callback" type="url" placeholder="myapp://auth/callback?token=…" />
+      </label>
+      <button id="complete" type="button">Complete callback</button>
+      <button id="sign-out" type="button">Sign out</button>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
