@@ -24,7 +24,7 @@ Rocket, warp, poem), and **Kotlin** (Ktor) that speak the same session protocol.
 
 ## ✨ Why Authdog Web SDK?
 
-- **🧩 Framework-native** — idiomatic packages for React, Next.js (App Router), Remix, TanStack Start, Vue, Astro, SvelteKit, Gatsby, RedwoodJS, Angular, React Native, and Node backends (Express / Fastify), plus Python (FastAPI, Flask, Django, Starlette, aiohttp), Go (Gin), Rust (axum, actix-web, Rocket, warp, poem), and Kotlin (Ktor) backends. No glue code.
+- **🧩 Framework-native** — idiomatic packages for React, Next.js (App Router), Remix, TanStack Start, Vue, Nuxt, Solid, React Router, Astro, SvelteKit, Gatsby, RedwoodJS, Angular, React Native, a framework-free browser client, Tauri, and Node backends (Express / Fastify / Hono / Koa / Elysia), plus Python (FastAPI, Flask, Django, Starlette, aiohttp), Go (Gin), Rust (axum, actix-web, Rocket, warp, poem), and Kotlin (Ktor) backends. No glue code.
 - **🌍 Polyglot backends** — Node, Python, Go, Rust, and Kotlin services share one `authdog-session` cookie, one OIDC `userinfo` flow, and one trusted identity-host allowlist, so a single Authdog environment works across your whole stack.
 - **🔐 Secure by default** — token validation, cookie handling, and session lifecycle managed for you.
 - **🎨 Batteries-included UI** — ready-made, accessible components (sign-in, user profile, TOTP, navbar) you can drop in or restyle.
@@ -49,6 +49,14 @@ Rocket, warp, poem), and **Kotlin** (Ktor) that speak the same session protocol.
 | [`@authdog/angular`](packages/angular)                   | [![npm](https://img.shields.io/npm/v/@authdog/angular)](https://www.npmjs.com/package/@authdog/angular)                   | Angular SDK             | [![angular](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-angular.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-angular.yml)                            |
 | [`@authdog/express`](packages/express)                   | [![npm](https://img.shields.io/npm/v/@authdog/express)](https://www.npmjs.com/package/@authdog/express)                   | Express SDK             | [![express](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-express.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-express.yml)                            |
 | [`@authdog/fastify`](packages/fastify)                   | [![npm](https://img.shields.io/npm/v/@authdog/fastify)](https://www.npmjs.com/package/@authdog/fastify)                   | Fastify SDK             | [![fastify](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-fastify.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-fastify.yml)                            |
+| [`@authdog/hono`](packages/hono)                         | [![npm](https://img.shields.io/npm/v/@authdog/hono)](https://www.npmjs.com/package/@authdog/hono)                         | Hono SDK                | [![hono](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-hono.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-hono.yml)                                     |
+| [`@authdog/koa`](packages/koa)                           | [![npm](https://img.shields.io/npm/v/@authdog/koa)](https://www.npmjs.com/package/@authdog/koa)                           | Koa SDK                 | [![koa](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-koa.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-koa.yml)                                        |
+| [`@authdog/elysia`](packages/elysia)                     | [![npm](https://img.shields.io/npm/v/@authdog/elysia)](https://www.npmjs.com/package/@authdog/elysia)                     | Elysia SDK              | [![elysia](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-elysia.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-elysia.yml)                               |
+| [`@authdog/react-router`](packages/react-router)         | [![npm](https://img.shields.io/npm/v/@authdog/react-router)](https://www.npmjs.com/package/@authdog/react-router)         | React Router 7 SDK      | [![react-router](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-react-router.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-react-router.yml)             |
+| [`@authdog/nuxt`](packages/nuxt)                         | [![npm](https://img.shields.io/npm/v/@authdog/nuxt)](https://www.npmjs.com/package/@authdog/nuxt)                         | Nuxt SDK                | [![nuxt](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-nuxt.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-nuxt.yml)                                     |
+| [`@authdog/solid`](packages/solid)                       | [![npm](https://img.shields.io/npm/v/@authdog/solid)](https://www.npmjs.com/package/@authdog/solid)                       | SolidJS SDK             | [![solid](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-solid.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-solid.yml)                                  |
+| [`@authdog/javascript`](packages/javascript)             | [![npm](https://img.shields.io/npm/v/@authdog/javascript)](https://www.npmjs.com/package/@authdog/javascript)             | Framework-free browser client | [![javascript](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-javascript.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-javascript.yml)                |
+| [`@authdog/tauri`](packages/tauri)                       | [![npm](https://img.shields.io/npm/v/@authdog/tauri)](https://www.npmjs.com/package/@authdog/tauri)                       | Tauri desktop SDK       | [![tauri](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-tauri.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-tauri.yml)                                  |
 | [`@authdog/react-native`](packages/react-native)         | [![npm](https://img.shields.io/npm/v/@authdog/react-native)](https://www.npmjs.com/package/@authdog/react-native)         | React Native / Expo SDK | [![react-native](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-react-native.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-react-native.yml)             |
 | [`@authdog/chrome-extension`](packages/chrome-extension) | [![npm](https://img.shields.io/npm/v/@authdog/chrome-extension)](https://www.npmjs.com/package/@authdog/chrome-extension) | Chrome Extension SDK    | [![chrome-extension](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-chrome-extension.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-chrome-extension.yml) |
 | [`@authdog/node-commons`](packages/node-commons)         | [![npm](https://img.shields.io/npm/v/@authdog/node-commons)](https://www.npmjs.com/package/@authdog/node-commons)         | Shared Node utilities   | [![node-commons](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-node-commons.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-node-commons.yml)             |
@@ -585,6 +593,14 @@ Each framework ships a runnable demo under [`examples/`](examples). Set `PK_AUTH
 | [`examples/angular`](examples/angular)           | `@authdog/angular` (interceptor, guard, signals)                     | `moon run angular-app:dev`        |
 | [`examples/express`](examples/express)           | `@authdog/express` (attachSession, requireAuth, logout)              | `moon run express-api:dev`        |
 | [`examples/fastify`](examples/fastify)           | `@authdog/fastify` (plugin, requireAuth, logout)                     | `moon run fastify-api:dev`        |
+| [`examples/hono`](examples/hono)                 | `@authdog/hono` (attachSession, requireAuth, logout)                 | `moon run hono-api:dev`           |
+| [`examples/koa`](examples/koa)                   | `@authdog/koa` (attachSession, requireAuth, logout)                  | `moon run koa-api:dev`            |
+| [`examples/elysia`](examples/elysia)             | `@authdog/elysia` (attachSession, requireAuth, logout)               | `moon run elysia-api:dev`         |
+| [`examples/react-router`](examples/react-router) | `@authdog/react-router` (identity loader, protected page, logout)    | `moon run react-router-app:dev`   |
+| [`examples/nuxt`](examples/nuxt)                 | `@authdog/nuxt` (plugin, composables, server session)                | `moon run nuxt-app:dev`           |
+| [`examples/solid`](examples/solid)               | `@authdog/solid` (provider, sign-in, profile, sign-out)              | `moon run solid-app:dev`          |
+| [`examples/javascript`](examples/javascript)     | `@authdog/javascript` (redirect callback, profile, sign-out)         | `moon run javascript-app:dev`     |
+| [`examples/tauri`](examples/tauri)               | `@authdog/tauri` (injectable opener, callback, sign-out)             | `moon run tauri-app:dev`          |
 | [`examples/react-native`](examples/react-native) | `@authdog/react-native` (Expo, deep-link sign-in, secure store)      | `moon run react-native-app:dev`   |
 
 ## 🛠 Development
@@ -623,7 +639,7 @@ Prefer raw scripts? `bun run build`, `bun run dev`, `bun run test`, `bun run lin
 
 ```
 web-sdk/
-├── examples/        # Runnable demo apps (Next.js, Remix, Vue, Astro, SvelteKit, Gatsby, RedwoodJS, Angular, Express, Fastify, React Native)
+├── examples/        # Runnable demo apps (Next.js, Remix, Vue, Nuxt, Solid, React Router, JavaScript, Tauri, Astro, SvelteKit, Gatsby, RedwoodJS, Angular, Express, Fastify, Hono, Koa, Elysia, React Native)
 ├── packages/        # Published SDK packages + shared configs
 │   ├── react-elements/   # React UI components
 │   ├── nextjs-app/       # Next.js App Router SDK
@@ -637,6 +653,14 @@ web-sdk/
 │   ├── angular/          # Angular SDK
 │   ├── express/          # Express SDK
 │   ├── fastify/          # Fastify SDK
+│   ├── hono/             # Hono SDK
+│   ├── koa/              # Koa SDK
+│   ├── elysia/           # Elysia SDK
+│   ├── react-router/     # React Router 7 SDK
+│   ├── nuxt/             # Nuxt SDK
+│   ├── solid/            # SolidJS SDK
+│   ├── javascript/       # Framework-free browser client
+│   ├── tauri/            # Tauri desktop SDK
 │   ├── react-native/     # React Native / Expo SDK
 │   ├── chrome-extension/ # Chrome Extension SDK
 │   ├── node-commons/     # Shared Node utilities

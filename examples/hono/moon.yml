@@ -1,0 +1,24 @@
+tasks:
+  build:
+    command: 'bun run build'
+    deps:
+      - 'hono:build'
+    inputs:
+      - 'src/**/*'
+      - 'tsconfig.json'
+      - 'package.json'
+
+  type-check:
+    command: 'bun run type-check'
+    deps:
+      - 'hono:build'
+    inputs:
+      - 'src/**/*'
+      - 'tsconfig.json'
+      - 'package.json'
+
+  dev:
+    command: 'bun run dev'
+    deps:
+      - 'hono:build'
+    preset: 'server'
