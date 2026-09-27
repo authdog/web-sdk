@@ -41,9 +41,10 @@ jobs:
       # Scan every workspace package against the vulnerability database and fail
       # on high/critical advisories. Lower --audit-level to "moderate" to tighten.
       #
-      # Most advisories are cleared at the source: next bumped to 16.2.12, astro to
-      # 6.x/7.x, Angular examples bumped to 20.3.29, and root `overrides` pin
-      # vite, js-yaml, nanoid, postcss, sharp, ip-address, brace-expansion, fast-uri,
+      # Most advisories are cleared at the source: next bumped to 16.3.6, astro to
+      # 7.2.8+, Angular examples bumped to 20.3.29, and root `overrides` pin
+      # vite, js-yaml, nanoid, postcss, sharp, smol-toml, multer, toml,
+      # @xmldom/xmldom, svgo below 2.8.4, ip-address, brace-expansion, fast-uri,
       # @remix-run/server-runtime, @remix-run/router and valibot to fixed versions
       # (see root package.json).
       #

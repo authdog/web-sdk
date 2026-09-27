@@ -10,9 +10,9 @@
     "type-check": "astro check"
   },
   "dependencies": {
-    "@astrojs/node": "^11.1.4",
+    "@astrojs/node": "^11.1.6",
     "@authdog/astro": "workspace:*",
-    "astro": "^7.2.4"
+    "astro": "^7.2.8"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
