@@ -1,5 +1,11 @@
 # @authdog/react-elements
 
+## 0.4.1
+
+### Patch Changes
+
+- 5d40fb4: Extend components list
+
 ## 0.3.1
 
 ### Patch Changes
