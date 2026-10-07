@@ -14,6 +14,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      # `moon run :test` includes flutter:test, which depends on `dart pub get`.
+      # ubuntu-latest does not ship the Dart SDK.
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
       - uses: dbrrt/setup-moon@v1.0.0
 
       - uses: oven-sh/setup-bun@v2
