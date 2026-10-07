@@ -1,0 +1,15 @@
+# Ruby SDK for Rack, Rails, and Sinatra. Tests use the standard library only.
+tags:
+  - publishable
+
+tasks:
+  test:
+    command: 'ruby test/authdog_test.rb'
+    inputs:
+      - 'lib/**/*.rb'
+      - 'test/**/*.rb'
+
+  type-check:
+    command: 'ruby -c lib/authdog.rb'
+    inputs:
+      - 'lib/**/*.rb'

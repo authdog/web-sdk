@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Authdog</RootNamespace>
+    <AssemblyName>Authdog</AssemblyName>
+    <Version>0.1.0</Version>
+    <Description>Authdog ASP.NET Core SDK</Description>
+    <PackageId>Authdog</PackageId>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+</Project>

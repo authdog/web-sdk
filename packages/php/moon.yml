@@ -1,0 +1,28 @@
+# PHP SDK. `install` vendors Composer dependencies into this package.
+tags:
+  - publishable
+
+tasks:
+  install:
+    script: 'test -f composer.phar || curl -fsSL https://getcomposer.org/download/latest-stable/composer.phar -o composer.phar; php composer.phar install --no-interaction --no-progress'
+    inputs:
+      - 'composer.json'
+    options:
+      cache: false
+
+  test:
+    command: 'php vendor/bin/phpunit --do-not-cache-result'
+    deps:
+      - '~:install'
+    inputs:
+      - 'src/**/*.php'
+      - 'tests/**/*.php'
+      - 'composer.json'
+      - 'phpunit.xml'
+
+  type-check:
+    command: 'php -l src/Authdog.php'
+    deps:
+      - '~:install'
+    inputs:
+      - 'src/**/*.php'

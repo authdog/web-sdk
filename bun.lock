@@ -57,6 +57,17 @@
         "typescript": "^5.7.2",
       },
     },
+    "examples/electron": {
+      "name": "@authdog-samples/electron",
+      "version": "0.1.0",
+      "dependencies": {
+        "@authdog/electron": "workspace:*",
+      },
+      "devDependencies": {
+        "typescript": "^5.7.2",
+        "vite": "^8.1.0",
+      },
+    },
     "examples/elysia": {
       "name": "@authdog-samples/elysia",
       "version": "0.1.0",
@@ -379,6 +390,20 @@
       },
       "peerDependencies": {
         "react": "^18.2.0 || ^19.0.0",
+      },
+    },
+    "packages/electron": {
+      "name": "@authdog/electron",
+      "version": "0.1.0",
+      "dependencies": {
+        "@authdog/node-commons": "workspace:*",
+      },
+      "devDependencies": {
+        "@types/node": "^26.0.0",
+        "prettier": "^3.4.2",
+        "tsup": "^8.3.5",
+        "typescript": "^5.7.2",
+        "vitest": "^5.0.0",
       },
     },
     "packages/elysia": {
@@ -984,6 +1009,8 @@
 
     "@authdog-samples/angular": ["@authdog-samples/angular@workspace:examples/angular"],
 
+    "@authdog-samples/electron": ["@authdog-samples/electron@workspace:examples/electron"],
+
     "@authdog-samples/elysia": ["@authdog-samples/elysia@workspace:examples/elysia"],
 
     "@authdog-samples/express": ["@authdog-samples/express@workspace:examples/express"],
@@ -1013,6 +1040,8 @@
     "@authdog/astro": ["@authdog/astro@workspace:packages/astro"],
 
     "@authdog/chrome-extension": ["@authdog/chrome-extension@workspace:packages/chrome-extension"],
+
+    "@authdog/electron": ["@authdog/electron@workspace:packages/electron"],
 
     "@authdog/elysia": ["@authdog/elysia@workspace:packages/elysia"],
 

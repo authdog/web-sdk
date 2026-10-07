@@ -41,6 +41,24 @@ __pycache__/
 *.egg-info/
 .venv/
 
+# JVM
+.gradle/
+
+# PHP
+packages/php/vendor/
+packages/php/composer.phar
+
+# .NET
+packages/csharp/**/bin/
+packages/csharp/**/obj/
+
+# Dart / Flutter
+.dart_tool/
+
+# Swift
+.build/
+.swiftpm/
+
 
 # Debug
 npm-debug.log*

@@ -1,0 +1,19 @@
+# iOS / macOS client. Foundation only, so `swift test` does not need Xcode.
+tags:
+  - publishable
+
+tasks:
+  test:
+    command: 'swift test'
+    inputs:
+      - 'Package.swift'
+      - 'Sources/**/*.swift'
+      - 'Tests/**/*.swift'
+
+  type-check:
+    command: 'swift build'
+    deps:
+      - 'test'
+    inputs:
+      - 'Package.swift'
+      - 'Sources/**/*.swift'

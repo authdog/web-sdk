@@ -6,10 +6,14 @@
 
 A curated monorepo of framework-native libraries that make it effortless to add
 secure sessions, user management, and auth UI to your React, Next.js, Remix,
-TanStack Start, Vue, Astro, SvelteKit, Gatsby, RedwoodJS, Angular, React Native,
-Chrome extensions, and Node (Express / Fastify) applications — plus backend SDKs for **Python** (FastAPI,
-Flask, Django, Starlette, aiohttp), **Go** (Gin), **Rust** (axum, actix-web,
-Rocket, warp, poem), and **Kotlin** (Ktor) that speak the same session protocol.
+TanStack Start, Vue, Nuxt, Solid, React Router, Astro, SvelteKit, Gatsby,
+RedwoodJS, Angular, React Native / Expo, Chrome extensions, Electron, Tauri,
+and Node (Express / Fastify / Hono / Koa / Elysia) applications — plus backend
+SDKs for **Python** (FastAPI, Flask, Django, Starlette, aiohttp), **Go** (Gin),
+**Rust** (axum, actix-web, Rocket, warp, poem), **Kotlin** (Ktor), **Java**
+(Jakarta Servlet), **PHP**, **Ruby** (Rails / Sinatra), and **C#** (ASP.NET
+Core), and mobile clients for **Android**, **iOS**, and **Flutter**, that speak
+the same session protocol.
 
 [![packages-publish](https://github.com/authdog/web-sdk/actions/workflows/packages-publish.yml/badge.svg)](https://github.com/authdog/web-sdk/actions/workflows/packages-publish.yml)
 [![CI](https://github.com/authdog/web-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/authdog/web-sdk/actions/workflows/ci.yml)
@@ -24,8 +28,8 @@ Rocket, warp, poem), and **Kotlin** (Ktor) that speak the same session protocol.
 
 ## ✨ Why Authdog Web SDK?
 
-- **🧩 Framework-native** — idiomatic packages for React, Next.js (App Router), Remix, TanStack Start, Vue, Nuxt, Solid, React Router, Astro, SvelteKit, Gatsby, RedwoodJS, Angular, React Native, a framework-free browser client, Tauri, and Node backends (Express / Fastify / Hono / Koa / Elysia), plus Python (FastAPI, Flask, Django, Starlette, aiohttp), Go (Gin), Rust (axum, actix-web, Rocket, warp, poem), and Kotlin (Ktor) backends. No glue code.
-- **🌍 Polyglot backends** — Node, Python, Go, Rust, and Kotlin services share one `authdog-session` cookie, one OIDC `userinfo` flow, and one trusted identity-host allowlist, so a single Authdog environment works across your whole stack.
+- **🧩 Framework-native** — idiomatic packages for React, Next.js (App Router), Remix, TanStack Start, Vue, Nuxt, Solid, React Router, Astro, SvelteKit, Gatsby, RedwoodJS, Angular, React Native / Expo, a framework-free browser client, Electron, Tauri, and Node backends (Express / Fastify / Hono / Koa / Elysia), plus Python (FastAPI, Flask, Django, Starlette, aiohttp), Go (Gin), Rust (axum, actix-web, Rocket, warp, poem), Kotlin (Ktor), Java (Jakarta Servlet), PHP, Ruby (Rails / Sinatra), and C# (ASP.NET Core) backends, and Android, iOS, and Flutter clients. No glue code.
+- **🌍 Polyglot backends** — Node, Python, Go, Rust, Kotlin, Java, PHP, Ruby, and C# services share one `authdog-session` cookie, one OIDC `userinfo` flow, and one trusted identity-host allowlist, so a single Authdog environment works across your whole stack.
 - **🔐 Secure by default** — token validation, cookie handling, and session lifecycle managed for you.
 - **🎨 Batteries-included UI** — ready-made, accessible components (sign-in, user profile, TOTP, navbar) you can drop in or restyle.
 - **⚡ Tiny & tree-shakeable** — ESM-first, `sideEffects: false`, dual CJS/ESM builds via [tsup](https://tsup.egoist.dev).
@@ -57,6 +61,7 @@ Rocket, warp, poem), and **Kotlin** (Ktor) that speak the same session protocol.
 | [`@authdog/solid`](packages/solid)                       | [![npm](https://img.shields.io/npm/v/@authdog/solid)](https://www.npmjs.com/package/@authdog/solid)                       | SolidJS SDK             | [![solid](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-solid.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-solid.yml)                                  |
 | [`@authdog/javascript`](packages/javascript)             | [![npm](https://img.shields.io/npm/v/@authdog/javascript)](https://www.npmjs.com/package/@authdog/javascript)             | Framework-free browser client | [![javascript](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-javascript.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-javascript.yml)                |
 | [`@authdog/tauri`](packages/tauri)                       | [![npm](https://img.shields.io/npm/v/@authdog/tauri)](https://www.npmjs.com/package/@authdog/tauri)                       | Tauri desktop SDK       | [![tauri](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-tauri.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-tauri.yml)                                  |
+| [`@authdog/electron`](packages/electron)                 | [![npm](https://img.shields.io/npm/v/@authdog/electron)](https://www.npmjs.com/package/@authdog/electron)                 | Electron desktop SDK    | [![electron](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-electron.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-electron.yml)                            |
 | [`@authdog/react-native`](packages/react-native)         | [![npm](https://img.shields.io/npm/v/@authdog/react-native)](https://www.npmjs.com/package/@authdog/react-native)         | React Native / Expo SDK | [![react-native](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-react-native.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-react-native.yml)             |
 | [`@authdog/chrome-extension`](packages/chrome-extension) | [![npm](https://img.shields.io/npm/v/@authdog/chrome-extension)](https://www.npmjs.com/package/@authdog/chrome-extension) | Chrome Extension SDK    | [![chrome-extension](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-chrome-extension.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-chrome-extension.yml) |
 | [`@authdog/node-commons`](packages/node-commons)         | [![npm](https://img.shields.io/npm/v/@authdog/node-commons)](https://www.npmjs.com/package/@authdog/node-commons)         | Shared Node utilities   | [![node-commons](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-node-commons.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-node-commons.yml)             |
@@ -74,11 +79,19 @@ Rocket, warp, poem), and **Kotlin** (Ktor) that speak the same session protocol.
 | [`authdog-warp`](packages/rust/warp)     | [crates.io](https://crates.io/crates/authdog-warp)                          | Rust SDK for Warp                                       | [![rust](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-rust.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-rust.yml)       |
 | [`authdog-poem`](packages/rust/poem)     | [crates.io](https://crates.io/crates/authdog-poem)                          | Rust SDK for Poem                                       | [![rust](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-rust.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-rust.yml)       |
 | [`authdog-ktor`](packages/kotlin)        | [Maven Central](https://search.maven.org/artifact/com.authdog/authdog-ktor) | Kotlin / Ktor SDK                                       | [![kotlin](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-kotlin.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-kotlin.yml) |
+| [`authdog-java`](packages/java)          | Maven (`com.authdog:authdog-java`)                                         | Java SDK — Jakarta Servlet                              | [![java](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-java.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-java.yml)       |
+| [`authdog/authdog`](packages/php)        | [Packagist](https://packagist.org/packages/authdog/authdog)                 | PHP SDK — PSR-15 and Laravel                            | [![php](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-php.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-php.yml)          |
+| [`authdog`](packages/ruby)               | RubyGems                                                                    | Ruby SDK — Rack, Rails, and Sinatra                     | [![ruby](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-ruby.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-ruby.yml)       |
+| [`Authdog`](packages/csharp)             | NuGet                                                                       | C# SDK — ASP.NET Core                                   | [![csharp](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-csharp.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-csharp.yml) |
+| [`authdog-android`](packages/android)    | Maven (`com.authdog:authdog-android`)                                      | Android client                                          | [![android](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-android.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-android.yml) |
+| [`Authdog`](packages/ios)                | Swift Package                                                               | iOS client                                              | [![ios](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-ios.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-ios.yml)          |
+| [`authdog`](packages/flutter)            | pub.dev                                                                     | Flutter / Dart client                                   | [![flutter](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-flutter.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-flutter.yml) |
 
-These backend SDKs mirror the Node `@authdog/express` / `@authdog/fastify`
+The server SDKs mirror the Node `@authdog/express` / `@authdog/fastify`
 packages on the wire (same `authdog-session` cookie, same `userinfo` flow, same
 identity-host allowlist), so they validate sessions issued for the same Authdog
-environment.
+environment. Android, iOS, Flutter, and Electron clients use that same allowlist
+and `userinfo` endpoint.
 
 ### Internal workspace packages
 
@@ -130,6 +143,9 @@ bun add @authdog/react-native
 
 # Chrome Extension
 bun add @authdog/chrome-extension
+
+# Electron
+bun add @authdog/electron
 ```
 
 Backend SDKs for other languages install with their native package managers:
@@ -146,6 +162,18 @@ cargo add authdog-axum    # or authdog-actix / authdog-rocket / authdog-warp / a
 
 # Kotlin (Ktor) — add to build.gradle.kts
 # implementation("com.authdog:authdog-ktor:0.1.0")
+
+# Java (Jakarta Servlet)
+# implementation("com.authdog:authdog-java:0.1.0")
+
+# PHP
+composer require authdog/authdog
+
+# Ruby (Rails / Sinatra)
+gem install authdog
+
+# C# (ASP.NET Core)
+dotnet add package Authdog
 ```
 
 Provide your Authdog public key (`pk_…`). Each framework reads it from a different
@@ -173,6 +201,14 @@ place — use the variable that matches your package:
 | Go (Gin)            | `PK_AUTHDOG`                       | `authdog.New(authdog.Config{PublicKey})`    |
 | Rust (all)          | `PK_AUTHDOG`                       | `Authdog::new(...)`                         |
 | Kotlin (Ktor)       | `PK_AUTHDOG`                       | `Authdog(System.getenv("PK_AUTHDOG"))`      |
+| Java (Servlet)      | `PK_AUTHDOG`                       | `new Authdog(System.getenv("PK_AUTHDOG"))`  |
+| PHP                 | `PK_AUTHDOG`                       | `new Authdog\Authdog(getenv('PK_AUTHDOG'))` |
+| Ruby                | `PK_AUTHDOG`                       | `Authdog::Client.new(ENV["PK_AUTHDOG"])`    |
+| C#                  | `PK_AUTHDOG`                       | `new AuthdogClient(Environment.GetEnvironmentVariable("PK_AUTHDOG"))` |
+| Electron            | `PK_AUTHDOG`                       | `createAuthdogClient({ publicKey })`        |
+| Android             | —                                  | Passed to `AuthdogClient(publicKey:)`       |
+| iOS                 | —                                  | Passed to `AuthdogClient(publicKey:)`       |
+| Flutter             | —                                  | Passed to `AuthdogClient(publicKey:)`       |
 
 ```bash
 # Next.js (App Router)
@@ -601,6 +637,7 @@ Each framework ships a runnable demo under [`examples/`](examples). Set `PK_AUTH
 | [`examples/solid`](examples/solid)               | `@authdog/solid` (provider, sign-in, profile, sign-out)              | `moon run solid-app:dev`          |
 | [`examples/javascript`](examples/javascript)     | `@authdog/javascript` (redirect callback, profile, sign-out)         | `moon run javascript-app:dev`     |
 | [`examples/tauri`](examples/tauri)               | `@authdog/tauri` (injectable opener, callback, sign-out)             | `moon run tauri-app:dev`          |
+| [`examples/electron`](examples/electron)         | `@authdog/electron` (injectable opener, callback, sign-out)          | `moon run electron-app:dev`       |
 | [`examples/react-native`](examples/react-native) | `@authdog/react-native` (Expo, deep-link sign-in, secure store)      | `moon run react-native-app:dev`   |
 
 ## 🛠 Development
@@ -639,7 +676,7 @@ Prefer raw scripts? `bun run build`, `bun run dev`, `bun run test`, `bun run lin
 
 ```
 web-sdk/
-├── examples/        # Runnable demo apps (Next.js, Remix, Vue, Nuxt, Solid, React Router, JavaScript, Tauri, Astro, SvelteKit, Gatsby, RedwoodJS, Angular, Express, Fastify, Hono, Koa, Elysia, React Native)
+├── examples/        # Runnable demo apps (Next.js, Remix, Vue, Nuxt, Solid, React Router, JavaScript, Tauri, Electron, Astro, SvelteKit, Gatsby, RedwoodJS, Angular, Express, Fastify, Hono, Koa, Elysia, React Native)
 ├── packages/        # Published SDK packages + shared configs
 │   ├── react-elements/   # React UI components
 │   ├── nextjs-app/       # Next.js App Router SDK
@@ -661,6 +698,7 @@ web-sdk/
 │   ├── solid/            # SolidJS SDK
 │   ├── javascript/       # Framework-free browser client
 │   ├── tauri/            # Tauri desktop SDK
+│   ├── electron/         # Electron desktop SDK
 │   ├── react-native/     # React Native / Expo SDK
 │   ├── chrome-extension/ # Chrome Extension SDK
 │   ├── node-commons/     # Shared Node utilities
@@ -668,6 +706,13 @@ web-sdk/
 │   ├── go/               # Go SDK (Gin)
 │   ├── rust/             # Rust workspace (axum, actix, rocket, warp, poem) — authdog-core + crates
 │   ├── kotlin/           # Kotlin SDK (Ktor) — authdog-ktor
+│   ├── java/             # Java SDK (Jakarta Servlet)
+│   ├── php/              # PHP SDK (PSR-15, Laravel)
+│   ├── ruby/             # Ruby SDK (Rack, Rails, Sinatra)
+│   ├── csharp/           # C# SDK (ASP.NET Core)
+│   ├── android/          # Android client
+│   ├── ios/              # iOS client
+│   ├── flutter/          # Flutter / Dart client
 │   ├── eslint/           # Shared ESLint config
 │   └── typescript-config/# Shared tsconfig presets
 └── .moon/           # moon workspace & toolchain config

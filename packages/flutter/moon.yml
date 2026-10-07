@@ -1,0 +1,29 @@
+# Flutter / Dart client. Pure Dart so tests do not need the Flutter SDK.
+tags:
+  - publishable
+
+tasks:
+  install:
+    command: 'dart pub get'
+    inputs:
+      - 'pubspec.yaml'
+    options:
+      cache: false
+
+  test:
+    command: 'dart test'
+    deps:
+      - '~:install'
+    inputs:
+      - 'lib/**/*.dart'
+      - 'test/**/*.dart'
+      - 'pubspec.yaml'
+
+  type-check:
+    command: 'dart analyze'
+    deps:
+      - '~:install'
+    inputs:
+      - 'lib/**/*.dart'
+      - 'test/**/*.dart'
+      - 'pubspec.yaml'

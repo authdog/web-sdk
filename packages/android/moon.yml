@@ -1,0 +1,33 @@
+# Android client. Protocol code is reused from packages/kotlin; tests run on the
+# JVM so they do not need the Android SDK.
+tags:
+  - publishable
+
+tasks:
+  build:
+    script: 'if [ ! -x "${JAVA_HOME:-}/bin/javac" ]; then export JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"; fi; ./gradlew classes --no-daemon'
+    inputs:
+      - 'src/**/*.kt'
+      - 'build.gradle.kts'
+      - 'settings.gradle.kts'
+      - 'gradle.properties'
+
+  test:
+    script: 'if [ ! -x "${JAVA_HOME:-}/bin/javac" ]; then export JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"; fi; ./gradlew test --no-daemon'
+    deps:
+      - 'build'
+    inputs:
+      - 'src/**/*.kt'
+      - 'build.gradle.kts'
+      - 'settings.gradle.kts'
+      - 'gradle.properties'
+
+  type-check:
+    script: 'if [ ! -x "${JAVA_HOME:-}/bin/javac" ]; then export JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"; fi; ./gradlew compileTestKotlin --no-daemon'
+    deps:
+      - 'test'
+    inputs:
+      - 'src/**/*.kt'
+      - 'build.gradle.kts'
+      - 'settings.gradle.kts'
+      - 'gradle.properties'

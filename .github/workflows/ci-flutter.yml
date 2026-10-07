@@ -1,0 +1,32 @@
+name: CI (flutter)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "packages/flutter/**"
+      - ".github/workflows/ci-flutter.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - uses: dbrrt/setup-moon@v1.0.0
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+
+      - run: bun install --frozen-lockfile
+
+      - run: moon run flutter:test

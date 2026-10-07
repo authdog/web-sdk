@@ -1,0 +1,20 @@
+# C# / ASP.NET Core SDK.
+tags:
+  - publishable
+
+tasks:
+  test:
+    command: 'dotnet test tests/Authdog.Tests/Authdog.Tests.csproj'
+    inputs:
+      - 'src/**/*.cs'
+      - 'src/**/*.csproj'
+      - 'tests/**/*.cs'
+      - 'tests/**/*.csproj'
+
+  type-check:
+    command: 'dotnet build src/Authdog/Authdog.csproj --nologo'
+    deps:
+      - 'test'
+    inputs:
+      - 'src/**/*.cs'
+      - 'src/**/*.csproj'

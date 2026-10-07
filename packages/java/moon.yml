@@ -1,0 +1,32 @@
+# Java (Jakarta Servlet) SDK. moon runs Gradle via the committed wrapper.
+tags:
+  - publishable
+
+tasks:
+  build:
+    script: 'if [ ! -x "${JAVA_HOME:-}/bin/javac" ]; then export JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"; fi; ./gradlew classes --no-daemon'
+    inputs:
+      - 'src/**/*.java'
+      - 'build.gradle.kts'
+      - 'settings.gradle.kts'
+      - 'gradle.properties'
+
+  test:
+    script: 'if [ ! -x "${JAVA_HOME:-}/bin/javac" ]; then export JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"; fi; ./gradlew test --no-daemon'
+    deps:
+      - 'build'
+    inputs:
+      - 'src/**/*.java'
+      - 'build.gradle.kts'
+      - 'settings.gradle.kts'
+      - 'gradle.properties'
+
+  type-check:
+    script: 'if [ ! -x "${JAVA_HOME:-}/bin/javac" ]; then export JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"; fi; ./gradlew compileTestJava --no-daemon'
+    deps:
+      - 'test'
+    inputs:
+      - 'src/**/*.java'
+      - 'build.gradle.kts'
+      - 'settings.gradle.kts'
+      - 'gradle.properties'

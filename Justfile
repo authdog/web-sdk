@@ -56,6 +56,9 @@ dev-javascript:
 dev-tauri:
     moon run tauri-app:dev
 
+dev-electron:
+    moon run electron-app:dev
+
 dev-react-native:
     moon run react-native-app:dev
 
