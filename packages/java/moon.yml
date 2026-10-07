@@ -1,7 +1,5 @@
 # Java (Jakarta Servlet) SDK. moon runs Gradle via the committed wrapper.
-tags:
-  - publishable
-
+# Not tagged `publishable`: that tag is the npm changeset release build.
 tasks:
   build:
     script: 'if [ ! -x "${JAVA_HOME:-}/bin/javac" ]; then export JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"; fi; ./gradlew classes --no-daemon'

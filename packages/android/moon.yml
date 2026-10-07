@@ -1,8 +1,6 @@
 # Android client. Protocol code is reused from packages/kotlin; tests run on the
 # JVM so they do not need the Android SDK.
-tags:
-  - publishable
-
+# Not tagged `publishable`: that tag is the npm changeset release build.
 tasks:
   build:
     script: 'if [ ! -x "${JAVA_HOME:-}/bin/javac" ]; then export JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"; fi; ./gradlew classes --no-daemon'

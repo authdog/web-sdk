@@ -15,7 +15,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset",
     "publish-packages": "moon run '#publishable:build' && bunx changeset publish",
-    "generate-pr": "moon run '#publishable:build' && bunx changeset version"
+    "generate-pr": "bunx changeset version"
   },
   "devDependencies": {
     "@authdog/eslint-config": "workspace:*",

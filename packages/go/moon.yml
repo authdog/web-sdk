@@ -1,8 +1,6 @@
 # Go (Gin) SDK. moon runs these as `system` tasks against the local Go
 # toolchain — no Bun/Node involvement. CI provisions Go.
-tags:
-  - publishable
-
+# Not tagged `publishable`: that tag is the npm changeset release build.
 tasks:
   build:
     command: 'go build ./...'
