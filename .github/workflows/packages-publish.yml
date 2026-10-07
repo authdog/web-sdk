@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
 
     steps:
@@ -47,32 +47,12 @@ jobs:
 
       - run: bun install --frozen-lockfile
 
-      # - name: Create Release Pull Request
-      #   id: changesets-version
-      #   uses: changesets/action@v2
-      #   with:
-      #     version: true
-      #   env:
-      #     GITHUB_TOKEN: ${{ env.GH_AUTOMATION_TOKEN }}
-      #     NPM_TOKEN: ${{ env.NPM_AUTOMATION_TOKEN }}
-      #   if: github.ref != 'refs/heads/main'
-
-      # - name: Publish packages
-      #   id: changesets-publish
-      #   uses: changesets/action@v2
-      #   with:
-      #     publish: true
-      #   env:
-      #     GITHUB_TOKEN: ${{ env.GH_AUTOMATION_TOKEN }}
-      #     NPM_TOKEN: ${{ env.NPM_AUTOMATION_TOKEN }}
-      #   if: github.ref == 'refs/heads/main'
-
       - name: Create Release Pull Request
         id: changesets-version
         uses: changesets/action@v2
         with:
-          version: |
-            bun run generate-pr
+          github-token: ${{ secrets.GH_AUTOMATION_TOKEN }}
+          version-script: bun run generate-pr
         env:
           GITHUB_TOKEN: ${{ secrets.GH_AUTOMATION_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
@@ -82,8 +62,8 @@ jobs:
         id: changesets-publish
         uses: changesets/action@v2
         with:
-          publish: |
-            bun run publish-packages
+          github-token: ${{ secrets.GH_AUTOMATION_TOKEN }}
+          publish-script: bun run publish-packages
         env:
           GITHUB_TOKEN: ${{ secrets.GH_AUTOMATION_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
