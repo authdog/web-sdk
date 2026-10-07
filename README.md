@@ -2,18 +2,9 @@
 
 # Authdog Web SDK
 
-**Drop-in authentication and identity for modern web frameworks.**
+**Drop-in authentication and identity for web, mobile, and backend apps.**
 
-A curated monorepo of framework-native libraries that make it effortless to add
-secure sessions, user management, and auth UI to your React, Next.js, Remix,
-TanStack Start, Vue, Nuxt, Solid, React Router, Astro, SvelteKit, Gatsby,
-RedwoodJS, Angular, React Native / Expo, Chrome extensions, Electron, Tauri,
-and Node (Express / Fastify / Hono / Koa / Elysia) applications — plus backend
-SDKs for **Python** (FastAPI, Flask, Django, Starlette, aiohttp), **Go** (Gin),
-**Rust** (axum, actix-web, Rocket, warp, poem), **Kotlin** (Ktor), **Java**
-(Jakarta Servlet), **PHP**, **Ruby** (Rails / Sinatra), and **C#** (ASP.NET
-Core), and mobile clients for **Android**, **iOS**, and **Flutter**, that speak
-the same session protocol.
+Framework-native SDKs for sessions, user management, and auth UI. One session protocol across the stack.
 
 [![packages-publish](https://github.com/authdog/web-sdk/actions/workflows/packages-publish.yml/badge.svg)](https://github.com/authdog/web-sdk/actions/workflows/packages-publish.yml)
 [![CI](https://github.com/authdog/web-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/authdog/web-sdk/actions/workflows/ci.yml)
@@ -28,8 +19,8 @@ the same session protocol.
 
 ## ✨ Why Authdog Web SDK?
 
-- **🧩 Framework-native** — idiomatic packages for React, Next.js (App Router), Remix, TanStack Start, Vue, Nuxt, Solid, React Router, Astro, SvelteKit, Gatsby, RedwoodJS, Angular, React Native / Expo, a framework-free browser client, Electron, Tauri, and Node backends (Express / Fastify / Hono / Koa / Elysia), plus Python (FastAPI, Flask, Django, Starlette, aiohttp), Go (Gin), Rust (axum, actix-web, Rocket, warp, poem), Kotlin (Ktor), Java (Jakarta Servlet), PHP, Ruby (Rails / Sinatra), and C# (ASP.NET Core) backends, and Android, iOS, and Flutter clients. No glue code.
-- **🌍 Polyglot backends** — Node, Python, Go, Rust, Kotlin, Java, PHP, Ruby, and C# services share one `authdog-session` cookie, one OIDC `userinfo` flow, and one trusted identity-host allowlist, so a single Authdog environment works across your whole stack.
+- **🧩 Framework-native** — an idiomatic package per framework. No glue code. See [Packages](#-packages).
+- **🌍 One session across the stack** — web, Node, Python, Go, Rust, JVM, PHP, Ruby, C#, and mobile clients share one `authdog-session` cookie, one OIDC `userinfo` flow, and one identity-host allowlist.
 - **🔐 Secure by default** — token validation, cookie handling, and session lifecycle managed for you.
 - **🎨 Batteries-included UI** — ready-made, accessible components (sign-in, user profile, TOTP, navbar) you can drop in or restyle.
 - **⚡ Tiny & tree-shakeable** — ESM-first, `sideEffects: false`, dual CJS/ESM builds via [tsup](https://tsup.egoist.dev).
@@ -87,11 +78,7 @@ the same session protocol.
 | [`Authdog`](packages/ios)                | Swift Package                                                               | iOS client                                              | [![ios](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-ios.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-ios.yml)          |
 | [`authdog`](packages/flutter)            | pub.dev                                                                     | Flutter / Dart client                                   | [![flutter](https://img.shields.io/github/actions/workflow/status/authdog/web-sdk/ci-flutter.yml?style=for-the-badge&label=)](https://github.com/authdog/web-sdk/actions/workflows/ci-flutter.yml) |
 
-The server SDKs mirror the Node `@authdog/express` / `@authdog/fastify`
-packages on the wire (same `authdog-session` cookie, same `userinfo` flow, same
-identity-host allowlist), so they validate sessions issued for the same Authdog
-environment. Android, iOS, Flutter, and Electron clients use that same allowlist
-and `userinfo` endpoint.
+These SDKs validate the same Authdog sessions as the Node packages.
 
 ### Internal workspace packages
 
