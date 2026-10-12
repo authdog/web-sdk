@@ -10,6 +10,12 @@ resolver, a ``require_auth`` gate, and a ``logout`` helper.
 
 from __future__ import annotations
 
+from .billing import (
+    cancel_billing_subscription,
+    create_billing_subscription,
+    get_billing_subscription,
+    list_billing_plans,
+)
 from .cookies import SESSION_COOKIE_NAME, get_session_token, parse_cookies
 from .identity import fetch_user_data, is_authenticated_user_info
 from .public_key import (
@@ -25,9 +31,13 @@ __all__ = [
     "PublicKeyError",
     "PublicKeyPayload",
     "assert_trusted_identity_host",
+    "cancel_billing_subscription",
+    "create_billing_subscription",
     "fetch_user_data",
+    "get_billing_subscription",
     "get_session_token",
     "is_authenticated_user_info",
+    "list_billing_plans",
     "parse_cookies",
     "sanitize_redirect_path",
     "validate_and_parse_public_key",

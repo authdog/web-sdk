@@ -27,6 +27,15 @@ Framework-native SDKs for sessions, user management, and auth UI. One session pr
 - **🟦 Type-safe end to end** — written in TypeScript with first-class types shipped in every package.
 - **🌐 Server & client split** — explicit `/client` and `/server` entry points keep secrets server-side.
 
+## Identity API coverage
+
+Tier-1 SDK language cores track parity with the Authdog **identity host** (OIDC, billing, account REST). See the living inventory and matrix:
+
+- [Identity API inventory](specs/002-api-parity/contracts/identity-api-inventory.md)
+- [Parity matrix](specs/002-api-parity/contracts/parity-matrix.md)
+
+Run `bun run check-parity-matrix` locally to verify P0 rows before opening a PR.
+
 ## 📦 Packages
 
 | Package                                                  | Version                                                                                                                   | Description             | CI                                                                                                                                                                                                                            |

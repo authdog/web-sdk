@@ -1,0 +1,30 @@
+{
+  "description": "Minimal billing plans list envelope for SDK contract tests (Wave 2). Align with identity billingPlansHandler shape.",
+  "plans": [
+    {
+      "id": "plan_test_1",
+      "slug": "pro",
+      "name": "Pro",
+      "description": null,
+      "forResource": "user",
+      "currency": "usd",
+      "amountMonth": 2000,
+      "amountAnnual": 20000,
+      "isDefault": true,
+      "sortOrder": 0,
+      "features": [
+        {
+          "id": "feat_1",
+          "slug": "api-access",
+          "name": "API access",
+          "description": null
+        }
+      ]
+    }
+  ],
+  "publishableKey": "pk_test_example",
+  "meta": {
+    "code": 200,
+    "message": "OK"
+  }
+}

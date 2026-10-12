@@ -16,11 +16,16 @@
 //! [warp]: https://docs.rs/authdog-warp
 //! [poem]: https://docs.rs/authdog-poem
 
+pub mod billing;
 pub mod cookies;
 pub mod identity;
 pub mod public_key;
 pub mod redirects;
 
+pub use billing::{
+    cancel_billing_subscription, create_billing_subscription, get_billing_subscription,
+    list_billing_plans, BillingError,
+};
 pub use cookies::{get_session_token, parse_cookies, SESSION_COOKIE_NAME};
 pub use identity::{fetch_user_data, is_authenticated_user_info, IdentityError, UserInfoResponse};
 pub use public_key::{

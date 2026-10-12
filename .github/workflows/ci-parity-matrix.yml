@@ -1,0 +1,24 @@
+name: CI (API parity matrix)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "specs/002-api-parity/**"
+      - "scripts/check-parity-matrix.ts"
+      - "packages/**"
+      - ".github/workflows/ci-parity-matrix.yml"
+  workflow_dispatch:
+
+jobs:
+  parity-matrix:
+    name: P0 parity matrix
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+
+      - run: bun run check-parity-matrix

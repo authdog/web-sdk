@@ -12,6 +12,7 @@
     "check-types": "moon run :type-check",
     "test": "moon run :test",
     "ci": "moon ci",
+    "check-parity-matrix": "bun run scripts/check-parity-matrix.ts",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset",
     "publish-packages": "moon run '#publishable:build' && bunx changeset publish",

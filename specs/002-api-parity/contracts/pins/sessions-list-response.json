@@ -1,0 +1,15 @@
+{
+  "description": "Stub envelope for account sessions list contract tests (Wave 3). Align with identity sessionsList handler when implementing account module.",
+  "sessions": [
+    {
+      "id": "sess_test_1",
+      "device": "Chrome on Linux",
+      "lastActive": "2026-10-12T12:00:00.000Z",
+      "current": true
+    }
+  ],
+  "meta": {
+    "code": 200,
+    "message": "OK"
+  }
+}

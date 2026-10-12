@@ -44,6 +44,12 @@ authdog-session=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; SameS
 
 `Secure` is added when `NODE_ENV` or `ENV` is `production`.
 
+## Identity billing API
+
+`com.authdog.Billing` exposes `listBillingPlans`, `getBillingSubscription`,
+`createBillingSubscription`, and `cancelBillingSubscription` against the identity host.
+See [identity API inventory](../../specs/002-api-parity/contracts/identity-api-inventory.md).
+
 ## Security
 
 - The public key is validated once. An identity host outside `authdog.com`,

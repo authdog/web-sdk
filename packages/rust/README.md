@@ -131,6 +131,12 @@ let app = Route::new()
     .data(authdog);
 ```
 
+## Identity billing API
+
+`authdog_core::list_billing_plans`, `get_billing_subscription`, `create_billing_subscription`, and
+`cancel_billing_subscription` target the identity host `/billing/{environmentId}/…` routes.
+See [identity API inventory](../../specs/002-api-parity/contracts/identity-api-inventory.md).
+
 ## Security
 
 - The public key is validated and parsed **once at startup** (`Authdog::new`);

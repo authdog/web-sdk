@@ -85,6 +85,12 @@ authdog = Authdog(public_key=os.environ["PK_AUTHDOG"], fetch_user=False)
 `ctx.token` is populated but `is_authenticated` stays `False` — you own
 validation.
 
+## Identity billing API
+
+Async helpers in `authdog.billing` call the identity host (`/billing/{environmentId}/…`):
+`list_billing_plans`, `get_billing_subscription`, `create_billing_subscription`, and
+`cancel_billing_subscription`. See [identity API inventory](../../specs/002-api-parity/contracts/identity-api-inventory.md).
+
 ## Security
 
 - The public key is validated and parsed **once at startup**; a malformed or

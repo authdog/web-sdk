@@ -104,6 +104,12 @@ The core (`ValidateAndParsePublicKey`, `GetSessionToken`, `FetchUserData`,
 `IsAuthenticatedUserInfo`, `SanitizeRedirectPath`) is framework-agnostic — wire
 it into `net/http`, chi, or Echo if you are not using Gin.
 
+## Identity billing API
+
+`ListBillingPlans`, `GetBillingSubscription`, `CreateBillingSubscription`, and
+`CancelBillingSubscription` call the identity host under `/billing/{environmentId}/…`.
+See [identity API inventory](../../specs/002-api-parity/contracts/identity-api-inventory.md).
+
 ## Security
 
 - The public key is validated and parsed **once at startup**; an untrusted key

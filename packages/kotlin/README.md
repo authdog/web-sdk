@@ -66,6 +66,13 @@ fails fast at startup rather than per request.
 A failed or untrusted `userinfo` lookup is treated as "not authenticated" —
 never an error response and never an authenticated session.
 
+## Identity billing API
+
+Top-level helpers in `com.authdog` (`listBillingPlans`, `getBillingSubscription`,
+`createBillingSubscription`, `cancelBillingSubscription`) call identity-host
+`/billing/{environmentId}/…` routes. See
+[identity API inventory](../../specs/002-api-parity/contracts/identity-api-inventory.md).
+
 ## Develop
 
 ```bash
